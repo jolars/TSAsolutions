@@ -33,5 +33,5 @@ vignettes/*.pdf
 *.knit.md
 .Rproj.user
 
-_book/
-_bookdown_files/
+/_book/
+/_bookdown_files/
