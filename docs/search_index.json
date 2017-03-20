@@ -1,0 +1,3 @@
+[
+["index.html", "Solutions to Time Series Analysis with Applications in R Preface", " Solutions to Time Series Analysis with Applications in R Johan Larsson 2017-03-20 Preface This book contains solutions to the problems in the book Time Series Analysis with Applications in R, third edition, by Cryer and Chan. It is provided as a github repository so that anybody may contribute to its development. Unlike the book, the solutions here use lattice graphics when possible instead of base graphics. "]
+]
