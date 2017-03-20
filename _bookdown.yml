@@ -1,1 +1,4 @@
-output_dir: "docs"
+book_filename: "TSAsolutions"
+language:
+  ui:
+    chapter_name: "Chapter "
