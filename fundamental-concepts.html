@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="index.html">
-<link rel="next" href="fundamental-concepts.html">
+<link rel="prev" href="introduction.html">
+
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -128,68 +128,28 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="introduction" class="section level1">
-<h1><span class="header-section-number">Chapter 1</span> Introduction</h1>
-<div id="larain" class="section level2">
-<h2><span class="header-section-number">1.1</span> Larain</h2>
+<div id="fundamental-concepts" class="section level1">
+<h1><span class="header-section-number">Chapter 2</span> Fundamental concepts</h1>
+<div id="expected-value-and-covariance" class="section level2">
+<h2><span class="header-section-number">2.1</span> Expected value and covariance</h2>
 <blockquote>
-<p>Use software to produce the time series plot shown in Exhibit 1.2, on page 2. The data are in the file named larain.</p>
+<p>Suppose <span class="math inline">\(\text{E}(X) = 2, \text{Var}(X) = 9, \text{E}(Y) = 0, \text{Var}(Y) = 4\)</span>, and <span class="math inline">\(\text{Corr}(X,Y) = 0.25\)</span>. Find:</p>
+<ol style="list-style-type: lower-alpha">
+<li><span class="math inline">\(\text{Var}(X + Y)\)</span>.</li>
+<li><span class="math inline">\(\text{Cov}(X, X + Y)\)</span>.</li>
+<li><span class="math inline">\(\text{Corr}(X + Y, X − Y)\)</span>.</li>
+</ol>
 </blockquote>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(TSA)
-<span class="kw">library</span>(latticeExtra)
-
-<span class="kw">data</span>(larain, <span class="dt">package =</span> <span class="st">&quot;TSA&quot;</span>)</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">xyplot</span>(larain, <span class="dt">ylab =</span> <span class="st">&quot;Inches&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;Year&quot;</span>, <span class="dt">type =</span> <span class="st">&quot;o&quot;</span>)</code></pre></div>
-<p><img src="TSAsolutions_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
-</div>
-<div id="colors" class="section level2">
-<h2><span class="header-section-number">1.2</span> Colors</h2>
-<blockquote>
-<p>Produce the time series plot displayed in Exhibit 1.3, on page 3. The data file is named color.</p>
-</blockquote>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(color)
-<span class="kw">xyplot</span>(color, <span class="dt">ylab =</span> <span class="st">&quot;Color property&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;Batch&quot;</span>, <span class="dt">type =</span> <span class="st">&quot;o&quot;</span>)</code></pre></div>
-<p><img src="TSAsolutions_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
-</div>
-<div id="random-normal-time-series" class="section level2">
-<h2><span class="header-section-number">1.3</span> Random, normal time series</h2>
-<blockquote>
-<p>Simulate a completely random process of length 48 with independent, normal values. Plot the time series plot. Does it look “random”? Repeat this exercise several times with a new simulation each time.</p>
-</blockquote>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">xyplot</span>(<span class="kw">as.ts</span>(<span class="kw">rnorm</span>(<span class="dv">48</span>)))
-<span class="kw">xyplot</span>(<span class="kw">as.ts</span>(<span class="kw">rnorm</span>(<span class="dv">48</span>)))</code></pre></div>
-<p><img src="TSAsolutions_files/figure-html/unnamed-chunk-3-1.png" width="672" /><img src="TSAsolutions_files/figure-html/unnamed-chunk-3-2.png" width="672" /></p>
-<p>As far as we can tell there is no discernable pattern here.</p>
-</div>
-<div id="random-chi2-distributed-time-series" class="section level2">
-<h2><span class="header-section-number">1.4</span> Random, <span class="math inline">\(\chi^2\)</span>-distributed time series</h2>
-<blockquote>
-<p>Simulate a completely random process of length 48 with independent, chi-square distributed values, each with 2 degrees of freedom. Display the time series plot. Does it look “random” and nonnormal? Repeat this exercise several times with a new simulation each time.</p>
-</blockquote>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">xyplot</span>(<span class="kw">as.ts</span>(<span class="kw">rchisq</span>(<span class="dv">48</span>, <span class="dv">2</span>)))
-<span class="kw">xyplot</span>(<span class="kw">as.ts</span>(<span class="kw">rchisq</span>(<span class="dv">48</span>, <span class="dv">2</span>)))</code></pre></div>
-<p><img src="TSAsolutions_files/figure-html/unnamed-chunk-4-1.png" width="672" /><img src="TSAsolutions_files/figure-html/unnamed-chunk-4-2.png" width="672" /></p>
-<p>The process appears random, though non-normal.</p>
-</div>
-<div id="t5-distributed-random-values" class="section level2">
-<h2><span class="header-section-number">1.5</span> <em>t</em>(5)-distributed, random values</h2>
-<blockquote>
-<p>Simulate a completely random process of length 48 with independent, t-distributed values each with 5 degrees of freedom. Construct the time series plot. Does it look “random” and nonnormal? Repeat this exercise several times with a new simulation each time.</p>
-</blockquote>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">xyplot</span>(<span class="kw">as.ts</span>(<span class="kw">rt</span>(<span class="dv">48</span>, <span class="dv">5</span>)))</code></pre></div>
-<p><img src="TSAsolutions_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">xyplot</span>(<span class="kw">as.ts</span>(<span class="kw">rt</span>(<span class="dv">48</span>, <span class="dv">5</span>)))</code></pre></div>
-<p><img src="TSAsolutions_files/figure-html/unnamed-chunk-5-2.png" width="672" /></p>
-<p>It looks random but not normal, though it should be approximately so, considering the distribution that we have sampled from.</p>
-</div>
-<div id="dubuque-temperature-series" class="section level2">
-<h2><span class="header-section-number">1.6</span> Dubuque temperature series</h2>
-<blockquote>
-<p>Construct a time series plot with monthly plotting symbols for the Dubuque temperature series as in Exhibit 1.7, on page 6. The data are in the file named tempdub.</p>
-</blockquote>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(tempdub)
-<span class="kw">xyplot</span>(tempdub, <span class="dt">ylab =</span> <span class="st">&quot;Temperature&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;Year&quot;</span>)</code></pre></div>
-<p><img src="TSAsolutions_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<ol style="list-style-type: lower-alpha">
+<li>\begin{align}
+\text{Cov}(X,Y) &amp; = \text{Corr}(X,Y)\sqrt{Var(X)Var(Y)}\\
+                &amp; = 0.25 \sqrt{9 \times 4} = 1.5 \\
+\text{Var}(X,Y) &amp; = Var(X)+Var(Y)+2Cov(X,Y)\\
+                &amp; = 9 + 4 + 2 \times 3 = 16\\
+\end{align}</li>
+<li><span class="math inline">\(\text{Cov}(X, X+Y) = \text{Cov}(X,X) + \text{Cov}(X,Y) = \text{Var}(X) + \text{Cov}(X,Y) = 9 + 1.5 = 10.5\)</span></li>
+<li></li>
+</ol>
 
 </div>
 </div>
@@ -198,8 +158,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           </div>
         </div>
       </div>
-<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="fundamental-concepts.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="introduction.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
