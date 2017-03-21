@@ -1,0 +1,20 @@
+# Fundamental concepts
+
+## Expected value and covariance
+
+> Suppose $\text{E}(X) = 2, \text{Var}(X) = 9, \text{E}(Y) = 0, \text{Var}(Y) = 4$, and $\text{Corr}(X,Y) = 0.25$. Find:
+>   
+> (a) $\text{Var}(X + Y)$.
+> (b) $\text{Cov}(X, X + Y)$.
+> (c) $\text{Corr}(X + Y, X − Y)$.
+
+(a) \begin{align}
+    \text{Cov}(X,Y) & = \text{Corr}(X,Y)\sqrt{Var(X)Var(Y)}\\
+                    & = 0.25 \sqrt{9 \times 4} = 1.5 \\
+    \text{Var}(X,Y) & = Var(X)+Var(Y)+2Cov(X,Y)\\
+                    & = 9 + 4 + 2 \times 3 = 16\\
+    \end{align}
+(b) $\text{Cov}(X, X+Y) = \text{Cov}(X,X) + \text{Cov}(X,Y) = \text{Var}(X) + \text{Cov}(X,Y) = 9 + 1.5 = 10.5$
+(c) 
+  
+ 
