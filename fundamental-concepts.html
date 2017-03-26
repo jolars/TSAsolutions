@@ -6,26 +6,26 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Solutions to Time Series Analysis with Applications in R</title>
-  <meta name="description" content="This book contains solutions to the problems in the book Time Series Analysis with Applications in R, third edition, by Cryer and Chan. It is provided as a github repository so that anybody may contribute to its development.">
-  <meta name="generator" content="bookdown 0.3.14 and GitBook 2.6.7">
+  <meta name="description" content="This book contains solutions to the problems in the book Time Series Analysis with Applications in R, second edition, by Cryer and Chan. It is provided as a github repository so that anybody may contribute to its development.">
+  <meta name="generator" content="bookdown 0.3.16 and GitBook 2.6.7">
 
   <meta property="og:title" content="Solutions to Time Series Analysis with Applications in R" />
   <meta property="og:type" content="book" />
   
   
-  <meta property="og:description" content="This book contains solutions to the problems in the book Time Series Analysis with Applications in R, third edition, by Cryer and Chan. It is provided as a github repository so that anybody may contribute to its development." />
+  <meta property="og:description" content="This book contains solutions to the problems in the book Time Series Analysis with Applications in R, second edition, by Cryer and Chan. It is provided as a github repository so that anybody may contribute to its development." />
   <meta name="github-repo" content="jolars/TSAsolutions" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Solutions to Time Series Analysis with Applications in R" />
   
-  <meta name="twitter:description" content="This book contains solutions to the problems in the book Time Series Analysis with Applications in R, third edition, by Cryer and Chan. It is provided as a github repository so that anybody may contribute to its development." />
+  <meta name="twitter:description" content="This book contains solutions to the problems in the book Time Series Analysis with Applications in R, second edition, by Cryer and Chan. It is provided as a github repository so that anybody may contribute to its development." />
   
 
 <meta name="author" content="Johan Larsson">
 
 
-<meta name="date" content="2017-03-21">
+<meta name="date" content="2017-03-26">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -110,6 +110,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="2" data-path="fundamental-concepts.html"><a href="fundamental-concepts.html"><i class="fa fa-check"></i><b>2</b> Fundamental concepts</a><ul>
 <li class="chapter" data-level="2.1" data-path="fundamental-concepts.html"><a href="fundamental-concepts.html#expected-value-and-covariance"><i class="fa fa-check"></i><b>2.1</b> Expected value and covariance</a></li>
+<li class="chapter" data-level="2.2" data-path="fundamental-concepts.html"><a href="fundamental-concepts.html#covariance-and-dependence"><i class="fa fa-check"></i><b>2.2</b> Covariance and dependence</a></li>
+<li class="chapter" data-level="2.3" data-path="fundamental-concepts.html"><a href="fundamental-concepts.html#weak-stationarity-autocovariance-and-time-plot"><i class="fa fa-check"></i><b>2.3</b> Weak stationarity, autocovariance and time plot</a></li>
+<li class="chapter" data-level="2.4" data-path="fundamental-concepts.html"><a href="fundamental-concepts.html#section"><i class="fa fa-check"></i><b>2.4</b> </a></li>
+<li class="chapter" data-level="2.5" data-path="fundamental-concepts.html"><a href="fundamental-concepts.html#section-1"><i class="fa fa-check"></i><b>2.5</b> </a></li>
+<li class="chapter" data-level="2.6" data-path="fundamental-concepts.html"><a href="fundamental-concepts.html#section-2"><i class="fa fa-check"></i><b>2.6</b> </a></li>
 </ul></li>
 </ul>
 
@@ -133,7 +138,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="expected-value-and-covariance" class="section level2">
 <h2><span class="header-section-number">2.1</span> Expected value and covariance</h2>
 <blockquote>
-<p>Suppose <span class="math inline">\(\text{E}(X) = 2, \text{Var}(X) = 9, \text{E}(Y) = 0, \text{Var}(Y) = 4\)</span>, and <span class="math inline">\(\text{Corr}(X,Y) = 0.25\)</span>. Find:</p>
+<p>Suppose <span class="math inline">\(\text{E}[X) = 2, \text{Var}[X) = 9, \text{E}[Y) = 0, \text{Var}[Y) = 4\)</span>, and <span class="math inline">\(\text{Corr}[X,Y) = 0.25\)</span>. Find:</p>
 <ol style="list-style-type: lower-alpha">
 <li><span class="math inline">\(\text{Var}(X + Y)\)</span>.</li>
 <li><span class="math inline">\(\text{Cov}(X, X + Y)\)</span>.</li>
@@ -142,13 +147,157 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </blockquote>
 <ol style="list-style-type: lower-alpha">
 <li>\begin{align}
-\text{Cov}(X,Y) &amp; = \text{Corr}(X,Y)\sqrt{Var(X)Var(Y)}\\
+\text{Cov}[X,Y] &amp; = \text{Corr}[X,Y]\sqrt{Var[X]Var[Y]}\\
                 &amp; = 0.25 \sqrt{9 \times 4} = 1.5 \\
-\text{Var}(X,Y) &amp; = Var(X)+Var(Y)+2Cov(X,Y)\\
+\text{Var}[X,Y] &amp; = Var[X]+Var[Y]+2Cov[X,Y]\\
                 &amp; = 9 + 4 + 2 \times 3 = 16\\
 \end{align}</li>
-<li><span class="math inline">\(\text{Cov}(X, X+Y) = \text{Cov}(X,X) + \text{Cov}(X,Y) = \text{Var}(X) + \text{Cov}(X,Y) = 9 + 1.5 = 10.5\)</span></li>
+<li><span class="math display">\[\text{Cov}[X, X+Y] = \text{Cov}[X,X] + \text{Cov}[X,Y] = \text{Var}[X] + \text{Cov}[X,Y] = 9 + 1.5 = 10.5\]</span></li>
+<li>\begin{align}
+\text{Corr}[X+Y, X-Y] = &amp; \text{Corr}[X,X] + \text{Corr}[X,-Y] + \text{Corr}[Y,X] + \text{Corr}[Y,-Y] \\
+                      = &amp; \text{Corr}[Y,X] + \text{Corr}[Y,-Y] \\
+                      = &amp; 1 - 0.25 + 0.25 -1 \\
+                      = &amp; 0 \\
+\end{align}</li>
+</ol>
+</div>
+<div id="covariance-and-dependence" class="section level2">
+<h2><span class="header-section-number">2.2</span> Covariance and dependence</h2>
+<blockquote>
+<p>If <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are dependent but <span class="math inline">\(\text{Var}[X) = \text{Var}[Y)\)</span>, find <span class="math inline">\(\text{Cov}[X + Y, X − Y)\)</span>.</p>
+</blockquote>
+<p><span class="math display">\[
+\text{Cov}[X+Y,X-Y] = \text{Cov}[X,X] + \text{Cov}[X,-Y] + \text{Cov}[Y,X] + \text{Cov}[Y, -Y] = \\
+Var[X] - Cov[X,Y] + Cov[X,Y] - Var[Y] = 0
+\]</span></p>
+<p>since <span class="math inline">\(Var[X] = Var[Y]\)</span>.</p>
+</div>
+<div id="weak-stationarity-autocovariance-and-time-plot" class="section level2">
+<h2><span class="header-section-number">2.3</span> Weak stationarity, autocovariance and time plot</h2>
+<blockquote>
+<p>Let X have a distribution with mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^2\)</span>, and let <span class="math inline">\(Y_t = X\)</span> for all <span class="math inline">\(t\)</span>.</p>
+<ol style="list-style-type: lower-alpha">
+<li>Show that <span class="math inline">\(\{Yt\}\)</span> is strictly and weakly stationary.</li>
+<li>Find the autocovariance function for <span class="math inline">\(\{Yt\}\)</span>.</li>
+<li>Sketch a “typical” time plot of Yt.</li>
+</ol>
+</blockquote>
+<ol style="list-style-type: lower-alpha">
+<li><p>We have that <span class="math display">\[
+P(Y_{t_1}, Y_{t_2}, \dots, Y_{t_n}) =\\
+  P(X_1, X_2, \dots, X_n) =\\
+  P(Y_{t_1 - k}, Y_{t_2 - k}, \dots, Y_{t_n - k}),
+\]</span></p>
+<p>which satisfies our requirement for strict stationarity.</p></li>
+<li>The autocovariance is given by <span class="math display">\[
+  \gamma_{t,s}=\text{Cov}[Y_t, Y_s] = \text{Cov}[X,X] = \text{Var}[X] = \sigma^2.
+\]</span></li>
 <li></li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(lattice)
+tstest &lt;-<span class="st"> </span><span class="kw">ts</span>(<span class="kw">runif</span>(<span class="dv">100</span>))
+
+lattice::<span class="kw">xyplot</span>(tstest,
+                <span class="dt">panel =</span> function(x, y, ...) {
+                  <span class="kw">panel.abline</span>(<span class="dt">h =</span> <span class="kw">mean</span>(y), <span class="dt">lty =</span> <span class="dv">2</span>)
+                  <span class="kw">panel.xyplot</span>(x, y, ...)
+                })</code></pre></div>
+<div class="figure"><span id="fig:unnamed-chunk-7"></span>
+<img src="TSAsolutions_files/figure-html/unnamed-chunk-7-1.png" alt="A white noise time series: no drift, independence between observations." width="672" />
+<p class="caption">
+Figure 2.1: A white noise time series: no drift, independence between observations.
+</p>
+</div>
+</div>
+<div id="section" class="section level2">
+<h2><span class="header-section-number">2.4</span> </h2>
+<blockquote>
+<p>Let <span class="math inline">\(\{e_t\}\)</span> be a zero mean white noise process. Suppose that the observed process is <span class="math inline">\(Y_t = e_t + \theta e_t − 1\)</span>, where <span class="math inline">\(\theta\)</span> is either 3 or 1/3.</p>
+<ol style="list-style-type: lower-alpha">
+<li>Find the autocorrelation function for <span class="math inline">\(\{Yt\}\)</span> both when <span class="math inline">\(\theta = 3\)</span> and when <span class="math inline">\(\theta = 1/3\)</span>.</li>
+<li>You should have discovered that the time series is stationary regardless of the value of <span class="math inline">\(\theta\)</span> and that the autocorrelation functions are the same for <span class="math inline">\(\theta = 3\)</span> and <span class="math inline">\(\theta = 1/3\)</span>. For simplicity, suppose that the process mean is known to be zero and the variance of <span class="math inline">\(Y_t\)</span> is known to be 1. You observe the series <span class="math inline">\(\{Yt\}\)</span> for <span class="math inline">\(t = 1, 2, \dots , n\)</span> and suppose that you can produce good estimates of the autocorrelations <span class="math inline">\(\rho_k\)</span>. Do you think that you could determine which value of <span class="math inline">\(\theta\)</span> is correct (3 or 1/3) based on the estimate of <span class="math inline">\(\rho_k\)</span>? Why or why not?</li>
+</ol>
+</blockquote>
+<ol style="list-style-type: lower-alpha">
+<li><p><span class="math display">\[
+  E[Y_t] = E[e_t+\theta e_{t-1}] = E[e_t] + \theta E[e_{t-1}] = 0 + 0 = 0\\
+  V[Y_t] = V[e_t + \theta e_{t-1}] =  V[e_t] + \theta^2 V[e_{t-1}] = \sigma_e^2 + \theta^2 \sigma_e^2 = \sigma_2^2(1 + \theta^2)\\
+\]</span></p>
+<p>For <span class="math inline">\(k = 1\)</span> we have</p>
+<p><span class="math display">\[
+  C[e_t + \theta e_{t-1}, e_{t-1} + \theta e_{t-2}] = \\
+  C[e_t,e_{t-1}] + C[e_t, \theta e_{t-2}] + C[\theta e_{t-1}, e_{t-1}] + C[\theta e_{t-1}, \theta e_{t-2}] = \\
+  0 + 0 + \theta V[e_{t-1}] + 0 = \theta \sigma_e^2,\\
+  \text{Corr}[Y_t, Y_{t-k}] = \frac{\theta \sigma_e^2}{\sqrt{(\sigma_e^2(1+\theta^2))^2}} = \frac{\theta }{1+\theta^2}
+\]</span></p>
+<p>and for <span class="math inline">\(k = 0\)</span> we get</p>
+<p><span class="math display">\[
+  \text{Corr}[Y_t, Y_{t-k}] = \text{Corr}[Y_t, Y_t] = 1
+\]</span></p>
+<p>and, finally, for <span class="math inline">\(k &gt; 0\)</span>:</p>
+<p><span class="math display">\[
+  C[e_t + \theta e_{t-1}, e_{t-k} + \theta e_{t-k-1}] = \\
+  C[e_t, e_{t-k}] + C[e_t, e_{t-1-k}] + C[\theta e_{t-1}, e_{t-k}] + C[\theta e_{t-1}, \theta e_{t-1-k}] = 0
+\]</span></p>
+<p>given that all terms are independent. Taken together, we have that</p>
+<p><span class="math display">\[ \text{Corr}[Y_t, Y_{t-k}] =
+  \begin{cases}
+    1                            &amp; \quad \text{for } k = 0\\
+    \frac{\theta}{1 + \theta^2}  &amp; \quad \text{for } k = 1\\
+    0                            &amp; \quad \text{for } k &gt; 1
+  \end{cases}.
+\]</span></p>
+<p>And, as required,</p>
+<span class="math display">\[
+  \text{Corr}[Y_t, Y_{t-k}] =
+  \begin{cases}
+    \frac{3}{1+3^2} = \frac{3}{10} &amp; \quad \text{if } \theta = 3\\
+    \frac{1/3}{1 + (1/3)^2} = \frac{1}{10/3} = \frac{3}{10}  &amp; \quad \text{if } \theta = 1/3
+  \end{cases}.
+\]</span></li>
+<li><p>No, probably not. Given that <span class="math inline">\(\rho\)</span> is standardized, we will not be able to detect any difference in the variance regardless of the values of k.</p></li>
+</ol>
+</div>
+<div id="section-1" class="section level2">
+<h2><span class="header-section-number">2.5</span> </h2>
+<blockquote>
+<p>Suppose <span class="math inline">\(Y_t = 5 + 2t + X_t\)</span>, where <span class="math inline">\(\{X_t\}\)</span> is a zero-mean stationary series with autocovariance function <span class="math inline">\(\gamma_k\)</span>.</p>
+<ol style="list-style-type: lower-alpha">
+<li>Find the mean function for <span class="math inline">\(\{Y_t\}\)</span>.</li>
+<li>Find the autocovariance function for <span class="math inline">\(\{Y_t\}\)</span>.</li>
+<li>Is <span class="math inline">\(\{Y_t\}\)</span> stationary? Why or why not?</li>
+</ol>
+</blockquote>
+<ol style="list-style-type: lower-alpha">
+<li><span class="math display">\[\mu_t = E[Y_t] = E[5 + 2t + X_t] = 5 + 2E[t] + E[X_t] = 5 + 2t + 0 = 2t + 5\]</span></li>
+<li><span class="math display">\[ \gamma_k = \text{Corr}[5+2t+X_t, 5+2(t-k)+X_{t-k}] = \text{Corr}[X_t, X_{t-k}]\]</span></li>
+<li>No, the mean function (<span class="math inline">\(\mu_t\)</span>) is constant and the aurocovariance (<span class="math inline">\(\gamma_{t,t-k}\)</span>) free from <span class="math inline">\(t\)</span>.</li>
+</ol>
+</div>
+<div id="section-2" class="section level2">
+<h2><span class="header-section-number">2.6</span> </h2>
+<blockquote>
+<p>Let {Xt} be a stationary time series, and define <span class="math display">\[ Y_t =
+   \begin{cases}
+     X_t     &amp; \quad \text{for odd } t \\
+     X_t + 3 &amp; \quad \text{for even } t
+   \end{cases}.
+ \]</span></p>
+<ol style="list-style-type: lower-alpha">
+<li>Show that <span class="math inline">\(\text{Cov}[Y_t, Y_{t-k}]\)</span> is free from <span class="math inline">\(t\)</span> for all lags <span class="math inline">\(k\)</span>.</li>
+<li>iS <span class="math inline">\(\{Y_t\}\)</span> stationary?</li>
+</ol>
+</blockquote>
+<ol style="list-style-type: lower-alpha">
+<li><p><span class="math display">\[\text{Cov}[a + X_t, b + X_{t-k}] =\text{Cov}[X_t, X_{t-k}],\]</span></p>
+which is free from <span class="math inline">\(t\)</span> for all <span class="math inline">\(k\)</span> because <span class="math inline">\(X_t\)</span> is stationary.</li>
+<li><p><span class="math display">\[
+  \mu_t = E[Y_t] = 
+    \begin{cases}
+      E[X_t]       &amp; \quad \text{for odd } t\\
+      3 + E[X_t]   &amp; \quad \text{for even } t\\
+    \end{cases}.
+\]</span> Since <span class="math inline">\(\mu_t\)</span> varies depending on <span class="math inline">\(t\)</span>, <span class="math inline">\(Y_t\)</span> is not stationary.</p></li>
 </ol>
 
 </div>
