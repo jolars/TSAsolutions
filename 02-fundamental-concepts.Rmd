@@ -166,7 +166,59 @@ lattice::xyplot(tstest,
         \end{cases}.
     \]
     Since $\mu_t$ varies depending on $t$, $Y_t$ is not stationary. 
-   
+    
+## 
+
+> Suppose that $\{Y_t\}$ is stationary with autocovariance function $\gamma_k$.
+> 
+> (a) Show that $W_t = \triangledown Y_t = Y_t − Y_t − 1$ is stationary by finding the mean and autocovariance
+function for $\{W_t\}$.
+> (b) Show that $U_t = \triangledown 2Y_t = \triangledown[Y_t − Y_t−1] = Y_t − 2Y_t − 1 + Y_t − 2 is stationary. (You need
+not find the mean and autocovariance function for $\{U_t\}$.)
+
+(a) \[\mu_t = E[W_t] = E[Y_t - Y_{t-1}] = E[Y_t] - E[Y_{t-1}] = 0\] because
+    $Y_t$ is stationary.
+    
+    \[
+      \text{Cov}[W_t] = \text{Cov}[Y_t - Y_{t-1}, Y_{t-k} - Y_{t-1-k}] = \\
+      \text{Cov}[Y_t, Y_{t-k}] + \text{Cov}[Y_t, Y_{t-1-k}] + \text{Cov}[-Y_{t-k}, Y_{t-k}] + \text{Cov}[-Y_{t-k}, -Y_{t-1-k}]=\\
+      \gamma_k-\gamma_{k+1}-\gamma_{k-1}+\gamma_{k} = 2 \gamma_k - \gamma_{k+1} - \gamma_{k-1}. \quad \square
+    \]
+(b) In (a), we discovered that the difference between two stationary
+    processes, $\triangledown Y_t$ itself was stationary. It follows that the
+    difference between two of these differences, $\triangledown^2Y_t$ is also
+    stationary.
+    
+## 
+
+> Suppose that $\{Y_t\}$ is stationary with autocovariance function $\gamma_k$.
+> Show that for any fixed positive integer $n$ and any constants $c_1, c_2, \dots, c_n$, the process $\{W_t\}$ defined
+> by $W_t = c_1 Y_t + c_2 Y_{t–1} + \dots + c_n Y_{t-n+1}$ is stationary. (Note that Exercise
+> 2.7 is a special case of this result.)
+
+\begin{align}
+  E[W_t] & = c_1E[Y_t]+c_2E[Y_t] + \dots + c_n E[Y_t]\\
+         & = E[Y_t](c_1 + c_2 + \dots + c_n),
+\end{align}
+
+and thus the expected value is constant. Moreover,
+
+\begin{align}
+  \text{Cov}[W_t] & = \text{Cov}[c_1 Y_t + c_2 Y_{t-1} + \dots + c_n Y_{t-k}, c_1 Y_{t-k} + c_2 Y_{t-k-1} + \dots + c_n Y_{t-k-n}] \\
+                  & = \sum_{i=0}^n \sum_{j=0}^n c_i c_j \text{Cov}[Y_{t-j}Y_{t-i-k}] \\
+                  & = \sum_{i=0}^n \sum_{j=0}^n c_i c_j \gamma_{j-k-i},
+\end{align}
+
+which is free of $t$; consequently, $W_t$ is stationary.
+
+
+    
+
+    
+    
+    
+    
+    
     
 
   
