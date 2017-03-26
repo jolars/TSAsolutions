@@ -2,19 +2,173 @@
 
 ## Expected value and covariance
 
-> Suppose $\text{E}(X) = 2, \text{Var}(X) = 9, \text{E}(Y) = 0, \text{Var}(Y) = 4$, and $\text{Corr}(X,Y) = 0.25$. Find:
+> Suppose $\text{E}[X) = 2, \text{Var}[X) = 9, \text{E}[Y) = 0, \text{Var}[Y) = 4$, and $\text{Corr}[X,Y) = 0.25$. Find:
 >   
 > (a) $\text{Var}(X + Y)$.
 > (b) $\text{Cov}(X, X + Y)$.
 > (c) $\text{Corr}(X + Y, X − Y)$.
 
 (a) \begin{align}
-    \text{Cov}(X,Y) & = \text{Corr}(X,Y)\sqrt{Var(X)Var(Y)}\\
+    \text{Cov}[X,Y] & = \text{Corr}[X,Y]\sqrt{Var[X]Var[Y]}\\
                     & = 0.25 \sqrt{9 \times 4} = 1.5 \\
-    \text{Var}(X,Y) & = Var(X)+Var(Y)+2Cov(X,Y)\\
+    \text{Var}[X,Y] & = Var[X]+Var[Y]+2Cov[X,Y]\\
                     & = 9 + 4 + 2 \times 3 = 16\\
     \end{align}
-(b) $\text{Cov}(X, X+Y) = \text{Cov}(X,X) + \text{Cov}(X,Y) = \text{Var}(X) + \text{Cov}(X,Y) = 9 + 1.5 = 10.5$
+(b) $$\text{Cov}[X, X+Y] = \text{Cov}[X,X] + \text{Cov}[X,Y] = \text{Var}[X] + \text{Cov}[X,Y] = 9 + 1.5 = 10.5$$
+(c) \begin{align}
+    \text{Corr}[X+Y, X-Y] = & \text{Corr}[X,X] + \text{Corr}[X,-Y] + \text{Corr}[Y,X] + \text{Corr}[Y,-Y] \\
+                          = & \text{Corr}[Y,X] + \text{Corr}[Y,-Y] \\
+                          = & 1 - 0.25 + 0.25 -1 \\
+                          = & 0 \\
+    \end{align}
+
+## Covariance and dependence
+
+> If $X$ and $Y$ are dependent but $\text{Var}[X) = \text{Var}[Y)$, find $\text{Cov}[X + Y, X − Y)$.
+
+\[
+\text{Cov}[X+Y,X-Y] = \text{Cov}[X,X] + \text{Cov}[X,-Y] + \text{Cov}[Y,X] + \text{Cov}[Y, -Y] = \\
+Var[X] - Cov[X,Y] + Cov[X,Y] - Var[Y] = 0
+\]
+
+since $Var[X] = Var[Y]$.
+
+## Weak stationarity, autocovariance and time plot
+
+> Let X have a distribution with mean $\mu$ and variance $\sigma^2$, and let $Y_t = X$ for all $t$.
+>
+> (a) Show that $\{Yt\}$ is strictly and weakly stationary.
+> (b) Find the autocovariance function for $\{Yt\}$.
+> (c) Sketch a “typical” time plot of Yt.
+    
+(a) We have that
+    \[
+    P(Y_{t_1}, Y_{t_2}, \dots, Y_{t_n}) =\\
+      P(X_1, X_2, \dots, X_n) =\\
+      P(Y_{t_1 - k}, Y_{t_2 - k}, \dots, Y_{t_n - k}),
+    \]
+    
+    which satisfies our requirement for strict stationarity.
+    
+(b) The autocovariance is given by 
+    \[
+      \gamma_{t,s}=\text{Cov}[Y_t, Y_s] = \text{Cov}[X,X] = \text{Var}[X] = \sigma^2.
+    \]
 (c) 
+```{r, fig.cap="A white noise time series: no drift, independence between observations."}
+library(lattice)
+tstest <- ts(runif(100))
+
+lattice::xyplot(tstest,
+                panel = function(x, y, ...) {
+                  panel.abline(h = mean(y), lty = 2)
+                  panel.xyplot(x, y, ...)
+                })
+```
+
+## 
+
+> Let $\{e_t\}$ be a zero mean white noise process. Suppose that the observed process is
+> $Y_t = e_t + \theta e_t − 1$, where $\theta$ is either 3 or 1/3.
+> 
+> (a) Find the autocorrelation function for $\{Yt\}$ both when $\theta = 3$ and when $\theta = 1/3$.
+> (b) You should have discovered that the time series is stationary regardless of the
+> value of $\theta$ and that the autocorrelation functions are the same for $\theta = 3$ and $\theta = 1/3$.
+> For simplicity, suppose that the process mean is known to be zero and the
+> variance of $Y_t$ is known to be 1. You observe the series $\{Yt\}$ for $t = 1, 2, \dots , n$
+> and suppose that you can produce good estimates of the autocorrelations $\rho_k$.
+> Do you think that you could determine which value of $\theta$ is correct (3 or 1/3)
+> based on the estimate of $\rho_k$? Why or why not?
+
+(a) \[
+      E[Y_t] = E[e_t+\theta e_{t-1}] = E[e_t] + \theta E[e_{t-1}] = 0 + 0 = 0\\
+      V[Y_t] = V[e_t + \theta e_{t-1}] =  V[e_t] + \theta^2 V[e_{t-1}] = \sigma_e^2 + \theta^2 \sigma_e^2 = \sigma_2^2(1 + \theta^2)\\
+    \]
+    
+    For $k = 1$ we have 
+    
+    \[
+      C[e_t + \theta e_{t-1}, e_{t-1} + \theta e_{t-2}] = \\
+      C[e_t,e_{t-1}] + C[e_t, \theta e_{t-2}] + C[\theta e_{t-1}, e_{t-1}] + C[\theta e_{t-1}, \theta e_{t-2}] = \\
+      0 + 0 + \theta V[e_{t-1}] + 0 = \theta \sigma_e^2,\\
+      \text{Corr}[Y_t, Y_{t-k}] = \frac{\theta \sigma_e^2}{\sqrt{(\sigma_e^2(1+\theta^2))^2}} = \frac{\theta }{1+\theta^2}
+    \]
+    
+    and for $k = 0$ we get
+    
+    \[
+      \text{Corr}[Y_t, Y_{t-k}] = \text{Corr}[Y_t, Y_t] = 1
+    \]
+    
+    and, finally, for $k > 0$:
+    
+    \[
+      C[e_t + \theta e_{t-1}, e_{t-k} + \theta e_{t-k-1}] = \\
+      C[e_t, e_{t-k}] + C[e_t, e_{t-1-k}] + C[\theta e_{t-1}, e_{t-k}] + C[\theta e_{t-1}, \theta e_{t-1-k}] = 0
+    \]
+    
+    given that all terms are independent. Taken together, we have that
+    
+    \[ \text{Corr}[Y_t, Y_{t-k}] =
+      \begin{cases}
+        1                            & \quad \text{for } k = 0\\
+        \frac{\theta}{1 + \theta^2}  & \quad \text{for } k = 1\\
+        0                            & \quad \text{for } k > 1
+      \end{cases}.
+    \]
+    
+    And, as required,
+    
+    \[
+      \text{Corr}[Y_t, Y_{t-k}] =
+      \begin{cases}
+        \frac{3}{1+3^2} = \frac{3}{10} & \quad \text{if } \theta = 3\\
+        \frac{1/3}{1 + (1/3)^2} = \frac{1}{10/3} = \frac{3}{10}  & \quad \text{if } \theta = 1/3
+      \end{cases}.
+    \]
+(b) No, probably not. Given that $\rho$ is standardized, we will not be able to
+    detect any difference in the variance regardless of the values of k.
+
+## 
+
+> Suppose $Y_t = 5 + 2t + X_t$, where $\{X_t\}$ is a zero-mean stationary series with autocovariance
+> function $\gamma_k$.
+>
+> (a) Find the mean function for $\{Y_t\}$.
+> (b) Find the autocovariance function for $\{Y_t\}$.
+> (c) Is $\{Y_t\}$ stationary? Why or why not?
+
+(a) $$\mu_t = E[Y_t] = E[5 + 2t + X_t] = 5 + 2E[t] + E[X_t] = 5 + 2t + 0 = 2t + 5$$
+(b) $$ \gamma_k = \text{Corr}[5+2t+X_t, 5+2(t-k)+X_{t-k}] = \text{Corr}[X_t, X_{t-k}]$$
+(c) No, the mean function ($\mu_t$) is constant and the aurocovariance ($\gamma_{t,t-k}$) free from $t$.
+
+## 
+
+> Let {Xt} be a stationary time series, and define
+>  \[ Y_t =
+>    \begin{cases}
+>      X_t     & \quad \text{for odd } t \\
+>      X_t + 3 & \quad \text{for even } t
+>    \end{cases}.
+>  \]
+> 
+> (a) Show that $\text{Cov}[Y_t, Y_{t-k}]$ is free from $t$ for all lags $k$.
+> (b) iS $\{Y_t\}$ stationary?
+
+(a) \[\text{Cov}[a + X_t, b + X_{t-k}] =\text{Cov}[X_t, X_{t-k}],\]
+
+    which is free from $t$ for all $k$ because $X_t$ is stationary.
+(b) \[
+      \mu_t = E[Y_t] = 
+        \begin{cases}
+          E[X_t]       & \quad \text{for odd } t\\
+          3 + E[X_t]   & \quad \text{for even } t\\
+        \end{cases}.
+    \]
+    Since $\mu_t$ varies depending on $t$, $Y_t$ is not stationary. 
+   
+    
+
+  
   
  
