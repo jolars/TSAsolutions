@@ -115,6 +115,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2.4" data-path="fundamental-concepts.html"><a href="fundamental-concepts.html#section"><i class="fa fa-check"></i><b>2.4</b> </a></li>
 <li class="chapter" data-level="2.5" data-path="fundamental-concepts.html"><a href="fundamental-concepts.html#section-1"><i class="fa fa-check"></i><b>2.5</b> </a></li>
 <li class="chapter" data-level="2.6" data-path="fundamental-concepts.html"><a href="fundamental-concepts.html#section-2"><i class="fa fa-check"></i><b>2.6</b> </a></li>
+<li class="chapter" data-level="2.7" data-path="fundamental-concepts.html"><a href="fundamental-concepts.html#section-3"><i class="fa fa-check"></i><b>2.7</b> </a></li>
+<li class="chapter" data-level="2.8" data-path="fundamental-concepts.html"><a href="fundamental-concepts.html#section-4"><i class="fa fa-check"></i><b>2.8</b> </a></li>
 </ul></li>
 </ul>
 
@@ -299,6 +301,42 @@ which is free from <span class="math inline">\(t\)</span> for all <span class="m
     \end{cases}.
 \]</span> Since <span class="math inline">\(\mu_t\)</span> varies depending on <span class="math inline">\(t\)</span>, <span class="math inline">\(Y_t\)</span> is not stationary.</p></li>
 </ol>
+</div>
+<div id="section-3" class="section level2">
+<h2><span class="header-section-number">2.7</span> </h2>
+<blockquote>
+<p>Suppose that <span class="math inline">\(\{Y_t\}\)</span> is stationary with autocovariance function <span class="math inline">\(\gamma_k\)</span>.</p>
+<ol style="list-style-type: lower-alpha">
+<li>Show that <span class="math inline">\(W_t = \triangledown Y_t = Y_t − Y_t − 1\)</span> is stationary by finding the mean and autocovariance function for <span class="math inline">\(\{W_t\}\)</span>.</li>
+<li>Show that $U_t = 2Y_t =  = Y_t − 2Y_t − 1 + Y_t − 2 is stationary. (You need not find the mean and autocovariance function for <span class="math inline">\(\{U_t\}\)</span>.)</li>
+</ol>
+</blockquote>
+<ol style="list-style-type: lower-alpha">
+<li><p><span class="math display">\[\mu_t = E[W_t] = E[Y_t - Y_{t-1}] = E[Y_t] - E[Y_{t-1}] = 0\]</span> because <span class="math inline">\(Y_t\)</span> is stationary.</p>
+<span class="math display">\[
+  \text{Cov}[W_t] = \text{Cov}[Y_t - Y_{t-1}, Y_{t-k} - Y_{t-1-k}] = \\
+  \text{Cov}[Y_t, Y_{t-k}] + \text{Cov}[Y_t, Y_{t-1-k}] + \text{Cov}[-Y_{t-k}, Y_{t-k}] + \text{Cov}[-Y_{t-k}, -Y_{t-1-k}]=\\
+  \gamma_k-\gamma_{k+1}-\gamma_{k-1}+\gamma_{k} = 2 \gamma_k - \gamma_{k+1} - \gamma_{k-1}. \quad \square
+\]</span></li>
+<li><p>In (a), we discovered that the difference between two stationary processes, <span class="math inline">\(\triangledown Y_t\)</span> itself was stationary. It follows that the difference between two of these differences, <span class="math inline">\(\triangledown^2Y_t\)</span> is also stationary.</p></li>
+</ol>
+</div>
+<div id="section-4" class="section level2">
+<h2><span class="header-section-number">2.8</span> </h2>
+<blockquote>
+<p>Suppose that <span class="math inline">\(\{Y_t\}\)</span> is stationary with autocovariance function <span class="math inline">\(\gamma_k\)</span>. Show that for any fixed positive integer <span class="math inline">\(n\)</span> and any constants <span class="math inline">\(c_1, c_2, \dots, c_n\)</span>, the process <span class="math inline">\(\{W_t\}\)</span> defined by <span class="math inline">\(W_t = c_1 Y_t + c_2 Y_{t–1} + \dots + c_n Y_{t-n+1}\)</span> is stationary. (Note that Exercise 2.7 is a special case of this result.)</p>
+</blockquote>
+\begin{align}
+  E[W_t] &amp; = c_1E[Y_t]+c_2E[Y_t] + \dots + c_n E[Y_t]\\
+         &amp; = E[Y_t](c_1 + c_2 + \dots + c_n),
+\end{align}
+<p>and thus the expected value is constant. Moreover,</p>
+\begin{align}
+  \text{Cov}[W_t] &amp; = \text{Cov}[c_1 Y_t + c_2 Y_{t-1} + \dots + c_n Y_{t-k}, c_1 Y_{t-k} + c_2 Y_{t-k-1} + \dots + c_n Y_{t-k-n}] \\
+                  &amp; = \sum_{i=0}^n \sum_{j=0}^n c_i c_j \text{Cov}[Y_{t-j}Y_{t-i-k}] \\
+                  &amp; = \sum_{i=0}^n \sum_{j=0}^n c_i c_j \gamma_{j-k-i},
+\end{align}
+<p>which is free of <span class="math inline">\(t\)</span>; consequently, <span class="math inline">\(W_t\)</span> is stationary.</p>
 
 </div>
 </div>
