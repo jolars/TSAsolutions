@@ -130,6 +130,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2.19" data-path="fundamental-concepts.html"><a href="fundamental-concepts.html#section-15"><i class="fa fa-check"></i><b>2.19</b> </a></li>
 <li class="chapter" data-level="2.20" data-path="fundamental-concepts.html"><a href="fundamental-concepts.html#section-16"><i class="fa fa-check"></i><b>2.20</b> </a></li>
 <li class="chapter" data-level="2.21" data-path="fundamental-concepts.html"><a href="fundamental-concepts.html#section-17"><i class="fa fa-check"></i><b>2.21</b> </a></li>
+<li class="chapter" data-level="2.22" data-path="fundamental-concepts.html"><a href="fundamental-concepts.html#section-18"><i class="fa fa-check"></i><b>2.22</b> </a></li>
 </ul></li>
 </ul>
 
@@ -633,7 +634,7 @@ which varies with <span class="math inline">\(t\)</span> and means that <span cl
 <ol style="list-style-type: lower-alpha">
 <li>Use the representation of <span class="math inline">\(Y_t\)</span> above to show that <span class="math inline">\(\mu_t = \mu_t − 1\)</span> for <span class="math inline">\(t &gt; 1\)</span> with initial condition <span class="math inline">\(\mu_1 = E(e_1) = 0\)</span>. Hence show that <span class="math inline">\(\mu_t = 0\)</span> for all <span class="math inline">\(t\)</span>.</li>
 <li>Similarly, show that <span class="math inline">\(\text{Var}(Y_t) = \text{Var}(Y_t − 1) + \sigma_e^2\)</span> for <span class="math inline">\(t &gt; 1\)</span> with <span class="math inline">\(\text{Var}(Y_1) = \sigma_e^2\)</span> and hence <span class="math inline">\(\text{Var}(Y_t) = t\sigma_e^2\)</span>.</li>
-<li>For <span class="math inline">\(0 \leq t \leq s\)</span>, use <span class="math inline">\(Y_s = Y_t + e_t + 1 + e_t + 2 + \sigma_e^2 + e_s\)</span> to show that <span class="math inline">\(\text{Cov}(Y_t, Y_s) = \text{Var}(Y_t)\)</span> and, hence, that <span class="math inline">\(\text{Cov}(Y_t, Y_s) = \min{t, s}\)</span>.</li>
+<li>For <span class="math inline">\(0 \leq t \leq s\)</span>, use <span class="math inline">\(Y_s = Y_t + e_t + 1 + e_t + 2 + \sigma_e^2 + e_s\)</span> to show that <span class="math inline">\(\text{Cov}(Y_t, Y_s) = \text{Var}(Y_t)\)</span> and, hence, that <span class="math inline">\(\text{Cov}(Y_t, Y_s) = \min(t, s)\)</span>.</li>
 </ol>
 </blockquote>
 <ol style="list-style-type: lower-alpha">
@@ -659,6 +660,38 @@ which implies <span class="math inline">\(\mu_t = \mu_{t-1}\quad\)</span> Q.E.D.
 </div>
 <div id="section-17" class="section level2">
 <h2><span class="header-section-number">2.21</span> </h2>
+<blockquote>
+<p>For a random walk with random starting value, let <span class="math inline">\(Y_t = Y_0 + e_t + e{t-1} + \dots + e_1\)</span> for <span class="math inline">\(t &gt; 0\)</span>, where <span class="math inline">\(\gamma_0\)</span> has a distribution with mean <span class="math inline">\(\mu_0\)</span> and variance <span class="math inline">\(\sigma_0^2\)</span>. Suppose further that <span class="math inline">\(Y_0, e_1, \dots , e_t\)</span> are independent.</p>
+<ol style="list-style-type: lower-alpha">
+<li>Show that <span class="math inline">\(E(Y_t) = \mu_0\)</span> for all <span class="math inline">\(t\)</span>.</li>
+<li>Show that <span class="math inline">\(\text{Var}(Y_t) = t \sigma_e^2 + \sigma_0^2\)</span></li>
+<li>Show that <span class="math inline">\(\text{Cov}(Y_t, Y_s) = \min(t, s) \sigma_e^2+ \sigma_0^2\)</span></li>
+<li>Show that <span class="math inline">\(\text{Corr}[Y_t, Y_s] = \sqrt{\frac{t \sigma_a^2 + \sigma_0^2}{s\sigma_a^2 + \sigma_0^2}}\)</span>.</li>
+</ol>
+</blockquote>
+<ol style="list-style-type: lower-alpha">
+<li><span class="math display">\[
+  E[Y_t] = E[Y_0+e_t+e_{t-1}+\dots+e_1] = \\
+  E[Y_0] + E[e_t] + E[e_{t-1}] + E[e_{t-2}] + \dots + E[e_1] = \\
+  \mu_0 + 0 + \dots + 0 = \mu_0 \quad \square
+\]</span></li>
+<li><span class="math display">\[
+  \text{Var}[Y_t] = \text{Var}[Y_0 + e_t + e_{t-1} + \dots + e_1] = \\
+  \text{Var}[Y_0] + \text{Var}[e_t] + \text{Var}[e_{t-1}] + \dots + \text{Var}[e_1] = \\
+  \sigma_0^2+t\sigma_e^2 \quad \square
+\]</span></li>
+<li><span class="math display">\[
+  \text{Cov}[Y_t, Y_s] = \text{Cov}[Y_t, Y_t+e_{t+1}+e_{t+2}+ \dots + e_s] = \\
+  \text{Cov}[Y_t, Y_t] = \text{Var}[Y_t] = \sigma_0^2+t\sigma_e^2 \quad \square
+\]</span></li>
+<li><span class="math display">\[
+  \text{Corr}[Y_t, Y_s] = \frac{\sigma_0^2+t\sigma_e^2}{\sqrt{(\sigma_0^2+t\sigma_e^2)(\sigma_0^2+s\sigma_e^2)}} = 
+    \sqrt{\frac{\sigma_0^2+t\sigma_e^2}{\sigma_0^2+s\sigma_e^2}} \quad \square
+\]</span></li>
+</ol>
+</div>
+<div id="section-18" class="section level2">
+<h2><span class="header-section-number">2.22</span> </h2>
 
 </div>
 </div>
