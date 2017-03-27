@@ -331,6 +331,80 @@ Then, as required, we have
 
 ## 
 
+> Let $Y_t = e_t − \theta(e_ − 1)2$. For this exercise, assume that the white noise series is normally
+> distributed.
+> 
+> (a) Find the autocorrelation function for $\{Y_t\}$.
+> (b) Is $\{Y_t\}$ stationary?
+
+(a) \[
+      E[Y_t] = E[e_t - \theta e_{t-1}^2] = E[e_t] - \theta E[e_{t-1}^2] = 0 - \theta \text{Var}[e_{t-1}] = -\theta \sigma_e^2
+    \]
+    
+    And thus the requirement of constant variance is fulfilled. Moreover,
+
+    \[
+      \text{Var}[Y_t] = \text{Var}[e_t-\theta e_{t-1}^2] = \text{Var}[e_t] + \theta^2 \text{Var}[e_{t-1}^2] = \sigma_e^2 + \theta^2 (E[e_{t-1}^4] - E[e_{t-1}^2]^2),
+    \]
+    where
+    \[
+      E[e_{t-1}^4] = 3\sigma_e^4 \quad \text{and} \quad E[e_{t-1}^2 ]^2 = \sigma_e^4,
+    \]
+    gives us
+    \[
+      \text{Var}[Y_t] = \sigma_e^2 + \theta(3\sigma_e^4 - \sigma_e^2) = \sigma_e^2 + 2 \theta^2 \sigma_e^4
+    \]
+    and
+    \[
+      \text{Cov}[Y_t, Y_{t-1}] = \text{Cov}[e_t - \theta e_{t-1}^2, e_{t-1} - \theta e_{t-2}^2] = \\
+      \text{Cov}[e_t, e_{t-1}] + \text{Cov}[e_t, - \theta e_{t-2}^2] + \text{Cov}[- \theta e_{t-1}^2, e_{t-1}]  \text{Cov}[-\theta e_{t-1}^2, - \theta e_{t-2}^2] =\\
+      \text{Cov}[e_t, e_{t-1}] - \theta \text{Cov}[e_t, e_{t-2}^2] - \theta \text{Cov}[e_{t-1}^2, e_{t-1}] + \theta^2 \text{Cov}[e_{t-1}^2, e_{t-2}^2] = \\
+      -\theta \text{Cov}[e_{t-1}^2, e_{t-1}] = -\theta (E[e_{t-1}^3] + \mu_{t-1} + \mu_t) = 0
+    \]
+    which means that the autocorrelation function $\gamma_{t,s}$ also has to be zero.
+    
+    ]
+(b) The autocorrelation of $\{Y_t\}$ is zeor and its mean function is constant, thus $\{Y_t\}$ must be stationary.
+
+## 
+
+> Evaluate the mean and covariance function for each of the following processes. In
+> each case, determine whether or not the process is stationary.
+> 
+> (a) $Y_t = \theta_0 + t e_t$.
+> (b) $W_t = \triangledown Y_t$, where $Y_t$ is as given in part (a).
+> (c) $Y_t = e_t e_{t−1}. (You may assume that $\{e_t\}$ is normal white noise.)
+
+(a) \[
+      E[Y_t]= E[\theta_0 +  t e_t] = \theta_0 + E[e_t] = \theta_0+t \times 0 = \theta_0\\
+    \text{Var}[Y_t] = \text{Var}[\theta_0] + \text{Var}[t e_t] = 0 + t^2\sigma_e^2 = t^2\sigma_e^2
+    \]
+
+    So $\{Y_t\}$ is not stationary.
+(b) \[
+      E[W_t] = E[\triangledown Y_t] = E[\theta_0 + te_t - \theta_0 - (t-1)e_{t-1}] =
+        tE[e_t] - tE[e_{t-1} + E[e_{t-1}] = 0 \\
+      \text{Var}[\triangledown Y_t] = \text{Var}[t e_t] = - \text{Var}[(t-1)e_{t-1}] = 
+        t^2 \sigma_e^2 - (t-1)^2 \sigma_e^2 = \sigma_e^2 (t^2 - t^2 + 2t - 1) = (2t-1)\sigma_e^2,
+    \]
+    
+    which varies with $t$ and means that $\{W_t\}$ is not stationary.
+(c) \[
+      E[Y_t] = E[e_t e_{t-1}] = E[e_t] E[e_{t-1}] = 0\\
+      \text{Cov}[Y_t, Y_{t-1}] = \text{Cov}[e_t e_{t-1}, e_{t-1} e_{t-2}] = E[(e_t e_{t-1} - \mu_t^2)(e_{t-1} e_{t-2} - \mu_t^2)] =\\
+      E[e_t]E[e_{t-1}]E[e_{t-1}]E[e_{t-2}] = 0
+    \]
+    Both the covariance and the mean function are zero, hence the process is stationary.
+
+##
+
+
+    
+
+
+    
+    
+
 
     
     
