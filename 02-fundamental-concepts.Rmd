@@ -24,7 +24,7 @@
 
 ## Covariance and dependence
 
-> If $X$ and $Y$ are dependent but $\text{Var}[X) = \text{Var}[Y)$, find $\text{Cov}[X + Y, X − Y)$.
+> If $X$ and $Y$ are dependent but $\text{Var}[X] = \text{Var}[Y]$, find $\text{Cov}[X + Y, X − Y]$.
 
 \[
 \text{Cov}[X+Y,X-Y] = \text{Cov}[X,X] + \text{Cov}[X,-Y] + \text{Cov}[Y,X] + \text{Cov}[Y, -Y] = \\
@@ -211,7 +211,86 @@ and thus the expected value is constant. Moreover,
 
 which is free of $t$; consequently, $W_t$ is stationary.
 
+## 
 
+> Suppose \Y_t = \beta_0 + \beta_1 t + X_t$, where $\{X_t\}$ is a zero-mean stationary series with autocovariance
+> function $\gamma_k$ and $\beta_0$ and $\beta_1$ are constants.
+> 
+> (a) Show that $\{Y_t\}$ is not stationary but that $W_t = \triangledown Y_t = Y_t − Y_{t−1}$ is stationary.
+> (b) In general, show that if $Y_t = \mu_t + X_t$, where $\{X_t\}$ is a zero-mean stationary
+> series and $\mu_t$ is a polynomial in $t$ of degree $d$, then $\triangledown^m Y_t = \triangledown(\triangledown^{m−1}Y_t)$ is stationary
+> for $m \geq d$ and nonstationary for $0 \leq m < d$.
+   
+(a) \[
+      E[Y_t] = \beta_0 + \beta_1 t + E[X_t] = \beta_0 + \beta_1 t + \mu_{t_x},
+    \]
+    
+    which is not free of $t$ and hence *not* stationary.
+    
+    \[
+      \text{Cov}[Y_t] = \text{Cov}[X_t, X_t-1] = \gamma_{t-1}
+    \]
+    
+    \[
+      E[W_t] = E[Y_t - Y_{t-1}] = E[\beta_0 + \beta_1 t + X_t - (\beta_0 + \beta_1(t-1) + X_{t-1})] =\\
+      \beta_0 + \beta_1 t - \beta_0 - \beta_1 t + \beta_1  = \beta_1,
+    \]
+
+    is free of $t$ and, furthermore, we have
+    
+    \[
+      \text{Cov}[W_t] = \text{Cov}[\beta_0 + \beta_1 t + X_t, \beta_0 + \beta_1 (t-1) + X_{t-1}] =\\
+      \text{Cov}[X_t, X_{t-1}] = \gamma_k,  
+    \]
+    
+    which is also free of $t$, thereby proving that $W_t$ is stationary.
+(b) \[
+      E[Y_t] = E[\mu_t + X_t] = \mu_t + \mu_t = 0 + 0 = 0, \quad \text{and}\\
+      \text{Cov}[Y_t] = \text{Cov}[\mu_t + X_t, \mu_{t-k} + X_{t-k}] = \text{Cov}[X_t, X_{t-k}] = \gamma_k
+    \]
+    
+    \[
+      \triangledown^m Y_t = \triangledown(\triangledown^{m−1}Y_t)
+    \]
+    
+    *Currently unsolved.*
+
+## 
+
+> Let $\{X_t\}$ be a zero-mean, unit-variance stationary process with autocorrelation
+> function $\rho_k$. Suppose that $\mu_t$ is a nonconstant function and that $\sigma_t$ is a positive-valued
+> nonconstant function. The observed series is formed as $Y_t = \mu_t + \sigma_t X_t$.
+> 
+> (a) Find the mean and covariance function for the $\{Y_t\}$ process.
+> (b) Show that the autocorrelation function for the $\{Y_t\}$ process depends only on
+>     the time lag. Is the $\{Y_t\}$ process stationary?
+> (c) Is it possible to have a time series with a constant mean and with
+>     $\text{Corr}(Y_t ,Y_t − k)$ free of $t$ but with $\{Y_t\}$ not stationary?
+
+(a) \[
+      \mu_t = E[Y_t] = E[\mu_t + \sigma_t X_t] = \mu_t + \sigma_t E[X_t] = \mu_t + \sigma_t \times 0 = \mu_t\\
+      \gamma_{t,t-k} = \text{Cov}[Y_t] = \text{Cov}[\mu_t + \sigma_t X_t, \mu_{t-k} + \sigma_{t-k} X_{t-k}] = 
+        \sigma_t \sigma_{t-k} \text{Cov}[X_t, X_{t-k}] = \sigma_t \sigma_{t-k} \rho_k
+    \]
+(b) First, we have
+    \[
+      \text{Var}[Y_t] = \text{Var}[\mu_t + \sigma_t X_t] = 0 + \sigma_t^2 \text{Var}[X_t] = \sigma_t^2 \times 1 = \sigma_t^2
+    \]
+
+    since $\{X_t\}$ has unit-variance. Futhermore,
+
+    \[
+      \text{Corr}[Y_t, Y_{t-k}] = \frac{\sigma_t \sigma_{t-k} \rho_k}{\sqrt{\text{Var}[Y_t]\text{Var}[Y_{t-k}]}} = 
+        \frac{\sigma_t \sigma_{t-k}\rho_k}{\sigma_t \sigma_{t-k}} = \rho_k,
+    \]
+     which depends only on the time lag, $k$. However, $\{Y_t\}$ is not necessarily
+     stationary since $\mu_t$ may depend on $t$.
+(c) Yes, $\rho_k$ might be free from $t$ but if $\sigma_t$ is not, we will have
+    a non-stationary time series with autocorrelation free from $t$ and
+    constant mean.
+    
+## 
+    
     
 
     
