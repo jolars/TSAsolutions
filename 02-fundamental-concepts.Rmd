@@ -290,6 +290,48 @@ which is free of $t$; consequently, $W_t$ is stationary.
     constant mean.
     
 ## 
+  
+> Suppose $\text{Cov}(X_t,X_t − k) = \gamma_k$ is free of $t$ but that $E(X_t) = 3t$.
+> 
+> (a) Is $\{X_t\}$ stationary?
+> (b) Let $Y_t = 7 − 3t + X_t$. Is $\{Y_t\}$ stationary?
+
+(a) \[
+      \text{Cov}[X_t, X_{t-k}] = \gamma_k\\
+      E[X_t] = 3t
+    \]
+    $\{X_t\}$ is not stationary because $\mu_t$ varies with $t$.
+(b) \[
+      E[Y_t] = 3 - 3t+E[X_t] = 7 - 3t - 3t = 7\\
+      \text{Cov}[Y_t, Y_{t-k}] = \text{Cov}[7-3t+X_t,7-3(t-k)+X_{t-k}] = \text{Cov}[X_t, X_{t-k}] = \gamma_k
+    \]
+    Since the mean function of $\{Y_t\}$ is constant (7) and its autocovariance
+    free of $t$, $\{Y_t\}$ is stionary.
+    
+##
+
+> Suppose that $Y_t = e_t − e_{t−12}. Show that $\{Y_t\}$ is stationary and that, for $k > 0$, its
+> autocorrelation function is nonzero only for lag $k = 12$.
+
+\[
+  E[Y_t] = E[e_t - e_{t-12}] = E[e_t] - E[e_{t-12}] = 0\\
+  \text{Cov}[Y_t, Y_{t-k}] = \text{Cov}[e_t - e_{t-12}, e_{t-k} - e_{t-12-k}] =\\
+  \text{Cov}[e_t, e_{t-k}] - \text{Cov}[e_t, e_{t-12-k}] - \text{Cov}[e_{t-12}, e_{t-k}] + \text{Cov}[e_{t-12}, e_{t-12-k}]
+\]
+
+Then, as required, we have
+
+\[ \text{Cov}[Y_t, Y_{t-k}] =
+  \begin{cases}
+    \text{Cov}[e_t, e_{t-12}] - \text{Cov}[e_t, e_t] - \text{Cov}[e_{t-12}, e_{t-12}] + \text{Cov}[e_{t-12},e_t] =
+      \text{Var}[e_t] - \text{Var}[e_{t-12}] \neq 0 & \quad \text{for }  k=12\\
+    0 + 0 + 0 + 0 = 0 & \quad \text{for } k \neq 12\quad \square
+  \end{cases}
+\]
+
+## 
+
+
     
     
 
