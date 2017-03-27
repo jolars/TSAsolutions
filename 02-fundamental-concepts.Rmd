@@ -507,6 +507,33 @@ Setting $k = t-s, j = t$ gives us
 
 ## 
 
+> Consider the standard random walk model where $Y_t = Y_t − 1 + e_t$ with $Y_1 = e_1$.
+> 
+> (a) Use the representation of $Y_t$ above to show that $\mu_t = \mu_t − 1$ for $t > 1$ with initial
+>     condition $\mu_1 = E(e_1) = 0$. Hence show that $\mu_t = 0$ for all $t$.
+> (b) Similarly, show that $\text{Var}(Y_t) = \text{Var}(Y_t − 1) + \sigma_e^2$ for $t > 1$ with $\text{Var}(Y_1) = \sigma_e^2$
+>     and hence $\text{Var}(Y_t) = t\sigma_e^2$.
+> (c) For $0 \leq t \leq s$, use $Y_s = Y_t + e_t + 1 + e_t + 2 + \sigma_e^2 + e_s$ to show that $\text{Cov}(Y_t, Y_s) = \text{Var}(Y_t)$
+>     and, hence, that $\text{Cov}(Y_t, Y_s) = \min{t, s}$.
+
+(a) \[
+      \mu_1 = E[Y_1] = E[e_1] = 0\\
+      \mu_2 = E[Y_2] = E[Y_1 - e_2] = E[Y_1] - E[e_2] = 0 - 0 = 0\\
+      \dots\\
+      \mu_{t-1} = E[Y_{t-1}] = E[Y_{t-2} - e_{t-1}] = E[Y_{t-2}] - E[e_{t-1}] = 0 \\
+      \mu_t = E[Y_t] = E[Y_{t-1} - e_t] = E[Y_t] - E[e_t] = 0,
+    \]
     
-  
- 
+    which implies $\mu_t = \mu_{t-1}\quad$ Q.E.D.
+(b) \[
+      \text{Var}[Y_1] = \sigma_e^2\\
+      \text{Var}[Y_2] = \text{Var}[Y_1 - e_2] = \text{Var}[Y_1] + \text{Var}[e_1] = \sigma_e^2 +  \sigma_e^2 = 2\sigma_e^2\\
+      \dots\\
+      \text{Var}[Y_{t-1}] = \text{Var}[Y_{t-2} - e_{t-1}] = \text{Var}[Y_{t-2}] + \text{Var}[e_{t-1}]  = (t-1)\sigma_e^2\\
+      \text{Var}[Y_t] = \text{Var}[Y_{t-1} - e_t] = \text{Var}[Y_{t-1}] + \text{Var}[e_t]  = (t-1)\sigma_e^2 + \sigma_e^2 = t\sigma_e^2 \quad \square
+    \]
+(c) \[
+      \text{Cov}[Y_t, Y_s] = \text{Cov}[Y_t, Y_t+e_{t+1}+e_{t+2}+ \dots + e_s] = \text{Cov}[Y_t, Y_t] = \text{Var}[Y_t] = t\sigma_e^2
+    \]
+    
+## 
