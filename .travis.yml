@@ -2,8 +2,10 @@ language: r
 sudo: false
 cache: packages
 
-os: linux
-dist: trusty
+addons:
+  apt:
+    packages:
+      - pandoc
 
 env:
   global:
