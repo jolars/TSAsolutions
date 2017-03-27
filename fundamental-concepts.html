@@ -124,6 +124,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2.13" data-path="fundamental-concepts.html"><a href="fundamental-concepts.html#section-9"><i class="fa fa-check"></i><b>2.13</b> </a></li>
 <li class="chapter" data-level="2.14" data-path="fundamental-concepts.html"><a href="fundamental-concepts.html#section-10"><i class="fa fa-check"></i><b>2.14</b> </a></li>
 <li class="chapter" data-level="2.15" data-path="fundamental-concepts.html"><a href="fundamental-concepts.html#section-11"><i class="fa fa-check"></i><b>2.15</b> </a></li>
+<li class="chapter" data-level="2.16" data-path="fundamental-concepts.html"><a href="fundamental-concepts.html#section-12"><i class="fa fa-check"></i><b>2.16</b> </a></li>
+<li class="chapter" data-level="2.17" data-path="fundamental-concepts.html"><a href="fundamental-concepts.html#section-13"><i class="fa fa-check"></i><b>2.17</b> </a></li>
 </ul></li>
 </ul>
 
@@ -442,11 +444,12 @@ which is also free of <span class="math inline">\(t\)</span>, thereby proving th
 <p>Then, as required, we have</p>
 <p><span class="math display">\[ \text{Cov}[Y_t, Y_{t-k}] =
   \begin{cases}
-    \text{Cov}[e_t, e_{t-12}] - \text{Cov}[e_t, e_t] - \text{Cov}[e_{t-12}, e_{t-12}] + \text{Cov}[e_{t-12},e_t] =
+    \text{Cov}[e_t, e_{t-12}] - \text{Cov}[e_t, e_t] - \text{Cov}[e_{t-12}, e_{t-12}] + \text{Cov}[e_{t-12},e_t] =\\
       \text{Var}[e_t] - \text{Var}[e_{t-12}] \neq 0 &amp; \quad \text{for }  k=12\\
-    0 + 0 + 0 + 0 = 0 &amp; \quad \text{for } k \neq 12\quad \square
+    \text{Cov}[e_t, e_{t-k}] - \text{Cov}[e_t, e_{t-12-k}] - \text{Cov}[e_{t-12}, e_{t-k}] + \text{Cov}[e_{t-12}, e_{t-12-k}] =\\
+    0 + 0 + 0 + 0 = 0 &amp; \quad \text{for } k \neq 12
   \end{cases}
-\]</span></p>
+\]</span> <span class="math inline">\(\square\)</span></p>
 </div>
 <div id="section-9" class="section level2">
 <h2><span class="header-section-number">2.13</span> </h2>
@@ -510,6 +513,51 @@ which varies with <span class="math inline">\(t\)</span> and means that <span cl
 </div>
 <div id="section-11" class="section level2">
 <h2><span class="header-section-number">2.15</span> </h2>
+<blockquote>
+<p>Suppose that X is a random variable with zero mean. Define a time series by <span class="math inline">\(Y_t = (−1)t_X\)</span>.</p>
+<ol style="list-style-type: lower-alpha">
+<li>Find the mean function for <span class="math inline">\(\{Y_t\}\)</span>.</li>
+<li>Find the covariance function for <span class="math inline">\(\{Y_t\}\)</span>.</li>
+<li>Is <span class="math inline">\(\{Y_t\}\)</span> stationary?</li>
+</ol>
+</blockquote>
+<ol style="list-style-type: lower-alpha">
+<li>$ E[Y_t] = (-1)^tE[X] = 0$</li>
+<li><span class="math inline">\(\text{Cov}[Y_t, Y_{t-k}] = \text{Cov}[(-1)^tX, (-1)^{t-k}X] = (-1)^{2t-k}\text{Cov}[X, X] = (-1)^k \text{Var}[X] = (-1)^k\sigma_t^2\)</span></li>
+<li>Yes, the covariance is free of <span class="math inline">\(t\)</span> and the mean is constant.</li>
+</ol>
+</div>
+<div id="section-12" class="section level2">
+<h2><span class="header-section-number">2.16</span> </h2>
+<blockquote>
+<p>Suppose <span class="math inline">\(Y_t = A + X_t\)</span>, where <span class="math inline">\(\{X_t\}\)</span> is stationary and <span class="math inline">\(A\)</span> is random but independent of <span class="math inline">\(\{X_t\}\)</span>. Find the mean and covariance function for <span class="math inline">\(\{Y_t\}\)</span> in terms of the mean and autocovariance function for <span class="math inline">\(\{X_t\}\)</span> and the mean and variance of <span class="math inline">\(A\)</span>.</p>
+</blockquote>
+<p><span class="math display">\[
+  E[Y_t] = E[A + X_t] = E[A] + E[X_t] = \mu_A + \mu_X\\
+  \text{Cov}[Y_t, Y_{t-k}] = \text{Cov}[A + X_t, A+ X_{t-k}] = \\
+  \text{Cov}[A, A] + \text{Cov}[A, X_{t-k}] + \text{Cov}[X_t, A] + \text{Cov}[X_t, X_{t-k}] = \sigma_A^2 + \gamma_{k_k}
+\]</span></p>
+</div>
+<div id="section-13" class="section level2">
+<h2><span class="header-section-number">2.17</span> </h2>
+<blockquote>
+<p>Let <span class="math inline">\(\{Y_t\}\)</span> be stationary with autocovariance function <span class="math inline">\(\gamma_k\)</span>. Let <span class="math inline">\(\bar{Y} = \frac{1}{n} \sum_{t=1}^n Y_t\)</span>. Show that <span class="math display">\[
+  \text{Var}[\bar{Y}] = \frac{\gamma_0}{n} + \frac{2}{n} \sum_{k=1}^{n-1}\left( 1 - \frac{k}{n}\right)\gamma_k =
+    \frac{1}{n} \sum_{k = -n + 1}^{n-1} \left( 1 - \frac{|k|}{n}\right)\gamma_k
+\]</span></p>
+</blockquote>
+<p><span class="math display">\[
+  \text{Var}[\bar{Y}] = \text{Var}\left[ \frac{1}{n} \sum_{t=1}^n Y_t \right] = \frac{1}{n^2} \text{Var}\left[ \sum_{t=1}^n Y_t \right] = \\
+  \frac{1}{n^2}\text{Cov}\left[ \sum_{t=1}^n Y_t, \sum_{s=1}^n Y_s \right] = \frac{1}{n^2} \sum_{t=1}^n \sum_{s=1}^n \gamma_{t-s}
+\]</span></p>
+<p>Setting <span class="math inline">\(k = t-s, j = t\)</span> gives us</p>
+<p><span class="math display">\[
+  \text{Var}[\bar{Y}] = \frac{1}{n^2} \sum_{j=1}^n \sum_{j-k=1}^n \gamma_k = \frac{1}{n^2} \sum_{j=1}^n \sum_{j=k+1}^{n+k} \gamma_k = \\
+  \frac{1}{n^2} \left( \sum_{k=1}^{n-1} \sum_{j=k+1}^{n} \gamma_k + \sum_{k=-n+1}^0 \sum_{j=1}^{n+k} \gamma_k \right) = \\
+  \frac{1}{n^2} \left( \sum_{k=1}^{n-1} (n-k)\gamma_k + \sum_{k=-n+1}^0 (n+k)\gamma_k \right) = \\
+  \frac{1}{n^2} \sum_{k=-n+1}^{n-1} \left( (n-k)\gamma_k + (n+k)\gamma_k \right) = \\
+  \frac{1}{n^2} \sum_{k=-n+1}^{n-1} (n-|k|)\gamma_k = \frac{1}{n} \sum_{k=-n+1}^{n-1} \left(1-\frac{|k|}{n}\right)\gamma_k \quad \square
+\]</span></p>
 
 </div>
 </div>
