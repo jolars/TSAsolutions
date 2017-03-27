@@ -482,25 +482,31 @@ Setting $k = t-s, j = t$ gives us
     
 ## 
 
+> Let $Y_1 = \theta_0 + e_1$, and then for $t > 1$ define $Y_t$ recursively by $Y_t = \theta_0 + Y_{t−1} + e_t$.
+> Here $\theta_0$ is a constant. The process $\{Y_t\}$ is called a random walk with drift.
+> 
+> (a) Show that $Y_t$ may be rewritten as $Y_t = t \theta_0 + e_t + e_{t-1} + \dots + e_1$
+> (b) Find the mean function for $Y_t$.
+> (c) Find the autocovariance function for $Y_t$.
 
+(a) \[
+      Y_{1} = \theta_0 + e_1\\
+      Y_{2} = \theta_0 + \theta_0 + e_2 + e_1\\
+      Y_{t} = \theta_0 + \theta_0 + \dots + \theta_0 + e_{t} + e_{t-1} + \dots+ e_1 = \\
+      Y_{t} = t \theta_0 + e_t + e_{t-1} + \dots + e_1 \quad \square
+    \]
+(b) \[
+      \mu_t = E[Y_t] = E[t \theta_0 + e_t + e_{t-1} + \dots + e_1] = t\theta_0 + E[e_t] + E[e_{t-1}] + \dots + E[e_1] = \\
+      t\theta_0 + 0 + 0 + \dots + 0 = t \theta_0
+    \]
+(c) \[
+      \gamma_{t,t-k} = \text{Cov}[Y_t, Y_{t-k}] = \text{Cov}[t\theta_0 + e_t, + e_{t-1} + \dots + e_1, (t-k)\theta_0 + e_{t-k}, + e_{t-1-k} + \dots + e_1] = \\
+       \text{Cov}[e_{t-k}, + e_{t-1-k} + \dots + e_1, e_{t-k}, + e_{t-1-k} + \dots + e_1] \quad \text{(since all other terms are 0)} =\\
+       \text{Var}[e_{t-k}, + e_{t-1-k} + \dots + e_1, e_{t-k}, + e_{t-1-k} + \dots + e_1] = (t-k)\sigma_e^2
+    \]
 
-
-
-
-    
-    
-
+## 
 
     
-    
-
-    
-    
-    
-    
-    
-    
-
-  
   
  
