@@ -514,7 +514,7 @@ Setting $k = t-s, j = t$ gives us
 > (b) Similarly, show that $\text{Var}(Y_t) = \text{Var}(Y_t − 1) + \sigma_e^2$ for $t > 1$ with $\text{Var}(Y_1) = \sigma_e^2$
 >     and hence $\text{Var}(Y_t) = t\sigma_e^2$.
 > (c) For $0 \leq t \leq s$, use $Y_s = Y_t + e_t + 1 + e_t + 2 + \sigma_e^2 + e_s$ to show that $\text{Cov}(Y_t, Y_s) = \text{Var}(Y_t)$
->     and, hence, that $\text{Cov}(Y_t, Y_s) = \min{t, s}$.
+>     and, hence, that $\text{Cov}(Y_t, Y_s) = \min(t, s)$.
 
 (a) \[
       \mu_1 = E[Y_1] = E[e_1] = 0\\
@@ -536,4 +536,34 @@ Setting $k = t-s, j = t$ gives us
       \text{Cov}[Y_t, Y_s] = \text{Cov}[Y_t, Y_t+e_{t+1}+e_{t+2}+ \dots + e_s] = \text{Cov}[Y_t, Y_t] = \text{Var}[Y_t] = t\sigma_e^2
     \]
     
+## 
+
+> For a random walk with random starting value, let $Y_t = Y_0 + e_t + e{t-1} + \dots + e_1$
+> for $t > 0$, where $\gamma_0$ has a distribution with mean $\mu_0$ and variance $\sigma_0^2$. Suppose further
+> that $Y_0, e_1, \dots , e_t$ are independent.
+> 
+> (a) Show that $E(Y_t) = \mu_0$ for all $t$.
+> (b) Show that $\text{Var}(Y_t) = t \sigma_e^2 + \sigma_0^2$
+> (c) Show that $\text{Cov}(Y_t, Y_s) = \min(t, s) \sigma_e^2+ \sigma_0^2$
+> (d) Show that $\text{Corr}[Y_t, Y_s] = \sqrt{\frac{t \sigma_a^2 + \sigma_0^2}{s\sigma_a^2 + \sigma_0^2}}$.
+
+(a) \[
+      E[Y_t] = E[Y_0+e_t+e_{t-1}+\dots+e_1] = \\
+      E[Y_0] + E[e_t] + E[e_{t-1}] + E[e_{t-2}] + \dots + E[e_1] = \\
+      \mu_0 + 0 + \dots + 0 = \mu_0 \quad \square
+    \]
+(b) \[
+      \text{Var}[Y_t] = \text{Var}[Y_0 + e_t + e_{t-1} + \dots + e_1] = \\
+      \text{Var}[Y_0] + \text{Var}[e_t] + \text{Var}[e_{t-1}] + \dots + \text{Var}[e_1] = \\
+      \sigma_0^2+t\sigma_e^2 \quad \square
+    \]
+(c) \[
+      \text{Cov}[Y_t, Y_s] = \text{Cov}[Y_t, Y_t+e_{t+1}+e_{t+2}+ \dots + e_s] = \\
+      \text{Cov}[Y_t, Y_t] = \text{Var}[Y_t] = \sigma_0^2+t\sigma_e^2 \quad \square
+    \]
+(d) \[
+      \text{Corr}[Y_t, Y_s] = \frac{\sigma_0^2+t\sigma_e^2}{\sqrt{(\sigma_0^2+t\sigma_e^2)(\sigma_0^2+s\sigma_e^2)}} = 
+        \sqrt{\frac{\sigma_0^2+t\sigma_e^2}{\sigma_0^2+s\sigma_e^2}} \quad \square
+    \]
+
 ## 
