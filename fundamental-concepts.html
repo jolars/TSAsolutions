@@ -25,7 +25,7 @@
 <meta name="author" content="Johan Larsson">
 
 
-<meta name="date" content="2017-03-26">
+<meta name="date" content="2017-03-27">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -117,6 +117,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2.6" data-path="fundamental-concepts.html"><a href="fundamental-concepts.html#section-2"><i class="fa fa-check"></i><b>2.6</b> </a></li>
 <li class="chapter" data-level="2.7" data-path="fundamental-concepts.html"><a href="fundamental-concepts.html#section-3"><i class="fa fa-check"></i><b>2.7</b> </a></li>
 <li class="chapter" data-level="2.8" data-path="fundamental-concepts.html"><a href="fundamental-concepts.html#section-4"><i class="fa fa-check"></i><b>2.8</b> </a></li>
+<li class="chapter" data-level="2.9" data-path="fundamental-concepts.html"><a href="fundamental-concepts.html#section-5"><i class="fa fa-check"></i><b>2.9</b> </a></li>
+<li class="chapter" data-level="2.10" data-path="fundamental-concepts.html"><a href="fundamental-concepts.html#section-6"><i class="fa fa-check"></i><b>2.10</b> </a></li>
+<li class="chapter" data-level="2.11" data-path="fundamental-concepts.html"><a href="fundamental-concepts.html#section-7"><i class="fa fa-check"></i><b>2.11</b> </a></li>
+<li class="chapter" data-level="2.12" data-path="fundamental-concepts.html"><a href="fundamental-concepts.html#section-8"><i class="fa fa-check"></i><b>2.12</b> </a></li>
+<li class="chapter" data-level="2.13" data-path="fundamental-concepts.html"><a href="fundamental-concepts.html#section-9"><i class="fa fa-check"></i><b>2.13</b> </a></li>
 </ul></li>
 </ul>
 
@@ -166,7 +171,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="covariance-and-dependence" class="section level2">
 <h2><span class="header-section-number">2.2</span> Covariance and dependence</h2>
 <blockquote>
-<p>If <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are dependent but <span class="math inline">\(\text{Var}[X) = \text{Var}[Y)\)</span>, find <span class="math inline">\(\text{Cov}[X + Y, X − Y)\)</span>.</p>
+<p>If <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are dependent but <span class="math inline">\(\text{Var}[X] = \text{Var}[Y]\)</span>, find <span class="math inline">\(\text{Cov}[X + Y, X − Y]\)</span>.</p>
 </blockquote>
 <p><span class="math display">\[
 \text{Cov}[X+Y,X-Y] = \text{Cov}[X,X] + \text{Cov}[X,-Y] + \text{Cov}[Y,X] + \text{Cov}[Y, -Y] = \\
@@ -337,6 +342,112 @@ which is free from <span class="math inline">\(t\)</span> for all <span class="m
                   &amp; = \sum_{i=0}^n \sum_{j=0}^n c_i c_j \gamma_{j-k-i},
 \end{align}
 <p>which is free of <span class="math inline">\(t\)</span>; consequently, <span class="math inline">\(W_t\)</span> is stationary.</p>
+</div>
+<div id="section-5" class="section level2">
+<h2><span class="header-section-number">2.9</span> </h2>
+<blockquote>
+<p>Suppose _t = _0 + _1 t + X_t$, where <span class="math inline">\(\{X_t\}\)</span> is a zero-mean stationary series with autocovariance function <span class="math inline">\(\gamma_k\)</span> and <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> are constants.</p>
+<ol style="list-style-type: lower-alpha">
+<li>Show that <span class="math inline">\(\{Y_t\}\)</span> is not stationary but that <span class="math inline">\(W_t = \triangledown Y_t = Y_t − Y_{t−1}\)</span> is stationary.</li>
+<li>In general, show that if <span class="math inline">\(Y_t = \mu_t + X_t\)</span>, where <span class="math inline">\(\{X_t\}\)</span> is a zero-mean stationary series and <span class="math inline">\(\mu_t\)</span> is a polynomial in <span class="math inline">\(t\)</span> of degree <span class="math inline">\(d\)</span>, then <span class="math inline">\(\triangledown^m Y_t = \triangledown(\triangledown^{m−1}Y_t)\)</span> is stationary for <span class="math inline">\(m \geq d\)</span> and nonstationary for <span class="math inline">\(0 \leq m &lt; d\)</span>.</li>
+</ol>
+</blockquote>
+<ol style="list-style-type: lower-alpha">
+<li><p><span class="math display">\[
+  E[Y_t] = \beta_0 + \beta_1 t + E[X_t] = \beta_0 + \beta_1 t + \mu_{t_x},
+\]</span></p>
+<p>which is not free of <span class="math inline">\(t\)</span> and hence <em>not</em> stationary.</p>
+<p><span class="math display">\[
+  \text{Cov}[Y_t] = \text{Cov}[X_t, X_t-1] = \gamma_{t-1}
+\]</span></p>
+<p><span class="math display">\[
+  E[W_t] = E[Y_t - Y_{t-1}] = E[\beta_0 + \beta_1 t + X_t - (\beta_0 + \beta_1(t-1) + X_{t-1})] =\\
+  \beta_0 + \beta_1 t - \beta_0 - \beta_1 t + \beta_1  = \beta_1,
+\]</span></p>
+<p>is free of <span class="math inline">\(t\)</span> and, furthermore, we have</p>
+<p><span class="math display">\[
+  \text{Cov}[W_t] = \text{Cov}[\beta_0 + \beta_1 t + X_t, \beta_0 + \beta_1 (t-1) + X_{t-1}] =\\
+  \text{Cov}[X_t, X_{t-1}] = \gamma_k,  
+\]</span></p>
+which is also free of <span class="math inline">\(t\)</span>, thereby proving that <span class="math inline">\(W_t\)</span> is stationary.</li>
+<li><p><span class="math display">\[
+  E[Y_t] = E[\mu_t + X_t] = \mu_t + \mu_t = 0 + 0 = 0, \quad \text{and}\\
+  \text{Cov}[Y_t] = \text{Cov}[\mu_t + X_t, \mu_{t-k} + X_{t-k}] = \text{Cov}[X_t, X_{t-k}] = \gamma_k
+\]</span></p>
+<p><span class="math display">\[
+  \triangledown^m Y_t = \triangledown(\triangledown^{m−1}Y_t)
+\]</span></p>
+<p><em>Currently unsolved.</em></p></li>
+</ol>
+</div>
+<div id="section-6" class="section level2">
+<h2><span class="header-section-number">2.10</span> </h2>
+<blockquote>
+<p>Let <span class="math inline">\(\{X_t\}\)</span> be a zero-mean, unit-variance stationary process with autocorrelation function <span class="math inline">\(\rho_k\)</span>. Suppose that <span class="math inline">\(\mu_t\)</span> is a nonconstant function and that <span class="math inline">\(\sigma_t\)</span> is a positive-valued nonconstant function. The observed series is formed as <span class="math inline">\(Y_t = \mu_t + \sigma_t X_t\)</span>.</p>
+<ol style="list-style-type: lower-alpha">
+<li>Find the mean and covariance function for the <span class="math inline">\(\{Y_t\}\)</span> process.</li>
+<li>Show that the autocorrelation function for the <span class="math inline">\(\{Y_t\}\)</span> process depends only on the time lag. Is the <span class="math inline">\(\{Y_t\}\)</span> process stationary?</li>
+<li>Is it possible to have a time series with a constant mean and with <span class="math inline">\(\text{Corr}(Y_t ,Y_t − k)\)</span> free of <span class="math inline">\(t\)</span> but with <span class="math inline">\(\{Y_t\}\)</span> not stationary?</li>
+</ol>
+</blockquote>
+<ol style="list-style-type: lower-alpha">
+<li><span class="math display">\[
+  \mu_t = E[Y_t] = E[\mu_t + \sigma_t X_t] = \mu_t + \sigma_t E[X_t] = \mu_t + \sigma_t \times 0 = \mu_t\\
+  \gamma_{t,t-k} = \text{Cov}[Y_t] = \text{Cov}[\mu_t + \sigma_t X_t, \mu_{t-k} + \sigma_{t-k} X_{t-k}] = 
+    \sigma_t \sigma_{t-k} \text{Cov}[X_t, X_{t-k}] = \sigma_t \sigma_{t-k} \rho_k
+\]</span></li>
+<li><p>First, we have <span class="math display">\[
+  \text{Var}[Y_t] = \text{Var}[\mu_t + \sigma_t X_t] = 0 + \sigma_t^2 \text{Var}[X_t] = \sigma_t^2 \times 1 = \sigma_t^2
+\]</span></p>
+<p>since <span class="math inline">\(\{X_t\}\)</span> has unit-variance. Futhermore,</p>
+<span class="math display">\[
+  \text{Corr}[Y_t, Y_{t-k}] = \frac{\sigma_t \sigma_{t-k} \rho_k}{\sqrt{\text{Var}[Y_t]\text{Var}[Y_{t-k}]}} = 
+    \frac{\sigma_t \sigma_{t-k}\rho_k}{\sigma_t \sigma_{t-k}} = \rho_k,
+\]</span> which depends only on the time lag, <span class="math inline">\(k\)</span>. However, <span class="math inline">\(\{Y_t\}\)</span> is not necessarily stationary since <span class="math inline">\(\mu_t\)</span> may depend on <span class="math inline">\(t\)</span>.</li>
+<li><p>Yes, <span class="math inline">\(\rho_k\)</span> might be free from <span class="math inline">\(t\)</span> but if <span class="math inline">\(\sigma_t\)</span> is not, we will have a non-stationary time series with autocorrelation free from <span class="math inline">\(t\)</span> and constant mean.</p></li>
+</ol>
+</div>
+<div id="section-7" class="section level2">
+<h2><span class="header-section-number">2.11</span> </h2>
+<blockquote>
+<p>Suppose <span class="math inline">\(\text{Cov}(X_t,X_t − k) = \gamma_k\)</span> is free of <span class="math inline">\(t\)</span> but that <span class="math inline">\(E(X_t) = 3t\)</span>.</p>
+<ol style="list-style-type: lower-alpha">
+<li>Is <span class="math inline">\(\{X_t\}\)</span> stationary?</li>
+<li>Let <span class="math inline">\(Y_t = 7 − 3t + X_t\)</span>. Is <span class="math inline">\(\{Y_t\}\)</span> stationary?</li>
+</ol>
+</blockquote>
+<ol style="list-style-type: lower-alpha">
+<li><span class="math display">\[
+  \text{Cov}[X_t, X_{t-k}] = \gamma_k\\
+  E[X_t] = 3t
+\]</span> <span class="math inline">\(\{X_t\}\)</span> is not stationary because <span class="math inline">\(\mu_t\)</span> varies with <span class="math inline">\(t\)</span>.</li>
+<li><span class="math display">\[
+  E[Y_t] = 3 - 3t+E[X_t] = 7 - 3t - 3t = 7\\
+  \text{Cov}[Y_t, Y_{t-k}] = \text{Cov}[7-3t+X_t,7-3(t-k)+X_{t-k}] = \text{Cov}[X_t, X_{t-k}] = \gamma_k
+\]</span> Since the mean function of <span class="math inline">\(\{Y_t\}\)</span> is constant (7) and its autocovariance free of <span class="math inline">\(t\)</span>, <span class="math inline">\(\{Y_t\}\)</span> is stionary.</li>
+</ol>
+</div>
+<div id="section-8" class="section level2">
+<h2><span class="header-section-number">2.12</span> </h2>
+<blockquote>
+<p>Suppose that $Y_t = e_t − e_{t−12}. Show that <span class="math inline">\(\{Y_t\}\)</span> is stationary and that, for <span class="math inline">\(k &gt; 0\)</span>, its autocorrelation function is nonzero only for lag <span class="math inline">\(k = 12\)</span>.</p>
+</blockquote>
+<p><span class="math display">\[
+  E[Y_t] = E[e_t - e_{t-12}] = E[e_t] - E[e_{t-12}] = 0\\
+  \text{Cov}[Y_t, Y_{t-k}] = \text{Cov}[e_t - e_{t-12}, e_{t-k} - e_{t-12-k}] =\\
+  \text{Cov}[e_t, e_{t-k}] - \text{Cov}[e_t, e_{t-12-k}] - \text{Cov}[e_{t-12}, e_{t-k}] + \text{Cov}[e_{t-12}, e_{t-12-k}]
+\]</span></p>
+<p>Then, as required, we have</p>
+<p><span class="math display">\[ \text{Cov}[Y_t, Y_{t-k}] =
+  \begin{cases}
+    \text{Cov}[e_t, e_{t-12}] - \text{Cov}[e_t, e_t] - \text{Cov}[e_{t-12}, e_{t-12}] + \text{Cov}[e_{t-12},e_t] =
+      \text{Var}[e_t] - \text{Var}[e_{t-12}] \neq 0 &amp; \quad \text{for }  k=12\\
+    0 + 0 + 0 + 0 = 0 &amp; \quad \text{for } k \neq 12\quad \square
+  \end{cases}
+\]</span></p>
+</div>
+<div id="section-9" class="section level2">
+<h2><span class="header-section-number">2.13</span> </h2>
 
 </div>
 </div>
