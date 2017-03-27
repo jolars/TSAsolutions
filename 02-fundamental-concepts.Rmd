@@ -365,7 +365,6 @@ $\square$
     \]
     which means that the autocorrelation function $\gamma_{t,s}$ also has to be zero.
     
-    ]
 (b) The autocorrelation of $\{Y_t\}$ is zeor and its mean function is constant, thus $\{Y_t\}$ must be stationary.
 
 ## 
@@ -445,6 +444,43 @@ Setting $k = t-s, j = t$ gives us
   \frac{1}{n^2} \sum_{k=-n+1}^{n-1} \left( (n-k)\gamma_k + (n+k)\gamma_k \right) = \\
   \frac{1}{n^2} \sum_{k=-n+1}^{n-1} (n-|k|)\gamma_k = \frac{1}{n} \sum_{k=-n+1}^{n-1} \left(1-\frac{|k|}{n}\right)\gamma_k \quad \square
 \]
+
+## 
+
+> Let $\{Y_t\}$ be stationary with autocovariance function $\gamma_k$. Define the sample variance
+> as $s^2 = \frac{1}{n-1}\sum_{t=1}^n (Y_t - \bar{Y})^2$.
+> 
+> (a) First show that $\sum_{t=1}^n (Y_t - \mu)^2 = \sum_{t=1}^n (Y_t - \bar{Y})^2 + n (\bar{Y} - \mu)^2$.
+> (b) Use part (a) to show that
+>     \[
+>       E[s^2] = \frac{n}{n-1}\gamma_0 - \frac{n}{n-1}\text{Var}(\bar{Y}) = \gamma_0 - \frac{2}{n-1} \sum_{k=1}^{n-1} \left( 1 - \frac{k}{n} \right) \gamma_k.
+>     \]
+>     (Use the results of Exercise 2.17 for the last expression.)
+> (c) If $\{Y_t\}$ is a white noise process with variance $\gamma_0$, show that $E(s^2) = \gamma_0$.
+
+(a) \[
+      \sum_{t=1}^n (Y_t - \mu)^2 = \sum_{t=1}^n((Y_t - \bar{Y}) + (\bar{Y} - \mu))^2 = \\
+      \sum_{t=1}^n ((Y_t - \bar{Y})^2 - 2(Y_t - \bar{Y})(\bar{Y}- \mu) + (\bar{Y} - \mu)^2) = \\
+      n(\bar{Y} - \mu)^2 + 2(\bar{Y} - \mu)\sum_{t=1}^n (Y_t - \bar{Y}) + \sum_{t=1}^n (Y_t - \bar{Y})^2  = \\
+      n(\bar{Y} - \mu)^2 + \sum_{t=1}^n(Y_t - \bar{Y})^2 \quad \square
+    \]
+(b) \[
+      E[s^2] = E\left[\frac{n}{n-1} \sum_{t=1}^n (Y_t - \bar{Y})^2 \right] =
+        \frac{n}{n-1} E\left[\sum_{t=1}^n \left( (Y_t-\mu)^2  + n(\bar{Y} - \mu)^2 \right)\right] = \\
+      \frac{n}{n-1} \sum_{t=1}^n \left( E[(Y_t-\mu)^2]  + nE[(\bar{Y} - \mu)^2] \right) = 
+        \frac{1}{n-1} \left( n\text{Var}[Y_t] - n\text{Var}[\bar{Y}] \right) = \\
+      \frac{n}{n-1} \gamma_0 - \frac{n}{n-1} \text{Var}[\bar{Y}] =
+        \frac{1}{n-1} \left( n \gamma_0 - n \left( \frac{\gamma_0}{n} + \frac{2}{n} \sum_{k=1}^{n-1} \left( 1 - \frac{k}{n} \right) \gamma_k\right) \right) = \\
+      \frac{1}{n-1} \left( n \gamma_0 - \gamma_0 + 2 \sum_{k=1}^{n-1} \left( 1 - \frac{k}{n} \right) \gamma_k\right) = 
+        \frac{1}{n-1} \left( \gamma_0(n-1) + 2 \sum_{k=1}^{n-1} \left( 1 - \frac{k}{n} \right) \gamma_k\right) = \\
+      \gamma_0 + \frac{2}{n-1} \sum_{k=1}^{n-1} \left( 1 - \frac{k}{n} \right) \gamma_k \quad \square
+    \]  
+(c) Since $\gamma_k = 0$ for $k \neq 0$, in our case for all $k$, we have
+    \[
+      E[s^2] = \gamma_0 - \frac{2}{n-1} \sum_{t=1}^n \left( 1 - \frac{k}{n} \right) \times 0 = \gamma_0
+    \]
+    
+## 
 
 
 
