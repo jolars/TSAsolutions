@@ -126,6 +126,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2.15" data-path="fundamental-concepts.html"><a href="fundamental-concepts.html#section-11"><i class="fa fa-check"></i><b>2.15</b> </a></li>
 <li class="chapter" data-level="2.16" data-path="fundamental-concepts.html"><a href="fundamental-concepts.html#section-12"><i class="fa fa-check"></i><b>2.16</b> </a></li>
 <li class="chapter" data-level="2.17" data-path="fundamental-concepts.html"><a href="fundamental-concepts.html#section-13"><i class="fa fa-check"></i><b>2.17</b> </a></li>
+<li class="chapter" data-level="2.18" data-path="fundamental-concepts.html"><a href="fundamental-concepts.html#section-14"><i class="fa fa-check"></i><b>2.18</b> </a></li>
+<li class="chapter" data-level="2.19" data-path="fundamental-concepts.html"><a href="fundamental-concepts.html#section-15"><i class="fa fa-check"></i><b>2.19</b> </a></li>
+<li class="chapter" data-level="2.20" data-path="fundamental-concepts.html"><a href="fundamental-concepts.html#section-16"><i class="fa fa-check"></i><b>2.20</b> </a></li>
+<li class="chapter" data-level="2.21" data-path="fundamental-concepts.html"><a href="fundamental-concepts.html#section-17"><i class="fa fa-check"></i><b>2.21</b> </a></li>
 </ul></li>
 </ul>
 
@@ -476,8 +480,7 @@ which is also free of <span class="math inline">\(t\)</span>, thereby proving th
   \text{Cov}[e_t, e_{t-1}] + \text{Cov}[e_t, - \theta e_{t-2}^2] + \text{Cov}[- \theta e_{t-1}^2, e_{t-1}]  \text{Cov}[-\theta e_{t-1}^2, - \theta e_{t-2}^2] =\\
   \text{Cov}[e_t, e_{t-1}] - \theta \text{Cov}[e_t, e_{t-2}^2] - \theta \text{Cov}[e_{t-1}^2, e_{t-1}] + \theta^2 \text{Cov}[e_{t-1}^2, e_{t-2}^2] = \\
   -\theta \text{Cov}[e_{t-1}^2, e_{t-1}] = -\theta (E[e_{t-1}^3] + \mu_{t-1} + \mu_t) = 0
-\]</span> which means that the autocorrelation function <span class="math inline">\(\gamma_{t,s}\)</span> also has to be zero.</p>
-]</li>
+\]</span> which means that the autocorrelation function <span class="math inline">\(\gamma_{t,s}\)</span> also has to be zero.</p></li>
 <li><p>The autocorrelation of <span class="math inline">\(\{Y_t\}\)</span> is zeor and its mean function is constant, thus <span class="math inline">\(\{Y_t\}\)</span> must be stationary.</p></li>
 </ol>
 </div>
@@ -558,6 +561,104 @@ which varies with <span class="math inline">\(t\)</span> and means that <span cl
   \frac{1}{n^2} \sum_{k=-n+1}^{n-1} \left( (n-k)\gamma_k + (n+k)\gamma_k \right) = \\
   \frac{1}{n^2} \sum_{k=-n+1}^{n-1} (n-|k|)\gamma_k = \frac{1}{n} \sum_{k=-n+1}^{n-1} \left(1-\frac{|k|}{n}\right)\gamma_k \quad \square
 \]</span></p>
+</div>
+<div id="section-14" class="section level2">
+<h2><span class="header-section-number">2.18</span> </h2>
+<blockquote>
+<p>Let <span class="math inline">\(\{Y_t\}\)</span> be stationary with autocovariance function <span class="math inline">\(\gamma_k\)</span>. Define the sample variance as <span class="math inline">\(s^2 = \frac{1}{n-1}\sum_{t=1}^n (Y_t - \bar{Y})^2\)</span>.</p>
+<ol style="list-style-type: lower-alpha">
+<li>First show that <span class="math inline">\(\sum_{t=1}^n (Y_t - \mu)^2 = \sum_{t=1}^n (Y_t - \bar{Y})^2 + n (\bar{Y} - \mu)^2\)</span>.</li>
+<li>Use part (a) to show that <span class="math display">\[
+  E[s^2] = \frac{n}{n-1}\gamma_0 - \frac{n}{n-1}\text{Var}(\bar{Y}) = \gamma_0 - \frac{2}{n-1} \sum_{k=1}^{n-1} \left( 1 - \frac{k}{n} \right) \gamma_k.
+\]</span> (Use the results of Exercise 2.17 for the last expression.)</li>
+<li>If <span class="math inline">\(\{Y_t\}\)</span> is a white noise process with variance <span class="math inline">\(\gamma_0\)</span>, show that <span class="math inline">\(E(s^2) = \gamma_0\)</span>.</li>
+</ol>
+</blockquote>
+<ol style="list-style-type: lower-alpha">
+<li><span class="math display">\[
+  \sum_{t=1}^n (Y_t - \mu)^2 = \sum_{t=1}^n((Y_t - \bar{Y}) + (\bar{Y} - \mu))^2 = \\
+  \sum_{t=1}^n ((Y_t - \bar{Y})^2 - 2(Y_t - \bar{Y})(\bar{Y}- \mu) + (\bar{Y} - \mu)^2) = \\
+  n(\bar{Y} - \mu)^2 + 2(\bar{Y} - \mu)\sum_{t=1}^n (Y_t - \bar{Y}) + \sum_{t=1}^n (Y_t - \bar{Y})^2  = \\
+  n(\bar{Y} - \mu)^2 + \sum_{t=1}^n(Y_t - \bar{Y})^2 \quad \square
+\]</span></li>
+<li><span class="math display">\[
+  E[s^2] = E\left[\frac{n}{n-1} \sum_{t=1}^n (Y_t - \bar{Y})^2 \right] =
+    \frac{n}{n-1} E\left[\sum_{t=1}^n \left( (Y_t-\mu)^2  + n(\bar{Y} - \mu)^2 \right)\right] = \\
+  \frac{n}{n-1} \sum_{t=1}^n \left( E[(Y_t-\mu)^2]  + nE[(\bar{Y} - \mu)^2] \right) = 
+    \frac{1}{n-1} \left( n\text{Var}[Y_t] - n\text{Var}[\bar{Y}] \right) = \\
+  \frac{n}{n-1} \gamma_0 - \frac{n}{n-1} \text{Var}[\bar{Y}] =
+    \frac{1}{n-1} \left( n \gamma_0 - n \left( \frac{\gamma_0}{n} + \frac{2}{n} \sum_{k=1}^{n-1} \left( 1 - \frac{k}{n} \right) \gamma_k\right) \right) = \\
+  \frac{1}{n-1} \left( n \gamma_0 - \gamma_0 + 2 \sum_{k=1}^{n-1} \left( 1 - \frac{k}{n} \right) \gamma_k\right) = 
+    \frac{1}{n-1} \left( \gamma_0(n-1) + 2 \sum_{k=1}^{n-1} \left( 1 - \frac{k}{n} \right) \gamma_k\right) = \\
+  \gamma_0 + \frac{2}{n-1} \sum_{k=1}^{n-1} \left( 1 - \frac{k}{n} \right) \gamma_k \quad \square
+\]</span><br />
+</li>
+<li>Since <span class="math inline">\(\gamma_k = 0\)</span> for <span class="math inline">\(k \neq 0\)</span>, in our case for all <span class="math inline">\(k\)</span>, we have <span class="math display">\[
+  E[s^2] = \gamma_0 - \frac{2}{n-1} \sum_{t=1}^n \left( 1 - \frac{k}{n} \right) \times 0 = \gamma_0
+\]</span></li>
+</ol>
+</div>
+<div id="section-15" class="section level2">
+<h2><span class="header-section-number">2.19</span> </h2>
+<blockquote>
+<p>Let <span class="math inline">\(Y_1 = \theta_0 + e_1\)</span>, and then for <span class="math inline">\(t &gt; 1\)</span> define <span class="math inline">\(Y_t\)</span> recursively by <span class="math inline">\(Y_t = \theta_0 + Y_{t−1} + e_t\)</span>. Here <span class="math inline">\(\theta_0\)</span> is a constant. The process <span class="math inline">\(\{Y_t\}\)</span> is called a random walk with drift.</p>
+<ol style="list-style-type: lower-alpha">
+<li>Show that <span class="math inline">\(Y_t\)</span> may be rewritten as <span class="math inline">\(Y_t = t \theta_0 + e_t + e_{t-1} + \dots + e_1\)</span></li>
+<li>Find the mean function for <span class="math inline">\(Y_t\)</span>.</li>
+<li>Find the autocovariance function for <span class="math inline">\(Y_t\)</span>.</li>
+</ol>
+</blockquote>
+<ol style="list-style-type: lower-alpha">
+<li><span class="math display">\[
+  Y_{1} = \theta_0 + e_1\\
+  Y_{2} = \theta_0 + \theta_0 + e_2 + e_1\\
+  Y_{t} = \theta_0 + \theta_0 + \dots + \theta_0 + e_{t} + e_{t-1} + \dots+ e_1 = \\
+  Y_{t} = t \theta_0 + e_t + e_{t-1} + \dots + e_1 \quad \square
+\]</span></li>
+<li><span class="math display">\[
+  \mu_t = E[Y_t] = E[t \theta_0 + e_t + e_{t-1} + \dots + e_1] = t\theta_0 + E[e_t] + E[e_{t-1}] + \dots + E[e_1] = \\
+  t\theta_0 + 0 + 0 + \dots + 0 = t \theta_0
+\]</span></li>
+<li><span class="math display">\[
+  \gamma_{t,t-k} = \text{Cov}[Y_t, Y_{t-k}] = \text{Cov}[t\theta_0 + e_t, + e_{t-1} + \dots + e_1, (t-k)\theta_0 + e_{t-k}, + e_{t-1-k} + \dots + e_1] = \\
+   \text{Cov}[e_{t-k}, + e_{t-1-k} + \dots + e_1, e_{t-k}, + e_{t-1-k} + \dots + e_1] \quad \text{(since all other terms are 0)} =\\
+   \text{Var}[e_{t-k}, + e_{t-1-k} + \dots + e_1, e_{t-k}, + e_{t-1-k} + \dots + e_1] = (t-k)\sigma_e^2
+\]</span></li>
+</ol>
+</div>
+<div id="section-16" class="section level2">
+<h2><span class="header-section-number">2.20</span> </h2>
+<blockquote>
+<p>Consider the standard random walk model where <span class="math inline">\(Y_t = Y_t − 1 + e_t\)</span> with <span class="math inline">\(Y_1 = e_1\)</span>.</p>
+<ol style="list-style-type: lower-alpha">
+<li>Use the representation of <span class="math inline">\(Y_t\)</span> above to show that <span class="math inline">\(\mu_t = \mu_t − 1\)</span> for <span class="math inline">\(t &gt; 1\)</span> with initial condition <span class="math inline">\(\mu_1 = E(e_1) = 0\)</span>. Hence show that <span class="math inline">\(\mu_t = 0\)</span> for all <span class="math inline">\(t\)</span>.</li>
+<li>Similarly, show that <span class="math inline">\(\text{Var}(Y_t) = \text{Var}(Y_t − 1) + \sigma_e^2\)</span> for <span class="math inline">\(t &gt; 1\)</span> with <span class="math inline">\(\text{Var}(Y_1) = \sigma_e^2\)</span> and hence <span class="math inline">\(\text{Var}(Y_t) = t\sigma_e^2\)</span>.</li>
+<li>For <span class="math inline">\(0 \leq t \leq s\)</span>, use <span class="math inline">\(Y_s = Y_t + e_t + 1 + e_t + 2 + \sigma_e^2 + e_s\)</span> to show that <span class="math inline">\(\text{Cov}(Y_t, Y_s) = \text{Var}(Y_t)\)</span> and, hence, that <span class="math inline">\(\text{Cov}(Y_t, Y_s) = \min{t, s}\)</span>.</li>
+</ol>
+</blockquote>
+<ol style="list-style-type: lower-alpha">
+<li><p><span class="math display">\[
+  \mu_1 = E[Y_1] = E[e_1] = 0\\
+  \mu_2 = E[Y_2] = E[Y_1 - e_2] = E[Y_1] - E[e_2] = 0 - 0 = 0\\
+  \dots\\
+  \mu_{t-1} = E[Y_{t-1}] = E[Y_{t-2} - e_{t-1}] = E[Y_{t-2}] - E[e_{t-1}] = 0 \\
+  \mu_t = E[Y_t] = E[Y_{t-1} - e_t] = E[Y_t] - E[e_t] = 0,
+\]</span></p>
+which implies <span class="math inline">\(\mu_t = \mu_{t-1}\quad\)</span> Q.E.D.</li>
+<li><span class="math display">\[
+  \text{Var}[Y_1] = \sigma_e^2\\
+  \text{Var}[Y_2] = \text{Var}[Y_1 - e_2] = \text{Var}[Y_1] + \text{Var}[e_1] = \sigma_e^2 +  \sigma_e^2 = 2\sigma_e^2\\
+  \dots\\
+  \text{Var}[Y_{t-1}] = \text{Var}[Y_{t-2} - e_{t-1}] = \text{Var}[Y_{t-2}] + \text{Var}[e_{t-1}]  = (t-1)\sigma_e^2\\
+  \text{Var}[Y_t] = \text{Var}[Y_{t-1} - e_t] = \text{Var}[Y_{t-1}] + \text{Var}[e_t]  = (t-1)\sigma_e^2 + \sigma_e^2 = t\sigma_e^2 \quad \square
+\]</span></li>
+<li><p><span class="math display">\[
+  \text{Cov}[Y_t, Y_s] = \text{Cov}[Y_t, Y_t+e_{t+1}+e_{t+2}+ \dots + e_s] = \text{Cov}[Y_t, Y_t] = \text{Var}[Y_t] = t\sigma_e^2
+\]</span></p></li>
+</ol>
+</div>
+<div id="section-17" class="section level2">
+<h2><span class="header-section-number">2.21</span> </h2>
 
 </div>
 </div>
