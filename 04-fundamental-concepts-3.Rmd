@@ -1,0 +1,101 @@
+# Chapter 2: Fundamental concepts (part 3)
+   
+## 1.21
+
+> For a random walk with random starting value, let $Y_t = Y_0 + e_t + e{t-1} + \dots + e_1$
+> for $t > 0$, where $\gamma_0$ has a distribution with mean $\mu_0$ and variance $\sigma_0^2$. Suppose further
+> that $Y_0, e_1, \dots , e_t$ are independent.
+> 
+> (a) Show that $E(Y_t) = \mu_0$ for all $t$.
+> (b) Show that $\text{Var}(Y_t) = t \sigma_e^2 + \sigma_0^2$
+> (c) Show that $\text{Cov}(Y_t, Y_s) = \min(t, s) \sigma_e^2+ \sigma_0^2$
+> (d) Show that $\text{Corr}[Y_t, Y_s] = \sqrt{\frac{t \sigma_a^2 + \sigma_0^2}{s\sigma_a^2 + \sigma_0^2}}$.
+
+(a) \[
+      E[Y_t] = E[Y_0+e_t+e_{t-1}+\dots+e_1] = \\
+      E[Y_0] + E[e_t] + E[e_{t-1}] + E[e_{t-2}] + \dots + E[e_1] = \\
+      \mu_0 + 0 + \dots + 0 = \mu_0 \quad \square
+    \]
+(b) \[
+      \text{Var}[Y_t] = \text{Var}[Y_0 + e_t + e_{t-1} + \dots + e_1] = \\
+      \text{Var}[Y_0] + \text{Var}[e_t] + \text{Var}[e_{t-1}] + \dots + \text{Var}[e_1] = \\
+      \sigma_0^2+t\sigma_e^2 \quad \square
+    \]
+(c) \[
+      \text{Cov}[Y_t, Y_s] = \text{Cov}[Y_t, Y_t+e_{t+1}+e_{t+2}+ \dots + e_s] = \\
+      \text{Cov}[Y_t, Y_t] = \text{Var}[Y_t] = \sigma_0^2+t\sigma_e^2 \quad \square
+    \]
+(d) \[
+      \text{Corr}[Y_t, Y_s] = \frac{\sigma_0^2+t\sigma_e^2}{\sqrt{(\sigma_0^2+t\sigma_e^2)(\sigma_0^2+s\sigma_e^2)}} = 
+        \sqrt{\frac{\sigma_0^2+t\sigma_e^2}{\sigma_0^2+s\sigma_e^2}} \quad \square
+    \]
+
+## 1.22
+
+> Let $\{e_t\}$ be a zero-mean white noise process, and let $c$ be a constant with $|c| < 1$.
+> Define $Y_t$ recursively by $Y_t = cY_{t-1} + e_t$ with $Y_1 = e_1$.
+> 
+> (a) Show that $E(Y_t) = 0$.
+> (b) Show that $Var(Y_t) = \sigma_e^2 (1 + c^2 +c^4 + \dots + c^{2t − 2})$. Is $\{Y_t\}$ stationary?
+> (c) Show that 
+>     \[
+>       \text{Corr}[Y_t, Y_{t-1}] = c\sqrt{\frac{\text{Var}(Y_{t-1})}{\text{Var}[Y_t]}} \quad \text{and, in general,}\\
+>       \text{Corr}[Y_t, Y_{t-k}] = c^k\sqrt{\frac{\text{Var}(Y_{t-k})}{\text{Var}[Y_t]}} \quad \text{for } k > 0    
+>     \]
+>     Hint: Argue that $Y_t - 1$ is independent of $e_t$. Then use
+>     \[
+>       \text{Cov}[Y_t, Y_{t-1}] = \text{Cov}[cY_{t-1}+e_t, Y_{t-1}]
+>     \]
+> (d) For large $t$, argue that
+>     \[
+>       \text{Var}[Y_t] \approx \frac{\sigma_e^2}{1-c^2}\quad\text{and}\quad \text{Corr}[Y_t, Y_{t-k}] \approx c^k \quad \text{for } k > 0
+>     \]
+>     so that $\{Y_t\}$ could be called **asymptotically stationary**.
+> (e) Suppose now that we alter the initial condition and put $Y_1 = \frac{e_1}{\sqrt{1-c^2}}$. 
+>     Show that now $\{Y_t\}$ is stationary.
+
+(a) \[
+      E[Y_1] = E[e_1] = 0\\
+      E[Y_2] = E[cY_{1}+e_2] = cE[Y_1] + E[e_2] = 0\\
+      \dots\\
+      E[Y_t] = E[cY_{t-1}+e_t] = cE[Y_{t-1}] + E[e_t] = 0\quad \square
+    \]
+(b) \[
+      \text{Var}[Y_1] = \text{Var}[e_1] = \sigma_e^2\\
+      \text{Var}[Y_2] = \text{Var}[cY_{1} + e_2] = c^2\text{Var}[Y_{t-1}] + \text{Var}[e_2] = c^2\sigma_e^2 + \sigma_e^2 = \sigma_e^2(1 + c^2)\\
+      \dots\\
+      \text{Var}[Y_t] = \sigma_e^2(1 + c^2 + c^4 + \dots + c^{2t-2}) \quad\square
+    \]
+    $\{Y_t\}$ is not stationary, given that its variance varies with $t$.
+(c) \[
+      \text{Cov}[Y_t, Y_{t-1}] = \text{Cov}[cY_{t-1} + e_t, Y_{t-1}] = c\text{Cov}[Y_{t-1}, Y_{t-1}] = c\text{Var}[Y_{t-1}]\quad \text{giving}\\
+      \text{Corr}[Y_t, Y_{t-1}] = \frac{c\text{Var}[Y_{t-1}]}{\sqrt{\text{Var}[Y_t]\text{Var}[Y_{t-1}]}} =
+        c \sqrt{\frac{\text{Var}[Y_{t-1}]}{\text{Var}[Y_t]}}\quad\square
+    \]
+    And, in the general case,
+    \[
+      \text{Cov}[Y_t, Y_{t-k}] = \text{Cov}[cY_{t-1}+e_t, Y_{t-k}] = \\
+      c\text{Cov}[cY_{t-2} + e_{t-1}, Y_{t-k}] =\\
+      c^3\text{Cov}[Y_{t-2} + e_{t-1}, Y_{t-k}] = \dots\\ = c^k\text{Var}[Y_{t-k}]
+    \]
+    giving
+    \[
+      \text{Corr}[Y_t, Y_{t-k}] = \frac{c^k\text{Var}[Y_{t-k}]}{\sqrt{\text{Var}[Y_t]\text{Var}[Y_{t-k}]}} =
+        c^k \sqrt{\frac{\text{Var}[Y_{t-k}]}{\text{Var}[Y_t]}}\quad\square
+    \]
+(d) \[
+      \text{Var}[Y_t] = \sigma_e^2(1+c^2+c^4+\dots+c^{2t-2}) = \sigma_e^2\sum_{t=1}^{n}c^{2(t-1)}=\sigma_e^2 \sum_{t=0}^{n-1} c^{2t} =
+        \sigma_e^2 \frac{1-c^{2t}}{1-c^2}
+    \]
+    And because
+    \[
+    \lim_{t \rightarrow \infty} \sigma_e^2 \frac{1-c^{2t}}{1-c^2} = \sigma_e^2 \frac{1}{1-c^2}\quad\text{since }|c| < 1,
+    \]
+    which is free of $t$, $\{Y_t\}$ can be considered *asymptotically* stationary.
+(e) \[
+      Y_t = c(cY_{t-2} + e_{t-1}) + e_t = \dots = e_t+ce_{t-1} + c^2e_{t-2} + \dots + c^{t-2}e_2+ \frac{c^{t-1}}{\sqrt{1-c^2}}e_1\\
+      \text{Var}[Y_t] = \text{Var}[e_t+ce_{t-1}+c^2e_{t-2}+\dots+c^{t-2}e_2+\frac{c^{t-1}}{\sqrt{1-c^2}}e_1] =\\
+      \text{Var}[e_t] + c^2\text{Var}[e_{t-1}]+c^4 \text{Var}[e_{t-2}] + \dots + c^{2(t-2)}\text{Var}[e_2]+\frac{c^{2(t-1)}}{1-c^2}\text{Var}[e_1] =\\
+      \sigma_e^2(1 + c^2 + c^4 + \dots + c^{2(t-2)} + \frac{c^{2(t-1)}}{1-c^2}) =\sigma_e^2\left( \sum_{t=1}^{n}c^{2(t-1)} + \frac{c^{2(t-1)}}{1-c^2}\right)= \\
+      \frac{\sigma_e^2}{1-c^2} \frac{1-c^{2t}}{1-c^2}
+    \]

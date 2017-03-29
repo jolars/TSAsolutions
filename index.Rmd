@@ -3,10 +3,13 @@ title: "Solutions to Time Series Analysis with Applications in R"
 author: "Johan Larsson"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
-output: bookdown::gitbook
+output:
+  bookdown::gitbook:
+    number_sections: false
 documentclass: book
 link-citations: yes
 github-repo: jolars/TSAsolutions
+number_sections: no
 description: "This book contains solutions to the problems in the book Time Series Analysis with Applications in R, second edition, by Cryer and Chan. It is provided as a github repository so that anybody may contribute to its development."
 ---
 

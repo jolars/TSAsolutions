@@ -2,11 +2,6 @@ language: r
 sudo: false
 cache: packages
 
-addons:
-  apt:
-    packages:
-      - pandoc
-
 env:
   global:
   - secure: IJY6FBHtuKqgc7mDbLOj9ivrjnLDWSho/jF74kQ6qdHrc1rLxMt2hJfjohvkCK7tKQ79AesvGp/wGtf+Tox7MZaZ2P7B7INEnrVUj7doLAvSTUIMI0Q0Ivy8ONho4xxUc2D6GsLx8yJRme+HIZFr+rE22ddgaYkax1L9Rm8THXV/d5FjZgOt/AUb7xUuWAKJKg9lTPBHlfFL7ugahR8Wxz4SfA2aJoMmxSOOM0GrjM0f09phwVR6Uyuz/g3plR35ksaaPWY9WM2QczVLU6bnnqtbqpZkPm8znNUgnZyi7lLR3ywkGvmBofMWKR8iY/HueJs9DsZF3ya/zSA/Gjf0obCAO1fg4co+UPRySks+ZKhIvXxRZ2fRXvObDeWWiqqxeICgDOamIU750QK/MftnZi5ZE15PFCwQeR/QfseqUzGcKVne02ObWTC5z7TMCbupzWq3DlXGM5YbB5a59zwCQz8ozIpsNJ+l+gsFzrqyNloQjQs151I5YATL4S++AglnJ0oHi3HeFdFrgAXKQGFwgtmYWKhZOrLyH+Sy2A4LSmqZKdpXn6THDRMKyFHzU1Re8O68kDxbmxW5uBN91u8o8MHIp5Wdc9woCD+6zwVkU8LKG6IIySEY27oE3cqPMcwp4gLNEFHwIDirrfIhoTZYHTH1TsqY//E6CWCy6F2DLlU=
