@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="index.html">
-<link rel="next" href="chapter-2-fundamental-concepts-part-1.html">
+<link rel="prev" href="chapter-2-fundamental-concepts-part-2.html">
+
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -153,68 +153,98 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="introduction" class="section level1">
-<h1>Introduction</h1>
-<div id="larain" class="section level2">
-<h2>Larain</h2>
+<div id="chapter-2-fundamental-concepts-part-3" class="section level1">
+<h1>Chapter 2: Fundamental concepts (part 3)</h1>
+<div id="section-20" class="section level2">
+<h2>1.21</h2>
 <blockquote>
-<p>Use software to produce the time series plot shown in Exhibit 1.2, on page 2. The data are in the file named larain.</p>
+<p>For a random walk with random starting value, let <span class="math inline">\(Y_t = Y_0 + e_t + e{t-1} + \dots + e_1\)</span> for <span class="math inline">\(t &gt; 0\)</span>, where <span class="math inline">\(\gamma_0\)</span> has a distribution with mean <span class="math inline">\(\mu_0\)</span> and variance <span class="math inline">\(\sigma_0^2\)</span>. Suppose further that <span class="math inline">\(Y_0, e_1, \dots , e_t\)</span> are independent.</p>
+<ol style="list-style-type: lower-alpha">
+<li>Show that <span class="math inline">\(E(Y_t) = \mu_0\)</span> for all <span class="math inline">\(t\)</span>.</li>
+<li>Show that <span class="math inline">\(\text{Var}(Y_t) = t \sigma_e^2 + \sigma_0^2\)</span></li>
+<li>Show that <span class="math inline">\(\text{Cov}(Y_t, Y_s) = \min(t, s) \sigma_e^2+ \sigma_0^2\)</span></li>
+<li>Show that <span class="math inline">\(\text{Corr}[Y_t, Y_s] = \sqrt{\frac{t \sigma_a^2 + \sigma_0^2}{s\sigma_a^2 + \sigma_0^2}}\)</span>.</li>
+</ol>
 </blockquote>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(TSA)
-<span class="kw">library</span>(latticeExtra)
-
-<span class="kw">data</span>(larain, <span class="dt">package =</span> <span class="st">&quot;TSA&quot;</span>)</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">xyplot</span>(larain, <span class="dt">ylab =</span> <span class="st">&quot;Inches&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;Year&quot;</span>, <span class="dt">type =</span> <span class="st">&quot;o&quot;</span>)</code></pre></div>
-<p><img src="TSAsolutions_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<ol style="list-style-type: lower-alpha">
+<li><span class="math display">\[
+  E[Y_t] = E[Y_0+e_t+e_{t-1}+\dots+e_1] = \\
+  E[Y_0] + E[e_t] + E[e_{t-1}] + E[e_{t-2}] + \dots + E[e_1] = \\
+  \mu_0 + 0 + \dots + 0 = \mu_0 \quad \square
+\]</span></li>
+<li><span class="math display">\[
+  \text{Var}[Y_t] = \text{Var}[Y_0 + e_t + e_{t-1} + \dots + e_1] = \\
+  \text{Var}[Y_0] + \text{Var}[e_t] + \text{Var}[e_{t-1}] + \dots + \text{Var}[e_1] = \\
+  \sigma_0^2+t\sigma_e^2 \quad \square
+\]</span></li>
+<li><span class="math display">\[
+  \text{Cov}[Y_t, Y_s] = \text{Cov}[Y_t, Y_t+e_{t+1}+e_{t+2}+ \dots + e_s] = \\
+  \text{Cov}[Y_t, Y_t] = \text{Var}[Y_t] = \sigma_0^2+t\sigma_e^2 \quad \square
+\]</span></li>
+<li><span class="math display">\[
+  \text{Corr}[Y_t, Y_s] = \frac{\sigma_0^2+t\sigma_e^2}{\sqrt{(\sigma_0^2+t\sigma_e^2)(\sigma_0^2+s\sigma_e^2)}} = 
+    \sqrt{\frac{\sigma_0^2+t\sigma_e^2}{\sigma_0^2+s\sigma_e^2}} \quad \square
+\]</span></li>
+</ol>
 </div>
-<div id="colors" class="section level2">
-<h2>Colors</h2>
+<div id="section-21" class="section level2">
+<h2>1.22</h2>
 <blockquote>
-<p>Produce the time series plot displayed in Exhibit 1.3, on page 3. The data file is named color.</p>
+<p>Let <span class="math inline">\(\{e_t\}\)</span> be a zero-mean white noise process, and let <span class="math inline">\(c\)</span> be a constant with <span class="math inline">\(|c| &lt; 1\)</span>. Define <span class="math inline">\(Y_t\)</span> recursively by <span class="math inline">\(Y_t = cY_{t-1} + e_t\)</span> with <span class="math inline">\(Y_1 = e_1\)</span>.</p>
+<ol style="list-style-type: lower-alpha">
+<li>Show that <span class="math inline">\(E(Y_t) = 0\)</span>.</li>
+<li>Show that <span class="math inline">\(Var(Y_t) = \sigma_e^2 (1 + c^2 +c^4 + \dots + c^{2t − 2})\)</span>. Is <span class="math inline">\(\{Y_t\}\)</span> stationary?</li>
+<li>Show that <span class="math display">\[
+  \text{Corr}[Y_t, Y_{t-1}] = c\sqrt{\frac{\text{Var}(Y_{t-1})}{\text{Var}[Y_t]}} \quad \text{and, in general,}\\
+  \text{Corr}[Y_t, Y_{t-k}] = c^k\sqrt{\frac{\text{Var}(Y_{t-k})}{\text{Var}[Y_t]}} \quad \text{for } k &gt; 0    
+\]</span> Hint: Argue that <span class="math inline">\(Y_t - 1\)</span> is independent of <span class="math inline">\(e_t\)</span>. Then use <span class="math display">\[
+  \text{Cov}[Y_t, Y_{t-1}] = \text{Cov}[cY_{t-1}+e_t, Y_{t-1}]
+\]</span></li>
+<li>For large <span class="math inline">\(t\)</span>, argue that <span class="math display">\[
+  \text{Var}[Y_t] \approx \frac{\sigma_e^2}{1-c^2}\quad\text{and}\quad \text{Corr}[Y_t, Y_{t-k}] \approx c^k \quad \text{for } k &gt; 0
+\]</span> so that <span class="math inline">\(\{Y_t\}\)</span> could be called <strong>asymptotically stationary</strong>.</li>
+<li>Suppose now that we alter the initial condition and put <span class="math inline">\(Y_1 = \frac{e_1}{\sqrt{1-c^2}}\)</span>. Show that now <span class="math inline">\(\{Y_t\}\)</span> is stationary.</li>
+</ol>
 </blockquote>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(color)
-<span class="kw">xyplot</span>(color, <span class="dt">ylab =</span> <span class="st">&quot;Color property&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;Batch&quot;</span>, <span class="dt">type =</span> <span class="st">&quot;o&quot;</span>)</code></pre></div>
-<p><img src="TSAsolutions_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
-</div>
-<div id="random-normal-time-series" class="section level2">
-<h2>Random, normal time series</h2>
-<blockquote>
-<p>Simulate a completely random process of length 48 with independent, normal values. Plot the time series plot. Does it look “random”? Repeat this exercise several times with a new simulation each time.</p>
-</blockquote>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">xyplot</span>(<span class="kw">as.ts</span>(<span class="kw">rnorm</span>(<span class="dv">48</span>)))
-<span class="kw">xyplot</span>(<span class="kw">as.ts</span>(<span class="kw">rnorm</span>(<span class="dv">48</span>)))</code></pre></div>
-<p><img src="TSAsolutions_files/figure-html/unnamed-chunk-3-1.png" width="672" /><img src="TSAsolutions_files/figure-html/unnamed-chunk-3-2.png" width="672" /></p>
-<p>As far as we can tell there is no discernable pattern here.</p>
-</div>
-<div id="random-chi2-distributed-time-series" class="section level2">
-<h2>Random, <span class="math inline">\(\chi^2\)</span>-distributed time series</h2>
-<blockquote>
-<p>Simulate a completely random process of length 48 with independent, chi-square distributed values, each with 2 degrees of freedom. Display the time series plot. Does it look “random” and nonnormal? Repeat this exercise several times with a new simulation each time.</p>
-</blockquote>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">xyplot</span>(<span class="kw">as.ts</span>(<span class="kw">rchisq</span>(<span class="dv">48</span>, <span class="dv">2</span>)))
-<span class="kw">xyplot</span>(<span class="kw">as.ts</span>(<span class="kw">rchisq</span>(<span class="dv">48</span>, <span class="dv">2</span>)))</code></pre></div>
-<p><img src="TSAsolutions_files/figure-html/unnamed-chunk-4-1.png" width="672" /><img src="TSAsolutions_files/figure-html/unnamed-chunk-4-2.png" width="672" /></p>
-<p>The process appears random, though non-normal.</p>
-</div>
-<div id="t5-distributed-random-values" class="section level2">
-<h2><em>t</em>(5)-distributed, random values</h2>
-<blockquote>
-<p>Simulate a completely random process of length 48 with independent, t-distributed values each with 5 degrees of freedom. Construct the time series plot. Does it look “random” and nonnormal? Repeat this exercise several times with a new simulation each time.</p>
-</blockquote>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">xyplot</span>(<span class="kw">as.ts</span>(<span class="kw">rt</span>(<span class="dv">48</span>, <span class="dv">5</span>)))</code></pre></div>
-<p><img src="TSAsolutions_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">xyplot</span>(<span class="kw">as.ts</span>(<span class="kw">rt</span>(<span class="dv">48</span>, <span class="dv">5</span>)))</code></pre></div>
-<p><img src="TSAsolutions_files/figure-html/unnamed-chunk-5-2.png" width="672" /></p>
-<p>It looks random but not normal, though it should be approximately so, considering the distribution that we have sampled from.</p>
-</div>
-<div id="dubuque-temperature-series" class="section level2">
-<h2>Dubuque temperature series</h2>
-<blockquote>
-<p>Construct a time series plot with monthly plotting symbols for the Dubuque temperature series as in Exhibit 1.7, on page 6. The data are in the file named tempdub.</p>
-</blockquote>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(tempdub)
-<span class="kw">xyplot</span>(tempdub, <span class="dt">ylab =</span> <span class="st">&quot;Temperature&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;Year&quot;</span>)</code></pre></div>
-<p><img src="TSAsolutions_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<ol style="list-style-type: lower-alpha">
+<li><span class="math display">\[
+  E[Y_1] = E[e_1] = 0\\
+  E[Y_2] = E[cY_{1}+e_2] = cE[Y_1] + E[e_2] = 0\\
+  \dots\\
+  E[Y_t] = E[cY_{t-1}+e_t] = cE[Y_{t-1}] + E[e_t] = 0\quad \square
+\]</span></li>
+<li><span class="math display">\[
+  \text{Var}[Y_1] = \text{Var}[e_1] = \sigma_e^2\\
+  \text{Var}[Y_2] = \text{Var}[cY_{1} + e_2] = c^2\text{Var}[Y_{t-1}] + \text{Var}[e_2] = c^2\sigma_e^2 + \sigma_e^2 = \sigma_e^2(1 + c^2)\\
+  \dots\\
+  \text{Var}[Y_t] = \sigma_e^2(1 + c^2 + c^4 + \dots + c^{2t-2}) \quad\square
+\]</span> <span class="math inline">\(\{Y_t\}\)</span> is not stationary, given that its variance varies with <span class="math inline">\(t\)</span>.</li>
+<li><span class="math display">\[
+  \text{Cov}[Y_t, Y_{t-1}] = \text{Cov}[cY_{t-1} + e_t, Y_{t-1}] = c\text{Cov}[Y_{t-1}, Y_{t-1}] = c\text{Var}[Y_{t-1}]\quad \text{giving}\\
+  \text{Corr}[Y_t, Y_{t-1}] = \frac{c\text{Var}[Y_{t-1}]}{\sqrt{\text{Var}[Y_t]\text{Var}[Y_{t-1}]}} =
+    c \sqrt{\frac{\text{Var}[Y_{t-1}]}{\text{Var}[Y_t]}}\quad\square
+\]</span> And, in the general case, <span class="math display">\[
+  \text{Cov}[Y_t, Y_{t-k}] = \text{Cov}[cY_{t-1}+e_t, Y_{t-k}] = \\
+  c\text{Cov}[cY_{t-2} + e_{t-1}, Y_{t-k}] =\\
+  c^3\text{Cov}[Y_{t-2} + e_{t-1}, Y_{t-k}] = \dots\\ = c^k\text{Var}[Y_{t-k}]
+\]</span> giving <span class="math display">\[
+  \text{Corr}[Y_t, Y_{t-k}] = \frac{c^k\text{Var}[Y_{t-k}]}{\sqrt{\text{Var}[Y_t]\text{Var}[Y_{t-k}]}} =
+    c^k \sqrt{\frac{\text{Var}[Y_{t-k}]}{\text{Var}[Y_t]}}\quad\square
+\]</span></li>
+<li><span class="math display">\[
+  \text{Var}[Y_t] = \sigma_e^2(1+c^2+c^4+\dots+c^{2t-2}) = \sigma_e^2\sum_{t=1}^{n}c^{2(t-1)}=\sigma_e^2 \sum_{t=0}^{n-1} c^{2t} =
+    \sigma_e^2 \frac{1-c^{2t}}{1-c^2}
+\]</span> And because <span class="math display">\[
+\lim_{t \rightarrow \infty} \sigma_e^2 \frac{1-c^{2t}}{1-c^2} = \sigma_e^2 \frac{1}{1-c^2}\quad\text{since }|c| &lt; 1,
+\]</span> which is free of <span class="math inline">\(t\)</span>, <span class="math inline">\(\{Y_t\}\)</span> can be considered <em>asymptotically</em> stationary.</li>
+<li><span class="math display">\[
+  Y_t = c(cY_{t-2} + e_{t-1}) + e_t = \dots = e_t+ce_{t-1} + c^2e_{t-2} + \dots + c^{t-2}e_2+ \frac{c^{t-1}}{\sqrt{1-c^2}}e_1\\
+  \text{Var}[Y_t] = \text{Var}[e_t+ce_{t-1}+c^2e_{t-2}+\dots+c^{t-2}e_2+\frac{c^{t-1}}{\sqrt{1-c^2}}e_1] =\\
+  \text{Var}[e_t] + c^2\text{Var}[e_{t-1}]+c^4 \text{Var}[e_{t-2}] + \dots + c^{2(t-2)}\text{Var}[e_2]+\frac{c^{2(t-1)}}{1-c^2}\text{Var}[e_1] =\\
+  \sigma_e^2(1 + c^2 + c^4 + \dots + c^{2(t-2)} + \frac{c^{2(t-1)}}{1-c^2}) =\sigma_e^2\left( \sum_{t=1}^{n}c^{2(t-1)} + \frac{c^{2(t-1)}}{1-c^2}\right)= \\
+  \frac{\sigma_e^2}{1-c^2} \frac{1-c^{2t}}{1-c^2}
+\]</span></li>
+</ol>
 
 </div>
 </div>
@@ -223,8 +253,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           </div>
         </div>
       </div>
-<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="chapter-2-fundamental-concepts-part-1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="chapter-2-fundamental-concepts-part-2.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

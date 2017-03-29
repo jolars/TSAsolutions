@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Solutions to Time Series Analysis with Applications in R</title>
+  <meta name="description" content="This book contains solutions to the problems in the book Time Series Analysis with Applications in R, second edition, by Cryer and Chan. It is provided as a github repository so that anybody may contribute to its development.">
+  <meta name="generator" content="bookdown 0.3.16 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Solutions to Time Series Analysis with Applications in R" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This book contains solutions to the problems in the book Time Series Analysis with Applications in R, second edition, by Cryer and Chan. It is provided as a github repository so that anybody may contribute to its development." />
+  <meta name="github-repo" content="jolars/TSAsolutions" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Solutions to Time Series Analysis with Applications in R" />
+  
+  <meta name="twitter:description" content="This book contains solutions to the problems in the book Time Series Analysis with Applications in R, second edition, by Cryer and Chan. It is provided as a github repository so that anybody may contribute to its development." />
+  
+
+<meta name="author" content="Johan Larsson">
+
+
+<meta name="date" content="2017-03-29">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="introduction.html">
+<link rel="next" href="chapter-2-fundamental-concepts-part-2.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i>Introduction</a><ul>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#larain"><i class="fa fa-check"></i>Larain</a></li>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#colors"><i class="fa fa-check"></i>Colors</a></li>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#random-normal-time-series"><i class="fa fa-check"></i>Random, normal time series</a></li>
+<li><a href="introduction.html#random-chi2-distributed-time-series">Random, <span class="math inline">\(\chi^2\)</span>-distributed time series</a></li>
+<li><a href="introduction.html#t5-distributed-random-values"><em>t</em>(5)-distributed, random values</a></li>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#dubuque-temperature-series"><i class="fa fa-check"></i>Dubuque temperature series</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="chapter-2-fundamental-concepts-part-1.html"><a href="chapter-2-fundamental-concepts-part-1.html"><i class="fa fa-check"></i>Chapter 2: Fundamental concepts (part 1)</a><ul>
+<li class="chapter" data-level="" data-path="chapter-2-fundamental-concepts-part-1.html"><a href="chapter-2-fundamental-concepts-part-1.html#section"><i class="fa fa-check"></i>1.1</a></li>
+<li class="chapter" data-level="" data-path="chapter-2-fundamental-concepts-part-1.html"><a href="chapter-2-fundamental-concepts-part-1.html#section-1"><i class="fa fa-check"></i>1.2</a></li>
+<li class="chapter" data-level="" data-path="chapter-2-fundamental-concepts-part-1.html"><a href="chapter-2-fundamental-concepts-part-1.html#section-2"><i class="fa fa-check"></i>1.3</a></li>
+<li class="chapter" data-level="" data-path="chapter-2-fundamental-concepts-part-1.html"><a href="chapter-2-fundamental-concepts-part-1.html#section-3"><i class="fa fa-check"></i>1.4</a></li>
+<li class="chapter" data-level="" data-path="chapter-2-fundamental-concepts-part-1.html"><a href="chapter-2-fundamental-concepts-part-1.html#section-4"><i class="fa fa-check"></i>1.5</a></li>
+<li class="chapter" data-level="" data-path="chapter-2-fundamental-concepts-part-1.html"><a href="chapter-2-fundamental-concepts-part-1.html#section-5"><i class="fa fa-check"></i>1.6</a></li>
+<li class="chapter" data-level="" data-path="chapter-2-fundamental-concepts-part-1.html"><a href="chapter-2-fundamental-concepts-part-1.html#section-6"><i class="fa fa-check"></i>1.7</a></li>
+<li class="chapter" data-level="" data-path="chapter-2-fundamental-concepts-part-1.html"><a href="chapter-2-fundamental-concepts-part-1.html#section-7"><i class="fa fa-check"></i>1.8</a></li>
+<li class="chapter" data-level="" data-path="chapter-2-fundamental-concepts-part-1.html"><a href="chapter-2-fundamental-concepts-part-1.html#section-8"><i class="fa fa-check"></i>1.9</a></li>
+<li class="chapter" data-level="" data-path="chapter-2-fundamental-concepts-part-1.html"><a href="chapter-2-fundamental-concepts-part-1.html#section-9"><i class="fa fa-check"></i>2.0</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="chapter-2-fundamental-concepts-part-2.html"><a href="chapter-2-fundamental-concepts-part-2.html"><i class="fa fa-check"></i>Chapter 2: Fundamental concepts (part 2)</a><ul>
+<li class="chapter" data-level="" data-path="chapter-2-fundamental-concepts-part-2.html"><a href="chapter-2-fundamental-concepts-part-2.html#section-10"><i class="fa fa-check"></i>1.11</a></li>
+<li class="chapter" data-level="" data-path="chapter-2-fundamental-concepts-part-2.html"><a href="chapter-2-fundamental-concepts-part-2.html#section-11"><i class="fa fa-check"></i>1.12</a></li>
+<li class="chapter" data-level="" data-path="chapter-2-fundamental-concepts-part-2.html"><a href="chapter-2-fundamental-concepts-part-2.html#section-12"><i class="fa fa-check"></i>1.13</a></li>
+<li class="chapter" data-level="" data-path="chapter-2-fundamental-concepts-part-2.html"><a href="chapter-2-fundamental-concepts-part-2.html#section-13"><i class="fa fa-check"></i>1.14</a></li>
+<li class="chapter" data-level="" data-path="chapter-2-fundamental-concepts-part-2.html"><a href="chapter-2-fundamental-concepts-part-2.html#section-14"><i class="fa fa-check"></i>1.15</a></li>
+<li class="chapter" data-level="" data-path="chapter-2-fundamental-concepts-part-2.html"><a href="chapter-2-fundamental-concepts-part-2.html#section-15"><i class="fa fa-check"></i>1.16</a></li>
+<li class="chapter" data-level="" data-path="chapter-2-fundamental-concepts-part-2.html"><a href="chapter-2-fundamental-concepts-part-2.html#section-16"><i class="fa fa-check"></i>1.17</a></li>
+<li class="chapter" data-level="" data-path="chapter-2-fundamental-concepts-part-2.html"><a href="chapter-2-fundamental-concepts-part-2.html#section-17"><i class="fa fa-check"></i>1.18</a></li>
+<li class="chapter" data-level="" data-path="chapter-2-fundamental-concepts-part-2.html"><a href="chapter-2-fundamental-concepts-part-2.html#section-18"><i class="fa fa-check"></i>1.19</a></li>
+<li class="chapter" data-level="" data-path="chapter-2-fundamental-concepts-part-2.html"><a href="chapter-2-fundamental-concepts-part-2.html#section-19"><i class="fa fa-check"></i>1.20</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="chapter-2-fundamental-concepts-part-3.html"><a href="chapter-2-fundamental-concepts-part-3.html"><i class="fa fa-check"></i>Chapter 2: Fundamental concepts (part 3)</a><ul>
+<li class="chapter" data-level="" data-path="chapter-2-fundamental-concepts-part-3.html"><a href="chapter-2-fundamental-concepts-part-3.html#section-20"><i class="fa fa-check"></i>1.21</a></li>
+<li class="chapter" data-level="" data-path="chapter-2-fundamental-concepts-part-3.html"><a href="chapter-2-fundamental-concepts-part-3.html#section-21"><i class="fa fa-check"></i>1.22</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Solutions to Time Series Analysis with Applications in R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="chapter-2-fundamental-concepts-part-1" class="section level1">
+<h1>Chapter 2: Fundamental concepts (part 1)</h1>
+<div id="section" class="section level2">
+<h2>1.1</h2>
+<blockquote>
+<p>Suppose <span class="math inline">\(\text{E}[X) = 2, \text{Var}[X) = 9, \text{E}[Y) = 0, \text{Var}[Y) = 4\)</span>, and <span class="math inline">\(\text{Corr}[X,Y) = 0.25\)</span>. Find:</p>
+<ol style="list-style-type: lower-alpha">
+<li><span class="math inline">\(\text{Var}(X + Y)\)</span>.</li>
+<li><span class="math inline">\(\text{Cov}(X, X + Y)\)</span>.</li>
+<li><span class="math inline">\(\text{Corr}(X + Y, X − Y)\)</span>.</li>
+</ol>
+</blockquote>
+<ol style="list-style-type: lower-alpha">
+<li>\begin{align}
+\text{Cov}[X,Y] &amp; = \text{Corr}[X,Y]\sqrt{Var[X]Var[Y]}\\
+                &amp; = 0.25 \sqrt{9 \times 4} = 1.5 \\
+\text{Var}[X,Y] &amp; = Var[X]+Var[Y]+2Cov[X,Y]\\
+                &amp; = 9 + 4 + 2 \times 3 = 16\\
+\end{align}</li>
+<li><span class="math display">\[\text{Cov}[X, X+Y] = \text{Cov}[X,X] + \text{Cov}[X,Y] = \text{Var}[X] + \text{Cov}[X,Y] = 9 + 1.5 = 10.5\]</span></li>
+<li>\begin{align}
+\text{Corr}[X+Y, X-Y] = &amp; \text{Corr}[X,X] + \text{Corr}[X,-Y] + \text{Corr}[Y,X] + \text{Corr}[Y,-Y] \\
+                      = &amp; \text{Corr}[Y,X] + \text{Corr}[Y,-Y] \\
+                      = &amp; 1 - 0.25 + 0.25 -1 \\
+                      = &amp; 0 \\
+\end{align}</li>
+</ol>
+</div>
+<div id="section-1" class="section level2">
+<h2>1.2</h2>
+<blockquote>
+<p>If <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are dependent but <span class="math inline">\(\text{Var}[X] = \text{Var}[Y]\)</span>, find <span class="math inline">\(\text{Cov}[X + Y, X − Y]\)</span>.</p>
+</blockquote>
+<p><span class="math display">\[
+\text{Cov}[X+Y,X-Y] = \text{Cov}[X,X] + \text{Cov}[X,-Y] + \text{Cov}[Y,X] + \text{Cov}[Y, -Y] = \\
+Var[X] - Cov[X,Y] + Cov[X,Y] - Var[Y] = 0
+\]</span></p>
+<p>since <span class="math inline">\(Var[X] = Var[Y]\)</span>.</p>
+</div>
+<div id="section-2" class="section level2">
+<h2>1.3</h2>
+<blockquote>
+<p>Let X have a distribution with mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^2\)</span>, and let <span class="math inline">\(Y_t = X\)</span> for all <span class="math inline">\(t\)</span>.</p>
+<ol style="list-style-type: lower-alpha">
+<li>Show that <span class="math inline">\(\{Yt\}\)</span> is strictly and weakly stationary.</li>
+<li>Find the autocovariance function for <span class="math inline">\(\{Yt\}\)</span>.</li>
+<li>Sketch a “typical” time plot of Yt.</li>
+</ol>
+</blockquote>
+<ol style="list-style-type: lower-alpha">
+<li><p>We have that <span class="math display">\[
+P(Y_{t_1}, Y_{t_2}, \dots, Y_{t_n}) =\\
+  P(X_1, X_2, \dots, X_n) =\\
+  P(Y_{t_1 - k}, Y_{t_2 - k}, \dots, Y_{t_n - k}),
+\]</span></p>
+<p>which satisfies our requirement for strict stationarity.</p></li>
+<li>The autocovariance is given by <span class="math display">\[
+  \gamma_{t,s}=\text{Cov}[Y_t, Y_s] = \text{Cov}[X,X] = \text{Var}[X] = \sigma^2.
+\]</span></li>
+<li></li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(lattice)
+tstest &lt;-<span class="st"> </span><span class="kw">ts</span>(<span class="kw">runif</span>(<span class="dv">100</span>))
+
+lattice::<span class="kw">xyplot</span>(tstest,
+                <span class="dt">panel =</span> function(x, y, ...) {
+                  <span class="kw">panel.abline</span>(<span class="dt">h =</span> <span class="kw">mean</span>(y), <span class="dt">lty =</span> <span class="dv">2</span>)
+                  <span class="kw">panel.xyplot</span>(x, y, ...)
+                })</code></pre></div>
+<div class="figure"><span id="fig:unnamed-chunk-7"></span>
+<img src="TSAsolutions_files/figure-html/unnamed-chunk-7-1.png" alt="A white noise time series: no drift, independence between observations." width="672" />
+<p class="caption">
+Figure 1: A white noise time series: no drift, independence between observations.
+</p>
+</div>
+</div>
+<div id="section-3" class="section level2">
+<h2>1.4</h2>
+<blockquote>
+<p>Let <span class="math inline">\(\{e_t\}\)</span> be a zero mean white noise process. Suppose that the observed process is <span class="math inline">\(Y_t = e_t + \theta e_t − 1\)</span>, where <span class="math inline">\(\theta\)</span> is either 3 or 1/3.</p>
+<ol style="list-style-type: lower-alpha">
+<li>Find the autocorrelation function for <span class="math inline">\(\{Yt\}\)</span> both when <span class="math inline">\(\theta = 3\)</span> and when <span class="math inline">\(\theta = 1/3\)</span>.</li>
+<li>You should have discovered that the time series is stationary regardless of the value of <span class="math inline">\(\theta\)</span> and that the autocorrelation functions are the same for <span class="math inline">\(\theta = 3\)</span> and <span class="math inline">\(\theta = 1/3\)</span>. For simplicity, suppose that the process mean is known to be zero and the variance of <span class="math inline">\(Y_t\)</span> is known to be 1. You observe the series <span class="math inline">\(\{Yt\}\)</span> for <span class="math inline">\(t = 1, 2, \dots , n\)</span> and suppose that you can produce good estimates of the autocorrelations <span class="math inline">\(\rho_k\)</span>. Do you think that you could determine which value of <span class="math inline">\(\theta\)</span> is correct (3 or 1/3) based on the estimate of <span class="math inline">\(\rho_k\)</span>? Why or why not?</li>
+</ol>
+</blockquote>
+<ol style="list-style-type: lower-alpha">
+<li><p><span class="math display">\[
+  E[Y_t] = E[e_t+\theta e_{t-1}] = E[e_t] + \theta E[e_{t-1}] = 0 + 0 = 0\\
+  V[Y_t] = V[e_t + \theta e_{t-1}] =  V[e_t] + \theta^2 V[e_{t-1}] = \sigma_e^2 + \theta^2 \sigma_e^2 = \sigma_2^2(1 + \theta^2)\\
+\]</span></p>
+<p>For <span class="math inline">\(k = 1\)</span> we have</p>
+<p><span class="math display">\[
+  C[e_t + \theta e_{t-1}, e_{t-1} + \theta e_{t-2}] = \\
+  C[e_t,e_{t-1}] + C[e_t, \theta e_{t-2}] + C[\theta e_{t-1}, e_{t-1}] + C[\theta e_{t-1}, \theta e_{t-2}] = \\
+  0 + 0 + \theta V[e_{t-1}] + 0 = \theta \sigma_e^2,\\
+  \text{Corr}[Y_t, Y_{t-k}] = \frac{\theta \sigma_e^2}{\sqrt{(\sigma_e^2(1+\theta^2))^2}} = \frac{\theta }{1+\theta^2}
+\]</span></p>
+<p>and for <span class="math inline">\(k = 0\)</span> we get</p>
+<p><span class="math display">\[
+  \text{Corr}[Y_t, Y_{t-k}] = \text{Corr}[Y_t, Y_t] = 1
+\]</span></p>
+<p>and, finally, for <span class="math inline">\(k &gt; 0\)</span>:</p>
+<p><span class="math display">\[
+  C[e_t + \theta e_{t-1}, e_{t-k} + \theta e_{t-k-1}] = \\
+  C[e_t, e_{t-k}] + C[e_t, e_{t-1-k}] + C[\theta e_{t-1}, e_{t-k}] + C[\theta e_{t-1}, \theta e_{t-1-k}] = 0
+\]</span></p>
+<p>given that all terms are independent. Taken together, we have that</p>
+<p><span class="math display">\[ \text{Corr}[Y_t, Y_{t-k}] =
+  \begin{cases}
+    1                            &amp; \quad \text{for } k = 0\\
+    \frac{\theta}{1 + \theta^2}  &amp; \quad \text{for } k = 1\\
+    0                            &amp; \quad \text{for } k &gt; 1
+  \end{cases}.
+\]</span></p>
+<p>And, as required,</p>
+<span class="math display">\[
+  \text{Corr}[Y_t, Y_{t-k}] =
+  \begin{cases}
+    \frac{3}{1+3^2} = \frac{3}{10} &amp; \quad \text{if } \theta = 3\\
+    \frac{1/3}{1 + (1/3)^2} = \frac{1}{10/3} = \frac{3}{10}  &amp; \quad \text{if } \theta = 1/3
+  \end{cases}.
+\]</span></li>
+<li><p>No, probably not. Given that <span class="math inline">\(\rho\)</span> is standardized, we will not be able to detect any difference in the variance regardless of the values of k.</p></li>
+</ol>
+</div>
+<div id="section-4" class="section level2">
+<h2>1.5</h2>
+<blockquote>
+<p>Suppose <span class="math inline">\(Y_t = 5 + 2t + X_t\)</span>, where <span class="math inline">\(\{X_t\}\)</span> is a zero-mean stationary series with autocovariance function <span class="math inline">\(\gamma_k\)</span>.</p>
+<ol style="list-style-type: lower-alpha">
+<li>Find the mean function for <span class="math inline">\(\{Y_t\}\)</span>.</li>
+<li>Find the autocovariance function for <span class="math inline">\(\{Y_t\}\)</span>.</li>
+<li>Is <span class="math inline">\(\{Y_t\}\)</span> stationary? Why or why not?</li>
+</ol>
+</blockquote>
+<ol style="list-style-type: lower-alpha">
+<li><span class="math display">\[\mu_t = E[Y_t] = E[5 + 2t + X_t] = 5 + 2E[t] + E[X_t] = 5 + 2t + 0 = 2t + 5\]</span></li>
+<li><span class="math display">\[ \gamma_k = \text{Corr}[5+2t+X_t, 5+2(t-k)+X_{t-k}] = \text{Corr}[X_t, X_{t-k}]\]</span></li>
+<li>No, the mean function (<span class="math inline">\(\mu_t\)</span>) is constant and the aurocovariance (<span class="math inline">\(\gamma_{t,t-k}\)</span>) free from <span class="math inline">\(t\)</span>.</li>
+</ol>
+</div>
+<div id="section-5" class="section level2">
+<h2>1.6</h2>
+<blockquote>
+<p>Let {Xt} be a stationary time series, and define <span class="math display">\[ Y_t =
+   \begin{cases}
+     X_t     &amp; \quad \text{for odd } t \\
+     X_t + 3 &amp; \quad \text{for even } t
+   \end{cases}.
+ \]</span></p>
+<ol style="list-style-type: lower-alpha">
+<li>Show that <span class="math inline">\(\text{Cov}[Y_t, Y_{t-k}]\)</span> is free from <span class="math inline">\(t\)</span> for all lags <span class="math inline">\(k\)</span>.</li>
+<li>iS <span class="math inline">\(\{Y_t\}\)</span> stationary?</li>
+</ol>
+</blockquote>
+<ol style="list-style-type: lower-alpha">
+<li><p><span class="math display">\[\text{Cov}[a + X_t, b + X_{t-k}] =\text{Cov}[X_t, X_{t-k}],\]</span></p>
+which is free from <span class="math inline">\(t\)</span> for all <span class="math inline">\(k\)</span> because <span class="math inline">\(X_t\)</span> is stationary.</li>
+<li><p><span class="math display">\[
+  \mu_t = E[Y_t] = 
+    \begin{cases}
+      E[X_t]       &amp; \quad \text{for odd } t\\
+      3 + E[X_t]   &amp; \quad \text{for even } t\\
+    \end{cases}.
+\]</span> Since <span class="math inline">\(\mu_t\)</span> varies depending on <span class="math inline">\(t\)</span>, <span class="math inline">\(Y_t\)</span> is not stationary.</p></li>
+</ol>
+</div>
+<div id="section-6" class="section level2">
+<h2>1.7</h2>
+<blockquote>
+<p>Suppose that <span class="math inline">\(\{Y_t\}\)</span> is stationary with autocovariance function <span class="math inline">\(\gamma_k\)</span>.</p>
+<ol style="list-style-type: lower-alpha">
+<li>Show that <span class="math inline">\(W_t = \triangledown Y_t = Y_t − Y_t − 1\)</span> is stationary by finding the mean and autocovariance function for <span class="math inline">\(\{W_t\}\)</span>.</li>
+<li>Show that $U_t = 2Y_t =  = Y_t − 2Y_t − 1 + Y_t − 2 is stationary. (You need not find the mean and autocovariance function for <span class="math inline">\(\{U_t\}\)</span>.)</li>
+</ol>
+</blockquote>
+<ol style="list-style-type: lower-alpha">
+<li><p><span class="math display">\[\mu_t = E[W_t] = E[Y_t - Y_{t-1}] = E[Y_t] - E[Y_{t-1}] = 0\]</span> because <span class="math inline">\(Y_t\)</span> is stationary.</p>
+<span class="math display">\[
+  \text{Cov}[W_t] = \text{Cov}[Y_t - Y_{t-1}, Y_{t-k} - Y_{t-1-k}] = \\
+  \text{Cov}[Y_t, Y_{t-k}] + \text{Cov}[Y_t, Y_{t-1-k}] + \text{Cov}[-Y_{t-k}, Y_{t-k}] + \text{Cov}[-Y_{t-k}, -Y_{t-1-k}]=\\
+  \gamma_k-\gamma_{k+1}-\gamma_{k-1}+\gamma_{k} = 2 \gamma_k - \gamma_{k+1} - \gamma_{k-1}. \quad \square
+\]</span></li>
+<li><p>In (a), we discovered that the difference between two stationary processes, <span class="math inline">\(\triangledown Y_t\)</span> itself was stationary. It follows that the difference between two of these differences, <span class="math inline">\(\triangledown^2Y_t\)</span> is also stationary.</p></li>
+</ol>
+</div>
+<div id="section-7" class="section level2">
+<h2>1.8</h2>
+<blockquote>
+<p>Suppose that <span class="math inline">\(\{Y_t\}\)</span> is stationary with autocovariance function <span class="math inline">\(\gamma_k\)</span>. Show that for any fixed positive integer <span class="math inline">\(n\)</span> and any constants <span class="math inline">\(c_1, c_2, \dots, c_n\)</span>, the process <span class="math inline">\(\{W_t\}\)</span> defined by <span class="math inline">\(W_t = c_1 Y_t + c_2 Y_{t–1} + \dots + c_n Y_{t-n+1}\)</span> is stationary. (Note that Exercise 2.7 is a special case of this result.)</p>
+</blockquote>
+\begin{align}
+  E[W_t] &amp; = c_1E[Y_t]+c_2E[Y_t] + \dots + c_n E[Y_t]\\
+         &amp; = E[Y_t](c_1 + c_2 + \dots + c_n),
+\end{align}
+<p>and thus the expected value is constant. Moreover,</p>
+\begin{align}
+  \text{Cov}[W_t] &amp; = \text{Cov}[c_1 Y_t + c_2 Y_{t-1} + \dots + c_n Y_{t-k}, c_1 Y_{t-k} + c_2 Y_{t-k-1} + \dots + c_n Y_{t-k-n}] \\
+                  &amp; = \sum_{i=0}^n \sum_{j=0}^n c_i c_j \text{Cov}[Y_{t-j}Y_{t-i-k}] \\
+                  &amp; = \sum_{i=0}^n \sum_{j=0}^n c_i c_j \gamma_{j-k-i},
+\end{align}
+<p>which is free of <span class="math inline">\(t\)</span>; consequently, <span class="math inline">\(W_t\)</span> is stationary.</p>
+</div>
+<div id="section-8" class="section level2">
+<h2>1.9</h2>
+<blockquote>
+<p>Suppose _t = _0 + _1 t + X_t$, where <span class="math inline">\(\{X_t\}\)</span> is a zero-mean stationary series with autocovariance function <span class="math inline">\(\gamma_k\)</span> and <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> are constants.</p>
+<ol style="list-style-type: lower-alpha">
+<li>Show that <span class="math inline">\(\{Y_t\}\)</span> is not stationary but that <span class="math inline">\(W_t = \triangledown Y_t = Y_t − Y_{t−1}\)</span> is stationary.</li>
+<li>In general, show that if <span class="math inline">\(Y_t = \mu_t + X_t\)</span>, where <span class="math inline">\(\{X_t\}\)</span> is a zero-mean stationary series and <span class="math inline">\(\mu_t\)</span> is a polynomial in <span class="math inline">\(t\)</span> of degree <span class="math inline">\(d\)</span>, then <span class="math inline">\(\triangledown^m Y_t = \triangledown(\triangledown^{m−1}Y_t)\)</span> is stationary for <span class="math inline">\(m \geq d\)</span> and nonstationary for <span class="math inline">\(0 \leq m &lt; d\)</span>.</li>
+</ol>
+</blockquote>
+<ol style="list-style-type: lower-alpha">
+<li><p><span class="math display">\[
+  E[Y_t] = \beta_0 + \beta_1 t + E[X_t] = \beta_0 + \beta_1 t + \mu_{t_x},
+\]</span></p>
+<p>which is not free of <span class="math inline">\(t\)</span> and hence <em>not</em> stationary.</p>
+<p><span class="math display">\[
+  \text{Cov}[Y_t] = \text{Cov}[X_t, X_t-1] = \gamma_{t-1}
+\]</span></p>
+<p><span class="math display">\[
+  E[W_t] = E[Y_t - Y_{t-1}] = E[\beta_0 + \beta_1 t + X_t - (\beta_0 + \beta_1(t-1) + X_{t-1})] =\\
+  \beta_0 + \beta_1 t - \beta_0 - \beta_1 t + \beta_1  = \beta_1,
+\]</span></p>
+<p>is free of <span class="math inline">\(t\)</span> and, furthermore, we have</p>
+<p><span class="math display">\[
+  \text{Cov}[W_t] = \text{Cov}[\beta_0 + \beta_1 t + X_t, \beta_0 + \beta_1 (t-1) + X_{t-1}] =\\
+  \text{Cov}[X_t, X_{t-1}] = \gamma_k,  
+\]</span></p>
+which is also free of <span class="math inline">\(t\)</span>, thereby proving that <span class="math inline">\(W_t\)</span> is stationary.</li>
+<li><p><span class="math display">\[
+  E[Y_t] = E[\mu_t + X_t] = \mu_t + \mu_t = 0 + 0 = 0, \quad \text{and}\\
+  \text{Cov}[Y_t] = \text{Cov}[\mu_t + X_t, \mu_{t-k} + X_{t-k}] = \text{Cov}[X_t, X_{t-k}] = \gamma_k
+\]</span></p>
+<p><span class="math display">\[
+  \triangledown^m Y_t = \triangledown(\triangledown^{m−1}Y_t)
+\]</span></p>
+<p><em>Currently unsolved.</em></p></li>
+</ol>
+</div>
+<div id="section-9" class="section level2">
+<h2>2.0</h2>
+<blockquote>
+<p>Let <span class="math inline">\(\{X_t\}\)</span> be a zero-mean, unit-variance stationary process with autocorrelation function <span class="math inline">\(\rho_k\)</span>. Suppose that <span class="math inline">\(\mu_t\)</span> is a nonconstant function and that <span class="math inline">\(\sigma_t\)</span> is a positive-valued nonconstant function. The observed series is formed as <span class="math inline">\(Y_t = \mu_t + \sigma_t X_t\)</span>.</p>
+<ol style="list-style-type: lower-alpha">
+<li>Find the mean and covariance function for the <span class="math inline">\(\{Y_t\}\)</span> process.</li>
+<li>Show that the autocorrelation function for the <span class="math inline">\(\{Y_t\}\)</span> process depends only on the time lag. Is the <span class="math inline">\(\{Y_t\}\)</span> process stationary?</li>
+<li>Is it possible to have a time series with a constant mean and with <span class="math inline">\(\text{Corr}(Y_t ,Y_t − k)\)</span> free of <span class="math inline">\(t\)</span> but with <span class="math inline">\(\{Y_t\}\)</span> not stationary?</li>
+</ol>
+</blockquote>
+<ol style="list-style-type: lower-alpha">
+<li><span class="math display">\[
+  \mu_t = E[Y_t] = E[\mu_t + \sigma_t X_t] = \mu_t + \sigma_t E[X_t] = \mu_t + \sigma_t \times 0 = \mu_t\\
+  \gamma_{t,t-k} = \text{Cov}[Y_t] = \text{Cov}[\mu_t + \sigma_t X_t, \mu_{t-k} + \sigma_{t-k} X_{t-k}] = 
+    \sigma_t \sigma_{t-k} \text{Cov}[X_t, X_{t-k}] = \sigma_t \sigma_{t-k} \rho_k
+\]</span></li>
+<li><p>First, we have <span class="math display">\[
+  \text{Var}[Y_t] = \text{Var}[\mu_t + \sigma_t X_t] = 0 + \sigma_t^2 \text{Var}[X_t] = \sigma_t^2 \times 1 = \sigma_t^2
+\]</span></p>
+<p>since <span class="math inline">\(\{X_t\}\)</span> has unit-variance. Futhermore,</p>
+<span class="math display">\[
+  \text{Corr}[Y_t, Y_{t-k}] = \frac{\sigma_t \sigma_{t-k} \rho_k}{\sqrt{\text{Var}[Y_t]\text{Var}[Y_{t-k}]}} = 
+    \frac{\sigma_t \sigma_{t-k}\rho_k}{\sigma_t \sigma_{t-k}} = \rho_k,
+\]</span> which depends only on the time lag, <span class="math inline">\(k\)</span>. However, <span class="math inline">\(\{Y_t\}\)</span> is not necessarily stationary since <span class="math inline">\(\mu_t\)</span> may depend on <span class="math inline">\(t\)</span>.</li>
+<li><p>Yes, <span class="math inline">\(\rho_k\)</span> might be free from <span class="math inline">\(t\)</span> but if <span class="math inline">\(\sigma_t\)</span> is not, we will have a non-stationary time series with autocorrelation free from <span class="math inline">\(t\)</span> and constant mean.</p></li>
+</ol>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="introduction.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="chapter-2-fundamental-concepts-part-2.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    if (location.protocol !== "file:" && /^https?:/.test(script.src))
+      script.src  = script.src.replace(/^https?:/, '');
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
