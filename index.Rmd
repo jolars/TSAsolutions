@@ -4,8 +4,7 @@ author: "Johan Larsson"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 output:
-  bookdown::gitbook:
-    number_sections: false
+  bookdown::gitbook
 documentclass: book
 link-citations: yes
 github-repo: jolars/TSAsolutions

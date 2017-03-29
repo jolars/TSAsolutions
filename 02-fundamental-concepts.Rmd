@@ -1,0 +1,641 @@
+# Fundamental concepts
+
+##
+
+> Suppose $\text{E}[X) = 2, \text{Var}[X) = 9, \text{E}[Y) = 0, \text{Var}[Y) = 4$, and $\text{Corr}[X,Y) = 0.25$. Find:
+>   
+> (a) $\text{Var}(X + Y)$.
+> (b) $\text{Cov}(X, X + Y)$.
+> (c) $\text{Corr}(X + Y, X − Y)$.
+
+(a) \begin{align}
+    \text{Cov}[X,Y] & = \text{Corr}[X,Y]\sqrt{Var[X]Var[Y]}\\
+                    & = 0.25 \sqrt{9 \times 4} = 1.5 \\
+    \text{Var}[X,Y] & = Var[X]+Var[Y]+2Cov[X,Y]\\
+                    & = 9 + 4 + 2 \times 3 = 16\\
+    \end{align}
+(b) $$\text{Cov}[X, X+Y] = \text{Cov}[X,X] + \text{Cov}[X,Y] = \text{Var}[X] + \text{Cov}[X,Y] = 9 + 1.5 = 10.5$$
+(c) \begin{align}
+    \text{Corr}[X+Y, X-Y] = & \text{Corr}[X,X] + \text{Corr}[X,-Y] + \text{Corr}[Y,X] + \text{Corr}[Y,-Y] \\
+                          = & \text{Corr}[Y,X] + \text{Corr}[Y,-Y] \\
+                          = & 1 - 0.25 + 0.25 -1 \\
+                          = & 0 \\
+    \end{align}
+
+##
+
+> If $X$ and $Y$ are dependent but $\text{Var}[X] = \text{Var}[Y]$, find $\text{Cov}[X + Y, X − Y]$.
+
+\[
+\text{Cov}[X+Y,X-Y] = \text{Cov}[X,X] + \text{Cov}[X,-Y] + \text{Cov}[Y,X] + \text{Cov}[Y, -Y] = \\
+Var[X] - Cov[X,Y] + Cov[X,Y] - Var[Y] = 0
+\]
+
+since $Var[X] = Var[Y]$.
+
+##
+
+> Let X have a distribution with mean $\mu$ and variance $\sigma^2$, and let $Y_t = X$ for all $t$.
+>
+> (a) Show that $\{Yt\}$ is strictly and weakly stationary.
+> (b) Find the autocovariance function for $\{Yt\}$.
+> (c) Sketch a “typical” time plot of Yt.
+    
+(a) We have that
+    \[
+    P(Y_{t_1}, Y_{t_2}, \dots, Y_{t_n}) =\\
+      P(X_1, X_2, \dots, X_n) =\\
+      P(Y_{t_1 - k}, Y_{t_2 - k}, \dots, Y_{t_n - k}),
+    \]
+    
+    which satisfies our requirement for strict stationarity.
+    
+(b) The autocovariance is given by 
+    \[
+      \gamma_{t,s}=\text{Cov}[Y_t, Y_s] = \text{Cov}[X,X] = \text{Var}[X] = \sigma^2.
+    \]
+(c) 
+```{r, fig.cap="A white noise time series: no drift, independence between observations."}
+library(lattice)
+tstest <- ts(runif(100))
+
+lattice::xyplot(tstest,
+                panel = function(x, y, ...) {
+                  panel.abline(h = mean(y), lty = 2)
+                  panel.xyplot(x, y, ...)
+                })
+```
+
+##
+
+> Let $\{e_t\}$ be a zero mean white noise process. Suppose that the observed process is
+> $Y_t = e_t + \theta e_t − 1$, where $\theta$ is either 3 or 1/3.
+> 
+> (a) Find the autocorrelation function for $\{Yt\}$ both when $\theta = 3$ and when $\theta = 1/3$.
+> (b) You should have discovered that the time series is stationary regardless of the
+> value of $\theta$ and that the autocorrelation functions are the same for $\theta = 3$ and $\theta = 1/3$.
+> For simplicity, suppose that the process mean is known to be zero and the
+> variance of $Y_t$ is known to be 1. You observe the series $\{Yt\}$ for $t = 1, 2, \dots , n$
+> and suppose that you can produce good estimates of the autocorrelations $\rho_k$.
+> Do you think that you could determine which value of $\theta$ is correct (3 or 1/3)
+> based on the estimate of $\rho_k$? Why or why not?
+
+(a) \[
+      E[Y_t] = E[e_t+\theta e_{t-1}] = E[e_t] + \theta E[e_{t-1}] = 0 + 0 = 0\\
+      V[Y_t] = V[e_t + \theta e_{t-1}] =  V[e_t] + \theta^2 V[e_{t-1}] = \sigma_e^2 + \theta^2 \sigma_e^2 = \sigma_2^2(1 + \theta^2)\\
+    \]
+    
+    For $k = 1$ we have 
+    
+    \[
+      C[e_t + \theta e_{t-1}, e_{t-1} + \theta e_{t-2}] = \\
+      C[e_t,e_{t-1}] + C[e_t, \theta e_{t-2}] + C[\theta e_{t-1}, e_{t-1}] + C[\theta e_{t-1}, \theta e_{t-2}] = \\
+      0 + 0 + \theta V[e_{t-1}] + 0 = \theta \sigma_e^2,\\
+      \text{Corr}[Y_t, Y_{t-k}] = \frac{\theta \sigma_e^2}{\sqrt{(\sigma_e^2(1+\theta^2))^2}} = \frac{\theta }{1+\theta^2}
+    \]
+    
+    and for $k = 0$ we get
+    
+    \[
+      \text{Corr}[Y_t, Y_{t-k}] = \text{Corr}[Y_t, Y_t] = 1
+    \]
+    
+    and, finally, for $k > 0$:
+    
+    \[
+      C[e_t + \theta e_{t-1}, e_{t-k} + \theta e_{t-k-1}] = \\
+      C[e_t, e_{t-k}] + C[e_t, e_{t-1-k}] + C[\theta e_{t-1}, e_{t-k}] + C[\theta e_{t-1}, \theta e_{t-1-k}] = 0
+    \]
+    
+    given that all terms are independent. Taken together, we have that
+    
+    \[ \text{Corr}[Y_t, Y_{t-k}] =
+      \begin{cases}
+        1                            & \quad \text{for } k = 0\\
+        \frac{\theta}{1 + \theta^2}  & \quad \text{for } k = 1\\
+        0                            & \quad \text{for } k > 1
+      \end{cases}.
+    \]
+    
+    And, as required,
+    
+    \[
+      \text{Corr}[Y_t, Y_{t-k}] =
+      \begin{cases}
+        \frac{3}{1+3^2} = \frac{3}{10} & \quad \text{if } \theta = 3\\
+        \frac{1/3}{1 + (1/3)^2} = \frac{1}{10/3} = \frac{3}{10}  & \quad \text{if } \theta = 1/3
+      \end{cases}.
+    \]
+(b) No, probably not. Given that $\rho$ is standardized, we will not be able to
+    detect any difference in the variance regardless of the values of k.
+
+##
+
+> Suppose $Y_t = 5 + 2t + X_t$, where $\{X_t\}$ is a zero-mean stationary series with autocovariance
+> function $\gamma_k$.
+>
+> (a) Find the mean function for $\{Y_t\}$.
+> (b) Find the autocovariance function for $\{Y_t\}$.
+> (c) Is $\{Y_t\}$ stationary? Why or why not?
+
+(a) $$\mu_t = E[Y_t] = E[5 + 2t + X_t] = 5 + 2E[t] + E[X_t] = 5 + 2t + 0 = 2t + 5$$
+(b) $$ \gamma_k = \text{Corr}[5+2t+X_t, 5+2(t-k)+X_{t-k}] = \text{Corr}[X_t, X_{t-k}]$$
+(c) No, the mean function ($\mu_t$) is constant and the aurocovariance ($\gamma_{t,t-k}$) free from $t$.
+
+##
+
+> Let {Xt} be a stationary time series, and define
+>  \[ Y_t =
+>    \begin{cases}
+>      X_t     & \quad \text{for odd } t \\
+>      X_t + 3 & \quad \text{for even } t
+>    \end{cases}.
+>  \]
+> 
+> (a) Show that $\text{Cov}[Y_t, Y_{t-k}]$ is free from $t$ for all lags $k$.
+> (b) iS $\{Y_t\}$ stationary?
+
+(a) \[\text{Cov}[a + X_t, b + X_{t-k}] =\text{Cov}[X_t, X_{t-k}],\]
+
+    which is free from $t$ for all $k$ because $X_t$ is stationary.
+(b) \[
+      \mu_t = E[Y_t] = 
+        \begin{cases}
+          E[X_t]       & \quad \text{for odd } t\\
+          3 + E[X_t]   & \quad \text{for even } t\\
+        \end{cases}.
+    \]
+    Since $\mu_t$ varies depending on $t$, $Y_t$ is not stationary. 
+    
+##
+
+> Suppose that $\{Y_t\}$ is stationary with autocovariance function $\gamma_k$.
+> 
+> (a) Show that $W_t = \triangledown Y_t = Y_t − Y_t − 1$ is stationary by finding the mean and autocovariance
+function for $\{W_t\}$.
+> (b) Show that $U_t = \triangledown 2Y_t = \triangledown[Y_t − Y_t−1] = Y_t − 2Y_t − 1 + Y_t − 2 is stationary. (You need
+not find the mean and autocovariance function for $\{U_t\}$.)
+
+(a) \[\mu_t = E[W_t] = E[Y_t - Y_{t-1}] = E[Y_t] - E[Y_{t-1}] = 0\] because
+    $Y_t$ is stationary.
+    
+    \[
+      \text{Cov}[W_t] = \text{Cov}[Y_t - Y_{t-1}, Y_{t-k} - Y_{t-1-k}] = \\
+      \text{Cov}[Y_t, Y_{t-k}] + \text{Cov}[Y_t, Y_{t-1-k}] + \text{Cov}[-Y_{t-k}, Y_{t-k}] + \text{Cov}[-Y_{t-k}, -Y_{t-1-k}]=\\
+      \gamma_k-\gamma_{k+1}-\gamma_{k-1}+\gamma_{k} = 2 \gamma_k - \gamma_{k+1} - \gamma_{k-1}. \quad \square
+    \]
+(b) In (a), we discovered that the difference between two stationary
+    processes, $\triangledown Y_t$ itself was stationary. It follows that the
+    difference between two of these differences, $\triangledown^2Y_t$ is also
+    stationary.
+    
+##
+
+> Suppose that $\{Y_t\}$ is stationary with autocovariance function $\gamma_k$.
+> Show that for any fixed positive integer $n$ and any constants $c_1, c_2, \dots, c_n$, the process $\{W_t\}$ defined
+> by $W_t = c_1 Y_t + c_2 Y_{t–1} + \dots + c_n Y_{t-n+1}$ is stationary. (Note that Exercise
+> 2.7 is a special case of this result.)
+
+\begin{align}
+  E[W_t] & = c_1E[Y_t]+c_2E[Y_t] + \dots + c_n E[Y_t]\\
+         & = E[Y_t](c_1 + c_2 + \dots + c_n),
+\end{align}
+
+and thus the expected value is constant. Moreover,
+
+\begin{align}
+  \text{Cov}[W_t] & = \text{Cov}[c_1 Y_t + c_2 Y_{t-1} + \dots + c_n Y_{t-k}, c_1 Y_{t-k} + c_2 Y_{t-k-1} + \dots + c_n Y_{t-k-n}] \\
+                  & = \sum_{i=0}^n \sum_{j=0}^n c_i c_j \text{Cov}[Y_{t-j}Y_{t-i-k}] \\
+                  & = \sum_{i=0}^n \sum_{j=0}^n c_i c_j \gamma_{j-k-i},
+\end{align}
+
+which is free of $t$; consequently, $W_t$ is stationary.
+
+##
+
+> Suppose \Y_t = \beta_0 + \beta_1 t + X_t$, where $\{X_t\}$ is a zero-mean stationary series with autocovariance
+> function $\gamma_k$ and $\beta_0$ and $\beta_1$ are constants.
+> 
+> (a) Show that $\{Y_t\}$ is not stationary but that $W_t = \triangledown Y_t = Y_t − Y_{t−1}$ is stationary.
+> (b) In general, show that if $Y_t = \mu_t + X_t$, where $\{X_t\}$ is a zero-mean stationary
+> series and $\mu_t$ is a polynomial in $t$ of degree $d$, then $\triangledown^m Y_t = \triangledown(\triangledown^{m−1}Y_t)$ is stationary
+> for $m \geq d$ and nonstationary for $0 \leq m < d$.
+   
+(a) \[
+      E[Y_t] = \beta_0 + \beta_1 t + E[X_t] = \beta_0 + \beta_1 t + \mu_{t_x},
+    \]
+    
+    which is not free of $t$ and hence *not* stationary.
+    
+    \[
+      \text{Cov}[Y_t] = \text{Cov}[X_t, X_t-1] = \gamma_{t-1}
+    \]
+    
+    \[
+      E[W_t] = E[Y_t - Y_{t-1}] = E[\beta_0 + \beta_1 t + X_t - (\beta_0 + \beta_1(t-1) + X_{t-1})] =\\
+      \beta_0 + \beta_1 t - \beta_0 - \beta_1 t + \beta_1  = \beta_1,
+    \]
+
+    is free of $t$ and, furthermore, we have
+    
+    \[
+      \text{Cov}[W_t] = \text{Cov}[\beta_0 + \beta_1 t + X_t, \beta_0 + \beta_1 (t-1) + X_{t-1}] =\\
+      \text{Cov}[X_t, X_{t-1}] = \gamma_k,  
+    \]
+    
+    which is also free of $t$, thereby proving that $W_t$ is stationary.
+(b) \[
+      E[Y_t] = E[\mu_t + X_t] = \mu_t + \mu_t = 0 + 0 = 0, \quad \text{and}\\
+      \text{Cov}[Y_t] = \text{Cov}[\mu_t + X_t, \mu_{t-k} + X_{t-k}] = \text{Cov}[X_t, X_{t-k}] = \gamma_k
+    \]
+    
+    \[
+      \triangledown^m Y_t = \triangledown(\triangledown^{m−1}Y_t)
+    \]
+    
+    *Currently unsolved.*
+    
+
+
+##
+
+> Let $\{X_t\}$ be a zero-mean, unit-variance stationary process with autocorrelation
+> function $\rho_k$. Suppose that $\mu_t$ is a nonconstant function and that $\sigma_t$ is a positive-valued
+> nonconstant function. The observed series is formed as $Y_t = \mu_t + \sigma_t X_t$.
+> 
+> (a) Find the mean and covariance function for the $\{Y_t\}$ process.
+> (b) Show that the autocorrelation function for the $\{Y_t\}$ process depends only on
+>     the time lag. Is the $\{Y_t\}$ process stationary?
+> (c) Is it possible to have a time series with a constant mean and with
+>     $\text{Corr}(Y_t ,Y_t − k)$ free of $t$ but with $\{Y_t\}$ not stationary?
+
+(a) \[
+      \mu_t = E[Y_t] = E[\mu_t + \sigma_t X_t] = \mu_t + \sigma_t E[X_t] = \mu_t + \sigma_t \times 0 = \mu_t\\
+      \gamma_{t,t-k} = \text{Cov}[Y_t] = \text{Cov}[\mu_t + \sigma_t X_t, \mu_{t-k} + \sigma_{t-k} X_{t-k}] = 
+        \sigma_t \sigma_{t-k} \text{Cov}[X_t, X_{t-k}] = \sigma_t \sigma_{t-k} \rho_k
+    \]
+(b) First, we have
+    \[
+      \text{Var}[Y_t] = \text{Var}[\mu_t + \sigma_t X_t] = 0 + \sigma_t^2 \text{Var}[X_t] = \sigma_t^2 \times 1 = \sigma_t^2
+    \]
+
+    since $\{X_t\}$ has unit-variance. Futhermore,
+
+    \[
+      \text{Corr}[Y_t, Y_{t-k}] = \frac{\sigma_t \sigma_{t-k} \rho_k}{\sqrt{\text{Var}[Y_t]\text{Var}[Y_{t-k}]}} = 
+        \frac{\sigma_t \sigma_{t-k}\rho_k}{\sigma_t \sigma_{t-k}} = \rho_k,
+    \]
+     which depends only on the time lag, $k$. However, $\{Y_t\}$ is not necessarily
+     stationary since $\mu_t$ may depend on $t$.
+(c) Yes, $\rho_k$ might be free from $t$ but if $\sigma_t$ is not, we will have
+    a non-stationary time series with autocorrelation free from $t$ and
+    constant mean.
+    
+##
+  
+> Suppose $\text{Cov}(X_t,X_t − k) = \gamma_k$ is free of $t$ but that $E(X_t) = 3t$.
+> 
+> (a) Is $\{X_t\}$ stationary?
+> (b) Let $Y_t = 7 − 3t + X_t$. Is $\{Y_t\}$ stationary?
+
+(a) \[
+      \text{Cov}[X_t, X_{t-k}] = \gamma_k\\
+      E[X_t] = 3t
+    \]
+    $\{X_t\}$ is not stationary because $\mu_t$ varies with $t$.
+(b) \[
+      E[Y_t] = 3 - 3t+E[X_t] = 7 - 3t - 3t = 7\\
+      \text{Cov}[Y_t, Y_{t-k}] = \text{Cov}[7-3t+X_t,7-3(t-k)+X_{t-k}] = \text{Cov}[X_t, X_{t-k}] = \gamma_k
+    \]
+    Since the mean function of $\{Y_t\}$ is constant (7) and its autocovariance
+    free of $t$, $\{Y_t\}$ is stionary.
+    
+##
+
+> Suppose that $Y_t = e_t − e_{t−12}. Show that $\{Y_t\}$ is stationary and that, for $k > 0$, its
+> autocorrelation function is nonzero only for lag $k = 12$.
+
+\[
+  E[Y_t] = E[e_t - e_{t-12}] = E[e_t] - E[e_{t-12}] = 0\\
+  \text{Cov}[Y_t, Y_{t-k}] = \text{Cov}[e_t - e_{t-12}, e_{t-k} - e_{t-12-k}] =\\
+  \text{Cov}[e_t, e_{t-k}] - \text{Cov}[e_t, e_{t-12-k}] - \text{Cov}[e_{t-12}, e_{t-k}] + \text{Cov}[e_{t-12}, e_{t-12-k}]
+\]
+
+Then, as required, we have
+
+\[ \text{Cov}[Y_t, Y_{t-k}] =
+  \begin{cases}
+    \text{Cov}[e_t, e_{t-12}] - \text{Cov}[e_t, e_t] - \text{Cov}[e_{t-12}, e_{t-12}] + \text{Cov}[e_{t-12},e_t] =\\
+      \text{Var}[e_t] - \text{Var}[e_{t-12}] \neq 0 & \quad \text{for }  k=12\\
+    \text{Cov}[e_t, e_{t-k}] - \text{Cov}[e_t, e_{t-12-k}] - \text{Cov}[e_{t-12}, e_{t-k}] + \text{Cov}[e_{t-12}, e_{t-12-k}] =\\
+    0 + 0 + 0 + 0 = 0 & \quad \text{for } k \neq 12
+  \end{cases}
+\]
+$\square$
+
+##
+
+> Let $Y_t = e_t − \theta(e_ − 1)2$. For this exercise, assume that the white noise series is normally
+> distributed.
+> 
+> (a) Find the autocorrelation function for $\{Y_t\}$.
+> (b) Is $\{Y_t\}$ stationary?
+
+(a) \[
+      E[Y_t] = E[e_t - \theta e_{t-1}^2] = E[e_t] - \theta E[e_{t-1}^2] = 0 - \theta \text{Var}[e_{t-1}] = -\theta \sigma_e^2
+    \]
+    
+    And thus the requirement of constant variance is fulfilled. Moreover,
+
+    \[
+      \text{Var}[Y_t] = \text{Var}[e_t-\theta e_{t-1}^2] = \text{Var}[e_t] + \theta^2 \text{Var}[e_{t-1}^2] = \sigma_e^2 + \theta^2 (E[e_{t-1}^4] - E[e_{t-1}^2]^2),
+    \]
+    where
+    \[
+      E[e_{t-1}^4] = 3\sigma_e^4 \quad \text{and} \quad E[e_{t-1}^2 ]^2 = \sigma_e^4,
+    \]
+    gives us
+    \[
+      \text{Var}[Y_t] = \sigma_e^2 + \theta(3\sigma_e^4 - \sigma_e^2) = \sigma_e^2 + 2 \theta^2 \sigma_e^4
+    \]
+    and
+    \[
+      \text{Cov}[Y_t, Y_{t-1}] = \text{Cov}[e_t - \theta e_{t-1}^2, e_{t-1} - \theta e_{t-2}^2] = \\
+      \text{Cov}[e_t, e_{t-1}] + \text{Cov}[e_t, - \theta e_{t-2}^2] + \text{Cov}[- \theta e_{t-1}^2, e_{t-1}]  \text{Cov}[-\theta e_{t-1}^2, - \theta e_{t-2}^2] =\\
+      \text{Cov}[e_t, e_{t-1}] - \theta \text{Cov}[e_t, e_{t-2}^2] - \theta \text{Cov}[e_{t-1}^2, e_{t-1}] + \theta^2 \text{Cov}[e_{t-1}^2, e_{t-2}^2] = \\
+      -\theta \text{Cov}[e_{t-1}^2, e_{t-1}] = -\theta (E[e_{t-1}^3] + \mu_{t-1} + \mu_t) = 0
+    \]
+    which means that the autocorrelation function $\gamma_{t,s}$ also has to be zero.
+    
+(b) The autocorrelation of $\{Y_t\}$ is zeor and its mean function is constant, thus $\{Y_t\}$ must be stationary.
+
+##
+
+> Evaluate the mean and covariance function for each of the following processes. In
+> each case, determine whether or not the process is stationary.
+> 
+> (a) $Y_t = \theta_0 + t e_t$.
+> (b) $W_t = \triangledown Y_t$, where $Y_t$ is as given in part (a).
+> (c) $Y_t = e_t e_{t−1}. (You may assume that $\{e_t\}$ is normal white noise.)
+
+(a) \[
+      E[Y_t]= E[\theta_0 +  t e_t] = \theta_0 + E[e_t] = \theta_0+t \times 0 = \theta_0\\
+    \text{Var}[Y_t] = \text{Var}[\theta_0] + \text{Var}[t e_t] = 0 + t^2\sigma_e^2 = t^2\sigma_e^2
+    \]
+
+    So $\{Y_t\}$ is not stationary.
+(b) \[
+      E[W_t] = E[\triangledown Y_t] = E[\theta_0 + te_t - \theta_0 - (t-1)e_{t-1}] =
+        tE[e_t] - tE[e_{t-1} + E[e_{t-1}] = 0 \\
+      \text{Var}[\triangledown Y_t] = \text{Var}[t e_t] = - \text{Var}[(t-1)e_{t-1}] = 
+        t^2 \sigma_e^2 - (t-1)^2 \sigma_e^2 = \sigma_e^2 (t^2 - t^2 + 2t - 1) = (2t-1)\sigma_e^2,
+    \]
+    
+    which varies with $t$ and means that $\{W_t\}$ is not stationary.
+(c) \[
+      E[Y_t] = E[e_t e_{t-1}] = E[e_t] E[e_{t-1}] = 0\\
+      \text{Cov}[Y_t, Y_{t-1}] = \text{Cov}[e_t e_{t-1}, e_{t-1} e_{t-2}] = E[(e_t e_{t-1} - \mu_t^2)(e_{t-1} e_{t-2} - \mu_t^2)] =\\
+      E[e_t]E[e_{t-1}]E[e_{t-1}]E[e_{t-2}] = 0
+    \]
+    Both the covariance and the mean function are zero, hence the process is stationary.
+
+##
+
+> Suppose that X is a random variable with zero mean. Define a time series by
+> $Y_t = (−1)t_X$.
+> 
+> (a) Find the mean function for $\{Y_t\}$.
+> (b) Find the covariance function for $\{Y_t\}$.
+> (c) Is $\{Y_t\}$ stationary?
+
+(a) $ E[Y_t] = (-1)^tE[X] = 0$
+(b) $\text{Cov}[Y_t, Y_{t-k}] = \text{Cov}[(-1)^tX, (-1)^{t-k}X] = (-1)^{2t-k}\text{Cov}[X, X] = (-1)^k \text{Var}[X] = (-1)^k\sigma_t^2$
+(c) Yes, the covariance is free of $t$ and the mean is constant.
+
+##
+
+> Suppose $Y_t = A + X_t$, where $\{X_t\}$ is stationary and $A$ is random but independent of
+> $\{X_t\}$. Find the mean and covariance function for $\{Y_t\}$ in terms of the mean and
+> autocovariance function for $\{X_t\}$ and the mean and variance of $A$.
+
+\[
+  E[Y_t] = E[A + X_t] = E[A] + E[X_t] = \mu_A + \mu_X\\
+  \text{Cov}[Y_t, Y_{t-k}] = \text{Cov}[A + X_t, A+ X_{t-k}] = \\
+  \text{Cov}[A, A] + \text{Cov}[A, X_{t-k}] + \text{Cov}[X_t, A] + \text{Cov}[X_t, X_{t-k}] = \sigma_A^2 + \gamma_{k_k}
+\]
+
+##
+
+> Let $\{Y_t\}$ be stationary with autocovariance function $\gamma_k$. Let $\bar{Y} = \frac{1}{n} \sum_{t=1}^n Y_t$. Show that
+> \[
+>   \text{Var}[\bar{Y}] = \frac{\gamma_0}{n} + \frac{2}{n} \sum_{k=1}^{n-1}\left( 1 - \frac{k}{n}\right)\gamma_k =
+>     \frac{1}{n} \sum_{k = -n + 1}^{n-1} \left( 1 - \frac{|k|}{n}\right)\gamma_k
+> \]
+
+\[
+  \text{Var}[\bar{Y}] = \text{Var}\left[ \frac{1}{n} \sum_{t=1}^n Y_t \right] = \frac{1}{n^2} \text{Var}\left[ \sum_{t=1}^n Y_t \right] = \\
+  \frac{1}{n^2}\text{Cov}\left[ \sum_{t=1}^n Y_t, \sum_{s=1}^n Y_s \right] = \frac{1}{n^2} \sum_{t=1}^n \sum_{s=1}^n \gamma_{t-s}
+\]
+
+Setting $k = t-s, j = t$ gives us
+
+\[
+  \text{Var}[\bar{Y}] = \frac{1}{n^2} \sum_{j=1}^n \sum_{j-k=1}^n \gamma_k = \frac{1}{n^2} \sum_{j=1}^n \sum_{j=k+1}^{n+k} \gamma_k = \\
+  \frac{1}{n^2} \left( \sum_{k=1}^{n-1} \sum_{j=k+1}^{n} \gamma_k + \sum_{k=-n+1}^0 \sum_{j=1}^{n+k} \gamma_k \right) = \\
+  \frac{1}{n^2} \left( \sum_{k=1}^{n-1} (n-k)\gamma_k + \sum_{k=-n+1}^0 (n+k)\gamma_k \right) = \\
+  \frac{1}{n^2} \sum_{k=-n+1}^{n-1} \left( (n-k)\gamma_k + (n+k)\gamma_k \right) = \\
+  \frac{1}{n^2} \sum_{k=-n+1}^{n-1} (n-|k|)\gamma_k = \frac{1}{n} \sum_{k=-n+1}^{n-1} \left(1-\frac{|k|}{n}\right)\gamma_k \quad \square
+\]
+
+##
+
+> Let $\{Y_t\}$ be stationary with autocovariance function $\gamma_k$. Define the sample variance
+> as $s^2 = \frac{1}{n-1}\sum_{t=1}^n (Y_t - \bar{Y})^2$.
+> 
+> (a) First show that $\sum_{t=1}^n (Y_t - \mu)^2 = \sum_{t=1}^n (Y_t - \bar{Y})^2 + n (\bar{Y} - \mu)^2$.
+> (b) Use part (a) to show that
+>     \[
+>       E[s^2] = \frac{n}{n-1}\gamma_0 - \frac{n}{n-1}\text{Var}(\bar{Y}) = \gamma_0 - \frac{2}{n-1} \sum_{k=1}^{n-1} \left( 1 - \frac{k}{n} \right) \gamma_k.
+>     \]
+>     (Use the results of Exercise 2.17 for the last expression.)
+> (c) If $\{Y_t\}$ is a white noise process with variance $\gamma_0$, show that $E(s^2) = \gamma_0$.
+
+(a) \[
+      \sum_{t=1}^n (Y_t - \mu)^2 = \sum_{t=1}^n((Y_t - \bar{Y}) + (\bar{Y} - \mu))^2 = \\
+      \sum_{t=1}^n ((Y_t - \bar{Y})^2 - 2(Y_t - \bar{Y})(\bar{Y}- \mu) + (\bar{Y} - \mu)^2) = \\
+      n(\bar{Y} - \mu)^2 + 2(\bar{Y} - \mu)\sum_{t=1}^n (Y_t - \bar{Y}) + \sum_{t=1}^n (Y_t - \bar{Y})^2  = \\
+      n(\bar{Y} - \mu)^2 + \sum_{t=1}^n(Y_t - \bar{Y})^2 \quad \square
+    \]
+(b) \[
+      E[s^2] = E\left[\frac{n}{n-1} \sum_{t=1}^n (Y_t - \bar{Y})^2 \right] =
+        \frac{n}{n-1} E\left[\sum_{t=1}^n \left( (Y_t-\mu)^2  + n(\bar{Y} - \mu)^2 \right)\right] = \\
+      \frac{n}{n-1} \sum_{t=1}^n \left( E[(Y_t-\mu)^2]  + nE[(\bar{Y} - \mu)^2] \right) = 
+        \frac{1}{n-1} \left( n\text{Var}[Y_t] - n\text{Var}[\bar{Y}] \right) = \\
+      \frac{n}{n-1} \gamma_0 - \frac{n}{n-1} \text{Var}[\bar{Y}] =
+        \frac{1}{n-1} \left( n \gamma_0 - n \left( \frac{\gamma_0}{n} + \frac{2}{n} \sum_{k=1}^{n-1} \left( 1 - \frac{k}{n} \right) \gamma_k\right) \right) = \\
+      \frac{1}{n-1} \left( n \gamma_0 - \gamma_0 + 2 \sum_{k=1}^{n-1} \left( 1 - \frac{k}{n} \right) \gamma_k\right) = 
+        \frac{1}{n-1} \left( \gamma_0(n-1) + 2 \sum_{k=1}^{n-1} \left( 1 - \frac{k}{n} \right) \gamma_k\right) = \\
+      \gamma_0 + \frac{2}{n-1} \sum_{k=1}^{n-1} \left( 1 - \frac{k}{n} \right) \gamma_k \quad \square
+    \]  
+(c) Since $\gamma_k = 0$ for $k \neq 0$, in our case for all $k$, we have
+    \[
+      E[s^2] = \gamma_0 - \frac{2}{n-1} \sum_{t=1}^n \left( 1 - \frac{k}{n} \right) \times 0 = \gamma_0
+    \]
+    
+##
+
+> Let $Y_1 = \theta_0 + e_1$, and then for $t > 1$ define $Y_t$ recursively by $Y_t = \theta_0 + Y_{t−1} + e_t$.
+> Here $\theta_0$ is a constant. The process $\{Y_t\}$ is called a random walk with drift.
+> 
+> (a) Show that $Y_t$ may be rewritten as $Y_t = t \theta_0 + e_t + e_{t-1} + \dots + e_1$
+> (b) Find the mean function for $Y_t$.
+> (c) Find the autocovariance function for $Y_t$.
+
+(a) \[
+      Y_{1} = \theta_0 + e_1\\
+      Y_{2} = \theta_0 + \theta_0 + e_2 + e_1\\
+      Y_{t} = \theta_0 + \theta_0 + \dots + \theta_0 + e_{t} + e_{t-1} + \dots+ e_1 = \\
+      Y_{t} = t \theta_0 + e_t + e_{t-1} + \dots + e_1 \quad \square
+    \]
+(b) \[
+      \mu_t = E[Y_t] = E[t \theta_0 + e_t + e_{t-1} + \dots + e_1] = t\theta_0 + E[e_t] + E[e_{t-1}] + \dots + E[e_1] = \\
+      t\theta_0 + 0 + 0 + \dots + 0 = t \theta_0
+    \]
+(c) \[
+      \gamma_{t,t-k} = \text{Cov}[Y_t, Y_{t-k}] = \text{Cov}[t\theta_0 + e_t, + e_{t-1} + \dots + e_1, (t-k)\theta_0 + e_{t-k}, + e_{t-1-k} + \dots + e_1] = \\
+       \text{Cov}[e_{t-k}, + e_{t-1-k} + \dots + e_1, e_{t-k}, + e_{t-1-k} + \dots + e_1] \quad \text{(since all other terms are 0)} =\\
+       \text{Var}[e_{t-k}, + e_{t-1-k} + \dots + e_1, e_{t-k}, + e_{t-1-k} + \dots + e_1] = (t-k)\sigma_e^2
+    \]
+
+##
+
+> Consider the standard random walk model where $Y_t = Y_t - 1 + e_t$ with $Y_1 = e_1$.
+> 
+> (a) Use the representation of $Y_t$ above to show that $\mu_t = \mu_t − 1$ for $t > 1$ with initial
+>     condition $\mu_1 = E(e_1) = 0$. Hence show that $\mu_t = 0$ for all $t$.
+> (b) Similarly, show that $\text{Var}(Y_t) = \text{Var}(Y_t − 1) + \sigma_e^2$ for $t > 1$ with $\text{Var}(Y_1) = \sigma_e^2$
+>     and hence $\text{Var}(Y_t) = t\sigma_e^2$.
+> (c) For $0 \leq t \leq s$, use $Y_s = Y_t + e_t + 1 + e_t + 2 + \sigma_e^2 + e_s$ to show that $\text{Cov}(Y_t, Y_s) = \text{Var}(Y_t)$
+>     and, hence, that $\text{Cov}(Y_t, Y_s) = \min(t, s)$.
+
+(a) \[
+      \mu_1 = E[Y_1] = E[e_1] = 0\\
+      \mu_2 = E[Y_2] = E[Y_1 - e_2] = E[Y_1] - E[e_2] = 0 - 0 = 0\\
+      \dots\\
+      \mu_{t-1} = E[Y_{t-1}] = E[Y_{t-2} - e_{t-1}] = E[Y_{t-2}] - E[e_{t-1}] = 0 \\
+      \mu_t = E[Y_t] = E[Y_{t-1} - e_t] = E[Y_t] - E[e_t] = 0,
+    \]
+    
+    which implies $\mu_t = \mu_{t-1}\quad$ Q.E.D.
+(b) \[
+      \text{Var}[Y_1] = \sigma_e^2\\
+      \text{Var}[Y_2] = \text{Var}[Y_1 - e_2] = \text{Var}[Y_1] + \text{Var}[e_1] = \sigma_e^2 +  \sigma_e^2 = 2\sigma_e^2\\
+      \dots\\
+      \text{Var}[Y_{t-1}] = \text{Var}[Y_{t-2} - e_{t-1}] = \text{Var}[Y_{t-2}] + \text{Var}[e_{t-1}]  = (t-1)\sigma_e^2\\
+      \text{Var}[Y_t] = \text{Var}[Y_{t-1} - e_t] = \text{Var}[Y_{t-1}] + \text{Var}[e_t]  = (t-1)\sigma_e^2 + \sigma_e^2 = t\sigma_e^2 \quad \square
+    \]
+(c) \[
+      \text{Cov}[Y_t, Y_s] = \text{Cov}[Y_t, Y_t+e_{t+1}+e_{t+2}+ \dots + e_s] = \text{Cov}[Y_t, Y_t] = \text{Var}[Y_t] = t\sigma_e^2
+    \]
+ 
+
+
+##
+
+> For a random walk with random starting value, let $Y_t = Y_0 + e_t + e{t-1} + \dots + e_1$
+> for $t > 0$, where $\gamma_0$ has a distribution with mean $\mu_0$ and variance $\sigma_0^2$. Suppose further
+> that $Y_0, e_1, \dots , e_t$ are independent.
+> 
+> (a) Show that $E(Y_t) = \mu_0$ for all $t$.
+> (b) Show that $\text{Var}(Y_t) = t \sigma_e^2 + \sigma_0^2$
+> (c) Show that $\text{Cov}(Y_t, Y_s) = \min(t, s) \sigma_e^2+ \sigma_0^2$
+> (d) Show that $\text{Corr}[Y_t, Y_s] = \sqrt{\frac{t \sigma_a^2 + \sigma_0^2}{s\sigma_a^2 + \sigma_0^2}}$.
+
+(a) \[
+      E[Y_t] = E[Y_0+e_t+e_{t-1}+\dots+e_1] = \\
+      E[Y_0] + E[e_t] + E[e_{t-1}] + E[e_{t-2}] + \dots + E[e_1] = \\
+      \mu_0 + 0 + \dots + 0 = \mu_0 \quad \square
+    \]
+(b) \[
+      \text{Var}[Y_t] = \text{Var}[Y_0 + e_t + e_{t-1} + \dots + e_1] = \\
+      \text{Var}[Y_0] + \text{Var}[e_t] + \text{Var}[e_{t-1}] + \dots + \text{Var}[e_1] = \\
+      \sigma_0^2+t\sigma_e^2 \quad \square
+    \]
+(c) \[
+      \text{Cov}[Y_t, Y_s] = \text{Cov}[Y_t, Y_t+e_{t+1}+e_{t+2}+ \dots + e_s] = \\
+      \text{Cov}[Y_t, Y_t] = \text{Var}[Y_t] = \sigma_0^2+t\sigma_e^2 \quad \square
+    \]
+(d) \[
+      \text{Corr}[Y_t, Y_s] = \frac{\sigma_0^2+t\sigma_e^2}{\sqrt{(\sigma_0^2+t\sigma_e^2)(\sigma_0^2+s\sigma_e^2)}} = 
+        \sqrt{\frac{\sigma_0^2+t\sigma_e^2}{\sigma_0^2+s\sigma_e^2}} \quad \square
+    \]
+
+##
+
+> Let $\{e_t\}$ be a zero-mean white noise process, and let $c$ be a constant with $|c| < 1$.
+> Define $Y_t$ recursively by $Y_t = cY_{t-1} + e_t$ with $Y_1 = e_1$.
+> 
+> (a) Show that $E(Y_t) = 0$.
+> (b) Show that $Var(Y_t) = \sigma_e^2 (1 + c^2 +c^4 + \dots + c^{2t − 2})$. Is $\{Y_t\}$ stationary?
+> (c) Show that 
+>     \[
+>       \text{Corr}[Y_t, Y_{t-1}] = c\sqrt{\frac{\text{Var}(Y_{t-1})}{\text{Var}[Y_t]}} \quad \text{and, in general,}\\
+>       \text{Corr}[Y_t, Y_{t-k}] = c^k\sqrt{\frac{\text{Var}(Y_{t-k})}{\text{Var}[Y_t]}} \quad \text{for } k > 0    
+>     \]
+>     Hint: Argue that $Y_t - 1$ is independent of $e_t$. Then use
+>     \[
+>       \text{Cov}[Y_t, Y_{t-1}] = \text{Cov}[cY_{t-1}+e_t, Y_{t-1}]
+>     \]
+> (d) For large $t$, argue that
+>     \[
+>       \text{Var}[Y_t] \approx \frac{\sigma_e^2}{1-c^2}\quad\text{and}\quad \text{Corr}[Y_t, Y_{t-k}] \approx c^k \quad \text{for } k > 0
+>     \]
+>     so that $\{Y_t\}$ could be called **asymptotically stationary**.
+> (e) Suppose now that we alter the initial condition and put $Y_1 = \frac{e_1}{\sqrt{1-c^2}}$. 
+>     Show that now $\{Y_t\}$ is stationary.
+
+(a) \[
+      E[Y_1] = E[e_1] = 0\\
+      E[Y_2] = E[cY_{1}+e_2] = cE[Y_1] + E[e_2] = 0\\
+      \dots\\
+      E[Y_t] = E[cY_{t-1}+e_t] = cE[Y_{t-1}] + E[e_t] = 0\quad \square
+    \]
+(b) \[
+      \text{Var}[Y_1] = \text{Var}[e_1] = \sigma_e^2\\
+      \text{Var}[Y_2] = \text{Var}[cY_{1} + e_2] = c^2\text{Var}[Y_{t-1}] + \text{Var}[e_2] = c^2\sigma_e^2 + \sigma_e^2 = \sigma_e^2(1 + c^2)\\
+      \dots\\
+      \text{Var}[Y_t] = \sigma_e^2(1 + c^2 + c^4 + \dots + c^{2t-2}) \quad\square
+    \]
+    $\{Y_t\}$ is not stationary, given that its variance varies with $t$.
+(c) \[
+      \text{Cov}[Y_t, Y_{t-1}] = \text{Cov}[cY_{t-1} + e_t, Y_{t-1}] = c\text{Cov}[Y_{t-1}, Y_{t-1}] = c\text{Var}[Y_{t-1}]\quad \text{giving}\\
+      \text{Corr}[Y_t, Y_{t-1}] = \frac{c\text{Var}[Y_{t-1}]}{\sqrt{\text{Var}[Y_t]\text{Var}[Y_{t-1}]}} =
+        c \sqrt{\frac{\text{Var}[Y_{t-1}]}{\text{Var}[Y_t]}}\quad\square
+    \]
+    And, in the general case,
+    \[
+      \text{Cov}[Y_t, Y_{t-k}] = \text{Cov}[cY_{t-1}+e_t, Y_{t-k}] = \\
+      c\text{Cov}[cY_{t-2} + e_{t-1}, Y_{t-k}] =\\
+      c^3\text{Cov}[Y_{t-2} + e_{t-1}, Y_{t-k}] = \dots\\ = c^k\text{Var}[Y_{t-k}]
+    \]
+    giving
+    \[
+      \text{Corr}[Y_t, Y_{t-k}] = \frac{c^k\text{Var}[Y_{t-k}]}{\sqrt{\text{Var}[Y_t]\text{Var}[Y_{t-k}]}} =
+        c^k \sqrt{\frac{\text{Var}[Y_{t-k}]}{\text{Var}[Y_t]}}\quad\square
+    \]
+(d) \[
+      \text{Var}[Y_t] = \sigma_e^2(1+c^2+c^4+\dots+c^{2t-2}) = \sigma_e^2\sum_{t=1}^{n}c^{2(t-1)}=\sigma_e^2 \sum_{t=0}^{n-1} c^{2t} =
+        \sigma_e^2 \frac{1-c^{2t}}{1-c^2}
+    \]
+    And because
+    \[
+    \lim_{t \rightarrow \infty} \sigma_e^2 \frac{1-c^{2t}}{1-c^2} = \sigma_e^2 \frac{1}{1-c^2}\quad\text{since }|c| < 1,
+    \]
+    which is free of $t$, $\{Y_t\}$ can be considered *asymptotically* stationary.
+(e) \[
+      Y_t = c(cY_{t-2} + e_{t-1}) + e_t = \dots = e_t+ce_{t-1} + c^2e_{t-2} + \dots + c^{t-2}e_2+ \frac{c^{t-1}}{\sqrt{1-c^2}}e_1\\
+      \text{Var}[Y_t] = \text{Var}[e_t+ce_{t-1}+c^2e_{t-2}+\dots+c^{t-2}e_2+\frac{c^{t-1}}{\sqrt{1-c^2}}e_1] =\\
+      \text{Var}[e_t] + c^2\text{Var}[e_{t-1}]+c^4 \text{Var}[e_{t-2}] + \dots + c^{2(t-2)}\text{Var}[e_2]+\frac{c^{2(t-1)}}{1-c^2}\text{Var}[e_1] =\\
+      \sigma_e^2(1 + c^2 + c^4 + \dots + c^{2(t-2)} + \frac{c^{2(t-1)}}{1-c^2}) =\sigma_e^2\left( \sum_{t=1}^{n}c^{2(t-1)} + \frac{c^{2(t-1)}}{1-c^2}\right)= \\
+      \frac{\sigma_e^2}{1-c^2} \frac{1-c^{2t}}{1-c^2}
+    \]
