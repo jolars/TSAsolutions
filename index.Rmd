@@ -4,11 +4,7 @@ author: "Johan Larsson"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 output:
-  bookdown::gitbook:
-    pandoc_args: [--katex]
-    mathjax: NULL
-    includes:
-      in_header: katex.html
+  bookdown::gitbook: default
 documentclass: book
 link-citations: yes
 github-repo: jolars/TSAsolutions
