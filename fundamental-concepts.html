@@ -649,8 +649,11 @@ which implies <span class="math inline">\(\mu_t = \mu_{t-1}\quad\)</span> Q.E.D.
   \frac{1}{2}\left( E[Y_t^2] - 2E[Y_t Y_s] + E[Y_s^2] \right) = \frac{1}{2}\gamma_0 + \frac{1}{2}\gamma_0 - 2 \times \frac{1}{2}\gamma_{|t-s|} = \gamma_0 - \gamma_{|t-s|}\\
   \text{Cov}[Y_t,Y_s] = E[Y_tY_s]-\mu_t\mu_s=E[Y_tY_s]=\gamma_{|t-s|} \quad \square
 \]</span></li>
-<li><p>[ Y_t-Y_s = e_t + e_{t-1} + + e_1 - e_s - e_{s-1} - - e_1 = \ e_t + e_{t-1} + + e_{s+1},  t &gt; s \ _{t,s} = E[(Y_t-Y_s)^2] = [e_t + e_{t-1} + + e_{s-1}] =\ _e^2(t-s) </p>
-<p>]</p></li>
+<li><span class="math display">\[
+  Y_t-Y_s = e_t + e_{t-1} + \dots + e_1 - e_s - e_{s-1} - \dots - e_1 = \\
+  e_t + e_{t-1} + \dots + e_{s+1}, \quad \text{for } t &gt; s \\
+  \Gamma_{t,s} = \frac{1}{2}E[(Y_t-Y_s)^2] = \frac{1}{2}\text{Var}[e_t + e_{t-1} + \dots + e_{s-1}] =\\ \frac{1}{2}\sigma_e^2(t-s) \quad \square
+\]</span></li>
 </ol>
 </div>
 <div id="section-26" class="section level2">
@@ -660,7 +663,8 @@ which implies <span class="math inline">\(\mu_t = \mu_{t-1}\quad\)</span> Q.E.D.
   E[Y_t] = E[e_t + \phi e_{t-1} + \phi^2 e_{t-2} + \dots + \phi^r e_{t-r}] = 0\\
   \text{Cov}[Y_t, Y_{t-k}] = \text{Cov}[e_t + \phi e_{t-1} + \dots +
     \phi^r e_{t-r}, e_{t-k} + \phi e_{t-1-k} + \dots + \phi^r e_{t-r-k}] =\\
-  \text{Cov}[e_1+\dots + \phi^k e_{t-k} + \phi^{k+1}e_{t-k-1} + \dots + \phi^r e_{t-r}, e_{t-r}, e_{t-k} + \dots + \phi^k e_{t-k-1} + \dots + \phi^r e_{t-k-r}] = \\
+  \text{Cov}[e_1+\dots + \phi^k e_{t-k} + \phi^{k+1}e_{t-k-1} +
+    \dots + \phi^r e_{t-r}, e_{t-r}, e_{t-k} + \dots + \phi^k e_{t-k-1} + \dots + \phi^r e_{t-k-r}] = \\
   \sigma_e^2(\phi^k + \phi^{k+2} + \phi^{k+4} + \dots + \phi^{k+2(r-k)}) = \sigma_e^2 \phi^k(1 + \phi^2 + \phi^4 + \dots + \phi^{2(r-k)})
 \]</span> Hence, because of the zero mean and covariance free of <span class="math inline">\(t\)</span>, it is a stationary process.</li>
 <li><span class="math display">\[
