@@ -1,14 +1,15 @@
 ---
-title: "Solutions to Time Series Analysis with Applications in R"
+title: "Solutions to Time Series Analysis: with Applications in R"
 author: "Johan Larsson"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 documentclass: book
 link-citations: yes
 github-repo: jolars/TSAsolutions
+cover-image: images/tsa.png
 description: "This book contains solutions to the problems in the book Time Series Analysis with Applications in R, second edition, by Cryer and Chan. It is provided as a github repository so that anybody may contribute to its development."
 ---
 
 # Preface {-}
 
-This book contains solutions to the problems in the book Time Series Analysis with Applications in R, third edition, by Cryer and Chan. It is provided as a github repository so that anybody may contribute to its development. Unlike the book, the solutions here use lattice graphics when possible instead of base graphics.
+This book contains solutions to the problems in the book *Time Series Analysis: with Applications in R*, third edition, by Cryer and Chan. It is provided as a github repository so that anybody may contribute to its development. Unlike the book, the solutions here use lattice graphics when possible instead of base graphics.
