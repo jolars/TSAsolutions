@@ -1,2 +1,91 @@
 # Trends
 
+## Least squares estimation for linear regression trend
+
+We begin by taking the partial derivatives with respect to $\beta_0$.
+
+\[
+\frac{\partial}{\partial{\beta_0}} \mathcal{Q}(\beta_0, \beta_1) =
+  -2\sum_{t=1}^n (Y_t - \beta_0 - \beta_1 t)
+\]
+
+We set it to $0$ and from this retrieve
+
+\begin{align*}
+-2\sum_{t=1}^n (Y_t - \beta_0 - \beta_1 t) = & 0 \implies \\
+\sum_{t=1}^n Y_t - n\beta_0 - \beta_1 \sum_{t=1}^n t = & 0 \implies \\
+\beta_0 = \frac{\sum_{t=1}^n Y_t - \beta_1 \sum_{t=1}^n t}{n} = &
+  \bar{Y} - \beta_1 \bar{t}
+\end{align*}
+
+Next, we take the partial derivative with respect to $\beta_1$;
+
+\[
+\frac{\partial}{\partial{\beta_1}} \mathcal{Q}(\beta_0, \beta_1) =
+  -2\sum_{t=1}^n t(Y_t - \beta_0 - \beta_1 t)
+\]
+
+Setting this to $0$ as well, multiplying both sides with $-1/2$ and rearranging
+results in
+
+\begin{align*}
+-2\sum_{t=1}^n t (Y_t - \beta_0 - \beta_1 t) = & 0 \implies \\
+\beta_1 \sum_{t=1}^n t^2 = & \sum_{t=1}^n Y_t t - \beta_0 \sum_{t=1}^n t
+\end{align*}
+
+Then, substituting with the result gained previously for $\beta_0$, we get
+
+\begin{align*}
+\beta_1 \sum_{t=1}^n t^2 = & \sum_{t=1}^n Y_t t - 
+ \left( \frac{\sum_{t=1}^n Y_t}{n} - \beta_1 \frac{\sum_{t=1}^n}{n} \right)
+ \sum_{t=1}^n t \iff \\
+\beta_1 \left( \sum_{t=1}^n t^2 - \frac{(\sum_{t=1}^n t)^2}{n} \right) = & 
+  \sum_{t=1}^n Y_t t - \frac{\sum_{t=1}^n Y_t \sum_{t=1}^n t}{n} \iff \\
+\beta_1 = & \frac{n\sum_{t=1}^n Y_tt - \sum_{t=1}^nY_t \sum_{t=1}^n t}{n \sum_{t=1}^n t^2 - \left( \sum_{t=1}^n t \right)^2} = 
+  \frac{\sum_{t=1}^n (Y_t - \bar{Y})(t-\bar{t})}{\sum_{t=1}^n (t-\bar{t})^2} \quad \square
+\end{align*}
+
+
+## Variance of mean estimator
+
+\[
+  \bar{Y} = \frac{1}{n}\sum_{t=1}^n Y_t = \frac{1}{n} \sum_{t=1}^n(\mu + e_t - e_{t-1}) = 
+    \mu + \frac{1}{n} \sum_{t=1}^n (e_t - e_{t-1}) = \mu + \frac{1}{n}(e_n - e_0)
+\]
+
+\[
+  \text{Var}[\bar{Y}] = \text{Var}[\mu + \frac{1}{n}(e_n - e_0)] =
+    \frac{1}{n^2}(\sigma_e^2 + \sigma_e^2) = \frac{2\sigma_e^2}{n^2}
+\]
+
+It is uncommon for the sample size to have such a large impact on the variance
+estimator for the sample mean.
+
+Setting $Y_t = \mu + e_t$ instead gives
+
+\[
+  \bar{Y} = \frac{1}{n}\sum_{t=1}^n Y_t = \frac{1}{n} \sum_{t=1}^n(\mu + e_t) = 
+    \mu + \frac{1}{n} \sum_{t=1}^n e_t
+\]
+
+\[
+  \text{Var}[\bar{Y}] = \text{Var} \left[ \mu + \frac{1}{n} \sum_{t=1}^n e_t \right] =
+    0 + \frac{1}{n^2} \times n \sigma_e^2 = \frac{\sigma_e^2}{n}.
+\]
+
+## Variance of mean estimator #2
+
+\[
+  \bar{Y} = \frac{1}{n} \sum_{t=1}^n(\mu + e_t + e_{t-1}) = 
+    \mu + \frac{1}{n} \sum_{t=1}^n (e_t + e_{t-1}) = \mu + \frac{1}{n} \left( e_n + e_0 + 2 \sum_{t=1}^{n-1} t \right)
+\]
+
+\[
+  \text{Var}[\bar{Y}] = \frac{1}{n^2}(\sigma_e^2 + \sigma_e^2 + 4(n-1) \sigma_e^2 ) = \frac{1}{n^2}2(2n-1)\sigma_e^2
+\]
+
+Setting $Y_t = \mu + e_t$ instead gives the result from 3.2. We note that for
+large $n$ the variance if approximately four times larger with
+$Y_t = \mu + e_t + e_{t-1}$.
+
+## 
