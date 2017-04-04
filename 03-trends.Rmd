@@ -208,7 +208,7 @@ of the factors are significant (mostly the winter months as expected).
 
 ### d {-}
 
-```{r}
+```{r, fig.cap="Beer sales residual plot."}
 xyplot(rstudent(beer_fit1) ~ time(beersales), type = "l",
        xlab = "Fitted values", ylab = "Time",
        panel = function(x, y, ...) {
