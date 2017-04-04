@@ -1,6 +1,6 @@
 # Fundamental concepts
 
-##
+## Basic properties of expected value and covariance
 
 (a) \begin{align}
     \text{Cov}[X,Y] & = \text{Corr}[X,Y]\sqrt{Var[X]Var[Y]}\\
@@ -16,7 +16,7 @@
                           = & 0 \\
     \end{align}
 
-##
+## Dependence and covariance
 
 \[
 \text{Cov}[X+Y,X-Y] = \text{Cov}[X,X] + \text{Cov}[X,-Y] + \text{Cov}[Y,X] + \text{Cov}[Y, -Y] = \\
@@ -25,7 +25,7 @@ Var[X] - Cov[X,Y] + Cov[X,Y] - Var[Y] = 0
 
 since $Var[X] = Var[Y]$.
 
-##
+## Strict and weak stationarity
 
 (a) We have that
     \[
@@ -52,7 +52,7 @@ lattice::xyplot(tstest,
                 })
 ```
 
-##
+## Zero-mean white noise
 
 (a) \[
       E[Y_t] = E[e_t+\theta e_{t-1}] = E[e_t] + \theta E[e_{t-1}] = 0 + 0 = 0\\
@@ -103,13 +103,13 @@ lattice::xyplot(tstest,
 (b) No, probably not. Given that $\rho$ is standardized, we will not be able to
     detect any difference in the variance regardless of the values of k.
 
-##
+## Zero-mean stationary series
 
 (a) $$\mu_t = E[Y_t] = E[5 + 2t + X_t] = 5 + 2E[t] + E[X_t] = 5 + 2t + 0 = 2t + 5$$
 (b) $$ \gamma_k = \text{Corr}[5+2t+X_t, 5+2(t-k)+X_{t-k}] = \text{Corr}[X_t, X_{t-k}]$$
 (c) No, the mean function ($\mu_t$) is constant and the aurocovariance ($\gamma_{t,t-k}$) free from $t$.
 
-##
+## Stationary time series
 
 (a) \[\text{Cov}[a + X_t, b + X_{t-k}] =\text{Cov}[X_t, X_{t-k}],\]
 
@@ -123,7 +123,7 @@ lattice::xyplot(tstest,
     \]
     Since $\mu_t$ varies depending on $t$, $Y_t$ is not stationary. 
     
-##
+## First and second-order difference series
 
 (a) \[\mu_t = E[W_t] = E[Y_t - Y_{t-1}] = E[Y_t] - E[Y_{t-1}] = 0\] because
     $Y_t$ is stationary.
@@ -138,7 +138,7 @@ lattice::xyplot(tstest,
     difference between two of these differences, $\triangledown^2Y_t$ is also
     stationary.
     
-##
+## Generalized difference series
 
 \begin{align}
   E[W_t] & = c_1E[Y_t]+c_2E[Y_t] + \dots + c_n E[Y_t]\\
@@ -155,7 +155,7 @@ and thus the expected value is constant. Moreover,
 
 which is free of $t$; consequently, $W_t$ is stationary.
 
-##
+## Zero-mean stationary difference series
 
 (a) \[
       E[Y_t] = \beta_0 + \beta_1 t + E[X_t] = \beta_0 + \beta_1 t + \mu_{t_x},
@@ -190,10 +190,7 @@ which is free of $t$; consequently, $W_t$ is stationary.
     \]
     
     *Currently unsolved.*
-    
-
-
-##
+## Zero-mean, unit-variance process
 
 (a) \[
       \mu_t = E[Y_t] = E[\mu_t + \sigma_t X_t] = \mu_t + \sigma_t E[X_t] = \mu_t + \sigma_t \times 0 = \mu_t\\
@@ -217,7 +214,7 @@ which is free of $t$; consequently, $W_t$ is stationary.
     a non-stationary time series with autocorrelation free from $t$ and
     constant mean.
     
-##
+## Drift
   
 (a) \[
       \text{Cov}[X_t, X_{t-k}] = \gamma_k\\
@@ -231,7 +228,7 @@ which is free of $t$; consequently, $W_t$ is stationary.
     Since the mean function of $\{Y_t\}$ is constant (7) and its autocovariance
     free of $t$, $\{Y_t\}$ is stionary.
     
-##
+## Periods
 
 \[
   E[Y_t] = E[e_t - e_{t-12}] = E[e_t] - E[e_{t-12}] = 0\\
@@ -243,15 +240,15 @@ Then, as required, we have
 
 \[ \text{Cov}[Y_t, Y_{t-k}] =
   \begin{cases}
-    \text{Cov}[e_t, e_{t-12}] - \text{Cov}[e_t, e_t] - \text{Cov}[e_{t-12}, e_{t-12}] + \text{Cov}[e_{t-12},e_t] =\\
+    \text{Cov}[e_t, e_{t-12}] - \text{Cov}[e_t, e_t] -\\ \text{Cov}[e_{t-12}, e_{t-12}] + \text{Cov}[e_{t-12},e_t] =\\
       \text{Var}[e_t] - \text{Var}[e_{t-12}] \neq 0 & \quad \text{for }  k=12\\
-    \text{Cov}[e_t, e_{t-k}] - \text{Cov}[e_t, e_{t-12-k}] - \text{Cov}[e_{t-12}, e_{t-k}] + \text{Cov}[e_{t-12}, e_{t-12-k}] =\\
+      \\
+    \text{Cov}[e_t, e_{t-k}] - \text{Cov}[e_t, e_{t-12-k}] -\\ \text{Cov}[e_{t-12}, e_{t-k}] + \text{Cov}[e_{t-12}, e_{t-12-k}] =\\
     0 + 0 + 0 + 0 = 0 & \quad \text{for } k \neq 12
   \end{cases}
 \]
-$\square$
 
-##
+## Drift, part 2
 
 (a) \[
       E[Y_t] = E[e_t - \theta e_{t-1}^2] = E[e_t] - \theta E[e_{t-1}^2] = 0 - \theta \text{Var}[e_{t-1}] = -\theta \sigma_e^2
@@ -281,7 +278,7 @@ $\square$
     
 (b) The autocorrelation of $\{Y_t\}$ is zeor and its mean function is constant, thus $\{Y_t\}$ must be stationary.
 
-##
+## Stationarity, again
 
 (a) \[
       E[Y_t]= E[\theta_0 +  t e_t] = \theta_0 + E[e_t] = \theta_0+t \times 0 = \theta_0\\
@@ -304,13 +301,13 @@ $\square$
     \]
     Both the covariance and the mean function are zero, hence the process is stationary.
 
-##
+## Random variable, zero mean
 
 (a) $ E[Y_t] = (-1)^tE[X] = 0$
 (b) $\text{Cov}[Y_t, Y_{t-k}] = \text{Cov}[(-1)^tX, (-1)^{t-k}X] = (-1)^{2t-k}\text{Cov}[X, X] = (-1)^k \text{Var}[X] = (-1)^k\sigma_t^2$
 (c) Yes, the covariance is free of $t$ and the mean is constant.
 
-##
+## Mean and variance
 
 \[
   E[Y_t] = E[A + X_t] = E[A] + E[X_t] = \mu_A + \mu_X\\
@@ -318,7 +315,7 @@ $\square$
   \text{Cov}[A, A] + \text{Cov}[A, X_{t-k}] + \text{Cov}[X_t, A] + \text{Cov}[X_t, X_{t-k}] = \sigma_A^2 + \gamma_{k_k}
 \]
 
-##
+## Variance of sample mean
 
 \[
   \text{Var}[\bar{Y}] = \text{Var}\left[ \frac{1}{n} \sum_{t=1}^n Y_t \right] = \frac{1}{n^2} \text{Var}\left[ \sum_{t=1}^n Y_t \right] = \\
@@ -335,7 +332,7 @@ Setting $k = t-s, j = t$ gives us
   \frac{1}{n^2} \sum_{k=-n+1}^{n-1} (n-|k|)\gamma_k = \frac{1}{n} \sum_{k=-n+1}^{n-1} \left(1-\frac{|k|}{n}\right)\gamma_k \quad \square
 \]
 
-##
+## Sample variance
 
 (a) \[
       \sum_{t=1}^n (Y_t - \mu)^2 = \sum_{t=1}^n((Y_t - \bar{Y}) + (\bar{Y} - \mu))^2 = \\
@@ -359,7 +356,7 @@ Setting $k = t-s, j = t$ gives us
       E[s^2] = \gamma_0 - \frac{2}{n-1} \sum_{t=1}^n \left( 1 - \frac{k}{n} \right) \times 0 = \gamma_0
     \]
     
-##
+## Random walk with drift
 
 (a) \[
       Y_{1} = \theta_0 + e_1\\
@@ -377,7 +374,7 @@ Setting $k = t-s, j = t$ gives us
        \text{Var}[e_{t-k}, + e_{t-1-k} + \dots + e_1, e_{t-k}, + e_{t-1-k} + \dots + e_1] = (t-k)\sigma_e^2
     \]
 
-##
+## Random walk
 
 (a) \[
       \mu_1 = E[Y_1] = E[e_1] = 0\\
@@ -398,10 +395,8 @@ Setting $k = t-s, j = t$ gives us
 (c) \[
       \text{Cov}[Y_t, Y_s] = \text{Cov}[Y_t, Y_t+e_{t+1}+e_{t+2}+ \dots + e_s] = \text{Cov}[Y_t, Y_t] = \text{Var}[Y_t] = t\sigma_e^2
     \]
- 
 
-
-##
+##  Random walk with random starting value
 
 (a) \[
       E[Y_t] = E[Y_0+e_t+e_{t-1}+\dots+e_1] = \\
@@ -422,7 +417,7 @@ Setting $k = t-s, j = t$ gives us
         \sqrt{\frac{\sigma_0^2+t\sigma_e^2}{\sigma_0^2+s\sigma_e^2}} \quad \square
     \]
 
-##
+## Asymptotic stationarity
 
 (a) \[
       E[Y_1] = E[e_1] = 0\\
@@ -484,7 +479,7 @@ Setting $k = t-s, j = t$ gives us
     \]
     which is free of $t$ and hence $\{Y_t\}$ is now stationary.
 
-## 
+## Stationarity in sums of stochastic processes
 
 \[
   E[W_t] = E[Z_t + Y_t] = E[Z_t] + Y[Z_t] = \mu_{Z_t} + \mu_{Y_s}
@@ -501,7 +496,7 @@ the sum of both processes must also be constant.
 
 both free of $t$.
 
-## 
+## Measurement noise
 
 \[
   E[Y_t] = E[Y_t + e_t] = E[X_t] + E[e_t] - \mu_t\\
@@ -511,7 +506,7 @@ both free of $t$.
     \frac{\rho_k}{1 + \frac{\sigma_e^2}{\sigma_X^2}} \quad \square
 \]
 
-## 
+## Random cosine wave
 
 \[
   E[Y_t] = E\left[\beta_0 + \sum_{i=1}^k(A_i\cos(2\pi f_it) + B_i \sin(2\pi f_it))\right] = \\
@@ -529,7 +524,7 @@ both free of $t$.
 
 and is thus free of $t$ and $s$.
 
-## 
+## Semivariogram
 
 (a) \[
       \Gamma_{t,s} = \frac{1}{2}E[(Y_t-Y_s)^2] = \frac{1}{2}E[Y_t^2 - 2Y_t Y_s + Y_s^2] = \\
@@ -542,7 +537,7 @@ and is thus free of $t$ and $s$.
       \Gamma_{t,s} = \frac{1}{2}E[(Y_t-Y_s)^2] = \frac{1}{2}\text{Var}[e_t + e_{t-1} + \dots + e_{s-1}] =\\ \frac{1}{2}\sigma_e^2(t-s) \quad \square
     \]
     
-## 
+## Polynomials
 
 (a) \[
       E[Y_t] = E[e_t + \phi e_{t-1} + \phi^2 e_{t-2} + \dots + \phi^r e_{t-r}] = 0\\
@@ -558,7 +553,7 @@ and is thus free of $t$ and $s$.
       \text{Corr}[Y_t, Y_{t-k}] = \frac{\sigma_e^2 \phi^k(1 + \phi^2 + \phi^4 + \dots + \phi^{2(r-k)})}{\sqrt{(\sigma_e^2(1 + \phi + \phi^2 + \dots + \phi^{2r}))^2}} = \frac{\phi^k(1 + \phi^2 + \phi^4 + \dots + \phi^{2(r-k)})}{(1 + \phi + \phi^2 + \dots + \phi^{2r})} \quad \square
     \]
 
-##
+## Random cosine wave extended
 
 (a) \[
       E[Y_t] = E[R \cos{(2\pi(ft+\phi))}] = E[R] \cos{(2\pi(ft+\phi))} = \\
@@ -576,7 +571,7 @@ and is thus free of $t$ and $s$.
     \]
     which is free of $t$.
     
-## 
+## Random cosine wave further
 
 (a) \[
       E[Y_t] = \sum_{j=1}^m E[R_j]E[\cos{(2\pi(f_j t+\phi))}] = \text{via 2.28} = \sum_{j=1}^m E[R_j] \times 0 = 0
@@ -585,7 +580,7 @@ and is thus free of $t$ and $s$.
       \gamma_k = \sum_{j=1}^m E[R_j]\cos{(2\pi f_jk)}, \text{ also from 2.28.}
     \]
     
-##
+## Rayleigh distribution
 
 \[
   Y = R\cos{(2\pi(ft + \phi))}, \quad X = R\sin{(2\pi(ft+\phi))}\\
