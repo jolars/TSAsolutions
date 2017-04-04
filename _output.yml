@@ -1,0 +1,9 @@
+bookdown::gitbook:
+  config:
+    toc:
+      collapse: section
+    fontsettings:
+      family: serif
+      size: 2
+bookdown::pdf_book:
+  latex_engine: xelatex
