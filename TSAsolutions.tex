@@ -1157,4 +1157,396 @@ and
 
 \chapter{Trends}\label{trends}
 
+\section{Least squares estimation for linear regression
+trend}\label{least-squares-estimation-for-linear-regression-trend}
+
+We begin by taking the partial derivatives with respect to \(\beta_0\).
+
+\[
+\frac{\partial}{\partial{\beta_0}} \mathcal{Q}(\beta_0, \beta_1) =
+  -2\sum_{t=1}^n (Y_t - \beta_0 - \beta_1 t)
+\]
+
+We set it to \(0\) and from this retrieve
+
+\begin{align*}
+-2\sum_{t=1}^n (Y_t - \beta_0 - \beta_1 t) = & 0 \implies \\
+\sum_{t=1}^n Y_t - n\beta_0 - \beta_1 \sum_{t=1}^n t = & 0 \implies \\
+\beta_0 = \frac{\sum_{t=1}^n Y_t - \beta_1 \sum_{t=1}^n t}{n} = &
+  \bar{Y} - \beta_1 \bar{t}
+\end{align*}
+
+Next, we take the partial derivative with respect to \(\beta_1\);
+
+\[
+\frac{\partial}{\partial{\beta_1}} \mathcal{Q}(\beta_0, \beta_1) =
+  -2\sum_{t=1}^n t(Y_t - \beta_0 - \beta_1 t)
+\]
+
+Setting this to \(0\) as well, multiplying both sides with \(-1/2\) and
+rearranging results in
+
+\begin{align*}
+-2\sum_{t=1}^n t (Y_t - \beta_0 - \beta_1 t) = & 0 \implies \\
+\beta_1 \sum_{t=1}^n t^2 = & \sum_{t=1}^n Y_t t - \beta_0 \sum_{t=1}^n t
+\end{align*}
+
+Then, substituting with the result gained previously for \(\beta_0\), we
+get
+
+\begin{align*}
+\beta_1 \sum_{t=1}^n t^2 = & \sum_{t=1}^n Y_t t - 
+ \left( \frac{\sum_{t=1}^n Y_t}{n} - \beta_1 \frac{\sum_{t=1}^n}{n} \right)
+ \sum_{t=1}^n t \iff \\
+\beta_1 \left( \sum_{t=1}^n t^2 - \frac{(\sum_{t=1}^n t)^2}{n} \right) = & 
+  \sum_{t=1}^n Y_t t - \frac{\sum_{t=1}^n Y_t \sum_{t=1}^n t}{n} \iff \\
+\beta_1 = & \frac{n\sum_{t=1}^n Y_tt - \sum_{t=1}^nY_t \sum_{t=1}^n t}{n \sum_{t=1}^n t^2 - \left( \sum_{t=1}^n t \right)^2} = 
+  \frac{\sum_{t=1}^n (Y_t - \bar{Y})(t-\bar{t})}{\sum_{t=1}^n (t-\bar{t})^2} \quad \square
+\end{align*}
+
+\section{Variance of mean estimator}\label{variance-of-mean-estimator}
+
+\[
+  \bar{Y} = \frac{1}{n}\sum_{t=1}^n Y_t = \frac{1}{n} \sum_{t=1}^n(\mu + e_t - e_{t-1}) = 
+    \mu + \frac{1}{n} \sum_{t=1}^n (e_t - e_{t-1}) = \mu + \frac{1}{n}(e_n - e_0)
+\]
+
+\[
+  \text{Var}[\bar{Y}] = \text{Var}[\mu + \frac{1}{n}(e_n - e_0)] =
+    \frac{1}{n^2}(\sigma_e^2 + \sigma_e^2) = \frac{2\sigma_e^2}{n^2}
+\]
+
+It is uncommon for the sample size to have such a large impact on the
+variance estimator for the sample mean.
+
+Setting \(Y_t = \mu + e_t\) instead gives
+
+\[
+  \bar{Y} = \frac{1}{n}\sum_{t=1}^n Y_t = \frac{1}{n} \sum_{t=1}^n(\mu + e_t) = 
+    \mu + \frac{1}{n} \sum_{t=1}^n e_t
+\]
+
+\[
+  \text{Var}[\bar{Y}] = \text{Var} \left[ \mu + \frac{1}{n} \sum_{t=1}^n e_t \right] =
+    0 + \frac{1}{n^2} \times n \sigma_e^2 = \frac{\sigma_e^2}{n}.
+\]
+
+\section{Variance of mean estimator
+\#2}\label{variance-of-mean-estimator-2}
+
+\[
+  \bar{Y} = \frac{1}{n} \sum_{t=1}^n(\mu + e_t + e_{t-1}) = 
+    \mu + \frac{1}{n} \sum_{t=1}^n (e_t + e_{t-1}) = \mu + \frac{1}{n} \left( e_n + e_0 + 2 \sum_{t=1}^{n-1} t \right)
+\]
+
+\[
+  \text{Var}[\bar{Y}] = \frac{1}{n^2}(\sigma_e^2 + \sigma_e^2 + 4(n-1) \sigma_e^2 ) = \frac{1}{n^2}2(2n-1)\sigma_e^2
+\]
+
+Setting \(Y_t = \mu + e_t\) instead gives the result from 3.2. We note
+that for large \(n\) the variance if approximately four times larger
+with \(Y_t = \mu + e_t + e_{t-1}\).
+
+\section{Hours}\label{hours}
+
+\subsection*{a}\label{a-21}
+\addcontentsline{toc}{subsection}{a}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(TSA)}
+\KeywordTok{data}\NormalTok{(}\StringTok{"hours"}\NormalTok{)}
+\KeywordTok{xyplot}\NormalTok{(hours)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics{TSAsolutions_files/figure-latex/unnamed-chunk-8-1.pdf}
+\caption{\label{fig:unnamed-chunk-8}Monthly values of the average hours
+worked per week in the U.S. manufacturing sector.}
+\end{figure}
+
+In Figure 1 we see a steep incline between 83 and 84. There also appears
+to be a seasonal trend with generally longer work hours later in the
+year apart from the summer; 1984, however, does not exhibit as clear a
+pattern.
+
+\subsection*{b}\label{b-21}
+\addcontentsline{toc}{subsection}{b}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{months <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"J"}\NormalTok{, }\StringTok{"A"}\NormalTok{, }\StringTok{"S"}\NormalTok{, }\StringTok{"O"}\NormalTok{, }\StringTok{"N"}\NormalTok{, }\StringTok{"D"}\NormalTok{, }\StringTok{"J"}\NormalTok{, }\StringTok{"F"}\NormalTok{, }\StringTok{"M"}\NormalTok{, }\StringTok{"A"}\NormalTok{, }\StringTok{"M"}\NormalTok{, }\StringTok{"J"}\NormalTok{)}
+
+\KeywordTok{xyplot}\NormalTok{(hours, }\DataTypeTok{panel =} \NormalTok{function(x, y, ...) \{}
+  \KeywordTok{panel.xyplot}\NormalTok{(x, y, ...)}
+  \KeywordTok{panel.text}\NormalTok{(}\DataTypeTok{x =} \NormalTok{x, }\DataTypeTok{y =} \NormalTok{y, }\DataTypeTok{labels =} \NormalTok{months)}
+\NormalTok{\})}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics{TSAsolutions_files/figure-latex/unnamed-chunk-9-1.pdf}
+\caption{\label{fig:unnamed-chunk-9}Monthly values of average hours worked
+per week with superposed initials of months.}
+\end{figure}
+
+Here, in Figure 2, our interpretation is largely the same. It is clear
+that December stands out as the month with the longest weekly work hours
+whilst February and January are low-points, demonstrating a clear trend.
+
+\section{Wages}\label{wages}
+
+\subsection*{a}\label{a-22}
+\addcontentsline{toc}{subsection}{a}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{data}\NormalTok{(}\StringTok{"wages"}\NormalTok{)}
+\KeywordTok{xyplot}\NormalTok{(wages, }\DataTypeTok{panel =} \NormalTok{function(x, y, ...) \{}
+  \KeywordTok{panel.xyplot}\NormalTok{(x, y, ...)}
+  \KeywordTok{panel.text}\NormalTok{(x, y, }\DataTypeTok{labels =} \NormalTok{months)}
+\NormalTok{\})}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics{TSAsolutions_files/figure-latex/unnamed-chunk-10-1.pdf}
+\caption{\label{fig:unnamed-chunk-10}Monthly average hourly wages for
+workers in the U.S. apparel and textile industry.}
+\end{figure}
+
+There is a positive trend with seasonality: August is a low-point for
+wages. Generally, there seems to be larger increases in the fall.
+
+\subsection*{b}\label{b-22}
+\addcontentsline{toc}{subsection}{b}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{wages_fit1 <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(wages ~}\StringTok{ }\KeywordTok{time}\NormalTok{(wages))}
+\KeywordTok{summary}\NormalTok{(wages_fit1)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = wages ~ time(wages))
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -0.23828 -0.04981  0.01942  0.05845  0.13136 
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(>|t|)    
+## (Intercept) -5.490e+02  1.115e+01  -49.24   <2e-16 ***
+## time(wages)  2.811e-01  5.618e-03   50.03   <2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 0.08257 on 70 degrees of freedom
+## Multiple R-squared:  0.9728, Adjusted R-squared:  0.9724 
+## F-statistic:  2503 on 1 and 70 DF,  p-value: < 2.2e-16
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{wages_rst <-}\StringTok{ }\KeywordTok{rstudent}\NormalTok{(wages_fit1)}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection*{c}\label{c-11}
+\addcontentsline{toc}{subsection}{c}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{xyplot}\NormalTok{(wages_rst ~}\StringTok{ }\KeywordTok{time}\NormalTok{(wages_rst), }\DataTypeTok{type =} \StringTok{"l"}\NormalTok{,}
+       \DataTypeTok{xlab =} \StringTok{"Time"}\NormalTok{, }\DataTypeTok{ylab =} \StringTok{"Studentized residuals"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics{TSAsolutions_files/figure-latex/wages_resid-1.pdf}
+\caption{(\#fig:wages\_resid)Residual plot}
+\end{figure}
+
+We still seem to have autocorrelation related to the time and not white
+noise.
+
+\subsection*{d}\label{d-2}
+\addcontentsline{toc}{subsection}{d}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{wages_fit2 <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(wages ~}\StringTok{ }\KeywordTok{time}\NormalTok{(wages) +}\StringTok{ }\KeywordTok{I}\NormalTok{(}\KeywordTok{time}\NormalTok{(wages)^}\DecValTok{2}\NormalTok{))}
+\KeywordTok{summary}\NormalTok{(wages_fit2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = wages ~ time(wages) + I(time(wages)^2))
+## 
+## Residuals:
+##       Min        1Q    Median        3Q       Max 
+## -0.148318 -0.041440  0.001563  0.050089  0.139839 
+## 
+## Coefficients:
+##                    Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)      -8.495e+04  1.019e+04  -8.336 4.87e-12 ***
+## time(wages)       8.534e+01  1.027e+01   8.309 5.44e-12 ***
+## I(time(wages)^2) -2.143e-02  2.588e-03  -8.282 6.10e-12 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 0.05889 on 69 degrees of freedom
+## Multiple R-squared:  0.9864, Adjusted R-squared:  0.986 
+## F-statistic:  2494 on 2 and 69 DF,  p-value: < 2.2e-16
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{wages_rst2 <-}\StringTok{ }\KeywordTok{rstudent}\NormalTok{(wages_fit2)}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection*{e}\label{e-1}
+\addcontentsline{toc}{subsection}{e}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{xyplot}\NormalTok{(wages_rst2 ~}\StringTok{ }\KeywordTok{time}\NormalTok{(wages_rst), }\DataTypeTok{type =} \StringTok{"l"}\NormalTok{,}
+       \DataTypeTok{xlab =} \StringTok{"Time"}\NormalTok{, }\DataTypeTok{ylab =} \StringTok{"Studentized residuals"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics{TSAsolutions_files/figure-latex/wages_quad_resid-1.pdf}
+\caption{(\#fig:wages\_quad\_resid)Residual plot for our quadratic
+model.}
+\end{figure}
+
+This looks more like random noise but there is still clear
+autocorrelation between the fitted residuals that we have yet to capture
+in our model.
+
+\section{Beer sales}\label{beer-sales}
+
+\subsection*{a}\label{a-23}
+\addcontentsline{toc}{subsection}{a}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{data}\NormalTok{(beersales)}
+\KeywordTok{xyplot}\NormalTok{(beersales)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics{TSAsolutions_files/figure-latex/unnamed-chunk-13-1.pdf}
+\caption{\label{fig:unnamed-chunk-13}Monthly U.S. beer sales.}
+\end{figure}
+
+Clear seasonal trends. There is an initial positive trend from 1975 to
+around 1981 that then levels out.
+
+\subsection*{b}\label{b-23}
+\addcontentsline{toc}{subsection}{b}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{months <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"J"}\NormalTok{, }\StringTok{"F"}\NormalTok{, }\StringTok{"M"}\NormalTok{, }\StringTok{"A"}\NormalTok{, }\StringTok{"M"}\NormalTok{, }\StringTok{"J"}\NormalTok{, }\StringTok{"J"}\NormalTok{, }\StringTok{"A"}\NormalTok{, }\StringTok{"S"}\NormalTok{, }\StringTok{"O"}\NormalTok{, }\StringTok{"N"}\NormalTok{, }\StringTok{"D"}\NormalTok{)}
+
+\KeywordTok{xyplot}\NormalTok{(beersales,}
+       \DataTypeTok{panel =} \NormalTok{function(x, y, ...) \{}
+         \KeywordTok{panel.xyplot}\NormalTok{(x, y, ...)}
+         \KeywordTok{panel.text}\NormalTok{(x, y, }\DataTypeTok{labels =} \NormalTok{months)}
+       \NormalTok{\})}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics{TSAsolutions_files/figure-latex/unnamed-chunk-14-1.pdf}
+\caption{\label{fig:unnamed-chunk-14}Monthly U.S. beer sales annotated with
+the months' initials.}
+\end{figure}
+
+It is now evident that the peaks are in the warm months and the slump in
+the winter and fall months. December is a particular low point, while
+May, June, and July seem to be the high points.
+
+\subsection*{c}\label{c-12}
+\addcontentsline{toc}{subsection}{c}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{beer_fit1 <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(beersales ~}\StringTok{ }\KeywordTok{season}\NormalTok{(beersales))}
+\KeywordTok{summary}\NormalTok{(beer_fit1)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = beersales ~ season(beersales))
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -3.5745 -0.4772  0.1759  0.7312  2.1023 
+## 
+## Coefficients:
+##                            Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)                12.48568    0.26392  47.309  < 2e-16 ***
+## season(beersales)February  -0.14259    0.37324  -0.382 0.702879    
+## season(beersales)March      2.08219    0.37324   5.579 8.77e-08 ***
+## season(beersales)April      2.39760    0.37324   6.424 1.15e-09 ***
+## season(beersales)May        3.59896    0.37324   9.643  < 2e-16 ***
+## season(beersales)June       3.84976    0.37324  10.314  < 2e-16 ***
+## season(beersales)July       3.76866    0.37324  10.097  < 2e-16 ***
+## season(beersales)August     3.60877    0.37324   9.669  < 2e-16 ***
+## season(beersales)September  1.57282    0.37324   4.214 3.96e-05 ***
+## season(beersales)October    1.25444    0.37324   3.361 0.000948 ***
+## season(beersales)November  -0.04797    0.37324  -0.129 0.897881    
+## season(beersales)December  -0.42309    0.37324  -1.134 0.258487    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 1.056 on 180 degrees of freedom
+## Multiple R-squared:  0.7103, Adjusted R-squared:  0.6926 
+## F-statistic: 40.12 on 11 and 180 DF,  p-value: < 2.2e-16
+\end{verbatim}
+
+All comparisons are made against january. The model helpfully explains
+approximately 0.71 of the variance and is statistically significant.
+Most of the factors are significant (mostly the winter months as
+expected).
+
+\subsection*{d}\label{d-3}
+\addcontentsline{toc}{subsection}{d}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{xyplot}\NormalTok{(}\KeywordTok{rstudent}\NormalTok{(beer_fit1) ~}\StringTok{ }\KeywordTok{time}\NormalTok{(beersales), }\DataTypeTok{type =} \StringTok{"l"}\NormalTok{,}
+       \DataTypeTok{xlab =} \StringTok{"Fitted values"}\NormalTok{, }\DataTypeTok{ylab =} \StringTok{"Time"}\NormalTok{,}
+       \DataTypeTok{panel =} \NormalTok{function(x, y, ...) \{}
+         \KeywordTok{panel.xyplot}\NormalTok{(x, y, ...)}
+         \KeywordTok{panel.text}\NormalTok{(x, y, }\DataTypeTok{labels =} \KeywordTok{season}\NormalTok{(beersales))}
+       \NormalTok{\})}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{TSAsolutions_files/figure-latex/unnamed-chunk-16-1.pdf}
+
+\subsection*{e}\label{e-2}
+\addcontentsline{toc}{subsection}{e}
+
 \end{document}
