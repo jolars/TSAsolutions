@@ -88,4 +88,141 @@ Setting $Y_t = \mu + e_t$ instead gives the result from 3.2. We note that for
 large $n$ the variance if approximately four times larger with
 $Y_t = \mu + e_t + e_{t-1}$.
 
-## 
+## Hours
+
+### a {-}
+
+```{r, fig.cap="Monthly values of the average hours worked per week in the U.S. manufacturing sector."}
+library(TSA)
+data("hours")
+xyplot(hours)
+```
+
+In Figure 1 we see a steep incline between 83 and 84. There also appears to be a seasonal
+trend with generally longer work hours later in the year apart from the summer;
+1984, however, does not exhibit as clear a pattern.
+
+### b {-}
+
+```{r, fig.cap="Monthly values of average hours worked per week with superposed initials of months."}
+months <- c("J", "A", "S", "O", "N", "D", "J", "F", "M", "A", "M", "J")
+
+xyplot(hours, panel = function(x, y, ...) {
+  panel.xyplot(x, y, ...)
+  panel.text(x = x, y = y, labels = months)
+})
+```
+
+Here, in Figure 2, our interpretation is largely the same. It is clear that
+December stands out as the month with the longest weekly work hours whilst
+February and January are low-points, demonstrating a clear trend.
+
+## Wages
+
+### a {-}
+
+```{r, fig.cap="Monthly average hourly wages for workers in the U.S. apparel and textile industry."}
+data("wages")
+xyplot(wages, panel = function(x, y, ...) {
+  panel.xyplot(x, y, ...)
+  panel.text(x, y, labels = months)
+})
+```
+
+There is a positive trend with seasonality: August is a low-point for wages. 
+Generally, there seems to be larger increases in the fall.
+
+### b {-}
+
+```{r}
+wages_fit1 <- lm(wages ~ time(wages))
+summary(wages_fit1)
+wages_rst <- rstudent(wages_fit1)
+```
+
+### c {-}
+
+```{r wages_resid, fig.cap="Residual plot"}
+xyplot(wages_rst ~ time(wages_rst), type = "l",
+       xlab = "Time", ylab = "Studentized residuals")
+```
+
+We still seem to have autocorrelation related to the time and not white noise.
+
+### d {-}
+
+```{r}
+wages_fit2 <- lm(wages ~ time(wages) + I(time(wages)^2))
+summary(wages_fit2)
+wages_rst2 <- rstudent(wages_fit2)
+```
+
+### e {-}
+
+```{r wages_quad_resid, fig.cap="Residual plot for our quadratic model."}
+xyplot(wages_rst2 ~ time(wages_rst), type = "l",
+       xlab = "Time", ylab = "Studentized residuals")
+```
+
+This looks more like random noise but there is still clear autocorrelation 
+between the fitted residuals that we have yet to capture in our model.
+
+## Beer sales
+
+### a {-}
+
+```{r, fig.cap = "Monthly U.S. beer sales."}
+data(beersales)
+xyplot(beersales)
+```
+
+Clear seasonal trends. There is an initial positive trend from 1975 to around
+1981 that then levels out.
+
+### b {-}
+
+```{r, fig.cap = "Monthly U.S. beer sales annotated with the months' initials."}
+months <- c("J", "F", "M", "A", "M", "J", "J", "A", "S", "O", "N", "D")
+
+xyplot(beersales,
+       panel = function(x, y, ...) {
+         panel.xyplot(x, y, ...)
+         panel.text(x, y, labels = months)
+       })
+```
+
+It is now evident that the peaks are in the warm months and the slump in the
+winter and fall months. December is a particular low point, while May, June,
+and July seem to be the high points.
+
+### c {-}
+
+```{r}
+beer_fit1 <- lm(beersales ~ season(beersales))
+summary(beer_fit1)
+```
+
+All comparisons are made against january. The model helpfully explains 
+approximately 0.71 of the variance and is statistically significant. Most 
+of the factors are significant (mostly the winter months as expected).
+
+### d {-}
+
+```{r}
+xyplot(rstudent(beer_fit1) ~ time(beersales), type = "l",
+       xlab = "Fitted values", ylab = "Time",
+       panel = function(x, y, ...) {
+         panel.xyplot(x, y, ...)
+         panel.text(x, y, labels = season(beersales))
+       })
+```
+
+### e {-}
+
+
+
+
+
+
+
+
