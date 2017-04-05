@@ -2010,7 +2010,7 @@ Figure 3.28: Normality plots for the prescitions series fit with a cosine model.
 <div id="a-33" class="section level3 unnumbered">
 <h3>a</h3>
 <p>We have the variance estimator</p>
-$$
+<p><span class="math display">\[
 \begin{align}
   \text{Var}[\bar{Y}] = &amp; \frac{\gamma_0}{n} \left( 1 + 2\sum_{k=1}^{n-1}\left(1 - \frac{k}{n}\right)\phi^k \right) \\
                       = &amp; \frac{\gamma_0}{n} \left( 1 + 2\sum_{k=0}^{n-1}\left(1 - \frac{k}{n}\right)\phi^k -
@@ -2024,9 +2024,8 @@ $$
                       = &amp; \frac{\gamma_0}{n} \left( -1 + 2 \frac{1-\phi^n}{1-\phi} - \frac{2\phi}{n} \frac{1-\phi^n}{(1-\phi)^2} + \frac{2\phi^n}{1-\phi} \right) \\
                       = &amp; \frac{\gamma_0}{n} \left( \frac{2-2\phi^n+2\phi^n-1+\phi}{1-\phi} - \frac{2\phi}{n} \frac{1-\phi^n}{(1-\phi)^2} \right) \\
                       = &amp; \frac{\gamma_0}{n} \left( \frac{1+\phi}{1-\phi} - \frac{2\phi}{n} \frac{1-\phi^n}{(1-\phi)^2} \right) \quad \square
-  
 \end{align}
-<p>$$</p>
+\]</span></p>
 </div>
 <div id="b-33" class="section level3 unnumbered">
 <h3>b</h3>
@@ -2065,8 +2064,13 @@ Figure 3.29: Variance estimation for different values of <span class="math inlin
 </div>
 <div id="equation-3.2.7" class="section level2">
 <h2><span class="header-section-number">3.18</span> Equation 3.2.7</h2>
-<p><span class="math inline">\($ \begin{gather}  \text{Var}[\bar{Y}] = \frac{1}{n^2} \text{Var}\left[ \sum_{i=1}^n Y_i \right] = \text{Var}\left[ \sum_{i=1}^n \sum_{j=1}^i e_j \right] = \\  \frac{1}{n^2}\text{Var}[e_1 + 2e_2 + 3e_3 + \dots + ne_n] = \frac{\sigma_e^2}{n}\sum_{k=1}^n k^2 = \\  \frac{\sigma_e^2}{n} \frac{n(n+1)(2n + 1)}{6} = \sigma_e^2 \frac{(n+1)(2n + 1)}{6} \tag*{\)</span>$} \end{gather}</p>
-<p>$$</p>
+<p><span class="math display">\[
+\begin{gather}
+  \text{Var}[\bar{Y}] = \frac{1}{n^2} \text{Var}\left[ \sum_{i=1}^n Y_i \right] = \text{Var}\left[ \sum_{i=1}^n \sum_{j=1}^i e_j \right] = \\
+    \frac{1}{n^2}\text{Var}[e_1 + 2e_2 + 3e_3 + \dots + ne_n] = \frac{\sigma_e^2}{n}\sum_{k=1}^n k^2 = \\
+    \frac{\sigma_e^2}{n} \frac{n(n+1)(2n + 1)}{6} = \sigma_e^2 \frac{(n+1)(2n + 1)}{6} \tag*{$\square$}
+\end{gather}
+\]</span></p>
 
 </div>
 </div>
