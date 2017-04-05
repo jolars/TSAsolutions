@@ -724,7 +724,6 @@ $$
                       = & \frac{\gamma_0}{n} \left( -1 + 2 \frac{1-\phi^n}{1-\phi} - \frac{2\phi}{n} \frac{1-\phi^n}{(1-\phi)^2} + \frac{2\phi^n}{1-\phi} \right) \\
                       = & \frac{\gamma_0}{n} \left( \frac{2-2\phi^n+2\phi^n-1+\phi}{1-\phi} - \frac{2\phi}{n} \frac{1-\phi^n}{(1-\phi)^2} \right) \\
                       = & \frac{\gamma_0}{n} \left( \frac{1+\phi}{1-\phi} - \frac{2\phi}{n} \frac{1-\phi^n}{(1-\phi)^2} \right) \quad \square
-  
 \end{align}
 $$
 
@@ -770,5 +769,4 @@ $$
     \frac{1}{n^2}\text{Var}[e_1 + 2e_2 + 3e_3 + \dots + ne_n] = \frac{\sigma_e^2}{n}\sum_{k=1}^n k^2 = \\
     \frac{\sigma_e^2}{n} \frac{n(n+1)(2n + 1)}{6} = \sigma_e^2 \frac{(n+1)(2n + 1)}{6} \tag*{$\square$}
 \end{gather}
-
 $$
