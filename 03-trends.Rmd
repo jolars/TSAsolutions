@@ -248,7 +248,7 @@ we're able to model the long term trend better.
 
 ### a {-}
 
-```{r, fig.cap = "Monthly unit sales of recreational vehicles from Winnebago."}
+```{r winnebago, fig.cap = "Monthly unit sales of recreational vehicles from Winnebago."}
 data(winnebago)
 xyplot(winnebago)
 ```
@@ -257,8 +257,7 @@ xyplot(winnebago)
 
 ```{r}
 winn_fit1 <- lm(winnebago ~ time(winnebago))
-summary(winn_fit1) %>%
-  pander()
+pander(summary(winn_fit1))
 ```
 
 The model is significant and explains 0.69 of the variance.
@@ -268,7 +267,7 @@ xyplot(rstudent(winn_fit1) ~ time(winnebago), type = "l",
        xlab = "Time", ylab = "Studentized residuals")
 ```
 
-The fit is poor (Figure \@ref(winnebago-lm-res). It is not random and it is
+The fit is poor (Figure \@ref(fig:winnebago-lm-res). It is not random and it is
 clear that we're making worse predictions for later yers.
 
 ### c {-}
@@ -293,7 +292,7 @@ xyplot(rstudent(winn_fit_log) ~ time(winnebago), type = "l",
        })
 ```
 
-This looks more like random noise (Figure \@ref(winnebago-log-res). Values still
+This looks more like random noise (Figure \@ref(fig:winnebago-log-res). Values still
 cling together somewhat but it
 is certainly better than the linear model. We're still systematically
 overpredictinig the values for some months, however.
@@ -310,7 +309,7 @@ of our seasonal means as well as the time trend.
 
 ### f {-}
 
-```{r}
+```{r winnebago-seasonal-res}
 xyplot(rstudent(winn_fit_seasonal) ~ time(winnebago), type = "l",
        xlab = "Time", ylab = "Studentized residuals",
        panel = function(x, y, ...) {
@@ -326,7 +325,7 @@ notably at the start of the series.
 
 ### a {-}
 
-```{r, fig.cap = "Total retail sales in the U.K. in billions pounds."}
+```{r retail, fig.cap="Total retail sales in the U.K. in billions pounds."}
 data(retail)
 xyplot(retail, panel = function(x, y, ...) {
   panel.xyplot(x, y, ...)
@@ -409,15 +408,298 @@ significant though.
 xyplot(rstudent(pres_cos) ~ time(prescrip), type = "l")
 ```
 
-The residual plot in Figure \@ref(cos-resid) looks rather random.
+The residual plot in Figure \@ref(fig:cos-resid) looks rather random.
 
+## Hours (revisited)
 
+### a {-}
 
+```{r}
+data(hours)
+hours_quad <- lm(hours ~ time(hours) + I(time(hours)^2))
+pander(summary(hours_quad))
+```
 
+Both the linear and quadratic trends are significant. We explain 59% of the
+variance. 
 
+### b {-}
 
+```{r hours-quad-res, fig.cap = "Studentized residuals for our quadratic fit for the hours series."}
+xyplot(rstudent(hours_quad) ~ seq_along(hours), type = "l",
+       xlab = "Index", ylab = "Studentized residuals",
+       panel = function(x, y, ...) {
+         panel.xyplot(x, y, ...)
+         panel.xyplot(x, y, pch = as.vector(season(hours)), col = 1)
+       })
+```
 
+We're clearly missing the seasonal trend here. February is underpredicted
+and December overpredicted, for instance.
 
+### c {-}
 
+We run the *Runs test* to check for dependence between our observations.
 
+```{r}
+runs(rstudent(hours_quad))
+```
 
+We have more runs than expected and a significant test at $p = 0.00012$,
+confirming out suspicions from (b).
+
+### d {-}
+
+```{r hours-acf, fig.cap = "Autocorrelation plot for the hours dataset."}
+lat_acf(rstudent(hours_quad))
+```
+
+Figure \@ref(fig:hours-acf) makes the autocorrelation clear: for the first 5--6
+values there is positive correlation, which then seems to reverse for the later
+values. Some of these are significant.
+
+### e {-}
+
+```{r normality-tests, fig.cap="Normality plots", fig.subcap=c("Q-Q-plot", "Densityplot"), fig.show="hold", fig.width=3, fig.height=3}
+qqmath(rstudent(hours_quad), asp = 1,
+       xlab = "Theoretical quantities", ylab = "Studentized residuals",
+       panel = function(x, ...) {
+         panel.qqmathline(x, ...)
+         panel.qqmath(x, ...)
+       })
+densityplot(rstudent(hours_quad), xlab = "Studentized residuals", 
+            ylab = "Density")
+```
+
+The distribution is somewhat light-tailed but otherwise look quite normal.
+
+## Wages (revisisted)
+
+### a {-}
+
+```{r}
+# data(wages)
+wages_quad <- lm(wages ~ time(wages) + I(time(wages)^2))
+pander(summary(wages_quad))
+```
+
+This quadratic fit explains much of the variance (0.99).
+
+### b {-}
+
+```{r}
+runs(rstudent(wages_quad))
+```
+
+Juding from the output of the Runs test, however, there is evidence
+to suggest that we have dependence among variables.
+
+### c {-}
+
+```{r wages_acf, fig.cap="Autocorrelation for the quadratic fit on the wages time series."}
+lat_acf(rstudent(wages_quad))
+```
+
+However, the autocorrelation plot (Figure \@ref(fig:wages_acf)) makes clear
+that we are dealing with a lot of auttocorrelation and this is obviously
+because we haven't accounted for the seasonal trend in the series.
+
+### d {-}
+
+Let's look at some normality plots as well.
+
+```{r wages-norm,fig.cap="Normality plots for the wages data with a quadratic fit."}
+figa <- 
+  qqmath(rstudent(wages_quad), xlab = "Theoretical quantities",
+       asp = 1,
+       ylab = "Studentized residuals",
+       panel = function(x, ...) {
+         panel.qqmathline(x, ...)
+         panel.qqmath(x, ...)
+       })
+
+figb <- densityplot(rstudent(wages_quad), xlab = "Studentized residuals")
+gridExtra::grid.arrange(figa, figb, ncol = 2)
+```
+
+The normality plots (Figure \@ref(fig:wages-norm)) testifies that the 
+distribution of the residuals is somewhat heavy-tailed and ever-so-slightly
+left-skewed.
+
+## Beersales (revisited)
+
+### a {-}
+
+First, we just collect the residuals.
+
+```{r}
+#data(beersales)
+beer_quad_seasonal <- lm(beersales ~ time(beersales) + I(time(beersales)^2) +
+                           season(beersales))
+beer_resid <- rstudent(beer_quad_seasonal)
+```
+
+### b {-}
+
+Next, we perform a Runs test.
+
+```{r}
+runs(beer_resid)
+```
+
+The test is significant ($p = `r runs(beer_resid)$pvalue`$).
+
+### c {-}
+
+```{r beer-acf, fig.cap="Autocorrelation for the beer sales model."}
+lat_acf(beer_resid)
+```
+
+Correlations are significant for several of the lags, leading us to
+question independence.
+
+### d {-}
+
+```{r beer-norm, fig.cap="Normality plots for the beersales series after a linear, quadratic and seasonal fit."}
+figa <- 
+  qqmath(beer_resid, xlab = "Theoretical quantities",
+       asp = 1,
+       ylab = "Studentized residuals",
+       panel = function(x, ...) {
+         panel.qqmathline(x, ...)
+         panel.qqmath(x, ...)
+       })
+
+figb <- densityplot(beer_resid, xlab = "Studentized residuals")
+gridExtra::grid.arrange(figa, figb, ncol = 2)
+```
+
+## Winnebago (revisited)
+
+### a {-}
+
+```{r}
+winn_resid <- rstudent(winn_fit_seasonal)
+```
+
+### b {-}
+
+```{r}
+runs(winn_resid)
+```
+
+The Runs test is signficant. We have fewer runs than expected.
+
+### c {-}
+
+```{r winn-acf, fig.cap="Autcorrelation for the winnebago model."}
+lat_acf(winn_resid)
+```
+
+There is evidence of dependence which we have so far not taken into account in
+the model
+
+### d {-}
+
+```{r, winn-norm, fig.cap="Normality plots for the winnebago series fit with a logarithimg and seasonal fit."}
+figa <- 
+  qqmath(winn_resid, xlab = "Theoretical quantities",
+       asp = 1,
+       ylab = "Studentized residuals",
+       panel = function(x, ...) {
+         panel.qqmathline(x, ...)
+         panel.qqmath(x, ...)
+       })
+
+figb <- densityplot(winn_resid, xlab = "Studentized residuals")
+gridExtra::grid.arrange(figa, figb, ncol = 2)
+```
+
+There is left skew, a large outlier, but otherwise approximate normality.
+
+## Retail (revisited)
+
+### a {-}
+
+```{r}
+retail_lm_seasonal <- lm(retail ~ time(retail) + season(retail))
+retail_resid <- rstudent(retail_lm_seasonal)
+```
+
+### b {-}
+
+```{r}
+runs(retail_resid)
+```
+
+The Runs test is signficant and we have fewer runs than expected.
+
+### c {-}
+
+```{r retail-acf, fig.cap="Autcorrelation for the retail model."}
+lat_acf(retail_resid)
+```
+
+There is evidence of dependence which we have so far not taken into account in
+the model. All of the lags are positive and several are significant too.
+
+### d {-}
+
+```{r, winn-norm, fig.cap="Normality plots for the winnebago series fit with a logarithimg and seasonal fit."}
+figa <- 
+  qqmath(retail_resid, xlab = "Theoretical quantities",
+       asp = 1,
+       ylab = "Studentized residuals",
+       panel = function(x, ...) {
+         panel.qqmathline(x, ...)
+         panel.qqmath(x, ...)
+       })
+
+figb <- densityplot(retail_resid, xlab = "Studentized residuals")
+gridExtra::grid.arrange(figa, figb, ncol = 2)
+```
+
+The distributin of the residuals is considerably light-tailed.
+
+## Prescriptions (revisited)
+
+### a {-}
+
+```{r}
+pres_resid <- rstudent(pres_cos)
+```
+
+### b {-}
+
+```{r}
+runs(pres_resid)
+```
+
+The Runs test is signficant and we have fewer runs than expected.
+
+### c {-}
+
+```{r retail-acf, fig.cap="Autcorrelation for the prescriptions model."}
+lat_acf(pres_resid)
+```
+
+Some of the lags have correlations that surpass statistical significane. There
+may be some alternating trends that we have not taken into account.
+
+### d {-}
+
+```{r, pres-norm, fig.cap="Normality plots for the prescitions series fit with a cosine model."}
+figa <- 
+  qqmath(pres_resid, xlab = "Theoretical quantities",
+       asp = 1,
+       ylab = "Studentized residuals",
+       panel = function(x, ...) {
+         panel.qqmathline(x, ...)
+         panel.qqmath(x, ...)
+       })
+
+figb <- densityplot(pres_resid, xlab = "Studentized residuals")
+gridExtra::grid.arrange(figa, figb, ncol = 2)
+```
+
+The distribution of the residuals is somewhat heavy-tailed and left-skewed.
