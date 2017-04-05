@@ -199,7 +199,7 @@ and July seem to be the high points.
 
 ```{r}
 beer_fit1 <- lm(beersales ~ season(beersales))
-summary(beer_fit1)
+pander(summary(beer_fit1))
 ```
 
 All comparisons are made against january. The model helpfully explains 
@@ -208,16 +208,211 @@ of the factors are significant (mostly the winter months as expected).
 
 ### d {-}
 
-```{r, fig.cap="Beer sales residual plot."}
+```{r rst-beer, fig.cap="Beer sales residual plot."}
 xyplot(rstudent(beer_fit1) ~ time(beersales), type = "l",
-       xlab = "Fitted values", ylab = "Time",
+       xlab = "Time", ylab = "Studentized residuals",
        panel = function(x, y, ...) {
          panel.xyplot(x, y, ...)
-         panel.text(x, y, labels = season(beersales))
+         panel.xyplot(x, y, pch = as.vector(season(beersales)), col = 1)
        })
 ```
 
+Looking at the residuals in \@ref(fig:rst-beer) We don't have a good fit to our
+data; in particular, wee're not capturing the long-term trend.
+
 ### e {-}
+
+```{r}
+beer_fit2 <- lm(beersales ~ season(beersales) + time(beersales) +
+                  I(time(beersales) ^ 2))
+pander(summary(beer_fit2))
+```
+
+This model fits the data better, explaining roughly 0.91 of the variance.
+
+### f {-}
+
+```{r rst-beer2, fig.cap="Beer sales residual plot from the quadratic fit."}
+xyplot(rstudent(beer_fit2) ~ time(beersales), type = "l",
+       xlab = "Time", yla = "Studentized residuals",
+       panel = function(x, y, ...) {
+         panel.xyplot(x, y, ...)
+         panel.xyplot(x, y, pch = as.vector(season(beersales)), col = 1)
+       })
+```
+
+Many of the values are still not being predicted successfully but at least
+we're able to model the long term trend better.
+
+## Winnebago
+
+### a {-}
+
+```{r, fig.cap = "Monthly unit sales of recreational vehicles from Winnebago."}
+data(winnebago)
+xyplot(winnebago)
+```
+
+### b {-}
+
+```{r}
+winn_fit1 <- lm(winnebago ~ time(winnebago))
+summary(winn_fit1) %>%
+  pander()
+```
+
+The model is significant and explains 0.69 of the variance.
+
+```{r winnebago-lm-res, fig.cap = "Residuals for the linear fit for the winnebago data."}
+xyplot(rstudent(winn_fit1) ~ time(winnebago), type = "l",
+       xlab = "Time", ylab = "Studentized residuals")
+```
+
+The fit is poor (Figure \@ref(winnebago-lm-res). It is not random and it is
+clear that we're making worse predictions for later yers.
+
+### c {-}
+
+To produce a better fit, we transform the outcome with the natural logarithm.
+
+```{r}
+winn_fit_log <- lm(log(winnebago) ~ time(winnebago))
+pander(summary(winn_fit_log))
+```
+
+The model is better, explaining almost 0.8 of the variance.
+
+### d {-}
+
+```{r winnebago-log-res, fig.cap = "Residual plot after natural log transformation."}
+xyplot(rstudent(winn_fit_log) ~ time(winnebago), type = "l",
+       xlab = "Time", ylab = "Studentized residuals",
+       panel = function(x, y, ...) {
+         panel.xyplot(x, y, ...)
+         panel.xyplot(x, y, pch = as.vector(season(winnebago)), col = 1)
+       })
+```
+
+This looks more like random noise (Figure \@ref(winnebago-log-res). Values still
+cling together somewhat but it
+is certainly better than the linear model. We're still systematically
+overpredictinig the values for some months, however.
+
+### e {-}
+
+```{r}
+winn_fit_seasonal <- lm(log(winnebago) ~ season(winnebago) + time(winnebago))
+pander(summary(winn_fit_seasonal))
+```
+
+The fit is improved further. We have a R^2^ of 0.89 and significance for most
+of our seasonal means as well as the time trend.
+
+### f {-}
+
+```{r}
+xyplot(rstudent(winn_fit_seasonal) ~ time(winnebago), type = "l",
+       xlab = "Time", ylab = "Studentized residuals",
+       panel = function(x, y, ...) {
+         panel.xyplot(x, y, ...)
+         panel.xyplot(x, y, col = 1, pch = as.vector(season(winnebago)))
+       })
+```
+
+This is acceptable even if our residuals are quite large for some of the values,
+notably at the start of the series.
+
+## Retail
+
+### a {-}
+
+```{r, fig.cap = "Total retail sales in the U.K. in billions pounds."}
+data(retail)
+xyplot(retail, panel = function(x, y, ...) {
+  panel.xyplot(x, y, ...)
+  panel.xyplot(x, y, pch = as.vector(season(retail)), col = 1)
+})
+```
+
+Plotting the retail sales trend there seems to be a long-term linear trend
+as well as heavy seasonality in tht December -- and to slighter extent also
+November and October -- exhibit regular surges in retail sales.
+
+### b {-}
+
+```{r}
+retail_lm <- lm(retail ~ season(retail) + time(retail))
+pander(summary(retail_lm))
+```
+
+This *seems* like an effective model, explaining 0.98 of the variance in
+retail sales.
+
+### c {-}
+
+```{r retail-res, fig.cap = "Studentized residuals for our seasonality + linear model of retail sales."}
+xyplot(rstudent(retail_lm) ~ time(retail), type = "l",
+       xlab = "Time", ylab = "Studentized residuals",
+       panel = function(x, y, ...) {
+         panel.xyplot(x, y, ...)
+         panel.xyplot(x, y, pch = as.vector(season(retail)), col = 1)
+       })
+```
+
+The residual plot (Figure \@ref(fig:retail-res)) tells a different story:
+we're underpredicting values for early period and overpredicting values for the
+later years -- however, this should be an easy fix.
+
+## Prescriptions
+
+### a {-}
+
+```{r prescrip, fig.cap="Monthly U.S. prescription costs."}
+data(prescrip)
+xyplot(prescrip, ylab = "Prescription costs",
+       panel = function(x, y, ...) {
+         panel.xyplot(x, y, ...)
+         panel.xyplot(x, y, pch = as.vector(season(prescrip)), col = 1)
+       })
+```
+
+Figure \@ref(fig:prescrip) shows a clear, smooth, and cyclical seasonal trend.
+Values are genereally higher for the summer months and there seems to be an
+exponential increase long-term.
+
+### b {-}
+
+```{r prescrip-diff, fig.cap="Percentage changes from month-to-month in prescription costs."}
+pchange <- diff(prescrip) / prescrip
+xyplot(pchange ~ time(prescrip), type = "l",
+       panel = function(x, y, ...) {
+         panel.xyplot(x, y, ...)
+         panel.xyplot(x, y, pch = as.vector(season(pchange)), col = 1)
+       })
+```
+
+The monthly percentage difference series looks rather stationary.
+
+### c {-}
+
+```{r}
+pres_cos <- lm(pchange ~ harmonic(pchange))
+pander(summary(pres_cos))
+```
+
+We explain 0.31 of the variance. The model is
+significant though.
+
+### d {-}
+
+```{r cos-resid, fig.cap="Residuals for our cosine model."}
+xyplot(rstudent(pres_cos) ~ time(prescrip), type = "l")
+```
+
+The residual plot in Figure \@ref(cos-resid) looks rather random.
+
+
+
 
 
 
