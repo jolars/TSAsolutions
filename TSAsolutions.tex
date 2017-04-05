@@ -111,7 +111,7 @@
   \postauthor{\par}
   \predate{\centering\large\emph}
   \postdate{\par}
-  \date{2017-04-04}
+  \date{2017-04-05}
 
 
 % Redefines (sub)paragraphs to behave more like sections
@@ -125,6 +125,17 @@
 \fi
 
 
+\usepackage{amsthm}
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{lemma}{Lemma}[chapter]
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[chapter]
+\newtheorem{corollary}{Corollary}[chapter]
+\newtheorem{proposition}{Proposition}[chapter]
+\theoremstyle{definition}
+\newtheorem{example}{Example}[chapter]
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
 \begin{document}
 \maketitle
 
@@ -138,8 +149,42 @@
 This book contains solutions to the problems in the book \emph{Time
 Series Analysis: with Applications in R}, third edition, by Cryer and
 Chan. It is provided as a github repository so that anybody may
-contribute to its development. Unlike the book, the solutions here use
-lattice graphics when possible instead of base graphics.
+contribute to its development.
+
+\section*{Dependencies}\label{dependencies}
+\addcontentsline{toc}{section}{Dependencies}
+
+You will need these packages to reproduce the examples in this book:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{install.packages}\NormalTok{(}\KeywordTok{c}\NormalTok{(}
+  \StringTok{"latticeExtra"}\NormalTok{,}
+  \StringTok{"lattice"}\NormalTok{,}
+  \StringTok{"TSA"}\NormalTok{,}
+  \StringTok{"pander"}
+\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Load the packages}
+\KeywordTok{library}\NormalTok{(latticeExtra)}
+\KeywordTok{library}\NormalTok{(TSA)}
+\KeywordTok{library}\NormalTok{(pander)}
+\KeywordTok{library}\NormalTok{(dplyr)}
+\end{Highlighting}
+\end{Shaded}
+
+In order for some of the content in this book to be reproducible, the
+random seed is set as follows.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{set.seed}\NormalTok{(}\DecValTok{1234}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
 
 \chapter{Introduction}\label{introduction}
 
@@ -165,7 +210,7 @@ page 2. The data are in the file named larain.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{TSAsolutions_files/figure-latex/unnamed-chunk-1-1.pdf}
+\includegraphics{TSAsolutions_files/figure-latex/unnamed-chunk-3-1.pdf}
 
 \section{Colors}\label{colors}
 
@@ -181,7 +226,7 @@ data file is named color.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{TSAsolutions_files/figure-latex/unnamed-chunk-2-1.pdf}
+\includegraphics{TSAsolutions_files/figure-latex/unnamed-chunk-4-1.pdf}
 
 \section{Random, normal time series}\label{random-normal-time-series}
 
@@ -198,8 +243,8 @@ Repeat this exercise several times with a new simulation each time.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{TSAsolutions_files/figure-latex/unnamed-chunk-3-1.pdf}
-\includegraphics{TSAsolutions_files/figure-latex/unnamed-chunk-3-2.pdf}
+\includegraphics{TSAsolutions_files/figure-latex/unnamed-chunk-5-1.pdf}
+\includegraphics{TSAsolutions_files/figure-latex/unnamed-chunk-5-2.pdf}
 
 As far as we can tell there is no discernable pattern here.
 
@@ -220,8 +265,8 @@ exercise several times with a new simulation each time.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{TSAsolutions_files/figure-latex/unnamed-chunk-4-1.pdf}
-\includegraphics{TSAsolutions_files/figure-latex/unnamed-chunk-4-2.pdf}
+\includegraphics{TSAsolutions_files/figure-latex/unnamed-chunk-6-1.pdf}
+\includegraphics{TSAsolutions_files/figure-latex/unnamed-chunk-6-2.pdf}
 
 The process appears random, though non-normal.
 
@@ -241,7 +286,7 @@ several times with a new simulation each time.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{TSAsolutions_files/figure-latex/unnamed-chunk-5-1.pdf}
+\includegraphics{TSAsolutions_files/figure-latex/unnamed-chunk-7-1.pdf}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -249,7 +294,7 @@ several times with a new simulation each time.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{TSAsolutions_files/figure-latex/unnamed-chunk-5-2.pdf}
+\includegraphics{TSAsolutions_files/figure-latex/unnamed-chunk-7-2.pdf}
 
 It looks random but not normal, though it should be approximately so,
 considering the distribution that we have sampled from.
@@ -269,7 +314,7 @@ the file named tempdub.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{TSAsolutions_files/figure-latex/unnamed-chunk-6-1.pdf}
+\includegraphics{TSAsolutions_files/figure-latex/unnamed-chunk-8-1.pdf}
 
 \chapter{Fundamental concepts}\label{fundamental-concepts}
 
@@ -356,8 +401,8 @@ The autocovariance is given by
 
 \begin{figure}[htbp]
 \centering
-\includegraphics{TSAsolutions_files/figure-latex/unnamed-chunk-7-1.pdf}
-\caption{\label{fig:unnamed-chunk-7}A white noise time series: no drift,
+\includegraphics{TSAsolutions_files/figure-latex/unnamed-chunk-9-1.pdf}
+\caption{\label{fig:unnamed-chunk-9}A white noise time series: no drift,
 independence between observations.}
 \end{figure}
 
@@ -1262,8 +1307,8 @@ with \(Y_t = \mu + e_t + e_{t-1}\).
 
 \begin{figure}[htbp]
 \centering
-\includegraphics{TSAsolutions_files/figure-latex/unnamed-chunk-8-1.pdf}
-\caption{\label{fig:unnamed-chunk-8}Monthly values of the average hours
+\includegraphics{TSAsolutions_files/figure-latex/unnamed-chunk-10-1.pdf}
+\caption{\label{fig:unnamed-chunk-10}Monthly values of the average hours
 worked per week in the U.S. manufacturing sector.}
 \end{figure}
 
@@ -1288,8 +1333,8 @@ pattern.
 
 \begin{figure}[htbp]
 \centering
-\includegraphics{TSAsolutions_files/figure-latex/unnamed-chunk-9-1.pdf}
-\caption{\label{fig:unnamed-chunk-9}Monthly values of average hours worked
+\includegraphics{TSAsolutions_files/figure-latex/unnamed-chunk-11-1.pdf}
+\caption{\label{fig:unnamed-chunk-11}Monthly values of average hours worked
 per week with superposed initials of months.}
 \end{figure}
 
@@ -1314,8 +1359,8 @@ whilst February and January are low-points, demonstrating a clear trend.
 
 \begin{figure}[htbp]
 \centering
-\includegraphics{TSAsolutions_files/figure-latex/unnamed-chunk-10-1.pdf}
-\caption{\label{fig:unnamed-chunk-10}Monthly average hourly wages for
+\includegraphics{TSAsolutions_files/figure-latex/unnamed-chunk-12-1.pdf}
+\caption{\label{fig:unnamed-chunk-12}Monthly average hourly wages for
 workers in the U.S. apparel and textile industry.}
 \end{figure}
 
@@ -1338,19 +1383,19 @@ wages. Generally, there seems to be larger increases in the fall.
 ## lm(formula = wages ~ time(wages))
 ## 
 ## Residuals:
-##      Min       1Q   Median       3Q      Max 
-## -0.23828 -0.04981  0.01942  0.05845  0.13136 
+##     Min      1Q  Median      3Q     Max 
+## -0.2383 -0.0498  0.0194  0.0585  0.1314 
 ## 
 ## Coefficients:
-##               Estimate Std. Error t value Pr(>|t|)    
-## (Intercept) -5.490e+02  1.115e+01  -49.24   <2e-16 ***
-## time(wages)  2.811e-01  5.618e-03   50.03   <2e-16 ***
+##              Estimate Std. Error t value Pr(>|t|)    
+## (Intercept) -5.49e+02   1.11e+01   -49.2   <2e-16 ***
+## time(wages)  2.81e-01   5.62e-03    50.0   <2e-16 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
-## Residual standard error: 0.08257 on 70 degrees of freedom
-## Multiple R-squared:  0.9728, Adjusted R-squared:  0.9724 
-## F-statistic:  2503 on 1 and 70 DF,  p-value: < 2.2e-16
+## Residual standard error: 0.083 on 70 degrees of freedom
+## Multiple R-squared:  0.973,  Adjusted R-squared:  0.972 
+## F-statistic: 2.5e+03 on 1 and 70 DF,  p-value: <2e-16
 \end{verbatim}
 
 \begin{Shaded}
@@ -1394,20 +1439,20 @@ noise.
 ## lm(formula = wages ~ time(wages) + I(time(wages)^2))
 ## 
 ## Residuals:
-##       Min        1Q    Median        3Q       Max 
-## -0.148318 -0.041440  0.001563  0.050089  0.139839 
+##      Min       1Q   Median       3Q      Max 
+## -0.14832 -0.04144  0.00156  0.05009  0.13984 
 ## 
 ## Coefficients:
-##                    Estimate Std. Error t value Pr(>|t|)    
-## (Intercept)      -8.495e+04  1.019e+04  -8.336 4.87e-12 ***
-## time(wages)       8.534e+01  1.027e+01   8.309 5.44e-12 ***
-## I(time(wages)^2) -2.143e-02  2.588e-03  -8.282 6.10e-12 ***
+##                   Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)      -8.49e+04   1.02e+04   -8.34  4.9e-12 ***
+## time(wages)       8.53e+01   1.03e+01    8.31  5.4e-12 ***
+## I(time(wages)^2) -2.14e-02   2.59e-03   -8.28  6.1e-12 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
-## Residual standard error: 0.05889 on 69 degrees of freedom
-## Multiple R-squared:  0.9864, Adjusted R-squared:  0.986 
-## F-statistic:  2494 on 2 and 69 DF,  p-value: < 2.2e-16
+## Residual standard error: 0.059 on 69 degrees of freedom
+## Multiple R-squared:  0.986,  Adjusted R-squared:  0.986 
+## F-statistic: 2.49e+03 on 2 and 69 DF,  p-value: <2e-16
 \end{verbatim}
 
 \begin{Shaded}
@@ -1451,8 +1496,8 @@ in our model.
 
 \begin{figure}[htbp]
 \centering
-\includegraphics{TSAsolutions_files/figure-latex/unnamed-chunk-13-1.pdf}
-\caption{\label{fig:unnamed-chunk-13}Monthly U.S. beer sales.}
+\includegraphics{TSAsolutions_files/figure-latex/unnamed-chunk-15-1.pdf}
+\caption{\label{fig:unnamed-chunk-15}Monthly U.S. beer sales.}
 \end{figure}
 
 Clear seasonal trends. There is an initial positive trend from 1975 to
@@ -1475,8 +1520,8 @@ around 1981 that then levels out.
 
 \begin{figure}[htbp]
 \centering
-\includegraphics{TSAsolutions_files/figure-latex/unnamed-chunk-14-1.pdf}
-\caption{\label{fig:unnamed-chunk-14}Monthly U.S. beer sales annotated with
+\includegraphics{TSAsolutions_files/figure-latex/unnamed-chunk-16-1.pdf}
+\caption{\label{fig:unnamed-chunk-16}Monthly U.S. beer sales annotated with
 the months' initials.}
 \end{figure}
 
@@ -1490,40 +1535,259 @@ May, June, and July seem to be the high points.
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{beer_fit1 <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(beersales ~}\StringTok{ }\KeywordTok{season}\NormalTok{(beersales))}
-\KeywordTok{summary}\NormalTok{(beer_fit1)}
+\KeywordTok{pander}\NormalTok{(}\KeywordTok{summary}\NormalTok{(beer_fit1))}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{verbatim}
-## 
-## Call:
-## lm(formula = beersales ~ season(beersales))
-## 
-## Residuals:
-##     Min      1Q  Median      3Q     Max 
-## -3.5745 -0.4772  0.1759  0.7312  2.1023 
-## 
-## Coefficients:
-##                            Estimate Std. Error t value Pr(>|t|)    
-## (Intercept)                12.48568    0.26392  47.309  < 2e-16 ***
-## season(beersales)February  -0.14259    0.37324  -0.382 0.702879    
-## season(beersales)March      2.08219    0.37324   5.579 8.77e-08 ***
-## season(beersales)April      2.39760    0.37324   6.424 1.15e-09 ***
-## season(beersales)May        3.59896    0.37324   9.643  < 2e-16 ***
-## season(beersales)June       3.84976    0.37324  10.314  < 2e-16 ***
-## season(beersales)July       3.76866    0.37324  10.097  < 2e-16 ***
-## season(beersales)August     3.60877    0.37324   9.669  < 2e-16 ***
-## season(beersales)September  1.57282    0.37324   4.214 3.96e-05 ***
-## season(beersales)October    1.25444    0.37324   3.361 0.000948 ***
-## season(beersales)November  -0.04797    0.37324  -0.129 0.897881    
-## season(beersales)December  -0.42309    0.37324  -1.134 0.258487    
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## Residual standard error: 1.056 on 180 degrees of freedom
-## Multiple R-squared:  0.7103, Adjusted R-squared:  0.6926 
-## F-statistic: 40.12 on 11 and 180 DF,  p-value: < 2.2e-16
-\end{verbatim}
+\begin{longtable}[c]{@{}ccccc@{}}
+\toprule
+\begin{minipage}[b]{0.37\columnwidth}\centering\strut
+~
+\strut\end{minipage} &
+\begin{minipage}[b]{0.12\columnwidth}\centering\strut
+Estimate
+\strut\end{minipage} &
+\begin{minipage}[b]{0.14\columnwidth}\centering\strut
+Std. Error
+\strut\end{minipage} &
+\begin{minipage}[b]{0.11\columnwidth}\centering\strut
+t value
+\strut\end{minipage} &
+\begin{minipage}[b]{0.11\columnwidth}\centering\strut
+Pr(\textgreater{}\textbar{}t\textbar{})
+\strut\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.37\columnwidth}\centering\strut
+\textbf{season(beersales)February}
+\strut\end{minipage} &
+\begin{minipage}[t]{0.12\columnwidth}\centering\strut
+-0.1426
+\strut\end{minipage} &
+\begin{minipage}[t]{0.14\columnwidth}\centering\strut
+0.3732
+\strut\end{minipage} &
+\begin{minipage}[t]{0.11\columnwidth}\centering\strut
+-0.382
+\strut\end{minipage} &
+\begin{minipage}[t]{0.11\columnwidth}\centering\strut
+0.7029
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.37\columnwidth}\centering\strut
+\textbf{season(beersales)March}
+\strut\end{minipage} &
+\begin{minipage}[t]{0.12\columnwidth}\centering\strut
+2.082
+\strut\end{minipage} &
+\begin{minipage}[t]{0.14\columnwidth}\centering\strut
+0.3732
+\strut\end{minipage} &
+\begin{minipage}[t]{0.11\columnwidth}\centering\strut
+5.579
+\strut\end{minipage} &
+\begin{minipage}[t]{0.11\columnwidth}\centering\strut
+8.771e-08
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.37\columnwidth}\centering\strut
+\textbf{season(beersales)April}
+\strut\end{minipage} &
+\begin{minipage}[t]{0.12\columnwidth}\centering\strut
+2.398
+\strut\end{minipage} &
+\begin{minipage}[t]{0.14\columnwidth}\centering\strut
+0.3732
+\strut\end{minipage} &
+\begin{minipage}[t]{0.11\columnwidth}\centering\strut
+6.424
+\strut\end{minipage} &
+\begin{minipage}[t]{0.11\columnwidth}\centering\strut
+1.151e-09
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.37\columnwidth}\centering\strut
+\textbf{season(beersales)May}
+\strut\end{minipage} &
+\begin{minipage}[t]{0.12\columnwidth}\centering\strut
+3.599
+\strut\end{minipage} &
+\begin{minipage}[t]{0.14\columnwidth}\centering\strut
+0.3732
+\strut\end{minipage} &
+\begin{minipage}[t]{0.11\columnwidth}\centering\strut
+9.643
+\strut\end{minipage} &
+\begin{minipage}[t]{0.11\columnwidth}\centering\strut
+5.322e-18
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.37\columnwidth}\centering\strut
+\textbf{season(beersales)June}
+\strut\end{minipage} &
+\begin{minipage}[t]{0.12\columnwidth}\centering\strut
+3.85
+\strut\end{minipage} &
+\begin{minipage}[t]{0.14\columnwidth}\centering\strut
+0.3732
+\strut\end{minipage} &
+\begin{minipage}[t]{0.11\columnwidth}\centering\strut
+10.31
+\strut\end{minipage} &
+\begin{minipage}[t]{0.11\columnwidth}\centering\strut
+6.813e-20
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.37\columnwidth}\centering\strut
+\textbf{season(beersales)July}
+\strut\end{minipage} &
+\begin{minipage}[t]{0.12\columnwidth}\centering\strut
+3.769
+\strut\end{minipage} &
+\begin{minipage}[t]{0.14\columnwidth}\centering\strut
+0.3732
+\strut\end{minipage} &
+\begin{minipage}[t]{0.11\columnwidth}\centering\strut
+10.1
+\strut\end{minipage} &
+\begin{minipage}[t]{0.11\columnwidth}\centering\strut
+2.812e-19
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.37\columnwidth}\centering\strut
+\textbf{season(beersales)August}
+\strut\end{minipage} &
+\begin{minipage}[t]{0.12\columnwidth}\centering\strut
+3.609
+\strut\end{minipage} &
+\begin{minipage}[t]{0.14\columnwidth}\centering\strut
+0.3732
+\strut\end{minipage} &
+\begin{minipage}[t]{0.11\columnwidth}\centering\strut
+9.669
+\strut\end{minipage} &
+\begin{minipage}[t]{0.11\columnwidth}\centering\strut
+4.494e-18
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.37\columnwidth}\centering\strut
+\textbf{season(beersales)September}
+\strut\end{minipage} &
+\begin{minipage}[t]{0.12\columnwidth}\centering\strut
+1.573
+\strut\end{minipage} &
+\begin{minipage}[t]{0.14\columnwidth}\centering\strut
+0.3732
+\strut\end{minipage} &
+\begin{minipage}[t]{0.11\columnwidth}\centering\strut
+4.214
+\strut\end{minipage} &
+\begin{minipage}[t]{0.11\columnwidth}\centering\strut
+3.964e-05
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.37\columnwidth}\centering\strut
+\textbf{season(beersales)October}
+\strut\end{minipage} &
+\begin{minipage}[t]{0.12\columnwidth}\centering\strut
+1.254
+\strut\end{minipage} &
+\begin{minipage}[t]{0.14\columnwidth}\centering\strut
+0.3732
+\strut\end{minipage} &
+\begin{minipage}[t]{0.11\columnwidth}\centering\strut
+3.361
+\strut\end{minipage} &
+\begin{minipage}[t]{0.11\columnwidth}\centering\strut
+0.0009484
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.37\columnwidth}\centering\strut
+\textbf{season(beersales)November}
+\strut\end{minipage} &
+\begin{minipage}[t]{0.12\columnwidth}\centering\strut
+-0.04797
+\strut\end{minipage} &
+\begin{minipage}[t]{0.14\columnwidth}\centering\strut
+0.3732
+\strut\end{minipage} &
+\begin{minipage}[t]{0.11\columnwidth}\centering\strut
+-0.1285
+\strut\end{minipage} &
+\begin{minipage}[t]{0.11\columnwidth}\centering\strut
+0.8979
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.37\columnwidth}\centering\strut
+\textbf{season(beersales)December}
+\strut\end{minipage} &
+\begin{minipage}[t]{0.12\columnwidth}\centering\strut
+-0.4231
+\strut\end{minipage} &
+\begin{minipage}[t]{0.14\columnwidth}\centering\strut
+0.3732
+\strut\end{minipage} &
+\begin{minipage}[t]{0.11\columnwidth}\centering\strut
+-1.134
+\strut\end{minipage} &
+\begin{minipage}[t]{0.11\columnwidth}\centering\strut
+0.2585
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.37\columnwidth}\centering\strut
+\textbf{(Intercept)}
+\strut\end{minipage} &
+\begin{minipage}[t]{0.12\columnwidth}\centering\strut
+12.49
+\strut\end{minipage} &
+\begin{minipage}[t]{0.14\columnwidth}\centering\strut
+0.2639
+\strut\end{minipage} &
+\begin{minipage}[t]{0.11\columnwidth}\centering\strut
+47.31
+\strut\end{minipage} &
+\begin{minipage}[t]{0.11\columnwidth}\centering\strut
+1.786e-103
+\strut\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
+
+\begin{longtable}[c]{@{}cccc@{}}
+\caption{Fitting linear model: beersales \textasciitilde{}
+season(beersales)}\tabularnewline
+\toprule
+\begin{minipage}[b]{0.18\columnwidth}\centering\strut
+Observations
+\strut\end{minipage} &
+\begin{minipage}[b]{0.27\columnwidth}\centering\strut
+Residual Std. Error
+\strut\end{minipage} &
+\begin{minipage}[b]{0.10\columnwidth}\centering\strut
+\(R^2\)
+\strut\end{minipage} &
+\begin{minipage}[b]{0.20\columnwidth}\centering\strut
+Adjusted \(R^2\)
+\strut\end{minipage}\tabularnewline
+\midrule
+\endfirsthead
+\toprule
+\begin{minipage}[b]{0.18\columnwidth}\centering\strut
+Observations
+\strut\end{minipage} &
+\begin{minipage}[b]{0.27\columnwidth}\centering\strut
+Residual Std. Error
+\strut\end{minipage} &
+\begin{minipage}[b]{0.10\columnwidth}\centering\strut
+\(R^2\)
+\strut\end{minipage} &
+\begin{minipage}[b]{0.20\columnwidth}\centering\strut
+Adjusted \(R^2\)
+\strut\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.18\columnwidth}\centering\strut
+192
+\strut\end{minipage} &
+\begin{minipage}[t]{0.27\columnwidth}\centering\strut
+1.056
+\strut\end{minipage} &
+\begin{minipage}[t]{0.10\columnwidth}\centering\strut
+0.7103
+\strut\end{minipage} &
+\begin{minipage}[t]{0.20\columnwidth}\centering\strut
+0.6926
+\strut\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
 
 All comparisons are made against january. The model helpfully explains
 approximately 0.71 of the variance and is statistically significant.
@@ -1536,17 +1800,1450 @@ expected).
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{xyplot}\NormalTok{(}\KeywordTok{rstudent}\NormalTok{(beer_fit1) ~}\StringTok{ }\KeywordTok{time}\NormalTok{(beersales), }\DataTypeTok{type =} \StringTok{"l"}\NormalTok{,}
-       \DataTypeTok{xlab =} \StringTok{"Fitted values"}\NormalTok{, }\DataTypeTok{ylab =} \StringTok{"Time"}\NormalTok{,}
+       \DataTypeTok{xlab =} \StringTok{"Time"}\NormalTok{, }\DataTypeTok{ylab =} \StringTok{"Studentized residuals"}\NormalTok{,}
        \DataTypeTok{panel =} \NormalTok{function(x, y, ...) \{}
          \KeywordTok{panel.xyplot}\NormalTok{(x, y, ...)}
-         \KeywordTok{panel.text}\NormalTok{(x, y, }\DataTypeTok{labels =} \KeywordTok{season}\NormalTok{(beersales))}
+         \KeywordTok{panel.xyplot}\NormalTok{(x, y, }\DataTypeTok{pch =} \KeywordTok{as.vector}\NormalTok{(}\KeywordTok{season}\NormalTok{(beersales)), }\DataTypeTok{col =} \DecValTok{1}\NormalTok{)}
        \NormalTok{\})}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{TSAsolutions_files/figure-latex/unnamed-chunk-16-1.pdf}
+\begin{figure}[htbp]
+\centering
+\includegraphics{TSAsolutions_files/figure-latex/rst-beer-1.pdf}
+\caption{\label{fig:rst-beer}Beer sales residual plot.}
+\end{figure}
+
+Looking at the residuals in \ref{fig:rst-beer} We don't have a good fit
+to our data; in particular, wee're not capturing the long-term trend.
 
 \subsection*{e}\label{e-2}
 \addcontentsline{toc}{subsection}{e}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{beer_fit2 <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(beersales ~}\StringTok{ }\KeywordTok{season}\NormalTok{(beersales) +}\StringTok{ }\KeywordTok{time}\NormalTok{(beersales) +}
+\StringTok{                  }\KeywordTok{I}\NormalTok{(}\KeywordTok{time}\NormalTok{(beersales) ^}\StringTok{ }\DecValTok{2}\NormalTok{))}
+\KeywordTok{pander}\NormalTok{(}\KeywordTok{summary}\NormalTok{(beer_fit2))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[c]{@{}ccccc@{}}
+\toprule
+\begin{minipage}[b]{0.37\columnwidth}\centering\strut
+~
+\strut\end{minipage} &
+\begin{minipage}[b]{0.12\columnwidth}\centering\strut
+Estimate
+\strut\end{minipage} &
+\begin{minipage}[b]{0.14\columnwidth}\centering\strut
+Std. Error
+\strut\end{minipage} &
+\begin{minipage}[b]{0.11\columnwidth}\centering\strut
+t value
+\strut\end{minipage} &
+\begin{minipage}[b]{0.11\columnwidth}\centering\strut
+Pr(\textgreater{}\textbar{}t\textbar{})
+\strut\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.37\columnwidth}\centering\strut
+\textbf{season(beersales)February}
+\strut\end{minipage} &
+\begin{minipage}[t]{0.12\columnwidth}\centering\strut
+-0.1579
+\strut\end{minipage} &
+\begin{minipage}[t]{0.14\columnwidth}\centering\strut
+0.209
+\strut\end{minipage} &
+\begin{minipage}[t]{0.11\columnwidth}\centering\strut
+-0.7554
+\strut\end{minipage} &
+\begin{minipage}[t]{0.11\columnwidth}\centering\strut
+0.451
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.37\columnwidth}\centering\strut
+\textbf{season(beersales)March}
+\strut\end{minipage} &
+\begin{minipage}[t]{0.12\columnwidth}\centering\strut
+2.052
+\strut\end{minipage} &
+\begin{minipage}[t]{0.14\columnwidth}\centering\strut
+0.209
+\strut\end{minipage} &
+\begin{minipage}[t]{0.11\columnwidth}\centering\strut
+9.818
+\strut\end{minipage} &
+\begin{minipage}[t]{0.11\columnwidth}\centering\strut
+1.864e-18
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.37\columnwidth}\centering\strut
+\textbf{season(beersales)April}
+\strut\end{minipage} &
+\begin{minipage}[t]{0.12\columnwidth}\centering\strut
+2.353
+\strut\end{minipage} &
+\begin{minipage}[t]{0.14\columnwidth}\centering\strut
+0.209
+\strut\end{minipage} &
+\begin{minipage}[t]{0.11\columnwidth}\centering\strut
+11.26
+\strut\end{minipage} &
+\begin{minipage}[t]{0.11\columnwidth}\centering\strut
+1.533e-22
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.37\columnwidth}\centering\strut
+\textbf{season(beersales)May}
+\strut\end{minipage} &
+\begin{minipage}[t]{0.12\columnwidth}\centering\strut
+3.539
+\strut\end{minipage} &
+\begin{minipage}[t]{0.14\columnwidth}\centering\strut
+0.209
+\strut\end{minipage} &
+\begin{minipage}[t]{0.11\columnwidth}\centering\strut
+16.93
+\strut\end{minipage} &
+\begin{minipage}[t]{0.11\columnwidth}\centering\strut
+6.063e-39
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.37\columnwidth}\centering\strut
+\textbf{season(beersales)June}
+\strut\end{minipage} &
+\begin{minipage}[t]{0.12\columnwidth}\centering\strut
+3.776
+\strut\end{minipage} &
+\begin{minipage}[t]{0.14\columnwidth}\centering\strut
+0.209
+\strut\end{minipage} &
+\begin{minipage}[t]{0.11\columnwidth}\centering\strut
+18.06
+\strut\end{minipage} &
+\begin{minipage}[t]{0.11\columnwidth}\centering\strut
+4.117e-42
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.37\columnwidth}\centering\strut
+\textbf{season(beersales)July}
+\strut\end{minipage} &
+\begin{minipage}[t]{0.12\columnwidth}\centering\strut
+3.681
+\strut\end{minipage} &
+\begin{minipage}[t]{0.14\columnwidth}\centering\strut
+0.209
+\strut\end{minipage} &
+\begin{minipage}[t]{0.11\columnwidth}\centering\strut
+17.61
+\strut\end{minipage} &
+\begin{minipage}[t]{0.11\columnwidth}\centering\strut
+7.706e-41
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.37\columnwidth}\centering\strut
+\textbf{season(beersales)August}
+\strut\end{minipage} &
+\begin{minipage}[t]{0.12\columnwidth}\centering\strut
+3.507
+\strut\end{minipage} &
+\begin{minipage}[t]{0.14\columnwidth}\centering\strut
+0.2091
+\strut\end{minipage} &
+\begin{minipage}[t]{0.11\columnwidth}\centering\strut
+16.78
+\strut\end{minipage} &
+\begin{minipage}[t]{0.11\columnwidth}\centering\strut
+1.698e-38
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.37\columnwidth}\centering\strut
+\textbf{season(beersales)September}
+\strut\end{minipage} &
+\begin{minipage}[t]{0.12\columnwidth}\centering\strut
+1.458
+\strut\end{minipage} &
+\begin{minipage}[t]{0.14\columnwidth}\centering\strut
+0.2091
+\strut\end{minipage} &
+\begin{minipage}[t]{0.11\columnwidth}\centering\strut
+6.972
+\strut\end{minipage} &
+\begin{minipage}[t]{0.11\columnwidth}\centering\strut
+5.89e-11
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.37\columnwidth}\centering\strut
+\textbf{season(beersales)October}
+\strut\end{minipage} &
+\begin{minipage}[t]{0.12\columnwidth}\centering\strut
+1.126
+\strut\end{minipage} &
+\begin{minipage}[t]{0.14\columnwidth}\centering\strut
+0.2091
+\strut\end{minipage} &
+\begin{minipage}[t]{0.11\columnwidth}\centering\strut
+5.385
+\strut\end{minipage} &
+\begin{minipage}[t]{0.11\columnwidth}\centering\strut
+2.268e-07
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.37\columnwidth}\centering\strut
+\textbf{season(beersales)November}
+\strut\end{minipage} &
+\begin{minipage}[t]{0.12\columnwidth}\centering\strut
+-0.1894
+\strut\end{minipage} &
+\begin{minipage}[t]{0.14\columnwidth}\centering\strut
+0.2091
+\strut\end{minipage} &
+\begin{minipage}[t]{0.11\columnwidth}\centering\strut
+-0.9059
+\strut\end{minipage} &
+\begin{minipage}[t]{0.11\columnwidth}\centering\strut
+0.3662
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.37\columnwidth}\centering\strut
+\textbf{season(beersales)December}
+\strut\end{minipage} &
+\begin{minipage}[t]{0.12\columnwidth}\centering\strut
+-0.5773
+\strut\end{minipage} &
+\begin{minipage}[t]{0.14\columnwidth}\centering\strut
+0.2092
+\strut\end{minipage} &
+\begin{minipage}[t]{0.11\columnwidth}\centering\strut
+-2.76
+\strut\end{minipage} &
+\begin{minipage}[t]{0.11\columnwidth}\centering\strut
+0.00638
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.37\columnwidth}\centering\strut
+\textbf{time(beersales)}
+\strut\end{minipage} &
+\begin{minipage}[t]{0.12\columnwidth}\centering\strut
+71.96
+\strut\end{minipage} &
+\begin{minipage}[t]{0.14\columnwidth}\centering\strut
+8.867
+\strut\end{minipage} &
+\begin{minipage}[t]{0.11\columnwidth}\centering\strut
+8.115
+\strut\end{minipage} &
+\begin{minipage}[t]{0.11\columnwidth}\centering\strut
+7.703e-14
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.37\columnwidth}\centering\strut
+\textbf{I(time(beersales)\^{}2)}
+\strut\end{minipage} &
+\begin{minipage}[t]{0.12\columnwidth}\centering\strut
+-0.0181
+\strut\end{minipage} &
+\begin{minipage}[t]{0.14\columnwidth}\centering\strut
+0.002236
+\strut\end{minipage} &
+\begin{minipage}[t]{0.11\columnwidth}\centering\strut
+-8.096
+\strut\end{minipage} &
+\begin{minipage}[t]{0.11\columnwidth}\centering\strut
+8.633e-14
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.37\columnwidth}\centering\strut
+\textbf{(Intercept)}
+\strut\end{minipage} &
+\begin{minipage}[t]{0.12\columnwidth}\centering\strut
+-71498
+\strut\end{minipage} &
+\begin{minipage}[t]{0.14\columnwidth}\centering\strut
+8791
+\strut\end{minipage} &
+\begin{minipage}[t]{0.11\columnwidth}\centering\strut
+-8.133
+\strut\end{minipage} &
+\begin{minipage}[t]{0.11\columnwidth}\centering\strut
+6.932e-14
+\strut\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
+
+\begin{longtable}[c]{@{}cccc@{}}
+\caption{Fitting linear model: beersales \textasciitilde{}
+season(beersales) + time(beersales) +
+I(time(beersales)\^{}2)}\tabularnewline
+\toprule
+\begin{minipage}[b]{0.18\columnwidth}\centering\strut
+Observations
+\strut\end{minipage} &
+\begin{minipage}[b]{0.27\columnwidth}\centering\strut
+Residual Std. Error
+\strut\end{minipage} &
+\begin{minipage}[b]{0.10\columnwidth}\centering\strut
+\(R^2\)
+\strut\end{minipage} &
+\begin{minipage}[b]{0.20\columnwidth}\centering\strut
+Adjusted \(R^2\)
+\strut\end{minipage}\tabularnewline
+\midrule
+\endfirsthead
+\toprule
+\begin{minipage}[b]{0.18\columnwidth}\centering\strut
+Observations
+\strut\end{minipage} &
+\begin{minipage}[b]{0.27\columnwidth}\centering\strut
+Residual Std. Error
+\strut\end{minipage} &
+\begin{minipage}[b]{0.10\columnwidth}\centering\strut
+\(R^2\)
+\strut\end{minipage} &
+\begin{minipage}[b]{0.20\columnwidth}\centering\strut
+Adjusted \(R^2\)
+\strut\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.18\columnwidth}\centering\strut
+192
+\strut\end{minipage} &
+\begin{minipage}[t]{0.27\columnwidth}\centering\strut
+0.5911
+\strut\end{minipage} &
+\begin{minipage}[t]{0.10\columnwidth}\centering\strut
+0.9102
+\strut\end{minipage} &
+\begin{minipage}[t]{0.20\columnwidth}\centering\strut
+0.9036
+\strut\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
+
+This model fits the data better, explaining roughly 0.91 of the
+variance.
+
+\subsection*{f}\label{f}
+\addcontentsline{toc}{subsection}{f}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{xyplot}\NormalTok{(}\KeywordTok{rstudent}\NormalTok{(beer_fit2) ~}\StringTok{ }\KeywordTok{time}\NormalTok{(beersales), }\DataTypeTok{type =} \StringTok{"l"}\NormalTok{,}
+       \DataTypeTok{xlab =} \StringTok{"Time"}\NormalTok{, }\DataTypeTok{yla =} \StringTok{"Studentized residuals"}\NormalTok{,}
+       \DataTypeTok{panel =} \NormalTok{function(x, y, ...) \{}
+         \KeywordTok{panel.xyplot}\NormalTok{(x, y, ...)}
+         \KeywordTok{panel.xyplot}\NormalTok{(x, y, }\DataTypeTok{pch =} \KeywordTok{as.vector}\NormalTok{(}\KeywordTok{season}\NormalTok{(beersales)), }\DataTypeTok{col =} \DecValTok{1}\NormalTok{)}
+       \NormalTok{\})}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics{TSAsolutions_files/figure-latex/rst-beer2-1.pdf}
+\caption{\label{fig:rst-beer2}Beer sales residual plot from the quadratic
+fit.}
+\end{figure}
+
+Many of the values are still not being predicted successfully but at
+least we're able to model the long term trend better.
+
+\section{Winnebago}\label{winnebago}
+
+\subsection*{a}\label{a-24}
+\addcontentsline{toc}{subsection}{a}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{data}\NormalTok{(winnebago)}
+\KeywordTok{xyplot}\NormalTok{(winnebago)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics{TSAsolutions_files/figure-latex/unnamed-chunk-19-1.pdf}
+\caption{\label{fig:unnamed-chunk-19}Monthly unit sales of recreational
+vehicles from Winnebago.}
+\end{figure}
+
+\subsection*{b}\label{b-24}
+\addcontentsline{toc}{subsection}{b}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{winn_fit1 <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(winnebago ~}\StringTok{ }\KeywordTok{time}\NormalTok{(winnebago))}
+\KeywordTok{summary}\NormalTok{(winn_fit1) %>%}
+\StringTok{  }\KeywordTok{pander}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[c]{@{}ccccc@{}}
+\toprule
+\begin{minipage}[b]{0.26\columnwidth}\centering\strut
+~
+\strut\end{minipage} &
+\begin{minipage}[b]{0.13\columnwidth}\centering\strut
+Estimate
+\strut\end{minipage} &
+\begin{minipage}[b]{0.16\columnwidth}\centering\strut
+Std. Error
+\strut\end{minipage} &
+\begin{minipage}[b]{0.12\columnwidth}\centering\strut
+t value
+\strut\end{minipage} &
+\begin{minipage}[b]{0.12\columnwidth}\centering\strut
+Pr(\textgreater{}\textbar{}t\textbar{})
+\strut\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.26\columnwidth}\centering\strut
+\textbf{time(winnebago)}
+\strut\end{minipage} &
+\begin{minipage}[t]{0.13\columnwidth}\centering\strut
+200.7
+\strut\end{minipage} &
+\begin{minipage}[t]{0.16\columnwidth}\centering\strut
+17.03
+\strut\end{minipage} &
+\begin{minipage}[t]{0.12\columnwidth}\centering\strut
+11.79
+\strut\end{minipage} &
+\begin{minipage}[t]{0.12\columnwidth}\centering\strut
+1.777e-17
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.26\columnwidth}\centering\strut
+\textbf{(Intercept)}
+\strut\end{minipage} &
+\begin{minipage}[t]{0.13\columnwidth}\centering\strut
+-394886
+\strut\end{minipage} &
+\begin{minipage}[t]{0.16\columnwidth}\centering\strut
+33540
+\strut\end{minipage} &
+\begin{minipage}[t]{0.12\columnwidth}\centering\strut
+-11.77
+\strut\end{minipage} &
+\begin{minipage}[t]{0.12\columnwidth}\centering\strut
+1.87e-17
+\strut\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
+
+\begin{longtable}[c]{@{}cccc@{}}
+\caption{Fitting linear model: winnebago \textasciitilde{}
+time(winnebago)}\tabularnewline
+\toprule
+\begin{minipage}[b]{0.18\columnwidth}\centering\strut
+Observations
+\strut\end{minipage} &
+\begin{minipage}[b]{0.27\columnwidth}\centering\strut
+Residual Std. Error
+\strut\end{minipage} &
+\begin{minipage}[b]{0.10\columnwidth}\centering\strut
+\(R^2\)
+\strut\end{minipage} &
+\begin{minipage}[b]{0.20\columnwidth}\centering\strut
+Adjusted \(R^2\)
+\strut\end{minipage}\tabularnewline
+\midrule
+\endfirsthead
+\toprule
+\begin{minipage}[b]{0.18\columnwidth}\centering\strut
+Observations
+\strut\end{minipage} &
+\begin{minipage}[b]{0.27\columnwidth}\centering\strut
+Residual Std. Error
+\strut\end{minipage} &
+\begin{minipage}[b]{0.10\columnwidth}\centering\strut
+\(R^2\)
+\strut\end{minipage} &
+\begin{minipage}[b]{0.20\columnwidth}\centering\strut
+Adjusted \(R^2\)
+\strut\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.18\columnwidth}\centering\strut
+64
+\strut\end{minipage} &
+\begin{minipage}[t]{0.27\columnwidth}\centering\strut
+209.7
+\strut\end{minipage} &
+\begin{minipage}[t]{0.10\columnwidth}\centering\strut
+0.6915
+\strut\end{minipage} &
+\begin{minipage}[t]{0.20\columnwidth}\centering\strut
+0.6865
+\strut\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
+
+The model is significant and explains 0.69 of the variance.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{xyplot}\NormalTok{(}\KeywordTok{rstudent}\NormalTok{(winn_fit1) ~}\StringTok{ }\KeywordTok{time}\NormalTok{(winnebago), }\DataTypeTok{type =} \StringTok{"l"}\NormalTok{,}
+       \DataTypeTok{xlab =} \StringTok{"Time"}\NormalTok{, }\DataTypeTok{ylab =} \StringTok{"Studentized residuals"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics{TSAsolutions_files/figure-latex/winnebago-lm-res-1.pdf}
+\caption{\label{fig:winnebago-lm-res}Residuals for the linear fit for the
+winnebago data.}
+\end{figure}
+
+The fit is poor (Figure \ref{winnebago-lm-res}. It is not random and it
+is clear that we're making worse predictions for later yers.
+
+\subsection*{c}\label{c-13}
+\addcontentsline{toc}{subsection}{c}
+
+To produce a better fit, we transform the outcome with the natural
+logarithm.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{winn_fit_log <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(}\KeywordTok{log}\NormalTok{(winnebago) ~}\StringTok{ }\KeywordTok{time}\NormalTok{(winnebago))}
+\KeywordTok{pander}\NormalTok{(}\KeywordTok{summary}\NormalTok{(winn_fit_log))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[c]{@{}ccccc@{}}
+\toprule
+\begin{minipage}[b]{0.26\columnwidth}\centering\strut
+~
+\strut\end{minipage} &
+\begin{minipage}[b]{0.13\columnwidth}\centering\strut
+Estimate
+\strut\end{minipage} &
+\begin{minipage}[b]{0.16\columnwidth}\centering\strut
+Std. Error
+\strut\end{minipage} &
+\begin{minipage}[b]{0.12\columnwidth}\centering\strut
+t value
+\strut\end{minipage} &
+\begin{minipage}[b]{0.12\columnwidth}\centering\strut
+Pr(\textgreater{}\textbar{}t\textbar{})
+\strut\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.26\columnwidth}\centering\strut
+\textbf{time(winnebago)}
+\strut\end{minipage} &
+\begin{minipage}[t]{0.13\columnwidth}\centering\strut
+0.5031
+\strut\end{minipage} &
+\begin{minipage}[t]{0.16\columnwidth}\centering\strut
+0.03199
+\strut\end{minipage} &
+\begin{minipage}[t]{0.12\columnwidth}\centering\strut
+15.73
+\strut\end{minipage} &
+\begin{minipage}[t]{0.12\columnwidth}\centering\strut
+2.575e-23
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.26\columnwidth}\centering\strut
+\textbf{(Intercept)}
+\strut\end{minipage} &
+\begin{minipage}[t]{0.13\columnwidth}\centering\strut
+-984.9
+\strut\end{minipage} &
+\begin{minipage}[t]{0.16\columnwidth}\centering\strut
+62.99
+\strut\end{minipage} &
+\begin{minipage}[t]{0.12\columnwidth}\centering\strut
+-15.64
+\strut\end{minipage} &
+\begin{minipage}[t]{0.12\columnwidth}\centering\strut
+3.45e-23
+\strut\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
+
+\begin{longtable}[c]{@{}cccc@{}}
+\caption{Fitting linear model: log(winnebago) \textasciitilde{}
+time(winnebago)}\tabularnewline
+\toprule
+\begin{minipage}[b]{0.18\columnwidth}\centering\strut
+Observations
+\strut\end{minipage} &
+\begin{minipage}[b]{0.27\columnwidth}\centering\strut
+Residual Std. Error
+\strut\end{minipage} &
+\begin{minipage}[b]{0.10\columnwidth}\centering\strut
+\(R^2\)
+\strut\end{minipage} &
+\begin{minipage}[b]{0.20\columnwidth}\centering\strut
+Adjusted \(R^2\)
+\strut\end{minipage}\tabularnewline
+\midrule
+\endfirsthead
+\toprule
+\begin{minipage}[b]{0.18\columnwidth}\centering\strut
+Observations
+\strut\end{minipage} &
+\begin{minipage}[b]{0.27\columnwidth}\centering\strut
+Residual Std. Error
+\strut\end{minipage} &
+\begin{minipage}[b]{0.10\columnwidth}\centering\strut
+\(R^2\)
+\strut\end{minipage} &
+\begin{minipage}[b]{0.20\columnwidth}\centering\strut
+Adjusted \(R^2\)
+\strut\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.18\columnwidth}\centering\strut
+64
+\strut\end{minipage} &
+\begin{minipage}[t]{0.27\columnwidth}\centering\strut
+0.3939
+\strut\end{minipage} &
+\begin{minipage}[t]{0.10\columnwidth}\centering\strut
+0.7996
+\strut\end{minipage} &
+\begin{minipage}[t]{0.20\columnwidth}\centering\strut
+0.7964
+\strut\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
+
+The model is better, explaining almost 0.8 of the variance.
+
+\subsection*{d}\label{d-4}
+\addcontentsline{toc}{subsection}{d}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{xyplot}\NormalTok{(}\KeywordTok{rstudent}\NormalTok{(winn_fit_log) ~}\StringTok{ }\KeywordTok{time}\NormalTok{(winnebago), }\DataTypeTok{type =} \StringTok{"l"}\NormalTok{,}
+       \DataTypeTok{xlab =} \StringTok{"Time"}\NormalTok{, }\DataTypeTok{ylab =} \StringTok{"Studentized residuals"}\NormalTok{,}
+       \DataTypeTok{panel =} \NormalTok{function(x, y, ...) \{}
+         \KeywordTok{panel.xyplot}\NormalTok{(x, y, ...)}
+         \KeywordTok{panel.xyplot}\NormalTok{(x, y, }\DataTypeTok{pch =} \KeywordTok{as.vector}\NormalTok{(}\KeywordTok{season}\NormalTok{(winnebago)), }\DataTypeTok{col =} \DecValTok{1}\NormalTok{)}
+       \NormalTok{\})}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics{TSAsolutions_files/figure-latex/winnebago-log-res-1.pdf}
+\caption{\label{fig:winnebago-log-res}Residual plot after natural log
+transformation.}
+\end{figure}
+
+This looks more like random noise (Figure \ref{winnebago-log-res}.
+Values still cling together somewhat but it is certainly better than the
+linear model. We're still systematically overpredictinig the values for
+some months, however.
+
+\subsection*{e}\label{e-3}
+\addcontentsline{toc}{subsection}{e}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{winn_fit_seasonal <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(}\KeywordTok{log}\NormalTok{(winnebago) ~}\StringTok{ }\KeywordTok{season}\NormalTok{(winnebago) +}\StringTok{ }\KeywordTok{time}\NormalTok{(winnebago))}
+\KeywordTok{pander}\NormalTok{(}\KeywordTok{summary}\NormalTok{(winn_fit_seasonal))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[c]{@{}ccccc@{}}
+\toprule
+\begin{minipage}[b]{0.37\columnwidth}\centering\strut
+~
+\strut\end{minipage} &
+\begin{minipage}[b]{0.12\columnwidth}\centering\strut
+Estimate
+\strut\end{minipage} &
+\begin{minipage}[b]{0.14\columnwidth}\centering\strut
+Std. Error
+\strut\end{minipage} &
+\begin{minipage}[b]{0.11\columnwidth}\centering\strut
+t value
+\strut\end{minipage} &
+\begin{minipage}[b]{0.11\columnwidth}\centering\strut
+Pr(\textgreater{}\textbar{}t\textbar{})
+\strut\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.37\columnwidth}\centering\strut
+\textbf{season(winnebago)February}
+\strut\end{minipage} &
+\begin{minipage}[t]{0.12\columnwidth}\centering\strut
+0.6244
+\strut\end{minipage} &
+\begin{minipage}[t]{0.14\columnwidth}\centering\strut
+0.1818
+\strut\end{minipage} &
+\begin{minipage}[t]{0.11\columnwidth}\centering\strut
+3.434
+\strut\end{minipage} &
+\begin{minipage}[t]{0.11\columnwidth}\centering\strut
+0.001188
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.37\columnwidth}\centering\strut
+\textbf{season(winnebago)March}
+\strut\end{minipage} &
+\begin{minipage}[t]{0.12\columnwidth}\centering\strut
+0.6822
+\strut\end{minipage} &
+\begin{minipage}[t]{0.14\columnwidth}\centering\strut
+0.1909
+\strut\end{minipage} &
+\begin{minipage}[t]{0.11\columnwidth}\centering\strut
+3.574
+\strut\end{minipage} &
+\begin{minipage}[t]{0.11\columnwidth}\centering\strut
+0.0007793
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.37\columnwidth}\centering\strut
+\textbf{season(winnebago)April}
+\strut\end{minipage} &
+\begin{minipage}[t]{0.12\columnwidth}\centering\strut
+0.8096
+\strut\end{minipage} &
+\begin{minipage}[t]{0.14\columnwidth}\centering\strut
+0.1908
+\strut\end{minipage} &
+\begin{minipage}[t]{0.11\columnwidth}\centering\strut
+4.243
+\strut\end{minipage} &
+\begin{minipage}[t]{0.11\columnwidth}\centering\strut
+9.301e-05
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.37\columnwidth}\centering\strut
+\textbf{season(winnebago)May}
+\strut\end{minipage} &
+\begin{minipage}[t]{0.12\columnwidth}\centering\strut
+0.8695
+\strut\end{minipage} &
+\begin{minipage}[t]{0.14\columnwidth}\centering\strut
+0.1907
+\strut\end{minipage} &
+\begin{minipage}[t]{0.11\columnwidth}\centering\strut
+4.559
+\strut\end{minipage} &
+\begin{minipage}[t]{0.11\columnwidth}\centering\strut
+3.246e-05
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.37\columnwidth}\centering\strut
+\textbf{season(winnebago)June}
+\strut\end{minipage} &
+\begin{minipage}[t]{0.12\columnwidth}\centering\strut
+0.8631
+\strut\end{minipage} &
+\begin{minipage}[t]{0.14\columnwidth}\centering\strut
+0.1907
+\strut\end{minipage} &
+\begin{minipage}[t]{0.11\columnwidth}\centering\strut
+4.526
+\strut\end{minipage} &
+\begin{minipage}[t]{0.11\columnwidth}\centering\strut
+3.627e-05
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.37\columnwidth}\centering\strut
+\textbf{season(winnebago)July}
+\strut\end{minipage} &
+\begin{minipage}[t]{0.12\columnwidth}\centering\strut
+0.5539
+\strut\end{minipage} &
+\begin{minipage}[t]{0.14\columnwidth}\centering\strut
+0.1907
+\strut\end{minipage} &
+\begin{minipage}[t]{0.11\columnwidth}\centering\strut
+2.905
+\strut\end{minipage} &
+\begin{minipage}[t]{0.11\columnwidth}\centering\strut
+0.00542
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.37\columnwidth}\centering\strut
+\textbf{season(winnebago)August}
+\strut\end{minipage} &
+\begin{minipage}[t]{0.12\columnwidth}\centering\strut
+0.5699
+\strut\end{minipage} &
+\begin{minipage}[t]{0.14\columnwidth}\centering\strut
+0.1907
+\strut\end{minipage} &
+\begin{minipage}[t]{0.11\columnwidth}\centering\strut
+2.988
+\strut\end{minipage} &
+\begin{minipage}[t]{0.11\columnwidth}\centering\strut
+0.004305
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.37\columnwidth}\centering\strut
+\textbf{season(winnebago)September}
+\strut\end{minipage} &
+\begin{minipage}[t]{0.12\columnwidth}\centering\strut
+0.5757
+\strut\end{minipage} &
+\begin{minipage}[t]{0.14\columnwidth}\centering\strut
+0.1907
+\strut\end{minipage} &
+\begin{minipage}[t]{0.11\columnwidth}\centering\strut
+3.018
+\strut\end{minipage} &
+\begin{minipage}[t]{0.11\columnwidth}\centering\strut
+0.00396
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.37\columnwidth}\centering\strut
+\textbf{season(winnebago)October}
+\strut\end{minipage} &
+\begin{minipage}[t]{0.12\columnwidth}\centering\strut
+0.2635
+\strut\end{minipage} &
+\begin{minipage}[t]{0.14\columnwidth}\centering\strut
+0.1908
+\strut\end{minipage} &
+\begin{minipage}[t]{0.11\columnwidth}\centering\strut
+1.381
+\strut\end{minipage} &
+\begin{minipage}[t]{0.11\columnwidth}\centering\strut
+0.1733
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.37\columnwidth}\centering\strut
+\textbf{season(winnebago)November}
+\strut\end{minipage} &
+\begin{minipage}[t]{0.12\columnwidth}\centering\strut
+0.2868
+\strut\end{minipage} &
+\begin{minipage}[t]{0.14\columnwidth}\centering\strut
+0.1819
+\strut\end{minipage} &
+\begin{minipage}[t]{0.11\columnwidth}\centering\strut
+1.577
+\strut\end{minipage} &
+\begin{minipage}[t]{0.11\columnwidth}\centering\strut
+0.1209
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.37\columnwidth}\centering\strut
+\textbf{season(winnebago)December}
+\strut\end{minipage} &
+\begin{minipage}[t]{0.12\columnwidth}\centering\strut
+0.248
+\strut\end{minipage} &
+\begin{minipage}[t]{0.14\columnwidth}\centering\strut
+0.1818
+\strut\end{minipage} &
+\begin{minipage}[t]{0.11\columnwidth}\centering\strut
+1.364
+\strut\end{minipage} &
+\begin{minipage}[t]{0.11\columnwidth}\centering\strut
+0.1785
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.37\columnwidth}\centering\strut
+\textbf{time(winnebago)}
+\strut\end{minipage} &
+\begin{minipage}[t]{0.12\columnwidth}\centering\strut
+0.5091
+\strut\end{minipage} &
+\begin{minipage}[t]{0.14\columnwidth}\centering\strut
+0.02571
+\strut\end{minipage} &
+\begin{minipage}[t]{0.11\columnwidth}\centering\strut
+19.8
+\strut\end{minipage} &
+\begin{minipage}[t]{0.11\columnwidth}\centering\strut
+1.351e-25
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.37\columnwidth}\centering\strut
+\textbf{(Intercept)}
+\strut\end{minipage} &
+\begin{minipage}[t]{0.12\columnwidth}\centering\strut
+-997.3
+\strut\end{minipage} &
+\begin{minipage}[t]{0.14\columnwidth}\centering\strut
+50.64
+\strut\end{minipage} &
+\begin{minipage}[t]{0.11\columnwidth}\centering\strut
+-19.69
+\strut\end{minipage} &
+\begin{minipage}[t]{0.11\columnwidth}\centering\strut
+1.718e-25
+\strut\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
+
+\begin{longtable}[c]{@{}cccc@{}}
+\caption{Fitting linear model: log(winnebago) \textasciitilde{}
+season(winnebago) + time(winnebago)}\tabularnewline
+\toprule
+\begin{minipage}[b]{0.18\columnwidth}\centering\strut
+Observations
+\strut\end{minipage} &
+\begin{minipage}[b]{0.27\columnwidth}\centering\strut
+Residual Std. Error
+\strut\end{minipage} &
+\begin{minipage}[b]{0.10\columnwidth}\centering\strut
+\(R^2\)
+\strut\end{minipage} &
+\begin{minipage}[b]{0.20\columnwidth}\centering\strut
+Adjusted \(R^2\)
+\strut\end{minipage}\tabularnewline
+\midrule
+\endfirsthead
+\toprule
+\begin{minipage}[b]{0.18\columnwidth}\centering\strut
+Observations
+\strut\end{minipage} &
+\begin{minipage}[b]{0.27\columnwidth}\centering\strut
+Residual Std. Error
+\strut\end{minipage} &
+\begin{minipage}[b]{0.10\columnwidth}\centering\strut
+\(R^2\)
+\strut\end{minipage} &
+\begin{minipage}[b]{0.20\columnwidth}\centering\strut
+Adjusted \(R^2\)
+\strut\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.18\columnwidth}\centering\strut
+64
+\strut\end{minipage} &
+\begin{minipage}[t]{0.27\columnwidth}\centering\strut
+0.3149
+\strut\end{minipage} &
+\begin{minipage}[t]{0.10\columnwidth}\centering\strut
+0.8946
+\strut\end{minipage} &
+\begin{minipage}[t]{0.20\columnwidth}\centering\strut
+0.8699
+\strut\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
+
+The fit is improved further. We have a R\textsuperscript{2} of 0.89 and
+significance for most of our seasonal means as well as the time trend.
+
+\subsection*{f}\label{f-1}
+\addcontentsline{toc}{subsection}{f}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{xyplot}\NormalTok{(}\KeywordTok{rstudent}\NormalTok{(winn_fit_seasonal) ~}\StringTok{ }\KeywordTok{time}\NormalTok{(winnebago), }\DataTypeTok{type =} \StringTok{"l"}\NormalTok{,}
+       \DataTypeTok{xlab =} \StringTok{"Time"}\NormalTok{, }\DataTypeTok{ylab =} \StringTok{"Studentized residuals"}\NormalTok{,}
+       \DataTypeTok{panel =} \NormalTok{function(x, y, ...) \{}
+         \KeywordTok{panel.xyplot}\NormalTok{(x, y, ...)}
+         \KeywordTok{panel.xyplot}\NormalTok{(x, y, }\DataTypeTok{col =} \DecValTok{1}\NormalTok{, }\DataTypeTok{pch =} \KeywordTok{as.vector}\NormalTok{(}\KeywordTok{season}\NormalTok{(winnebago)))}
+       \NormalTok{\})}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{TSAsolutions_files/figure-latex/unnamed-chunk-23-1.pdf}
+
+This is acceptable even if our residuals are quite large for some of the
+values, notably at the start of the series.
+
+\section{Retail}\label{retail}
+
+\subsection*{a}\label{a-25}
+\addcontentsline{toc}{subsection}{a}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{data}\NormalTok{(retail)}
+\KeywordTok{xyplot}\NormalTok{(retail, }\DataTypeTok{panel =} \NormalTok{function(x, y, ...) \{}
+  \KeywordTok{panel.xyplot}\NormalTok{(x, y, ...)}
+  \KeywordTok{panel.xyplot}\NormalTok{(x, y, }\DataTypeTok{pch =} \KeywordTok{as.vector}\NormalTok{(}\KeywordTok{season}\NormalTok{(retail)), }\DataTypeTok{col =} \DecValTok{1}\NormalTok{)}
+\NormalTok{\})}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics{TSAsolutions_files/figure-latex/unnamed-chunk-24-1.pdf}
+\caption{\label{fig:unnamed-chunk-24}Total retail sales in the U.K. in
+billions pounds.}
+\end{figure}
+
+Plotting the retail sales trend there seems to be a long-term linear
+trend as well as heavy seasonality in tht December -- and to slighter
+extent also November and October -- exhibit regular surges in retail
+sales.
+
+\subsection*{b}\label{b-25}
+\addcontentsline{toc}{subsection}{b}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{retail_lm <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(retail ~}\StringTok{ }\KeywordTok{season}\NormalTok{(retail) +}\StringTok{ }\KeywordTok{time}\NormalTok{(retail))}
+\KeywordTok{pander}\NormalTok{(}\KeywordTok{summary}\NormalTok{(retail_lm))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[c]{@{}ccccc@{}}
+\toprule
+\begin{minipage}[b]{0.35\columnwidth}\centering\strut
+~
+\strut\end{minipage} &
+\begin{minipage}[b]{0.13\columnwidth}\centering\strut
+Estimate
+\strut\end{minipage} &
+\begin{minipage}[b]{0.15\columnwidth}\centering\strut
+Std. Error
+\strut\end{minipage} &
+\begin{minipage}[b]{0.12\columnwidth}\centering\strut
+t value
+\strut\end{minipage} &
+\begin{minipage}[b]{0.12\columnwidth}\centering\strut
+Pr(\textgreater{}\textbar{}t\textbar{})
+\strut\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.35\columnwidth}\centering\strut
+\textbf{season(retail)February}
+\strut\end{minipage} &
+\begin{minipage}[t]{0.13\columnwidth}\centering\strut
+-3.015
+\strut\end{minipage} &
+\begin{minipage}[t]{0.15\columnwidth}\centering\strut
+1.29
+\strut\end{minipage} &
+\begin{minipage}[t]{0.12\columnwidth}\centering\strut
+-2.337
+\strut\end{minipage} &
+\begin{minipage}[t]{0.12\columnwidth}\centering\strut
+0.02024
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.35\columnwidth}\centering\strut
+\textbf{season(retail)March}
+\strut\end{minipage} &
+\begin{minipage}[t]{0.13\columnwidth}\centering\strut
+0.07469
+\strut\end{minipage} &
+\begin{minipage}[t]{0.15\columnwidth}\centering\strut
+1.29
+\strut\end{minipage} &
+\begin{minipage}[t]{0.12\columnwidth}\centering\strut
+0.05791
+\strut\end{minipage} &
+\begin{minipage}[t]{0.12\columnwidth}\centering\strut
+0.9539
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.35\columnwidth}\centering\strut
+\textbf{season(retail)April}
+\strut\end{minipage} &
+\begin{minipage}[t]{0.13\columnwidth}\centering\strut
+3.447
+\strut\end{minipage} &
+\begin{minipage}[t]{0.15\columnwidth}\centering\strut
+1.305
+\strut\end{minipage} &
+\begin{minipage}[t]{0.12\columnwidth}\centering\strut
+2.641
+\strut\end{minipage} &
+\begin{minipage}[t]{0.12\columnwidth}\centering\strut
+0.008801
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.35\columnwidth}\centering\strut
+\textbf{season(retail)May}
+\strut\end{minipage} &
+\begin{minipage}[t]{0.13\columnwidth}\centering\strut
+3.108
+\strut\end{minipage} &
+\begin{minipage}[t]{0.15\columnwidth}\centering\strut
+1.305
+\strut\end{minipage} &
+\begin{minipage}[t]{0.12\columnwidth}\centering\strut
+2.381
+\strut\end{minipage} &
+\begin{minipage}[t]{0.12\columnwidth}\centering\strut
+0.01803
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.35\columnwidth}\centering\strut
+\textbf{season(retail)June}
+\strut\end{minipage} &
+\begin{minipage}[t]{0.13\columnwidth}\centering\strut
+3.074
+\strut\end{minipage} &
+\begin{minipage}[t]{0.15\columnwidth}\centering\strut
+1.305
+\strut\end{minipage} &
+\begin{minipage}[t]{0.12\columnwidth}\centering\strut
+2.355
+\strut\end{minipage} &
+\begin{minipage}[t]{0.12\columnwidth}\centering\strut
+0.01932
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.35\columnwidth}\centering\strut
+\textbf{season(retail)July}
+\strut\end{minipage} &
+\begin{minipage}[t]{0.13\columnwidth}\centering\strut
+6.053
+\strut\end{minipage} &
+\begin{minipage}[t]{0.15\columnwidth}\centering\strut
+1.305
+\strut\end{minipage} &
+\begin{minipage}[t]{0.12\columnwidth}\centering\strut
+4.638
+\strut\end{minipage} &
+\begin{minipage}[t]{0.12\columnwidth}\centering\strut
+5.757e-06
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.35\columnwidth}\centering\strut
+\textbf{season(retail)August}
+\strut\end{minipage} &
+\begin{minipage}[t]{0.13\columnwidth}\centering\strut
+3.138
+\strut\end{minipage} &
+\begin{minipage}[t]{0.15\columnwidth}\centering\strut
+1.305
+\strut\end{minipage} &
+\begin{minipage}[t]{0.12\columnwidth}\centering\strut
+2.404
+\strut\end{minipage} &
+\begin{minipage}[t]{0.12\columnwidth}\centering\strut
+0.01695
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.35\columnwidth}\centering\strut
+\textbf{season(retail)September}
+\strut\end{minipage} &
+\begin{minipage}[t]{0.13\columnwidth}\centering\strut
+3.428
+\strut\end{minipage} &
+\begin{minipage}[t]{0.15\columnwidth}\centering\strut
+1.305
+\strut\end{minipage} &
+\begin{minipage}[t]{0.12\columnwidth}\centering\strut
+2.626
+\strut\end{minipage} &
+\begin{minipage}[t]{0.12\columnwidth}\centering\strut
+0.009187
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.35\columnwidth}\centering\strut
+\textbf{season(retail)October}
+\strut\end{minipage} &
+\begin{minipage}[t]{0.13\columnwidth}\centering\strut
+8.555
+\strut\end{minipage} &
+\begin{minipage}[t]{0.15\columnwidth}\centering\strut
+1.305
+\strut\end{minipage} &
+\begin{minipage}[t]{0.12\columnwidth}\centering\strut
+6.555
+\strut\end{minipage} &
+\begin{minipage}[t]{0.12\columnwidth}\centering\strut
+3.336e-10
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.35\columnwidth}\centering\strut
+\textbf{season(retail)November}
+\strut\end{minipage} &
+\begin{minipage}[t]{0.13\columnwidth}\centering\strut
+20.82
+\strut\end{minipage} &
+\begin{minipage}[t]{0.15\columnwidth}\centering\strut
+1.305
+\strut\end{minipage} &
+\begin{minipage}[t]{0.12\columnwidth}\centering\strut
+15.95
+\strut\end{minipage} &
+\begin{minipage}[t]{0.12\columnwidth}\centering\strut
+1.274e-39
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.35\columnwidth}\centering\strut
+\textbf{season(retail)December}
+\strut\end{minipage} &
+\begin{minipage}[t]{0.13\columnwidth}\centering\strut
+52.54
+\strut\end{minipage} &
+\begin{minipage}[t]{0.15\columnwidth}\centering\strut
+1.305
+\strut\end{minipage} &
+\begin{minipage}[t]{0.12\columnwidth}\centering\strut
+40.25
+\strut\end{minipage} &
+\begin{minipage}[t]{0.12\columnwidth}\centering\strut
+3.169e-109
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.35\columnwidth}\centering\strut
+\textbf{time(retail)}
+\strut\end{minipage} &
+\begin{minipage}[t]{0.13\columnwidth}\centering\strut
+3.67
+\strut\end{minipage} &
+\begin{minipage}[t]{0.15\columnwidth}\centering\strut
+0.04369
+\strut\end{minipage} &
+\begin{minipage}[t]{0.12\columnwidth}\centering\strut
+84
+\strut\end{minipage} &
+\begin{minipage}[t]{0.12\columnwidth}\centering\strut
+5.206e-181
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.35\columnwidth}\centering\strut
+\textbf{(Intercept)}
+\strut\end{minipage} &
+\begin{minipage}[t]{0.13\columnwidth}\centering\strut
+-7249
+\strut\end{minipage} &
+\begin{minipage}[t]{0.15\columnwidth}\centering\strut
+87.24
+\strut\end{minipage} &
+\begin{minipage}[t]{0.12\columnwidth}\centering\strut
+-83.1
+\strut\end{minipage} &
+\begin{minipage}[t]{0.12\columnwidth}\centering\strut
+6.41e-180
+\strut\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
+
+\begin{longtable}[c]{@{}cccc@{}}
+\caption{Fitting linear model: retail \textasciitilde{} season(retail) +
+time(retail)}\tabularnewline
+\toprule
+\begin{minipage}[b]{0.18\columnwidth}\centering\strut
+Observations
+\strut\end{minipage} &
+\begin{minipage}[b]{0.27\columnwidth}\centering\strut
+Residual Std. Error
+\strut\end{minipage} &
+\begin{minipage}[b]{0.10\columnwidth}\centering\strut
+\(R^2\)
+\strut\end{minipage} &
+\begin{minipage}[b]{0.20\columnwidth}\centering\strut
+Adjusted \(R^2\)
+\strut\end{minipage}\tabularnewline
+\midrule
+\endfirsthead
+\toprule
+\begin{minipage}[b]{0.18\columnwidth}\centering\strut
+Observations
+\strut\end{minipage} &
+\begin{minipage}[b]{0.27\columnwidth}\centering\strut
+Residual Std. Error
+\strut\end{minipage} &
+\begin{minipage}[b]{0.10\columnwidth}\centering\strut
+\(R^2\)
+\strut\end{minipage} &
+\begin{minipage}[b]{0.20\columnwidth}\centering\strut
+Adjusted \(R^2\)
+\strut\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.18\columnwidth}\centering\strut
+255
+\strut\end{minipage} &
+\begin{minipage}[t]{0.27\columnwidth}\centering\strut
+4.278
+\strut\end{minipage} &
+\begin{minipage}[t]{0.10\columnwidth}\centering\strut
+0.9767
+\strut\end{minipage} &
+\begin{minipage}[t]{0.20\columnwidth}\centering\strut
+0.9755
+\strut\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
+
+This \emph{seems} like an effective model, explaining 0.98 of the
+variance in retail sales.
+
+\subsection*{c}\label{c-14}
+\addcontentsline{toc}{subsection}{c}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{xyplot}\NormalTok{(}\KeywordTok{rstudent}\NormalTok{(retail_lm) ~}\StringTok{ }\KeywordTok{time}\NormalTok{(retail), }\DataTypeTok{type =} \StringTok{"l"}\NormalTok{,}
+       \DataTypeTok{xlab =} \StringTok{"Time"}\NormalTok{, }\DataTypeTok{ylab =} \StringTok{"Studentized residuals"}\NormalTok{,}
+       \DataTypeTok{panel =} \NormalTok{function(x, y, ...) \{}
+         \KeywordTok{panel.xyplot}\NormalTok{(x, y, ...)}
+         \KeywordTok{panel.xyplot}\NormalTok{(x, y, }\DataTypeTok{pch =} \KeywordTok{as.vector}\NormalTok{(}\KeywordTok{season}\NormalTok{(retail)), }\DataTypeTok{col =} \DecValTok{1}\NormalTok{)}
+       \NormalTok{\})}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics{TSAsolutions_files/figure-latex/retail-res-1.pdf}
+\caption{\label{fig:retail-res}Studentized residuals for our seasonality +
+linear model of retail sales.}
+\end{figure}
+
+The residual plot (Figure \ref{fig:retail-res}) tells a different story:
+we're underpredicting values for early period and overpredicting values
+for the later years -- however, this should be an easy fix.
+
+\section{Prescriptions}\label{prescriptions}
+
+\subsection*{a}\label{a-26}
+\addcontentsline{toc}{subsection}{a}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{data}\NormalTok{(prescrip)}
+\KeywordTok{xyplot}\NormalTok{(prescrip, }\DataTypeTok{ylab =} \StringTok{"Prescription costs"}\NormalTok{,}
+       \DataTypeTok{panel =} \NormalTok{function(x, y, ...) \{}
+         \KeywordTok{panel.xyplot}\NormalTok{(x, y, ...)}
+         \KeywordTok{panel.xyplot}\NormalTok{(x, y, }\DataTypeTok{pch =} \KeywordTok{as.vector}\NormalTok{(}\KeywordTok{season}\NormalTok{(prescrip)), }\DataTypeTok{col =} \DecValTok{1}\NormalTok{)}
+       \NormalTok{\})}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics{TSAsolutions_files/figure-latex/prescrip-1.pdf}
+\caption{\label{fig:prescrip}Monthly U.S. prescription costs.}
+\end{figure}
+
+Figure \ref{fig:prescrip} shows a clear, smooth, and cyclical seasonal
+trend. Values are genereally higher for the summer months and there
+seems to be an exponential increase long-term.
+
+\subsection*{b}\label{b-26}
+\addcontentsline{toc}{subsection}{b}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pchange <-}\StringTok{ }\KeywordTok{diff}\NormalTok{(prescrip) /}\StringTok{ }\NormalTok{prescrip}
+\KeywordTok{xyplot}\NormalTok{(pchange ~}\StringTok{ }\KeywordTok{time}\NormalTok{(prescrip), }\DataTypeTok{type =} \StringTok{"l"}\NormalTok{,}
+       \DataTypeTok{panel =} \NormalTok{function(x, y, ...) \{}
+         \KeywordTok{panel.xyplot}\NormalTok{(x, y, ...)}
+         \KeywordTok{panel.xyplot}\NormalTok{(x, y, }\DataTypeTok{pch =} \KeywordTok{as.vector}\NormalTok{(}\KeywordTok{season}\NormalTok{(pchange)), }\DataTypeTok{col =} \DecValTok{1}\NormalTok{)}
+       \NormalTok{\})}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics{TSAsolutions_files/figure-latex/prescrip-diff-1.pdf}
+\caption{\label{fig:prescrip-diff}Percentage changes from month-to-month in
+prescription costs.}
+\end{figure}
+
+The monthly percentage difference series looks rather stationary.
+
+\subsection*{c}\label{c-15}
+\addcontentsline{toc}{subsection}{c}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pres_cos <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(pchange ~}\StringTok{ }\KeywordTok{harmonic}\NormalTok{(pchange))}
+\KeywordTok{pander}\NormalTok{(}\KeywordTok{summary}\NormalTok{(pres_cos))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[c]{@{}ccccc@{}}
+\toprule
+\begin{minipage}[b]{0.38\columnwidth}\centering\strut
+~
+\strut\end{minipage} &
+\begin{minipage}[b]{0.12\columnwidth}\centering\strut
+Estimate
+\strut\end{minipage} &
+\begin{minipage}[b]{0.14\columnwidth}\centering\strut
+Std. Error
+\strut\end{minipage} &
+\begin{minipage}[b]{0.11\columnwidth}\centering\strut
+t value
+\strut\end{minipage} &
+\begin{minipage}[b]{0.11\columnwidth}\centering\strut
+Pr(\textgreater{}\textbar{}t\textbar{})
+\strut\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.38\columnwidth}\centering\strut
+\textbf{harmonic(pchange)cos(2\emph{pi}t)}
+\strut\end{minipage} &
+\begin{minipage}[t]{0.12\columnwidth}\centering\strut
+-0.006605
+\strut\end{minipage} &
+\begin{minipage}[t]{0.14\columnwidth}\centering\strut
+0.003237
+\strut\end{minipage} &
+\begin{minipage}[t]{0.11\columnwidth}\centering\strut
+-2.041
+\strut\end{minipage} &
+\begin{minipage}[t]{0.11\columnwidth}\centering\strut
+0.04542
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.38\columnwidth}\centering\strut
+\textbf{harmonic(pchange)sin(2\emph{pi}t)}
+\strut\end{minipage} &
+\begin{minipage}[t]{0.12\columnwidth}\centering\strut
+0.01612
+\strut\end{minipage} &
+\begin{minipage}[t]{0.14\columnwidth}\centering\strut
+0.003208
+\strut\end{minipage} &
+\begin{minipage}[t]{0.11\columnwidth}\centering\strut
+5.026
+\strut\end{minipage} &
+\begin{minipage}[t]{0.11\columnwidth}\centering\strut
+4.291e-06
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.38\columnwidth}\centering\strut
+\textbf{(Intercept)}
+\strut\end{minipage} &
+\begin{minipage}[t]{0.12\columnwidth}\centering\strut
+0.01159
+\strut\end{minipage} &
+\begin{minipage}[t]{0.14\columnwidth}\centering\strut
+0.002282
+\strut\end{minipage} &
+\begin{minipage}[t]{0.11\columnwidth}\centering\strut
+5.08
+\strut\end{minipage} &
+\begin{minipage}[t]{0.11\columnwidth}\centering\strut
+3.508e-06
+\strut\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
+
+\begin{longtable}[c]{@{}cccc@{}}
+\caption{Fitting linear model: pchange \textasciitilde{}
+harmonic(pchange)}\tabularnewline
+\toprule
+\begin{minipage}[b]{0.18\columnwidth}\centering\strut
+Observations
+\strut\end{minipage} &
+\begin{minipage}[b]{0.27\columnwidth}\centering\strut
+Residual Std. Error
+\strut\end{minipage} &
+\begin{minipage}[b]{0.10\columnwidth}\centering\strut
+\(R^2\)
+\strut\end{minipage} &
+\begin{minipage}[b]{0.20\columnwidth}\centering\strut
+Adjusted \(R^2\)
+\strut\end{minipage}\tabularnewline
+\midrule
+\endfirsthead
+\toprule
+\begin{minipage}[b]{0.18\columnwidth}\centering\strut
+Observations
+\strut\end{minipage} &
+\begin{minipage}[b]{0.27\columnwidth}\centering\strut
+Residual Std. Error
+\strut\end{minipage} &
+\begin{minipage}[b]{0.10\columnwidth}\centering\strut
+\(R^2\)
+\strut\end{minipage} &
+\begin{minipage}[b]{0.20\columnwidth}\centering\strut
+Adjusted \(R^2\)
+\strut\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.18\columnwidth}\centering\strut
+67
+\strut\end{minipage} &
+\begin{minipage}[t]{0.27\columnwidth}\centering\strut
+0.01862
+\strut\end{minipage} &
+\begin{minipage}[t]{0.10\columnwidth}\centering\strut
+0.3126
+\strut\end{minipage} &
+\begin{minipage}[t]{0.20\columnwidth}\centering\strut
+0.2912
+\strut\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
+
+We explain 0.31 of the variance. The model is significant though.
+
+\subsection*{d}\label{d-5}
+\addcontentsline{toc}{subsection}{d}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{xyplot}\NormalTok{(}\KeywordTok{rstudent}\NormalTok{(pres_cos) ~}\StringTok{ }\KeywordTok{time}\NormalTok{(prescrip), }\DataTypeTok{type =} \StringTok{"l"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics{TSAsolutions_files/figure-latex/cos-resid-1.pdf}
+\caption{\label{fig:cos-resid}Residuals for our cosine model.}
+\end{figure}
+
+The residual plot in Figure \ref{cos-resid} looks rather random.
 
 \end{document}

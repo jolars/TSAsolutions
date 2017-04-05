@@ -25,7 +25,7 @@
 <meta name="author" content="Johan Larsson">
 
 
-<meta name="date" content="2017-04-04">
+<meta name="date" content="2017-04-05">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -99,7 +99,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
       <nav role="navigation">
 
 <ul class="summary">
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#dependencies"><i class="fa fa-check"></i>Dependencies</a></li>
+</ul></li>
 <li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
 <li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#larain"><i class="fa fa-check"></i><b>1.1</b> Larain</a></li>
 <li class="chapter" data-level="1.2" data-path="introduction.html"><a href="introduction.html#colors"><i class="fa fa-check"></i><b>1.2</b> Colors</a></li>
@@ -238,6 +240,26 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="" data-path="trends.html"><a href="trends.html#c-12"><i class="fa fa-check"></i>c</a></li>
 <li class="chapter" data-level="" data-path="trends.html"><a href="trends.html#d-3"><i class="fa fa-check"></i>d</a></li>
 <li class="chapter" data-level="" data-path="trends.html"><a href="trends.html#e-2"><i class="fa fa-check"></i>e</a></li>
+<li class="chapter" data-level="" data-path="trends.html"><a href="trends.html#f"><i class="fa fa-check"></i>f</a></li>
+</ul></li>
+<li class="chapter" data-level="3.7" data-path="trends.html"><a href="trends.html#winnebago"><i class="fa fa-check"></i><b>3.7</b> Winnebago</a><ul>
+<li class="chapter" data-level="" data-path="trends.html"><a href="trends.html#a-24"><i class="fa fa-check"></i>a</a></li>
+<li class="chapter" data-level="" data-path="trends.html"><a href="trends.html#b-24"><i class="fa fa-check"></i>b</a></li>
+<li class="chapter" data-level="" data-path="trends.html"><a href="trends.html#c-13"><i class="fa fa-check"></i>c</a></li>
+<li class="chapter" data-level="" data-path="trends.html"><a href="trends.html#d-4"><i class="fa fa-check"></i>d</a></li>
+<li class="chapter" data-level="" data-path="trends.html"><a href="trends.html#e-3"><i class="fa fa-check"></i>e</a></li>
+<li class="chapter" data-level="" data-path="trends.html"><a href="trends.html#f-1"><i class="fa fa-check"></i>f</a></li>
+</ul></li>
+<li class="chapter" data-level="3.8" data-path="trends.html"><a href="trends.html#retail"><i class="fa fa-check"></i><b>3.8</b> Retail</a><ul>
+<li class="chapter" data-level="" data-path="trends.html"><a href="trends.html#a-25"><i class="fa fa-check"></i>a</a></li>
+<li class="chapter" data-level="" data-path="trends.html"><a href="trends.html#b-25"><i class="fa fa-check"></i>b</a></li>
+<li class="chapter" data-level="" data-path="trends.html"><a href="trends.html#c-14"><i class="fa fa-check"></i>c</a></li>
+</ul></li>
+<li class="chapter" data-level="3.9" data-path="trends.html"><a href="trends.html#prescriptions"><i class="fa fa-check"></i><b>3.9</b> Prescriptions</a><ul>
+<li class="chapter" data-level="" data-path="trends.html"><a href="trends.html#a-26"><i class="fa fa-check"></i>a</a></li>
+<li class="chapter" data-level="" data-path="trends.html"><a href="trends.html#b-26"><i class="fa fa-check"></i>b</a></li>
+<li class="chapter" data-level="" data-path="trends.html"><a href="trends.html#c-15"><i class="fa fa-check"></i>c</a></li>
+<li class="chapter" data-level="" data-path="trends.html"><a href="trends.html#d-5"><i class="fa fa-check"></i>d</a></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -269,7 +291,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <span class="kw">data</span>(larain, <span class="dt">package =</span> <span class="st">&quot;TSA&quot;</span>)</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">xyplot</span>(larain, <span class="dt">ylab =</span> <span class="st">&quot;Inches&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;Year&quot;</span>, <span class="dt">type =</span> <span class="st">&quot;o&quot;</span>)</code></pre></div>
-<p><img src="TSAsolutions_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<p><img src="TSAsolutions_files/figure-html/unnamed-chunk-3-1.png" width="576" /></p>
 </div>
 <div id="colors" class="section level2">
 <h2><span class="header-section-number">1.2</span> Colors</h2>
@@ -278,7 +300,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </blockquote>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(color)
 <span class="kw">xyplot</span>(color, <span class="dt">ylab =</span> <span class="st">&quot;Color property&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;Batch&quot;</span>, <span class="dt">type =</span> <span class="st">&quot;o&quot;</span>)</code></pre></div>
-<p><img src="TSAsolutions_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p><img src="TSAsolutions_files/figure-html/unnamed-chunk-4-1.png" width="576" /></p>
 </div>
 <div id="random-normal-time-series" class="section level2">
 <h2><span class="header-section-number">1.3</span> Random, normal time series</h2>
@@ -287,7 +309,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </blockquote>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">xyplot</span>(<span class="kw">as.ts</span>(<span class="kw">rnorm</span>(<span class="dv">48</span>)))
 <span class="kw">xyplot</span>(<span class="kw">as.ts</span>(<span class="kw">rnorm</span>(<span class="dv">48</span>)))</code></pre></div>
-<p><img src="TSAsolutions_files/figure-html/unnamed-chunk-3-1.png" width="672" /><img src="TSAsolutions_files/figure-html/unnamed-chunk-3-2.png" width="672" /></p>
+<p><img src="TSAsolutions_files/figure-html/unnamed-chunk-5-1.png" width="576" /><img src="TSAsolutions_files/figure-html/unnamed-chunk-5-2.png" width="576" /></p>
 <p>As far as we can tell there is no discernable pattern here.</p>
 </div>
 <div id="random-chi2-distributed-time-series" class="section level2">
@@ -297,7 +319,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </blockquote>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">xyplot</span>(<span class="kw">as.ts</span>(<span class="kw">rchisq</span>(<span class="dv">48</span>, <span class="dv">2</span>)))
 <span class="kw">xyplot</span>(<span class="kw">as.ts</span>(<span class="kw">rchisq</span>(<span class="dv">48</span>, <span class="dv">2</span>)))</code></pre></div>
-<p><img src="TSAsolutions_files/figure-html/unnamed-chunk-4-1.png" width="672" /><img src="TSAsolutions_files/figure-html/unnamed-chunk-4-2.png" width="672" /></p>
+<p><img src="TSAsolutions_files/figure-html/unnamed-chunk-6-1.png" width="576" /><img src="TSAsolutions_files/figure-html/unnamed-chunk-6-2.png" width="576" /></p>
 <p>The process appears random, though non-normal.</p>
 </div>
 <div id="t5-distributed-random-values" class="section level2">
@@ -306,9 +328,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>Simulate a completely random process of length 48 with independent, t-distributed values each with 5 degrees of freedom. Construct the time series plot. Does it look “random” and nonnormal? Repeat this exercise several times with a new simulation each time.</p>
 </blockquote>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">xyplot</span>(<span class="kw">as.ts</span>(<span class="kw">rt</span>(<span class="dv">48</span>, <span class="dv">5</span>)))</code></pre></div>
-<p><img src="TSAsolutions_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p><img src="TSAsolutions_files/figure-html/unnamed-chunk-7-1.png" width="576" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">xyplot</span>(<span class="kw">as.ts</span>(<span class="kw">rt</span>(<span class="dv">48</span>, <span class="dv">5</span>)))</code></pre></div>
-<p><img src="TSAsolutions_files/figure-html/unnamed-chunk-5-2.png" width="672" /></p>
+<p><img src="TSAsolutions_files/figure-html/unnamed-chunk-7-2.png" width="576" /></p>
 <p>It looks random but not normal, though it should be approximately so, considering the distribution that we have sampled from.</p>
 </div>
 <div id="dubuque-temperature-series" class="section level2">
@@ -318,7 +340,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </blockquote>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(tempdub)
 <span class="kw">xyplot</span>(tempdub, <span class="dt">ylab =</span> <span class="st">&quot;Temperature&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;Year&quot;</span>)</code></pre></div>
-<p><img src="TSAsolutions_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p><img src="TSAsolutions_files/figure-html/unnamed-chunk-8-1.png" width="576" /></p>
 
 </div>
 </div>
