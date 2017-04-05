@@ -679,7 +679,7 @@ The Runs test is signficant and we have fewer runs than expected.
 
 ### c {-}
 
-```{r retail-acf, fig.cap="Autcorrelation for the prescriptions model."}
+```{r pres-acf, fig.cap="Autcorrelation for the prescriptions model."}
 lat_acf(pres_resid)
 ```
 
