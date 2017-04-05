@@ -298,6 +298,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="" data-path="trends.html"><a href="trends.html#c-21"><i class="fa fa-check"></i>c</a></li>
 <li class="chapter" data-level="" data-path="trends.html"><a href="trends.html#d-11"><i class="fa fa-check"></i>d</a></li>
 </ul></li>
+<li class="chapter" data-level="3.16" data-path="trends.html"><a href="trends.html#variance-estimator-for-sample-mean"><i class="fa fa-check"></i><b>3.16</b> Variance estimator for sample mean</a><ul>
+<li class="chapter" data-level="" data-path="trends.html"><a href="trends.html#a-33"><i class="fa fa-check"></i>a</a></li>
+<li class="chapter" data-level="" data-path="trends.html"><a href="trends.html#b-33"><i class="fa fa-check"></i>b</a></li>
+<li class="chapter" data-level="" data-path="trends.html"><a href="trends.html#c-22"><i class="fa fa-check"></i>c</a></li>
+</ul></li>
+<li class="chapter" data-level="3.17" data-path="trends.html"><a href="trends.html#equation-3.2.6"><i class="fa fa-check"></i><b>3.17</b> Equation 3.2.6</a></li>
+<li class="chapter" data-level="3.18" data-path="trends.html"><a href="trends.html#equation-3.2.7"><i class="fa fa-check"></i><b>3.18</b> Equation 3.2.7</a></li>
 </ul></li>
 </ul>
 
@@ -462,10 +469,10 @@ Figure 3.3: Monthly average hourly wages for workers in the U.S. apparel and tex
 <h3>c</h3>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">xyplot</span>(wages_rst ~<span class="st"> </span><span class="kw">time</span>(wages_rst), <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>,
        <span class="dt">xlab =</span> <span class="st">&quot;Time&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Studentized residuals&quot;</span>)</code></pre></div>
-<div class="figure" style="text-align: center">
-<img src="TSAsolutions_files/figure-html/wages_resid-1.png" alt="Residual plot" width="672" />
+<div class="figure" style="text-align: center"><span id="fig:wages-resid"></span>
+<img src="TSAsolutions_files/figure-html/wages-resid-1.png" alt="Residual plot" width="672" />
 <p class="caption">
-(#fig:wages_resid)Residual plot
+Figure 3.4: Residual plot
 </p>
 </div>
 <p>We still seem to have autocorrelation related to the time and not white noise.</p>
@@ -517,7 +524,7 @@ Figure 3.3: Monthly average hourly wages for workers in the U.S. apparel and tex
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-15"></span>
 <img src="TSAsolutions_files/figure-html/unnamed-chunk-15-1.png" alt="Monthly U.S. beer sales." width="672" />
 <p class="caption">
-Figure 3.4: Monthly U.S. beer sales.
+Figure 3.5: Monthly U.S. beer sales.
 </p>
 </div>
 <p>Clear seasonal trends. There is an initial positive trend from 1975 to around 1981 that then levels out.</p>
@@ -534,7 +541,7 @@ Figure 3.4: Monthly U.S. beer sales.
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-16"></span>
 <img src="TSAsolutions_files/figure-html/unnamed-chunk-16-1.png" alt="Monthly U.S. beer sales annotated with the months' initials." width="672" />
 <p class="caption">
-Figure 3.5: Monthly U.S. beer sales annotated with the months’ initials.
+Figure 3.6: Monthly U.S. beer sales annotated with the months’ initials.
 </p>
 </div>
 <p>It is now evident that the peaks are in the warm months and the slump in the winter and fall months. December is a particular low point, while May, June, and July seem to be the high points.</p>
@@ -685,10 +692,10 @@ Figure 3.5: Monthly U.S. beer sales annotated with the months’ initials.
 <div class="figure" style="text-align: center"><span id="fig:rst-beer"></span>
 <img src="TSAsolutions_files/figure-html/rst-beer-1.png" alt="Beer sales residual plot." width="672" />
 <p class="caption">
-Figure 3.6: Beer sales residual plot.
+Figure 3.7: Beer sales residual plot.
 </p>
 </div>
-<p>Looking at the residuals in <a href="trends.html#fig:rst-beer">3.6</a> We don’t have a good fit to our data; in particular, wee’re not capturing the long-term trend.</p>
+<p>Looking at the residuals in <a href="trends.html#fig:rst-beer">3.7</a> We don’t have a good fit to our data; in particular, wee’re not capturing the long-term trend.</p>
 </div>
 <div id="e-2" class="section level3 unnumbered">
 <h3>e</h3>
@@ -851,7 +858,7 @@ Figure 3.6: Beer sales residual plot.
 <div class="figure" style="text-align: center"><span id="fig:rst-beer2"></span>
 <img src="TSAsolutions_files/figure-html/rst-beer2-1.png" alt="Beer sales residual plot from the quadratic fit." width="672" />
 <p class="caption">
-Figure 3.7: Beer sales residual plot from the quadratic fit.
+Figure 3.8: Beer sales residual plot from the quadratic fit.
 </p>
 </div>
 <p>Many of the values are still not being predicted successfully but at least we’re able to model the long term trend better.</p>
@@ -866,7 +873,7 @@ Figure 3.7: Beer sales residual plot from the quadratic fit.
 <div class="figure" style="text-align: center"><span id="fig:winnebago"></span>
 <img src="TSAsolutions_files/figure-html/winnebago-1.png" alt="Monthly unit sales of recreational vehicles from Winnebago." width="672" />
 <p class="caption">
-Figure 3.8: Monthly unit sales of recreational vehicles from Winnebago.
+Figure 3.9: Monthly unit sales of recreational vehicles from Winnebago.
 </p>
 </div>
 </div>
@@ -939,10 +946,10 @@ Figure 3.8: Monthly unit sales of recreational vehicles from Winnebago.
 <div class="figure" style="text-align: center"><span id="fig:winnebago-lm-res"></span>
 <img src="TSAsolutions_files/figure-html/winnebago-lm-res-1.png" alt="Residuals for the linear fit for the winnebago data." width="672" />
 <p class="caption">
-Figure 3.9: Residuals for the linear fit for the winnebago data.
+Figure 3.10: Residuals for the linear fit for the winnebago data.
 </p>
 </div>
-<p>The fit is poor (Figure <a href="trends.html#fig:winnebago-lm-res">3.9</a>. It is not random and it is clear that we’re making worse predictions for later yers.</p>
+<p>The fit is poor (Figure <a href="trends.html#fig:winnebago-lm-res">3.10</a>. It is not random and it is clear that we’re making worse predictions for later yers.</p>
 </div>
 <div id="c-13" class="section level3 unnumbered">
 <h3>c</h3>
@@ -1021,10 +1028,10 @@ Figure 3.9: Residuals for the linear fit for the winnebago data.
 <div class="figure" style="text-align: center"><span id="fig:winnebago-log-res"></span>
 <img src="TSAsolutions_files/figure-html/winnebago-log-res-1.png" alt="Residual plot after natural log transformation." width="672" />
 <p class="caption">
-Figure 3.10: Residual plot after natural log transformation.
+Figure 3.11: Residual plot after natural log transformation.
 </p>
 </div>
-<p>This looks more like random noise (Figure <a href="trends.html#fig:winnebago-log-res">3.10</a>. Values still cling together somewhat but it is certainly better than the linear model. We’re still systematically overpredictinig the values for some months, however.</p>
+<p>This looks more like random noise (Figure <a href="trends.html#fig:winnebago-log-res">3.11</a>. Values still cling together somewhat but it is certainly better than the linear model. We’re still systematically overpredictinig the values for some months, however.</p>
 </div>
 <div id="e-3" class="section level3 unnumbered">
 <h3>e</h3>
@@ -1192,7 +1199,7 @@ Figure 3.10: Residual plot after natural log transformation.
 <div class="figure" style="text-align: center"><span id="fig:retail"></span>
 <img src="TSAsolutions_files/figure-html/retail-1.png" alt="Total retail sales in the U.K. in billions pounds." width="672" />
 <p class="caption">
-Figure 3.11: Total retail sales in the U.K. in billions pounds.
+Figure 3.12: Total retail sales in the U.K. in billions pounds.
 </p>
 </div>
 <p>Plotting the retail sales trend there seems to be a long-term linear trend as well as heavy seasonality in tht December – and to slighter extent also November and October – exhibit regular surges in retail sales.</p>
@@ -1350,10 +1357,10 @@ Figure 3.11: Total retail sales in the U.K. in billions pounds.
 <div class="figure" style="text-align: center"><span id="fig:retail-res"></span>
 <img src="TSAsolutions_files/figure-html/retail-res-1.png" alt="Studentized residuals for our seasonality + linear model of retail sales." width="672" />
 <p class="caption">
-Figure 3.12: Studentized residuals for our seasonality + linear model of retail sales.
+Figure 3.13: Studentized residuals for our seasonality + linear model of retail sales.
 </p>
 </div>
-<p>The residual plot (Figure <a href="trends.html#fig:retail-res">3.12</a>) tells a different story: we’re underpredicting values for early period and overpredicting values for the later years – however, this should be an easy fix.</p>
+<p>The residual plot (Figure <a href="trends.html#fig:retail-res">3.13</a>) tells a different story: we’re underpredicting values for early period and overpredicting values for the later years – however, this should be an easy fix.</p>
 </div>
 </div>
 <div id="prescriptions" class="section level2">
@@ -1369,10 +1376,10 @@ Figure 3.12: Studentized residuals for our seasonality + linear model of retail 
 <div class="figure" style="text-align: center"><span id="fig:prescrip"></span>
 <img src="TSAsolutions_files/figure-html/prescrip-1.png" alt="Monthly U.S. prescription costs." width="672" />
 <p class="caption">
-Figure 3.13: Monthly U.S. prescription costs.
+Figure 3.14: Monthly U.S. prescription costs.
 </p>
 </div>
-<p>Figure <a href="trends.html#fig:prescrip">3.13</a> shows a clear, smooth, and cyclical seasonal trend. Values are genereally higher for the summer months and there seems to be an exponential increase long-term.</p>
+<p>Figure <a href="trends.html#fig:prescrip">3.14</a> shows a clear, smooth, and cyclical seasonal trend. Values are genereally higher for the summer months and there seems to be an exponential increase long-term.</p>
 </div>
 <div id="b-26" class="section level3 unnumbered">
 <h3>b</h3>
@@ -1385,7 +1392,7 @@ Figure 3.13: Monthly U.S. prescription costs.
 <div class="figure" style="text-align: center"><span id="fig:prescrip-diff"></span>
 <img src="TSAsolutions_files/figure-html/prescrip-diff-1.png" alt="Percentage changes from month-to-month in prescription costs." width="672" />
 <p class="caption">
-Figure 3.14: Percentage changes from month-to-month in prescription costs.
+Figure 3.15: Percentage changes from month-to-month in prescription costs.
 </p>
 </div>
 <p>The monthly percentage difference series looks rather stationary.</p>
@@ -1468,10 +1475,10 @@ Figure 3.14: Percentage changes from month-to-month in prescription costs.
 <div class="figure" style="text-align: center"><span id="fig:cos-resid"></span>
 <img src="TSAsolutions_files/figure-html/cos-resid-1.png" alt="Residuals for our cosine model." width="672" />
 <p class="caption">
-Figure 3.15: Residuals for our cosine model.
+Figure 3.16: Residuals for our cosine model.
 </p>
 </div>
-<p>The residual plot in Figure <a href="trends.html#fig:cos-resid">3.15</a> looks rather random.</p>
+<p>The residual plot in Figure <a href="trends.html#fig:cos-resid">3.16</a> looks rather random.</p>
 </div>
 </div>
 <div id="hours-revisited" class="section level2">
@@ -1560,7 +1567,7 @@ hours_quad &lt;-<span class="st"> </span><span class="kw">lm</span>(hours ~<span
 <div class="figure" style="text-align: center"><span id="fig:hours-quad-res"></span>
 <img src="TSAsolutions_files/figure-html/hours-quad-res-1.png" alt="Studentized residuals for our quadratic fit for the hours series." width="672" />
 <p class="caption">
-Figure 3.16: Studentized residuals for our quadratic fit for the hours series.
+Figure 3.17: Studentized residuals for our quadratic fit for the hours series.
 </p>
 </div>
 <p>We’re clearly missing the seasonal trend here. February is underpredicted and December overpredicted, for instance.</p>
@@ -1594,10 +1601,10 @@ Figure 3.16: Studentized residuals for our quadratic fit for the hours series.
 <div class="figure" style="text-align: center"><span id="fig:hours-acf"></span>
 <img src="TSAsolutions_files/figure-html/hours-acf-1.png" alt="Autocorrelation plot for the hours dataset." width="672" />
 <p class="caption">
-Figure 3.17: Autocorrelation plot for the hours dataset.
+Figure 3.18: Autocorrelation plot for the hours dataset.
 </p>
 </div>
-<p>Figure <a href="trends.html#fig:hours-acf">3.17</a> makes the autocorrelation clear: for the first 5–6 values there is positive correlation, which then seems to reverse for the later values. Some of these are significant.</p>
+<p>Figure <a href="trends.html#fig:hours-acf">3.18</a> makes the autocorrelation clear: for the first 5–6 values there is positive correlation, which then seems to reverse for the later values. Some of these are significant.</p>
 </div>
 <div id="e-4" class="section level3 unnumbered">
 <h3>e</h3>
@@ -1612,7 +1619,7 @@ Figure 3.17: Autocorrelation plot for the hours dataset.
 <div class="figure" style="text-align: center"><span id="fig:normality-tests"></span>
 <img src="TSAsolutions_files/figure-html/normality-tests-1.png" alt="Normality plots" width="288" /><img src="TSAsolutions_files/figure-html/normality-tests-2.png" alt="Normality plots" width="288" />
 <p class="caption">
-Figure 3.18: Normality plots
+Figure 3.19: Normality plots
 </p>
 </div>
 <p>The distribution is somewhat light-tailed but otherwise look quite normal.</p>
@@ -1743,10 +1750,10 @@ gridExtra::<span class="kw">grid.arrange</span>(figa, figb, <span class="dt">nco
 <div class="figure" style="text-align: center"><span id="fig:wages-norm"></span>
 <img src="TSAsolutions_files/figure-html/wages-norm-1.png" alt="Normality plots for the wages data with a quadratic fit." width="672" />
 <p class="caption">
-Figure 3.19: Normality plots for the wages data with a quadratic fit.
+Figure 3.20: Normality plots for the wages data with a quadratic fit.
 </p>
 </div>
-<p>The normality plots (Figure <a href="trends.html#fig:wages-norm">3.19</a>) testifies that the distribution of the residuals is somewhat heavy-tailed and ever-so-slightly left-skewed.</p>
+<p>The normality plots (Figure <a href="trends.html#fig:wages-norm">3.20</a>) testifies that the distribution of the residuals is somewhat heavy-tailed and ever-so-slightly left-skewed.</p>
 </div>
 </div>
 <div id="beersales-revisited" class="section level2">
@@ -1788,7 +1795,7 @@ beer_resid &lt;-<span class="st"> </span><span class="kw">rstudent</span>(beer_q
 <div class="figure" style="text-align: center"><span id="fig:beer-acf"></span>
 <img src="TSAsolutions_files/figure-html/beer-acf-1.png" alt="Autocorrelation for the beer sales model." width="672" />
 <p class="caption">
-Figure 3.20: Autocorrelation for the beer sales model.
+Figure 3.21: Autocorrelation for the beer sales model.
 </p>
 </div>
 <p>Correlations are significant for several of the lags, leading us to question independence.</p>
@@ -1809,7 +1816,7 @@ gridExtra::<span class="kw">grid.arrange</span>(figa, figb, <span class="dt">nco
 <div class="figure" style="text-align: center"><span id="fig:beer-norm"></span>
 <img src="TSAsolutions_files/figure-html/beer-norm-1.png" alt="Normality plots for the beersales series after a linear, quadratic and seasonal fit." width="672" />
 <p class="caption">
-Figure 3.21: Normality plots for the beersales series after a linear, quadratic and seasonal fit.
+Figure 3.22: Normality plots for the beersales series after a linear, quadratic and seasonal fit.
 </p>
 </div>
 </div>
@@ -1848,7 +1855,7 @@ Figure 3.21: Normality plots for the beersales series after a linear, quadratic 
 <div class="figure" style="text-align: center"><span id="fig:winn-acf"></span>
 <img src="TSAsolutions_files/figure-html/winn-acf-1.png" alt="Autcorrelation for the winnebago model." width="672" />
 <p class="caption">
-Figure 3.22: Autcorrelation for the winnebago model.
+Figure 3.23: Autcorrelation for the winnebago model.
 </p>
 </div>
 <p>There is evidence of dependence which we have so far not taken into account in the model</p>
@@ -1869,7 +1876,7 @@ gridExtra::<span class="kw">grid.arrange</span>(figa, figb, <span class="dt">nco
 <div class="figure" style="text-align: center"><span id="fig:winn-norm"></span>
 <img src="TSAsolutions_files/figure-html/winn-norm-1.png" alt="Normality plots for the winnebago series fit with a logarithimg and seasonal fit." width="672" />
 <p class="caption">
-Figure 3.23: Normality plots for the winnebago series fit with a logarithimg and seasonal fit.
+Figure 3.24: Normality plots for the winnebago series fit with a logarithimg and seasonal fit.
 </p>
 </div>
 <p>There is left skew, a large outlier, but otherwise approximate normality.</p>
@@ -1910,7 +1917,7 @@ retail_resid &lt;-<span class="st"> </span><span class="kw">rstudent</span>(reta
 <div class="figure" style="text-align: center"><span id="fig:retail-acf"></span>
 <img src="TSAsolutions_files/figure-html/retail-acf-1.png" alt="Autcorrelation for the retail model." width="672" />
 <p class="caption">
-Figure 3.24: Autcorrelation for the retail model.
+Figure 3.25: Autcorrelation for the retail model.
 </p>
 </div>
 <p>There is evidence of dependence which we have so far not taken into account in the model. All of the lags are positive and several are significant too.</p>
@@ -1931,7 +1938,7 @@ gridExtra::<span class="kw">grid.arrange</span>(figa, figb, <span class="dt">nco
 <div class="figure" style="text-align: center"><span id="fig:retail-norm"></span>
 <img src="TSAsolutions_files/figure-html/retail-norm-1.png" alt="Normality plots for the winnebago series fit with a logarithimg and seasonal fit." width="672" />
 <p class="caption">
-Figure 3.25: Normality plots for the winnebago series fit with a logarithimg and seasonal fit.
+Figure 3.26: Normality plots for the winnebago series fit with a logarithimg and seasonal fit.
 </p>
 </div>
 <p>The distributin of the residuals is considerably light-tailed.</p>
@@ -1971,7 +1978,7 @@ Figure 3.25: Normality plots for the winnebago series fit with a logarithimg and
 <div class="figure" style="text-align: center"><span id="fig:pres-acf"></span>
 <img src="TSAsolutions_files/figure-html/pres-acf-1.png" alt="Autcorrelation for the prescriptions model." width="672" />
 <p class="caption">
-Figure 3.26: Autcorrelation for the prescriptions model.
+Figure 3.27: Autcorrelation for the prescriptions model.
 </p>
 </div>
 <p>Some of the lags have correlations that surpass statistical significane. There may be some alternating trends that we have not taken into account.</p>
@@ -1992,12 +1999,75 @@ gridExtra::<span class="kw">grid.arrange</span>(figa, figb, <span class="dt">nco
 <div class="figure" style="text-align: center"><span id="fig:pres-norm"></span>
 <img src="TSAsolutions_files/figure-html/pres-norm-1.png" alt="Normality plots for the prescitions series fit with a cosine model." width="672" />
 <p class="caption">
-Figure 3.27: Normality plots for the prescitions series fit with a cosine model.
+Figure 3.28: Normality plots for the prescitions series fit with a cosine model.
 </p>
 </div>
 <p>The distribution of the residuals is somewhat heavy-tailed and left-skewed.</p>
-
 </div>
+</div>
+<div id="variance-estimator-for-sample-mean" class="section level2">
+<h2><span class="header-section-number">3.16</span> Variance estimator for sample mean</h2>
+<div id="a-33" class="section level3 unnumbered">
+<h3>a</h3>
+<p>We have the variance estimator</p>
+$$
+\begin{align}
+  \text{Var}[\bar{Y}] = &amp; \frac{\gamma_0}{n} \left( 1 + 2\sum_{k=1}^{n-1}\left(1 - \frac{k}{n}\right)\phi^k \right) \\
+                      = &amp; \frac{\gamma_0}{n} \left( 1 + 2\sum_{k=0}^{n-1}\left(1 - \frac{k}{n}\right)\phi^k -
+                          2\sum_{k=0}\left(1 - \frac{k}{n}\right)\phi^k \right) \\
+                      = &amp; \frac{\gamma_0}{n} \left( 1 + 2\sum_{k=0}^{n-1}\left(1 - \frac{k}{n}\right)\phi^k - 2 \right) \\
+                      = &amp; \frac{\gamma_0}{n} \left( -1 + 2\sum_{k=0}^{n-1}\phi^k - \frac{2}{n}\sum_{k=0}^{n-1}k\phi^k \right) \\
+                      = &amp; \frac{\gamma_0}{n} \left( -1 + 2 \frac{1-\phi^n}{1-\phi} - \frac{2\phi}{n} \sum_{k=0}^{n-1}k\phi^{k-1} \right) \\
+                      = &amp; \frac{\gamma_0}{n} \left( -1 + 2 \frac{1-\phi^n}{1-\phi} - \frac{2\phi}{n} \frac{\partial}{\partial{\phi}} \sum_{k=0}^{n-1}\phi^k \right) \\
+                      = &amp; \frac{\gamma_0}{n} \left( -1 + 2 \frac{1-\phi^n}{1-\phi} - \frac{2\phi}{n} \frac{(1-\phi)(-n\phi^{n-1}) - (1-\phi^n)(-1)}{(1-\phi)^2} \right) \\
+                      = &amp; \frac{\gamma_0}{n} \left( -1 + 2 \frac{1-\phi^n}{1-\phi} - \frac{2\phi}{n} \frac{(1-\phi)(-n\phi^{n-1}) - (1-\phi^n)(-1)}{(1-\phi)^2} \right) \\
+                      = &amp; \frac{\gamma_0}{n} \left( -1 + 2 \frac{1-\phi^n}{1-\phi} - \frac{2\phi}{n} \frac{1-\phi^n}{(1-\phi)^2} + \frac{2\phi^n}{1-\phi} \right) \\
+                      = &amp; \frac{\gamma_0}{n} \left( \frac{2-2\phi^n+2\phi^n-1+\phi}{1-\phi} - \frac{2\phi}{n} \frac{1-\phi^n}{(1-\phi)^2} \right) \\
+                      = &amp; \frac{\gamma_0}{n} \left( \frac{1+\phi}{1-\phi} - \frac{2\phi}{n} \frac{1-\phi^n}{(1-\phi)^2} \right) \quad \square
+  
+\end{align}
+<p>$$</p>
+</div>
+<div id="b-33" class="section level3 unnumbered">
+<h3>b</h3>
+<p><span class="math display">\[
+\lim_{n \rightarrow \infty}\text{Var}[\bar{Y}] = \frac{\gamma_0}{n}\left( \frac{1+\phi}{1-\phi} - 0 \right) = \frac{\gamma_0}{n}\left( \frac{1+\phi}{1-\phi}\right)
+\]</span></p>
+<p>since <span class="math inline">\(\phi \in [-1,1]\)</span>.</p>
+</div>
+<div id="c-22" class="section level3 unnumbered">
+<h3>c</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">phi &lt;-<span class="st"> </span><span class="kw">seq</span>(-<span class="dv">1</span>, <span class="dv">1</span>, <span class="fl">0.01</span>)
+var_ybar &lt;-<span class="st"> </span>(<span class="dv">1</span> +<span class="st"> </span>phi) /<span class="st"> </span>(<span class="dv">1</span> -<span class="st"> </span>phi)
+
+<span class="kw">xyplot</span>(var_ybar ~<span class="st"> </span>phi, <span class="dt">ylab =</span> <span class="kw">expression</span>(<span class="kw">Var</span>(<span class="kw">bar</span>(Y))), <span class="dt">xlab =</span> <span class="kw">expression</span>(phi),
+       <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>)</code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:varbary"></span>
+<img src="TSAsolutions_files/figure-html/varbary-1.png" alt="Variance estimation for different values of $\phi$." width="672" />
+<p class="caption">
+Figure 3.29: Variance estimation for different values of <span class="math inline">\(\phi\)</span>.
+</p>
+</div>
+<p>Plotting <span class="math inline">\(\text{Var}[\bar{Y}]\)</span> for values of <span class="math inline">\(\phi\)</span> in <span class="math inline">\([-1, 1]\)</span>. Shows that variance increases exponentially as <span class="math inline">\(\phi\)</span> approaches 1, in which case our estimates of <span class="math inline">\(\bar{Y}\)</span> become increasingly uncertain.</p>
+</div>
+</div>
+<div id="equation-3.2.6" class="section level2">
+<h2><span class="header-section-number">3.17</span> Equation 3.2.6</h2>
+<p><span class="math display">\[
+\begin{align}
+  \text{Var}[\bar{Y}] = &amp; \frac{\gamma_0}{n} \sum_{k= -\infty}^\infty \rho_k \quad \text{when} \quad \rho_k = \phi^{|k|} \implies \\
+                      = &amp; \frac{\gamma_0}{n} \sum_{k= -\infty}^\infty \phi^{|k|} \\
+                      = &amp; \frac{\gamma_0}{n} \left( \sum_{k = 0}^\infty \phi^k + \sum_{0}^\infty \phi^{-k} \right) \\
+                      = &amp; \frac{\gamma_0}{n} \left( \frac{1}{1-\phi} - \frac{1}{1-\frac{1}{\phi}} \right) \\
+                      = &amp; \frac{\gamma_0}{n} \frac{1+\phi}{1-\phi} \tag*{$\square$}
+\end{align}
+\]</span></p>
+</div>
+<div id="equation-3.2.7" class="section level2">
+<h2><span class="header-section-number">3.18</span> Equation 3.2.7</h2>
+<p><span class="math inline">\($ \begin{gather}  \text{Var}[\bar{Y}] = \frac{1}{n^2} \text{Var}\left[ \sum_{i=1}^n Y_i \right] = \text{Var}\left[ \sum_{i=1}^n \sum_{j=1}^i e_j \right] = \\  \frac{1}{n^2}\text{Var}[e_1 + 2e_2 + 3e_3 + \dots + ne_n] = \frac{\sigma_e^2}{n}\sum_{k=1}^n k^2 = \\  \frac{\sigma_e^2}{n} \frac{n(n+1)(2n + 1)}{6} = \sigma_e^2 \frac{(n+1)(2n + 1)}{6} \tag*{\)</span>$} \end{gather}</p>
+<p>$$</p>
+
 </div>
 </div>
             </section>
