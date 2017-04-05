@@ -12,15 +12,12 @@ description: "This book contains solutions to the problems in the book Time Seri
 
 ```{r setup-options, include = FALSE}
 knitr::opts_chunk$set(
-  fig.aling = "center",
-  fig.width = 6,
-  fig.height = 4,
-  fig.pos = "!htbp",
-  dev.args = list(pointsize = 8)
+  fig.align = "center",
+  fig.pos = "!htbp"
 )
 
 lattice::lattice.options(default.theme = list(
-  fontsize = list(text = 8, points = 4)  
+  fontsize = list(text = 10, points = 8)  
 ))
 
 options(digits = 2)
@@ -46,7 +43,8 @@ install.packages(c(
   "latticeExtra",
   "lattice",
   "TSA",
-  "pander"
+  "pander",
+  "gridExtra"
 ))
 ```
 
@@ -55,7 +53,7 @@ install.packages(c(
 library(latticeExtra)
 library(TSA)
 library(pander)
-library(dplyr)
+library(gridExtra)
 ```
 
 In order for some of the content in this book to be reproducible, the random
