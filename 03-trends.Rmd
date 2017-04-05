@@ -142,7 +142,7 @@ wages_rst <- rstudent(wages_fit1)
 
 ### c {-}
 
-```{r wages_resid, fig.cap="Residual plot"}
+```{r wages-resid, fig.cap="Residual plot"}
 xyplot(wages_rst ~ time(wages_rst), type = "l",
        xlab = "Time", ylab = "Studentized residuals")
 ```
@@ -508,7 +508,7 @@ because we haven't accounted for the seasonal trend in the series.
 
 Let's look at some normality plots as well.
 
-```{r wages-norm,fig.cap="Normality plots for the wages data with a quadratic fit."}
+```{r wages-norm, fig.height=3, fig.cap="Normality plots for the wages data with a quadratic fit."}
 figa <- 
   qqmath(rstudent(wages_quad), xlab = "Theoretical quantities",
        asp = 1,
@@ -601,7 +601,7 @@ the model
 
 ### d {-}
 
-```{r, winn-norm, fig.cap="Normality plots for the winnebago series fit with a logarithimg and seasonal fit."}
+```{r, winn-norm, fig.height=3, fig.cap="Normality plots for the winnebago series fit with a logarithimg and seasonal fit."}
 figa <- 
   qqmath(winn_resid, xlab = "Theoretical quantities",
        asp = 1,
@@ -645,7 +645,7 @@ the model. All of the lags are positive and several are significant too.
 
 ### d {-}
 
-```{r, retail-norm, fig.cap="Normality plots for the winnebago series fit with a logarithimg and seasonal fit."}
+```{r, retail-norm, fig.height=3, fig.cap="Normality plots for the winnebago series fit with a logarithimg and seasonal fit."}
 figa <- 
   qqmath(retail_resid, xlab = "Theoretical quantities",
        asp = 1,
@@ -688,7 +688,7 @@ may be some alternating trends that we have not taken into account.
 
 ### d {-}
 
-```{r, pres-norm, fig.cap="Normality plots for the prescitions series fit with a cosine model."}
+```{r, pres-norm, fig.height=3, fig.cap="Normality plots for the prescitions series fit with a cosine model."}
 figa <- 
   qqmath(pres_resid, xlab = "Theoretical quantities",
        asp = 1,
@@ -703,3 +703,72 @@ gridExtra::grid.arrange(figa, figb, ncol = 2)
 ```
 
 The distribution of the residuals is somewhat heavy-tailed and left-skewed.
+
+## Variance estimator for sample mean
+
+### a {-}
+
+We have the variance estimator
+
+$$
+\begin{align}
+  \text{Var}[\bar{Y}] = & \frac{\gamma_0}{n} \left( 1 + 2\sum_{k=1}^{n-1}\left(1 - \frac{k}{n}\right)\phi^k \right) \\
+                      = & \frac{\gamma_0}{n} \left( 1 + 2\sum_{k=0}^{n-1}\left(1 - \frac{k}{n}\right)\phi^k -
+                          2\sum_{k=0}\left(1 - \frac{k}{n}\right)\phi^k \right) \\
+                      = & \frac{\gamma_0}{n} \left( 1 + 2\sum_{k=0}^{n-1}\left(1 - \frac{k}{n}\right)\phi^k - 2 \right) \\
+                      = & \frac{\gamma_0}{n} \left( -1 + 2\sum_{k=0}^{n-1}\phi^k - \frac{2}{n}\sum_{k=0}^{n-1}k\phi^k \right) \\
+                      = & \frac{\gamma_0}{n} \left( -1 + 2 \frac{1-\phi^n}{1-\phi} - \frac{2\phi}{n} \sum_{k=0}^{n-1}k\phi^{k-1} \right) \\
+                      = & \frac{\gamma_0}{n} \left( -1 + 2 \frac{1-\phi^n}{1-\phi} - \frac{2\phi}{n} \frac{\partial}{\partial{\phi}} \sum_{k=0}^{n-1}\phi^k \right) \\
+                      = & \frac{\gamma_0}{n} \left( -1 + 2 \frac{1-\phi^n}{1-\phi} - \frac{2\phi}{n} \frac{(1-\phi)(-n\phi^{n-1}) - (1-\phi^n)(-1)}{(1-\phi)^2} \right) \\
+                      = & \frac{\gamma_0}{n} \left( -1 + 2 \frac{1-\phi^n}{1-\phi} - \frac{2\phi}{n} \frac{(1-\phi)(-n\phi^{n-1}) - (1-\phi^n)(-1)}{(1-\phi)^2} \right) \\
+                      = & \frac{\gamma_0}{n} \left( -1 + 2 \frac{1-\phi^n}{1-\phi} - \frac{2\phi}{n} \frac{1-\phi^n}{(1-\phi)^2} + \frac{2\phi^n}{1-\phi} \right) \\
+                      = & \frac{\gamma_0}{n} \left( \frac{2-2\phi^n+2\phi^n-1+\phi}{1-\phi} - \frac{2\phi}{n} \frac{1-\phi^n}{(1-\phi)^2} \right) \\
+                      = & \frac{\gamma_0}{n} \left( \frac{1+\phi}{1-\phi} - \frac{2\phi}{n} \frac{1-\phi^n}{(1-\phi)^2} \right) \quad \square
+  
+\end{align}
+$$
+
+### b {-}
+
+$$
+\lim_{n \rightarrow \infty}\text{Var}[\bar{Y}] = \frac{\gamma_0}{n}\left( \frac{1+\phi}{1-\phi} - 0 \right) = \frac{\gamma_0}{n}\left( \frac{1+\phi}{1-\phi}\right)
+$$
+
+since $\phi \in [-1,1]$.
+
+### c {-}
+
+```{r varbary, fig.cap="Variance estimation for different values of $\\phi$."}
+phi <- seq(-1, 1, 0.01)
+var_ybar <- (1 + phi) / (1 - phi)
+
+xyplot(var_ybar ~ phi, ylab = expression(Var(bar(Y))), xlab = expression(phi),
+       type = "l")
+```
+
+Plotting $\text{Var}[\bar{Y}]$ for values of $\phi$ in $[-1, 1]$. Shows that
+variance increases exponentially as $\phi$ approaches 1, in which case
+our estimates of $\bar{Y}$ become increasingly uncertain.
+
+## Equation 3.2.6
+
+$$
+\begin{align}
+  \text{Var}[\bar{Y}] = & \frac{\gamma_0}{n} \sum_{k= -\infty}^\infty \rho_k \quad \text{when} \quad \rho_k = \phi^{|k|} \implies \\
+                      = & \frac{\gamma_0}{n} \sum_{k= -\infty}^\infty \phi^{|k|} \\
+                      = & \frac{\gamma_0}{n} \left( \sum_{k = 0}^\infty \phi^k + \sum_{0}^\infty \phi^{-k} \right) \\
+                      = & \frac{\gamma_0}{n} \left( \frac{1}{1-\phi} - \frac{1}{1-\frac{1}{\phi}} \right) \\
+                      = & \frac{\gamma_0}{n} \frac{1+\phi}{1-\phi} \tag*{$\square$}
+\end{align}
+$$
+
+## Equation 3.2.7
+
+$$
+\begin{gather}
+  \text{Var}[\bar{Y}] = \frac{1}{n^2} \text{Var}\left[ \sum_{i=1}^n Y_i \right] = \text{Var}\left[ \sum_{i=1}^n \sum_{j=1}^i e_j \right] = \\
+    \frac{1}{n^2}\text{Var}[e_1 + 2e_2 + 3e_3 + \dots + ne_n] = \frac{\sigma_e^2}{n}\sum_{k=1}^n k^2 = \\
+    \frac{\sigma_e^2}{n} \frac{n(n+1)(2n + 1)}{6} = \sigma_e^2 \frac{(n+1)(2n + 1)}{6} \tag*{$\square$}
+\end{gather}
+
+$$
