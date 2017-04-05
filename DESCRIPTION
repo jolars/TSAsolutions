@@ -1,5 +1,5 @@
 Package: placeholder
 Title: Does not matter.
 Version: 0.0.1
-Imports: bookdown, lattice, latticeExtra, TSA
+Imports: bookdown, lattice, latticeExtra, TSA, pander, dplyr
 Remotes: rstudio/bookdown
