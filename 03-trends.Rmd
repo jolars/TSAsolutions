@@ -645,7 +645,7 @@ the model. All of the lags are positive and several are significant too.
 
 ### d {-}
 
-```{r, winn-norm, fig.cap="Normality plots for the winnebago series fit with a logarithimg and seasonal fit."}
+```{r, retail-norm, fig.cap="Normality plots for the winnebago series fit with a logarithimg and seasonal fit."}
 figa <- 
   qqmath(retail_resid, xlab = "Theoretical quantities",
        asp = 1,
