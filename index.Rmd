@@ -10,6 +10,58 @@ cover-image: images/tsa.png
 description: "This book contains solutions to the problems in the book Time Series Analysis with Applications in R, second edition, by Cryer and Chan. It is provided as a github repository so that anybody may contribute to its development."
 ---
 
+```{r setup-options, include = FALSE}
+knitr::opts_chunk$set(
+  fig.aling = "center",
+  fig.width = 6,
+  fig.height = 4,
+  fig.pos = "!htbp",
+  dev.args = list(pointsize = 8)
+)
+
+lattice::lattice.options(default.theme = list(
+  fontsize = list(text = 8, points = 4)  
+))
+
+options(digits = 2)
+
+# Source some scripts
+source(file.path("R", "lattice_wrappers.R"))
+
+```
+
 # Preface {-}
 
-This book contains solutions to the problems in the book *Time Series Analysis: with Applications in R*, third edition, by Cryer and Chan. It is provided as a github repository so that anybody may contribute to its development. Unlike the book, the solutions here use lattice graphics when possible instead of base graphics.
+This book contains solutions to the problems in the book
+*Time Series Analysis: with Applications in R*, third edition, by Cryer and
+Chan. It is provided as a github repository so that anybody may contribute to
+its development.
+
+## Dependencies {-}
+
+You will need these packages to reproduce the examples in this book:
+
+```{r, eval = FALSE}
+install.packages(c(
+  "latticeExtra",
+  "lattice",
+  "TSA",
+  "pander"
+))
+```
+
+```{r libraries, message = FALSE}
+# Load the packages
+library(latticeExtra)
+library(TSA)
+library(pander)
+library(dplyr)
+```
+
+In order for some of the content in this book to be reproducible, the random
+seed is set as follows.
+
+```{r}
+set.seed(1234)
+```
+
