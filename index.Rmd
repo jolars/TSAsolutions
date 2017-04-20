@@ -3,6 +3,7 @@ title: "Solutions to Time Series Analysis: with Applications in R"
 author: "Johan Larsson"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
+math: false
 documentclass: book
 link-citations: yes
 github-repo: jolars/TSAsolutions
