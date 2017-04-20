@@ -306,7 +306,17 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="3.17" data-path="trends.html"><a href="trends.html#equation-3.2.6"><i class="fa fa-check"></i><b>3.17</b> Equation 3.2.6</a></li>
 <li class="chapter" data-level="3.18" data-path="trends.html"><a href="trends.html#equation-3.2.7"><i class="fa fa-check"></i><b>3.18</b> Equation 3.2.7</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="models-for-stationary-time-series.html"><a href="models-for-stationary-time-series.html"><i class="fa fa-check"></i><b>4</b> Models for stationary time series</a></li>
+<li class="chapter" data-level="4" data-path="models-for-stationary-time-series.html"><a href="models-for-stationary-time-series.html"><i class="fa fa-check"></i><b>4</b> Models for stationary time series</a><ul>
+<li class="chapter" data-level="4.1" data-path="models-for-stationary-time-series.html"><a href="models-for-stationary-time-series.html#first-principles"><i class="fa fa-check"></i><b>4.1</b> First principles</a></li>
+<li class="chapter" data-level="4.2" data-path="models-for-stationary-time-series.html"><a href="models-for-stationary-time-series.html#sketch-autocorrelations"><i class="fa fa-check"></i><b>4.2</b> Sketch autocorrelations</a><ul>
+<li class="chapter" data-level="" data-path="models-for-stationary-time-series.html"><a href="models-for-stationary-time-series.html#a-34"><i class="fa fa-check"></i>a</a></li>
+<li class="chapter" data-level="" data-path="models-for-stationary-time-series.html"><a href="models-for-stationary-time-series.html#b-34"><i class="fa fa-check"></i>b</a></li>
+<li class="chapter" data-level="" data-path="models-for-stationary-time-series.html"><a href="models-for-stationary-time-series.html#c-23"><i class="fa fa-check"></i>c</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="models-for-stationary-time-series.html"><a href="models-for-stationary-time-series.html#max-and-min-correlations-for-ma1"><i class="fa fa-check"></i><b>4.3</b> Max and min correlations for MA(1)</a></li>
+<li class="chapter" data-level="4.4" data-path="models-for-stationary-time-series.html"><a href="models-for-stationary-time-series.html#non-uniqueness-of-ma1"><i class="fa fa-check"></i><b>4.4</b> Non-uniqueness of MA(1)</a></li>
+<li class="chapter" data-level="4.5" data-path="models-for-stationary-time-series.html"><a href="models-for-stationary-time-series.html#sketch-more-autocorrelations"><i class="fa fa-check"></i><b>4.5</b> Sketch more autocorrelations</a></li>
+</ul></li>
 </ul>
 
       </nav>
@@ -326,8 +336,118 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="models-for-stationary-time-series" class="section level1">
 <h1><span class="header-section-number">4</span> Models for stationary time series</h1>
-<p>Placeholder.</p>
+<div id="first-principles" class="section level2">
+<h2><span class="header-section-number">4.1</span> First principles</h2>
+<p>We have the process <span class="math display">\[
+Y_t = 5  + e_t - \frac{1}{2}e_{t-i} + \frac{1}{4}e_{t-2}
+\]</span> and begin by working out its variance <span class="math display">\[
+\begin{aligned}
+\text{Var}(Y_t) &amp; = \text{Var}(5  + e_t - \frac{1}{2}e_{t-i} + \frac{1}{4}e_{t-2})\\
+                &amp; = \text{Var}(e_t) + \frac{1}{4}\text{Var}(e_t) + \frac{1}{16}\text{Var}(e_t)\\
+                &amp; = \frac{21}{16}\sigma_e^2
+\end{aligned}
+\]</span> and then the autocovariance at lag 1 <span class="math display">\[
+\begin{aligned}
+\text{Cov}(Y_t, Y_{t-1}) &amp; = \text{Cov}(5+e_t-\frac{1}{2}e_{t-1}+\frac{1}{4}e_{t-2}, 5+e_{t-1}-\frac{1}{2}e_{t-2}+\frac{1}{4}e_{t-3})\\
+                         &amp; = \text{Cov}(-\frac{1}{2}e_{t-1},e_{t-1}) + \text{Cov}(\frac{1}{4}e_{t-2},-\frac{1}{2}e_{t-2}) \\
+                         &amp; = -\frac{1}{2}\text{Var}(e_{t-1}) -\frac{1}{8}\text{Var}(e_{t-2})\\
+                         &amp; = -\frac{5}{8}\sigma_e^2
+\end{aligned}
+\]</span> lag 2 <span class="math display">\[
+\begin{aligned}
+\text{Cov}(Y_t, Y_{t-2}) &amp; = \text{Cov}(5+e_t-\frac{1}{2}e_{t-1}+\frac{1}{4}e_{t-2}, 5+e_{t-2}-\frac{1}{2}e_{t-3}+\frac{1}{4}e_{t-4})\\
+                         &amp; = \frac{1}{4}\text{Var}(e_{t-2}) \\
+                         &amp; = \frac{1}{4}\sigma_e^2
+\end{aligned}
+\]</span> and lag 3 <span class="math display">\[
+\text{Cov}(Y_t, Y_{t-2}) = \text{Cov}(5+e_t-\frac{1}{2}e_{t-1}+\frac{1}{4}e_{t-2}, 5+e_{t-2}-\frac{1}{2}e_{t-3}+\frac{1}{4}e_{t-4}) = 0
+\]</span> which results in the autocorrelation <span class="math display">\[
+\rho_k = \begin{cases}
+           1 &amp; k = 0\\
+           \frac{-\frac{5}{8}\sigma_e^2}{\frac{21}{16}\sigma_e^2}=-\frac{10}{21} &amp; k = 1\\
+           \frac{\frac{1}{4}\sigma_e^2}{\frac{21}{16}\sigma_e^2}=\frac{4}{21} &amp; k = 2\\
+           0 &amp; k = 3\\
+         \end{cases} \tag*{$\square$}
+\]</span></p>
+</div>
+<div id="sketch-autocorrelations" class="section level2">
+<h2><span class="header-section-number">4.2</span> Sketch autocorrelations</h2>
+<div id="a-34" class="section level3 unnumbered">
+<h3>a</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">tacf</span>(<span class="dt">ma =</span> <span class="kw">list</span>(-<span class="fl">0.5</span>, -<span class="fl">0.4</span>))</code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-36"></span>
+<img src="TSAsolutions_files/figure-html/unnamed-chunk-36-1.png" alt="Autocorrelation with $\theta_1 = 0.5$ and $\theta_2 = 0.4$" width="672" />
+<p class="caption">
+Figure 4.1: Autocorrelation with <span class="math inline">\(\theta_1 = 0.5\)</span> and <span class="math inline">\(\theta_2 = 0.4\)</span>
+</p>
+</div>
+</div>
+<div id="b-34" class="section level3 unnumbered">
+<h3>b</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">tacf</span>(<span class="dt">ma =</span> <span class="kw">list</span>(-<span class="fl">1.2</span>, <span class="fl">0.7</span>))</code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-37"></span>
+<img src="TSAsolutions_files/figure-html/unnamed-chunk-37-1.png" alt="Autocorrelation with $\theta_1 = 1.2$ and $\theta_2 = -0.7$" width="672" />
+<p class="caption">
+Figure 4.2: Autocorrelation with <span class="math inline">\(\theta_1 = 1.2\)</span> and <span class="math inline">\(\theta_2 = -0.7\)</span>
+</p>
+</div>
+</div>
+<div id="c-23" class="section level3 unnumbered">
+<h3>c</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">tacf</span>(<span class="dt">ma =</span> <span class="kw">list</span>(<span class="dv">1</span>, <span class="fl">0.6</span>))</code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-38"></span>
+<img src="TSAsolutions_files/figure-html/unnamed-chunk-38-1.png" alt="Autocorrelation with $\theta_1 = -1$ and $\theta_2 = -0.6$" width="672" />
+<p class="caption">
+Figure 4.3: Autocorrelation with <span class="math inline">\(\theta_1 = -1\)</span> and <span class="math inline">\(\theta_2 = -0.6\)</span>
+</p>
+</div>
+</div>
+</div>
+<div id="max-and-min-correlations-for-ma1" class="section level2">
+<h2><span class="header-section-number">4.3</span> Max and min correlations for MA(1)</h2>
+<p>For <span class="math display">\[
+\rho_1 = \frac{-\theta}{1+\theta^2}
+\]</span> we retrieve extreme values at <span class="math display">\[
+\frac{\partial}{\partial \theta}\rho_1 = \frac{-1(1+\theta^2)-2\theta(-\theta)}{(1+\theta^2)^2} = \frac{\theta^2 - 1}{(1+\theta^2)^2} = 0
+\]</span> when <span class="math inline">\(t = \begin{cases}-1\\1\end{cases}\)</span>, which gives us <span class="math display">\[
+\begin{aligned}
+\max \rho_1 &amp; = \frac{-1(-1)}{1+(-1)^2} = 0.5\\
+\min \rho_1 &amp; = \frac{-1}{1+1^2} = -0.5
+\end{aligned}
+\]</span> which we graph in figure <a href="models-for-stationary-time-series.html#fig:minmax">4.4</a></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">theta &lt;-<span class="st"> </span><span class="kw">seq</span>(-<span class="dv">10</span>, <span class="dv">10</span>, <span class="dt">by =</span> <span class="fl">0.01</span>)
+p1 &lt;-<span class="st"> </span>(-theta) /<span class="st"> </span>(<span class="dv">1</span> +<span class="st"> </span>theta^<span class="dv">2</span>)
+<span class="kw">plot</span>(theta, p1, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>)
+<span class="kw">points</span>(theta[<span class="kw">which.max</span>(p1)], <span class="kw">max</span>(p1))
+<span class="kw">points</span>(theta[<span class="kw">which.min</span>(p1)], <span class="kw">min</span>(p1))</code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:minmax"></span>
+<img src="TSAsolutions_files/figure-html/minmax-1.png" alt="Autocorrelation at lag one for MA(1) with max and min annotated." width="672" />
+<p class="caption">
+Figure 4.4: Autocorrelation at lag one for MA(1) with max and min annotated.
+</p>
+</div>
+</div>
+<div id="non-uniqueness-of-ma1" class="section level2">
+<h2><span class="header-section-number">4.4</span> Non-uniqueness of MA(1)</h2>
+<p><span class="math display">\[
+\frac{-\frac{1}{\theta}}{1 + \left( \frac{1}{\theta}\right)^2} = \frac{-\frac{1}{\theta}\times\theta^2}{\left( 1 + \frac{1}{\theta^2} \right) \theta^2} = \frac{-\theta}{1+\theta^2} \tag*{$\square$}
+\]</span></p>
+</div>
+<div id="sketch-more-autocorrelations" class="section level2">
+<h2><span class="header-section-number">4.5</span> Sketch more autocorrelations</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">theta &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.6</span>, -<span class="fl">0.6</span>, <span class="fl">0.95</span>, <span class="fl">0.3</span>)
+lag &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">10</span>)
+for (i in <span class="kw">seq_along</span>(theta)) {
+  <span class="kw">print</span>(<span class="kw">tacf</span>(<span class="dt">ar =</span> theta[i], <span class="dt">lag.max =</span> lag[i]))
+}</code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:autocorrelation"></span>
+<img src="TSAsolutions_files/figure-html/autocorrelation-1.png" alt="ACF for various AR(1) processes." width="211.2" /><img src="TSAsolutions_files/figure-html/autocorrelation-2.png" alt="ACF for various AR(1) processes." width="211.2" /><img src="TSAsolutions_files/figure-html/autocorrelation-3.png" alt="ACF for various AR(1) processes." width="211.2" /><img src="TSAsolutions_files/figure-html/autocorrelation-4.png" alt="ACF for various AR(1) processes." width="211.2" />
+<p class="caption">
+Figure 4.5: ACF for various AR(1) processes.
+</p>
+</div>
 
+</div>
 </div>
             </section>
 
