@@ -7,10 +7,6 @@ bookdown::gitbook:
       size: 2
     edit: https://github.com/jolars/TSAsolutions/edit/master/%s
     download: ["pdf", "epub"]
-  mathjax: NULL
-  pandoc_args: [--katex]
-  includes:
-    in_header: katex.html
 bookdown::pdf_book:
   latex_engine: xelatex
   keep_tex: yes
