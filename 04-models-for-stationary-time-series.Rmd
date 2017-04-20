@@ -1,3 +1,109 @@
 # Models for stationary time series
 
-Placeholder.
+## First principles
+
+We have the process
+\[
+Y_t = 5  + e_t - \frac{1}{2}e_{t-i} + \frac{1}{4}e_{t-2}
+\]
+and begin by working out its variance
+\[
+\begin{aligned}
+\text{Var}(Y_t) & = \text{Var}(5  + e_t - \frac{1}{2}e_{t-i} + \frac{1}{4}e_{t-2})\\
+                & = \text{Var}(e_t) + \frac{1}{4}\text{Var}(e_t) + \frac{1}{16}\text{Var}(e_t)\\
+                & = \frac{21}{16}\sigma_e^2
+\end{aligned}
+\]
+and then the autocovariance at lag 1
+\[
+\begin{aligned}
+\text{Cov}(Y_t, Y_{t-1}) & = \text{Cov}(5+e_t-\frac{1}{2}e_{t-1}+\frac{1}{4}e_{t-2}, 5+e_{t-1}-\frac{1}{2}e_{t-2}+\frac{1}{4}e_{t-3})\\
+                         & = \text{Cov}(-\frac{1}{2}e_{t-1},e_{t-1}) + \text{Cov}(\frac{1}{4}e_{t-2},-\frac{1}{2}e_{t-2}) \\
+                         & = -\frac{1}{2}\text{Var}(e_{t-1}) -\frac{1}{8}\text{Var}(e_{t-2})\\
+                         & = -\frac{5}{8}\sigma_e^2
+\end{aligned}
+\]
+lag 2
+\[
+\begin{aligned}
+\text{Cov}(Y_t, Y_{t-2}) & = \text{Cov}(5+e_t-\frac{1}{2}e_{t-1}+\frac{1}{4}e_{t-2}, 5+e_{t-2}-\frac{1}{2}e_{t-3}+\frac{1}{4}e_{t-4})\\
+                         & = \frac{1}{4}\text{Var}(e_{t-2}) \\
+                         & = \frac{1}{4}\sigma_e^2
+\end{aligned}
+\]
+and lag 3
+\[
+\text{Cov}(Y_t, Y_{t-2}) = \text{Cov}(5+e_t-\frac{1}{2}e_{t-1}+\frac{1}{4}e_{t-2}, 5+e_{t-2}-\frac{1}{2}e_{t-3}+\frac{1}{4}e_{t-4}) = 0
+\]
+which results in the autocorrelation
+\[
+\rho_k = \begin{cases}
+           1 & k = 0\\
+           \frac{-\frac{5}{8}\sigma_e^2}{\frac{21}{16}\sigma_e^2}=-\frac{10}{21} & k = 1\\
+           \frac{\frac{1}{4}\sigma_e^2}{\frac{21}{16}\sigma_e^2}=\frac{4}{21} & k = 2\\
+           0 & k = 3\\
+         \end{cases} \tag*{$\square$}
+\]
+
+## Sketch autocorrelations
+
+### a {-}
+```{r, fig.cap = "Autocorrelation with $\\theta_1 = 0.5$ and $\\theta_2 = 0.4$"}
+tacf(ma = list(-0.5, -0.4))
+```
+
+### b {-}
+
+```{r, fig.cap = "Autocorrelation with $\\theta_1 = 1.2$ and $\\theta_2 = -0.7$"}
+tacf(ma = list(-1.2, 0.7))
+```
+
+### c {-}
+
+```{r, fig.cap = "Autocorrelation with $\\theta_1 = -1$ and $\\theta_2 = -0.6$"}
+tacf(ma = list(1, 0.6))
+```
+
+## Max and min correlations for MA(1)
+
+For
+\[
+\rho_1 = \frac{-\theta}{1+\theta^2}
+\]
+we retrieve extreme values at 
+\[
+\frac{\partial}{\partial \theta}\rho_1 = \frac{-1(1+\theta^2)-2\theta(-\theta)}{(1+\theta^2)^2} = \frac{\theta^2 - 1}{(1+\theta^2)^2} = 0
+\]
+when $t = \begin{cases}-1\\1\end{cases}$, which gives us
+\[
+\begin{aligned}
+\max \rho_1 & = \frac{-1(-1)}{1+(-1)^2} = 0.5\\
+\min \rho_1 & = \frac{-1}{1+1^2} = -0.5
+\end{aligned}
+\]
+which we graph in figure \@ref(fig:minmax)
+
+```{r minmax, fig.cap = "Autocorrelation at lag one for MA(1) with max and min annotated."}
+theta <- seq(-10, 10, by = 0.01)
+p1 <- (-theta) / (1 + theta^2)
+plot(theta, p1, type = "l")
+points(theta[which.max(p1)], max(p1))
+points(theta[which.min(p1)], min(p1))
+```
+
+## Non-uniqueness of MA(1)
+
+\[
+\frac{-\frac{1}{\theta}}{1 + \left( \frac{1}{\theta}\right)^2} = \frac{-\frac{1}{\theta}\times\theta^2}{\left( 1 + \frac{1}{\theta^2} \right) \theta^2} = \frac{-\theta}{1+\theta^2} \tag*{$\square$}
+\]
+
+## Sketch more autocorrelations
+
+```{r autocorrelation, fig.width = 2.2, fig.height = 2, fig.show = "hold", fig.cap = "ACF for various AR(1) processes."}
+theta <- c(0.6, -0.6, 0.95, 0.3)
+lag <- c(10, 10, 20, 10)
+for (i in seq_along(theta)) {
+  print(tacf(ar = theta[i], lag.max = lag[i]))
+}
+```
+
