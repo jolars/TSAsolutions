@@ -47,15 +47,6 @@
 
 
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
-    renderMathInElement(document.body);
-  });
-</script>
 
 
 <style type="text/css">
@@ -115,7 +106,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#larain"><i class="fa fa-check"></i><b>1.1</b> Larain</a></li>
 <li class="chapter" data-level="1.2" data-path="introduction.html"><a href="introduction.html#colors"><i class="fa fa-check"></i><b>1.2</b> Colors</a></li>
 <li class="chapter" data-level="1.3" data-path="introduction.html"><a href="introduction.html#random-normal-time-series"><i class="fa fa-check"></i><b>1.3</b> Random, normal time series</a></li>
-<li class="chapter" data-level="1.4" data-path="introduction.html"><a href="introduction.html#random-chi2-distributed-time-series"><i class="fa fa-check"></i><b>1.4</b> Random, <span class="math inline">\chi^2</span>-distributed time series</a></li>
+<li class="chapter" data-level="1.4" data-path="introduction.html"><a href="introduction.html#random-chi2-distributed-time-series"><i class="fa fa-check"></i><b>1.4</b> Random, <span class="math inline">\(\chi^2\)</span>-distributed time series</a></li>
 <li class="chapter" data-level="1.5" data-path="introduction.html"><a href="introduction.html#t5-distributed-random-values"><i class="fa fa-check"></i><b>1.5</b> <em>t</em>(5)-distributed, random values</a></li>
 <li class="chapter" data-level="1.6" data-path="introduction.html"><a href="introduction.html#dubuque-temperature-series"><i class="fa fa-check"></i><b>1.6</b> Dubuque temperature series</a></li>
 </ul></li>
@@ -334,57 +325,73 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
             <section class="normal" id="section-">
 <div id="trends" class="section level1">
-<h1><span class="header-section-number">Chapter 3</span> Trends</h1>
+<h1><span class="header-section-number">3</span> Trends</h1>
 <div id="least-squares-estimation-for-linear-regression-trend" class="section level2">
 <h2><span class="header-section-number">3.1</span> Least squares estimation for linear regression trend</h2>
-<p>We begin by taking the partial derivatives with respect to <span class="math inline">\beta_0</span>.</p>
-<p><span class="math display">\displaystyle 
+<p>We begin by taking the partial derivatives with respect to <span class="math inline">\(\beta_0\)</span>.</p>
+<p><span class="math display">\[
 \frac{\partial}{\partial{\beta_0}} \mathcal{Q}(\beta_0, \beta_1) =
   -2\sum_{t=1}^n (Y_t - \beta_0 - \beta_1 t)
-</span></p>
-<p>We set it to <span class="math inline">0</span> and from this retrieve</p>
-
-<p>Next, we take the partial derivative with respect to <span class="math inline">\beta_1</span>;</p>
-<p><span class="math display">\displaystyle 
+\]</span></p>
+<p>We set it to <span class="math inline">\(0\)</span> and from this retrieve</p>
+\begin{align*}
+-2\sum_{t=1}^n (Y_t - \beta_0 - \beta_1 t) = &amp; 0 \implies \\
+\sum_{t=1}^n Y_t - n\beta_0 - \beta_1 \sum_{t=1}^n t = &amp; 0 \implies \\
+\beta_0 = \frac{\sum_{t=1}^n Y_t - \beta_1 \sum_{t=1}^n t}{n} = &amp;
+  \bar{Y} - \beta_1 \bar{t}
+\end{align*}
+<p>Next, we take the partial derivative with respect to <span class="math inline">\(\beta_1\)</span>;</p>
+<p><span class="math display">\[
 \frac{\partial}{\partial{\beta_1}} \mathcal{Q}(\beta_0, \beta_1) =
   -2\sum_{t=1}^n t(Y_t - \beta_0 - \beta_1 t)
-</span></p>
-<p>Setting this to <span class="math inline">0</span> as well, multiplying both sides with <span class="math inline">-1/2</span> and rearranging results in</p>
-
-<p>Then, substituting with the result gained previously for <span class="math inline">\beta_0</span>, we get</p>
-
+\]</span></p>
+<p>Setting this to <span class="math inline">\(0\)</span> as well, multiplying both sides with <span class="math inline">\(-1/2\)</span> and rearranging results in</p>
+\begin{align*}
+-2\sum_{t=1}^n t (Y_t - \beta_0 - \beta_1 t) = &amp; 0 \implies \\
+\beta_1 \sum_{t=1}^n t^2 = &amp; \sum_{t=1}^n Y_t t - \beta_0 \sum_{t=1}^n t
+\end{align*}
+<p>Then, substituting with the result gained previously for <span class="math inline">\(\beta_0\)</span>, we get</p>
+\begin{align*}
+\beta_1 \sum_{t=1}^n t^2 = &amp; \sum_{t=1}^n Y_t t - 
+ \left( \frac{\sum_{t=1}^n Y_t}{n} - \beta_1 \frac{\sum_{t=1}^n}{n} \right)
+ \sum_{t=1}^n t \iff \\
+\beta_1 \left( \sum_{t=1}^n t^2 - \frac{(\sum_{t=1}^n t)^2}{n} \right) = &amp; 
+  \sum_{t=1}^n Y_t t - \frac{\sum_{t=1}^n Y_t \sum_{t=1}^n t}{n} \iff \\
+\beta_1 = &amp; \frac{n\sum_{t=1}^n Y_tt - \sum_{t=1}^nY_t \sum_{t=1}^n t}{n \sum_{t=1}^n t^2 - \left( \sum_{t=1}^n t \right)^2} = 
+  \frac{\sum_{t=1}^n (Y_t - \bar{Y})(t-\bar{t})}{\sum_{t=1}^n (t-\bar{t})^2} \quad \square
+\end{align*}
 </div>
 <div id="variance-of-mean-estimator" class="section level2">
 <h2><span class="header-section-number">3.2</span> Variance of mean estimator</h2>
-<p><span class="math display">\displaystyle 
+<p><span class="math display">\[
   \bar{Y} = \frac{1}{n}\sum_{t=1}^n Y_t = \frac{1}{n} \sum_{t=1}^n(\mu + e_t - e_{t-1}) = 
     \mu + \frac{1}{n} \sum_{t=1}^n (e_t - e_{t-1}) = \mu + \frac{1}{n}(e_n - e_0)
-</span></p>
-<p><span class="math display">\displaystyle 
+\]</span></p>
+<p><span class="math display">\[
   \text{Var}[\bar{Y}] = \text{Var}[\mu + \frac{1}{n}(e_n - e_0)] =
     \frac{1}{n^2}(\sigma_e^2 + \sigma_e^2) = \frac{2\sigma_e^2}{n^2}
-</span></p>
+\]</span></p>
 <p>It is uncommon for the sample size to have such a large impact on the variance estimator for the sample mean.</p>
-<p>Setting <span class="math inline">Y_t = \mu + e_t</span> instead gives</p>
-<p><span class="math display">\displaystyle 
+<p>Setting <span class="math inline">\(Y_t = \mu + e_t\)</span> instead gives</p>
+<p><span class="math display">\[
   \bar{Y} = \frac{1}{n}\sum_{t=1}^n Y_t = \frac{1}{n} \sum_{t=1}^n(\mu + e_t) = 
     \mu + \frac{1}{n} \sum_{t=1}^n e_t
-</span></p>
-<p><span class="math display">\displaystyle 
+\]</span></p>
+<p><span class="math display">\[
   \text{Var}[\bar{Y}] = \text{Var} \left[ \mu + \frac{1}{n} \sum_{t=1}^n e_t \right] =
     0 + \frac{1}{n^2} \times n \sigma_e^2 = \frac{\sigma_e^2}{n}.
-</span></p>
+\]</span></p>
 </div>
 <div id="variance-of-mean-estimator-2" class="section level2">
 <h2><span class="header-section-number">3.3</span> Variance of mean estimator #2</h2>
-<p><span class="math display">\displaystyle 
+<p><span class="math display">\[
   \bar{Y} = \frac{1}{n} \sum_{t=1}^n(\mu + e_t + e_{t-1}) = 
     \mu + \frac{1}{n} \sum_{t=1}^n (e_t + e_{t-1}) = \mu + \frac{1}{n} \left( e_n + e_0 + 2 \sum_{t=1}^{n-1} t \right)
-</span></p>
-<p><span class="math display">\displaystyle 
+\]</span></p>
+<p><span class="math display">\[
   \text{Var}[\bar{Y}] = \frac{1}{n^2}(\sigma_e^2 + \sigma_e^2 + 4(n-1) \sigma_e^2 ) = \frac{1}{n^2}2(2n-1)\sigma_e^2
-</span></p>
-<p>Setting <span class="math inline">Y_t = \mu + e_t</span> instead gives the result from 3.2. We note that for large <span class="math inline">n</span> the variance if approximately four times larger with <span class="math inline">Y_t = \mu + e_t + e_{t-1}</span>.</p>
+\]</span></p>
+<p>Setting <span class="math inline">\(Y_t = \mu + e_t\)</span> instead gives the result from 3.2. We note that for large <span class="math inline">\(n\)</span> the variance if approximately four times larger with <span class="math inline">\(Y_t = \mu + e_t + e_{t-1}\)</span>.</p>
 </div>
 <div id="hours" class="section level2">
 <h2><span class="header-section-number">3.4</span> Hours</h2>
@@ -660,8 +667,8 @@ Figure 3.6: Monthly U.S. beer sales annotated with the months’ initials.
 <tr class="header">
 <th align="center">Observations</th>
 <th align="center">Residual Std. Error</th>
-<th align="center"><span class="math inline">R^2</span></th>
-<th align="center">Adjusted <span class="math inline">R^2</span></th>
+<th align="center"><span class="math inline">\(R^2\)</span></th>
+<th align="center">Adjusted <span class="math inline">\(R^2\)</span></th>
 </tr>
 </thead>
 <tbody>
@@ -826,8 +833,8 @@ Figure 3.7: Beer sales residual plot.
 <tr class="header">
 <th align="center">Observations</th>
 <th align="center">Residual Std. Error</th>
-<th align="center"><span class="math inline">R^2</span></th>
-<th align="center">Adjusted <span class="math inline">R^2</span></th>
+<th align="center"><span class="math inline">\(R^2\)</span></th>
+<th align="center">Adjusted <span class="math inline">\(R^2\)</span></th>
 </tr>
 </thead>
 <tbody>
@@ -921,8 +928,8 @@ Figure 3.9: Monthly unit sales of recreational vehicles from Winnebago.
 <tr class="header">
 <th align="center">Observations</th>
 <th align="center">Residual Std. Error</th>
-<th align="center"><span class="math inline">R^2</span></th>
-<th align="center">Adjusted <span class="math inline">R^2</span></th>
+<th align="center"><span class="math inline">\(R^2\)</span></th>
+<th align="center">Adjusted <span class="math inline">\(R^2\)</span></th>
 </tr>
 </thead>
 <tbody>
@@ -996,8 +1003,8 @@ Figure 3.10: Residuals for the linear fit for the winnebago data.
 <tr class="header">
 <th align="center">Observations</th>
 <th align="center">Residual Std. Error</th>
-<th align="center"><span class="math inline">R^2</span></th>
-<th align="center">Adjusted <span class="math inline">R^2</span></th>
+<th align="center"><span class="math inline">\(R^2\)</span></th>
+<th align="center">Adjusted <span class="math inline">\(R^2\)</span></th>
 </tr>
 </thead>
 <tbody>
@@ -1154,8 +1161,8 @@ Figure 3.11: Residual plot after natural log transformation.
 <tr class="header">
 <th align="center">Observations</th>
 <th align="center">Residual Std. Error</th>
-<th align="center"><span class="math inline">R^2</span></th>
-<th align="center">Adjusted <span class="math inline">R^2</span></th>
+<th align="center"><span class="math inline">\(R^2\)</span></th>
+<th align="center">Adjusted <span class="math inline">\(R^2\)</span></th>
 </tr>
 </thead>
 <tbody>
@@ -1325,8 +1332,8 @@ Figure 3.12: Total retail sales in the U.K. in billions pounds.
 <tr class="header">
 <th align="center">Observations</th>
 <th align="center">Residual Std. Error</th>
-<th align="center"><span class="math inline">R^2</span></th>
-<th align="center">Adjusted <span class="math inline">R^2</span></th>
+<th align="center"><span class="math inline">\(R^2\)</span></th>
+<th align="center">Adjusted <span class="math inline">\(R^2\)</span></th>
 </tr>
 </thead>
 <tbody>
@@ -1448,8 +1455,8 @@ Figure 3.15: Percentage changes from month-to-month in prescription costs.
 <tr class="header">
 <th align="center">Observations</th>
 <th align="center">Residual Std. Error</th>
-<th align="center"><span class="math inline">R^2</span></th>
-<th align="center">Adjusted <span class="math inline">R^2</span></th>
+<th align="center"><span class="math inline">\(R^2\)</span></th>
+<th align="center">Adjusted <span class="math inline">\(R^2\)</span></th>
 </tr>
 </thead>
 <tbody>
@@ -1535,8 +1542,8 @@ hours_quad &lt;-<span class="st"> </span><span class="kw">lm</span>(hours ~<span
 <tr class="header">
 <th align="center">Observations</th>
 <th align="center">Residual Std. Error</th>
-<th align="center"><span class="math inline">R^2</span></th>
-<th align="center">Adjusted <span class="math inline">R^2</span></th>
+<th align="center"><span class="math inline">\(R^2\)</span></th>
+<th align="center">Adjusted <span class="math inline">\(R^2\)</span></th>
 </tr>
 </thead>
 <tbody>
@@ -1587,7 +1594,7 @@ Figure 3.17: Studentized residuals for our quadratic fit for the hours series.
 ## 
 ## $k
 ## [1] 0</code></pre>
-<p>We have more runs than expected and a significant test at <span class="math inline">p = 0.00012</span>, confirming out suspicions from (b).</p>
+<p>We have more runs than expected and a significant test at <span class="math inline">\(p = 0.00012\)</span>, confirming out suspicions from (b).</p>
 </div>
 <div id="d-6" class="section level3 unnumbered">
 <h3>d</h3>
@@ -1679,8 +1686,8 @@ wages_quad &lt;-<span class="st"> </span><span class="kw">lm</span>(wages ~<span
 <tr class="header">
 <th align="center">Observations</th>
 <th align="center">Residual Std. Error</th>
-<th align="center"><span class="math inline">R^2</span></th>
-<th align="center">Adjusted <span class="math inline">R^2</span></th>
+<th align="center"><span class="math inline">\(R^2\)</span></th>
+<th align="center">Adjusted <span class="math inline">\(R^2\)</span></th>
 </tr>
 </thead>
 <tbody>
@@ -1781,7 +1788,7 @@ beer_resid &lt;-<span class="st"> </span><span class="kw">rstudent</span>(beer_q
 ## 
 ## $k
 ## [1] 0</code></pre>
-<p>The test is significant (<span class="math inline">p = 0.01</span>).</p>
+<p>The test is significant (<span class="math inline">\(p = 0.01\)</span>).</p>
 </div>
 <div id="c-18" class="section level3 unnumbered">
 <h3>c</h3>
@@ -2004,7 +2011,7 @@ Figure 3.28: Normality plots for the prescitions series fit with a cosine model.
 <div id="a-33" class="section level3 unnumbered">
 <h3>a</h3>
 <p>We have the variance estimator</p>
-<p><span class="math display">\displaystyle 
+<p><span class="math display">\[
 \begin{align}
   \text{Var}[\bar{Y}] = &amp; \frac{\gamma_0}{n} \left( 1 + 2\sum_{k=1}^{n-1}\left(1 - \frac{k}{n}\right)\phi^k \right) \\
                       = &amp; \frac{\gamma_0}{n} \left( 1 + 2\sum_{k=0}^{n-1}\left(1 - \frac{k}{n}\right)\phi^k -
@@ -2019,14 +2026,14 @@ Figure 3.28: Normality plots for the prescitions series fit with a cosine model.
                       = &amp; \frac{\gamma_0}{n} \left( \frac{2-2\phi^n+2\phi^n-1+\phi}{1-\phi} - \frac{2\phi}{n} \frac{1-\phi^n}{(1-\phi)^2} \right) \\
                       = &amp; \frac{\gamma_0}{n} \left( \frac{1+\phi}{1-\phi} - \frac{2\phi}{n} \frac{1-\phi^n}{(1-\phi)^2} \right) \quad \square
 \end{align}
-</span></p>
+\]</span></p>
 </div>
 <div id="b-33" class="section level3 unnumbered">
 <h3>b</h3>
-<p><span class="math display">\displaystyle 
+<p><span class="math display">\[
 \lim_{n \rightarrow \infty}\text{Var}[\bar{Y}] = \frac{\gamma_0}{n}\left( \frac{1+\phi}{1-\phi} - 0 \right) = \frac{\gamma_0}{n}\left( \frac{1+\phi}{1-\phi}\right)
-</span></p>
-<p>since <span class="math inline">\phi \in [-1,1]</span>.</p>
+\]</span></p>
+<p>since <span class="math inline">\(\phi \in [-1,1]\)</span>.</p>
 </div>
 <div id="c-22" class="section level3 unnumbered">
 <h3>c</h3>
@@ -2038,15 +2045,15 @@ var_ybar &lt;-<span class="st"> </span>(<span class="dv">1</span> +<span class="
 <div class="figure" style="text-align: center"><span id="fig:varbary"></span>
 <img src="TSAsolutions_files/figure-html/varbary-1.png" alt="Variance estimation for different values of $\phi$." width="672" />
 <p class="caption">
-Figure 3.29: Variance estimation for different values of <span class="math inline">\phi</span>.
+Figure 3.29: Variance estimation for different values of <span class="math inline">\(\phi\)</span>.
 </p>
 </div>
-<p>Plotting <span class="math inline">\text{Var}[\bar{Y}]</span> for values of <span class="math inline">\phi</span> in <span class="math inline">[-1, 1]</span>. Shows that variance increases exponentially as <span class="math inline">\phi</span> approaches 1, in which case our estimates of <span class="math inline">\bar{Y}</span> become increasingly uncertain.</p>
+<p>Plotting <span class="math inline">\(\text{Var}[\bar{Y}]\)</span> for values of <span class="math inline">\(\phi\)</span> in <span class="math inline">\([-1, 1]\)</span>. Shows that variance increases exponentially as <span class="math inline">\(\phi\)</span> approaches 1, in which case our estimates of <span class="math inline">\(\bar{Y}\)</span> become increasingly uncertain.</p>
 </div>
 </div>
 <div id="equation-3.2.6" class="section level2">
 <h2><span class="header-section-number">3.17</span> Equation 3.2.6</h2>
-<p><span class="math display">\displaystyle 
+<p><span class="math display">\[
 \begin{align}
   \text{Var}[\bar{Y}] = &amp; \frac{\gamma_0}{n} \sum_{k= -\infty}^\infty \rho_k \quad \text{when} \quad \rho_k = \phi^{|k|} \implies \\
                       = &amp; \frac{\gamma_0}{n} \sum_{k= -\infty}^\infty \phi^{|k|} \\
@@ -2054,17 +2061,17 @@ Figure 3.29: Variance estimation for different values of <span class="math inlin
                       = &amp; \frac{\gamma_0}{n} \left( \frac{1}{1-\phi} - \frac{1}{1-\frac{1}{\phi}} \right) \\
                       = &amp; \frac{\gamma_0}{n} \frac{1+\phi}{1-\phi} \tag*{$\square$}
 \end{align}
-</span></p>
+\]</span></p>
 </div>
 <div id="equation-3.2.7" class="section level2">
 <h2><span class="header-section-number">3.18</span> Equation 3.2.7</h2>
-<p><span class="math display">\displaystyle 
+<p><span class="math display">\[
 \begin{gather}
   \text{Var}[\bar{Y}] = \frac{1}{n^2} \text{Var}\left[ \sum_{i=1}^n Y_i \right] = \text{Var}\left[ \sum_{i=1}^n \sum_{j=1}^i e_j \right] = \\
     \frac{1}{n^2}\text{Var}[e_1 + 2e_2 + 3e_3 + \dots + ne_n] = \frac{\sigma_e^2}{n}\sum_{k=1}^n k^2 = \\
     \frac{\sigma_e^2}{n} \frac{n(n+1)(2n + 1)}{6} = \sigma_e^2 \frac{(n+1)(2n + 1)}{6} \tag*{$\square$}
 \end{gather}
-</span></p>
+\]</span></p>
 
 </div>
 </div>
@@ -2114,6 +2121,17 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    if (location.protocol !== "file:" && /^https?:/.test(script.src))
+      script.src  = script.src.replace(/^https?:/, '');
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>

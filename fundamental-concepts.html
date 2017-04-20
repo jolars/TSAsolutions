@@ -47,15 +47,6 @@
 
 
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
-    renderMathInElement(document.body);
-  });
-</script>
 
 
 <style type="text/css">
@@ -115,7 +106,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#larain"><i class="fa fa-check"></i><b>1.1</b> Larain</a></li>
 <li class="chapter" data-level="1.2" data-path="introduction.html"><a href="introduction.html#colors"><i class="fa fa-check"></i><b>1.2</b> Colors</a></li>
 <li class="chapter" data-level="1.3" data-path="introduction.html"><a href="introduction.html#random-normal-time-series"><i class="fa fa-check"></i><b>1.3</b> Random, normal time series</a></li>
-<li class="chapter" data-level="1.4" data-path="introduction.html"><a href="introduction.html#random-chi2-distributed-time-series"><i class="fa fa-check"></i><b>1.4</b> Random, <span class="math inline">\chi^2</span>-distributed time series</a></li>
+<li class="chapter" data-level="1.4" data-path="introduction.html"><a href="introduction.html#random-chi2-distributed-time-series"><i class="fa fa-check"></i><b>1.4</b> Random, <span class="math inline">\(\chi^2\)</span>-distributed time series</a></li>
 <li class="chapter" data-level="1.5" data-path="introduction.html"><a href="introduction.html#t5-distributed-random-values"><i class="fa fa-check"></i><b>1.5</b> <em>t</em>(5)-distributed, random values</a></li>
 <li class="chapter" data-level="1.6" data-path="introduction.html"><a href="introduction.html#dubuque-temperature-series"><i class="fa fa-check"></i><b>1.6</b> Dubuque temperature series</a></li>
 </ul></li>
@@ -334,40 +325,61 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
             <section class="normal" id="section-">
 <div id="fundamental-concepts" class="section level1">
-<h1><span class="header-section-number">Chapter 2</span> Fundamental concepts</h1>
+<h1><span class="header-section-number">2</span> Fundamental concepts</h1>
 <div id="basic-properties-of-expected-value-and-covariance" class="section level2">
 <h2><span class="header-section-number">2.1</span> Basic properties of expected value and covariance</h2>
 <div id="a" class="section level3 unnumbered">
 <h3>a</h3>
-
+\begin{align}
+    \text{Cov}[X,Y] &amp; = \text{Corr}[X,Y]\sqrt{Var[X]Var[Y]}\\
+                    &amp; = 0.25 \sqrt{9 \times 4} = 1.5 \\
+    \text{Var}[X,Y] &amp; = Var[X]+Var[Y]+2Cov[X,Y]\\
+                    &amp; = 9 + 4 + 2 \times 3 = 16\\
+    \end{align}
 </div>
 <div id="b" class="section level3 unnumbered">
 <h3>b</h3>
-<p><span class="math display">\displaystyle \text{Cov}[X, X+Y] = \text{Cov}[X,X] + \text{Cov}[X,Y] =
-  \text{Var}[X] + \text{Cov}[X,Y] = 9 + 1.5 = 10.5</span></p>
+<p><span class="math display">\[\text{Cov}[X, X+Y] = \text{Cov}[X,X] + \text{Cov}[X,Y] =
+  \text{Var}[X] + \text{Cov}[X,Y] = 9 + 1.5 = 10.5\]</span></p>
 </div>
 <div id="c" class="section level3 unnumbered">
 <h3>c</h3>
-
+\begin{align}
+\text{Corr}[X+Y, X-Y] = &amp; \text{Corr}[X,X] + \text{Corr}[X,-Y] +
+                          \text{Corr}[Y,X] + \text{Corr}[Y,-Y] \\
+                      = &amp; \text{Corr}[Y,X] + \text{Corr}[Y,-Y] \\
+                      = &amp; 1 - 0.25 + 0.25 -1 \\
+                      = &amp; 0 \\
+\end{align}
 </div>
 </div>
 <div id="dependence-and-covariance" class="section level2">
 <h2><span class="header-section-number">2.2</span> Dependence and covariance</h2>
-
-<p>since <span class="math inline">Var[X] = Var[Y]</span>.</p>
+\begin{gather*}
+\text{Cov}[X+Y,X-Y] = \text{Cov}[X,X] + \text{Cov}[X,-Y] +
+  \text{Cov}[Y,X] + \text{Cov}[Y, -Y] = \\
+Var[X] - Cov[X,Y] + Cov[X,Y] - Var[Y] = 0
+\end{gather*}
+<p>since <span class="math inline">\(Var[X] = Var[Y]\)</span>.</p>
 </div>
 <div id="strict-and-weak-stationarity" class="section level2">
 <h2><span class="header-section-number">2.3</span> Strict and weak stationarity</h2>
 <div id="a-1" class="section level3 unnumbered">
 <h3>a</h3>
 We have that
-
+\begin{gather*}
+P(Y_{t_1}, Y_{t_2}, \dots, Y_{t_n}) = \\
+  P(X_1, X_2, \dots, X_n) = \\
+  P(Y_{t_1 - k}, Y_{t_2 - k}, \dots, Y_{t_n - k}),
+\end{gather*}
 <p>which satisfies our requirement for strict stationarity.</p>
 </div>
 <div id="b-1" class="section level3 unnumbered">
 <h3>b</h3>
 The autocovariance is given by
-
+\begin{gather*}
+  \gamma_{t,s}=\text{Cov}[Y_t, Y_s] = \text{Cov}[X,X] = \text{Var}[X] = \sigma^2.
+\end{gather*}
 </div>
 <div id="c-1" class="section level3 unnumbered">
 <h3>c</h3>
@@ -391,88 +403,145 @@ Figure 2.1: A white noise time series: no drift, independence between observatio
 <h2><span class="header-section-number">2.4</span> Zero-mean white noise</h2>
 <div id="a-2" class="section level3 unnumbered">
 <h3>a</h3>
-
-<p>For <span class="math inline">k = 1</span> we have</p>
-
-<p>and for <span class="math inline">k = 0</span> we get</p>
-
-<p>and, finally, for <span class="math inline">k &gt; 0</span>:</p>
-
+\begin{gather*}
+  E[Y_t] = E[e_t+\theta e_{t-1}] = E[e_t] + \theta E[e_{t-1}] = 0 + 0 = 0\\
+  V[Y_t] = V[e_t + \theta e_{t-1}] =  V[e_t] + \theta^2 V[e_{t-1}] = \sigma_e^2 + \theta^2 \sigma_e^2 = \sigma_2^2(1 + \theta^2)\\
+\end{gather*}
+<p>For <span class="math inline">\(k = 1\)</span> we have</p>
+\begin{gather*}
+  C[e_t + \theta e_{t-1}, e_{t-1} + \theta e_{t-2}] = \\
+  C[e_t,e_{t-1}] + C[e_t, \theta e_{t-2}] + C[\theta e_{t-1}, e_{t-1}] + C[\theta e_{t-1}, \theta e_{t-2}] = \\
+  0 + 0 + \theta V[e_{t-1}] + 0 = \theta \sigma_e^2,\\
+  \text{Corr}[Y_t, Y_{t-k}] = \frac{\theta \sigma_e^2}{\sqrt{(\sigma_e^2(1+\theta^2))^2}} = \frac{\theta }{1+\theta^2}
+\end{gather*}
+<p>and for <span class="math inline">\(k = 0\)</span> we get</p>
+\begin{gather*}
+  \text{Corr}[Y_t, Y_{t-k}] = \text{Corr}[Y_t, Y_t] = 1
+\end{gather*}
+<p>and, finally, for <span class="math inline">\(k &gt; 0\)</span>:</p>
+\begin{gather*}
+  C[e_t + \theta e_{t-1}, e_{t-k} + \theta e_{t-k-1}] = \\
+  C[e_t, e_{t-k}] + C[e_t, e_{t-1-k}] + C[\theta e_{t-1}, e_{t-k}] + C[\theta e_{t-1}, \theta e_{t-1-k}] = 0
+\end{gather*}
 <p>given that all terms are independent. Taken together, we have that</p>
-
+\begin{gather*} \text{Corr}[Y_t, Y_{t-k}] =
+  \begin{cases}
+    1                            &amp; \quad \text{for } k = 0\\
+    \frac{\theta}{1 + \theta^2}  &amp; \quad \text{for } k = 1\\
+    0                            &amp; \quad \text{for } k &gt; 1
+  \end{cases}.
+\end{gather*}
 <p>And, as required,</p>
-
+\begin{gather*}
+  \text{Corr}[Y_t, Y_{t-k}] =
+  \begin{cases}
+    \frac{3}{1+3^2} = \frac{3}{10} &amp; \quad \text{if } \theta = 3\\
+    \frac{1/3}{1 + (1/3)^2} = \frac{1}{10/3} = \frac{3}{10}  &amp; \quad \text{if } \theta = 1/3
+  \end{cases}.
+\end{gather*}
 </div>
 <div id="b-2" class="section level3 unnumbered">
 <h3>b</h3>
-<p>No, probably not. Given that <span class="math inline">\rho</span> is standardized, we will not be able to detect any difference in the variance regardless of the values of k.</p>
+<p>No, probably not. Given that <span class="math inline">\(\rho\)</span> is standardized, we will not be able to detect any difference in the variance regardless of the values of k.</p>
 </div>
 </div>
 <div id="zero-mean-stationary-series" class="section level2">
 <h2><span class="header-section-number">2.5</span> Zero-mean stationary series</h2>
 <div id="a-3" class="section level3 unnumbered">
 <h3>a</h3>
-<p><span class="math display">\displaystyle \mu_t = E[Y_t] = E[5 + 2t + X_t] = 5 + 2E[t] + E[X_t] = 5 + 2t + 0 = 2t + 5</span></p>
+<p><span class="math display">\[\mu_t = E[Y_t] = E[5 + 2t + X_t] = 5 + 2E[t] + E[X_t] = 5 + 2t + 0 = 2t + 5\]</span></p>
 </div>
 <div id="b-3" class="section level3 unnumbered">
 <h3>b</h3>
-<p><span class="math display">\displaystyle  \gamma_k = \text{Corr}[5+2t+X_t, 5+2(t-k)+X_{t-k}] =
-  \text{Corr}[X_t, X_{t-k}]</span></p>
+<p><span class="math display">\[ \gamma_k = \text{Corr}[5+2t+X_t, 5+2(t-k)+X_{t-k}] =
+  \text{Corr}[X_t, X_{t-k}]\]</span></p>
 </div>
 <div id="c-2" class="section level3 unnumbered">
 <h3>c</h3>
-<p>No, the mean function (<span class="math inline">\mu_t</span>) is constant and the aurocovariance (<span class="math inline">\gamma_{t,t-k}</span>) free from <span class="math inline">t</span>.</p>
+<p>No, the mean function (<span class="math inline">\(\mu_t\)</span>) is constant and the aurocovariance (<span class="math inline">\(\gamma_{t,t-k}\)</span>) free from <span class="math inline">\(t\)</span>.</p>
 </div>
 </div>
 <div id="stationary-time-series" class="section level2">
 <h2><span class="header-section-number">2.6</span> Stationary time series</h2>
 <div id="a-4" class="section level3 unnumbered">
 <h3>a</h3>
-
-<p>which is free from <span class="math inline">t</span> for all <span class="math inline">k</span> because <span class="math inline">X_t</span> is stationary.</p>
+\begin{gather*}\text{Cov}[a + X_t, b + X_{t-k}] =\text{Cov}[X_t, X_{t-k}],\end{gather*}
+<p>which is free from <span class="math inline">\(t\)</span> for all <span class="math inline">\(k\)</span> because <span class="math inline">\(X_t\)</span> is stationary.</p>
 </div>
 <div id="b-4" class="section level3 unnumbered">
 <h3>b</h3>
-
-<p>Since <span class="math inline">\mu_t</span> varies depending on <span class="math inline">t</span>, <span class="math inline">Y_t</span> is not stationary.</p>
+\begin{gather*}
+  \mu_t = E[Y_t] = 
+    \begin{cases}
+      E[X_t]       &amp; \quad \text{for odd } t\\
+      3 + E[X_t]   &amp; \quad \text{for even } t\\
+    \end{cases}.
+\end{gather*}
+<p>Since <span class="math inline">\(\mu_t\)</span> varies depending on <span class="math inline">\(t\)</span>, <span class="math inline">\(Y_t\)</span> is not stationary.</p>
 </div>
 </div>
 <div id="first-and-second-order-difference-series" class="section level2">
 <h2><span class="header-section-number">2.7</span> First and second-order difference series</h2>
 <div id="a-5" class="section level3 unnumbered">
 <h3>a</h3>
-
-<p>because <span class="math inline">Y_t</span> is stationary.</p>
-
+\begin{gather*}\mu_t = E[W_t] = E[Y_t - Y_{t-1}] = E[Y_t] - E[Y_{t-1}] = 0\end{gather*}
+<p>because <span class="math inline">\(Y_t\)</span> is stationary.</p>
+\begin{gather*}
+  \text{Cov}[W_t] = \text{Cov}[Y_t - Y_{t-1}, Y_{t-k} - Y_{t-1-k}] = \\
+  \text{Cov}[Y_t, Y_{t-k}] + \text{Cov}[Y_t, Y_{t-1-k}] + \text{Cov}[-Y_{t-k}, Y_{t-k}] + \text{Cov}[-Y_{t-k}, -Y_{t-1-k}]=\\
+  \gamma_k-\gamma_{k+1}-\gamma_{k-1}+\gamma_{k} = 2 \gamma_k - \gamma_{k+1} - \gamma_{k-1}. \quad \square
+\end{gather*}
 </div>
 <div id="b-5" class="section level3 unnumbered">
 <h3>b</h3>
-<p>In (a), we discovered that the difference between two stationary processes, <span class="math inline">\triangledown Y_t</span> itself was stationary. It follows that the difference between two of these differences, <span class="math inline">\triangledown^2Y_t</span> is also stationary.</p>
+<p>In (a), we discovered that the difference between two stationary processes, <span class="math inline">\(\triangledown Y_t\)</span> itself was stationary. It follows that the difference between two of these differences, <span class="math inline">\(\triangledown^2Y_t\)</span> is also stationary.</p>
 </div>
 </div>
 <div id="generalized-difference-series" class="section level2">
 <h2><span class="header-section-number">2.8</span> Generalized difference series</h2>
-
+\begin{align}
+  E[W_t] &amp; = c_1E[Y_t]+c_2E[Y_t] + \dots + c_n E[Y_t]\\
+         &amp; = E[Y_t](c_1 + c_2 + \dots + c_n),
+\end{align}
 <p>and thus the expected value is constant. Moreover,</p>
-
-<p>which is free of <span class="math inline">t</span>; consequently, <span class="math inline">W_t</span> is stationary.</p>
+\begin{align}
+  \text{Cov}[W_t] &amp; = \text{Cov}[c_1 Y_t + c_2 Y_{t-1} + \dots + c_n Y_{t-k}, c_1 Y_{t-k} + c_2 Y_{t-k-1} + \dots + c_n Y_{t-k-n}] \\
+                  &amp; = \sum_{i=0}^n \sum_{j=0}^n c_i c_j \text{Cov}[Y_{t-j}Y_{t-i-k}] \\
+                  &amp; = \sum_{i=0}^n \sum_{j=0}^n c_i c_j \gamma_{j-k-i},
+\end{align}
+<p>which is free of <span class="math inline">\(t\)</span>; consequently, <span class="math inline">\(W_t\)</span> is stationary.</p>
 </div>
 <div id="zero-mean-stationary-difference-series" class="section level2">
 <h2><span class="header-section-number">2.9</span> Zero-mean stationary difference series</h2>
 <div id="a-6" class="section level3 unnumbered">
 <h3>a</h3>
-
-<p>which is not free of <span class="math inline">t</span> and hence <em>not</em> stationary.</p>
-
-
-<p>is free of <span class="math inline">t</span> and, furthermore, we have</p>
-
-<p>which is also free of <span class="math inline">t</span>, thereby proving that <span class="math inline">W_t</span> is stationary.</p>
+\begin{gather*}
+  E[Y_t] = \beta_0 + \beta_1 t + E[X_t] = \beta_0 + \beta_1 t + \mu_{t_x},
+\end{gather*}
+<p>which is not free of <span class="math inline">\(t\)</span> and hence <em>not</em> stationary.</p>
+\begin{gather*}
+  \text{Cov}[Y_t] = \text{Cov}[X_t, X_t-1] = \gamma_{t-1}
+\end{gather*}
+\begin{gather*}
+  E[W_t] = E[Y_t - Y_{t-1}] = E[\beta_0 + \beta_1 t + X_t - (\beta_0 + \beta_1(t-1) + X_{t-1})] =\\
+  \beta_0 + \beta_1 t - \beta_0 - \beta_1 t + \beta_1  = \beta_1,
+\end{gather*}
+<p>is free of <span class="math inline">\(t\)</span> and, furthermore, we have</p>
+\begin{gather*}
+  \text{Cov}[W_t] = \text{Cov}[\beta_0 + \beta_1 t + X_t, \beta_0 + \beta_1 (t-1) + X_{t-1}] =\\
+  \text{Cov}[X_t, X_{t-1}] = \gamma_k,  
+\end{gather*}
+<p>which is also free of <span class="math inline">\(t\)</span>, thereby proving that <span class="math inline">\(W_t\)</span> is stationary.</p>
 </div>
 <div id="b-6" class="section level3 unnumbered">
 <h3>b</h3>
-
-
+\begin{gather*}
+  E[Y_t] = E[\mu_t + X_t] = \mu_t + \mu_t = 0 + 0 = 0, \quad \text{and}\\
+  \text{Cov}[Y_t] = \text{Cov}[\mu_t + X_t, \mu_{t-k} + X_{t-k}] = \text{Cov}[X_t, X_{t-k}] = \gamma_k
+\end{gather*}
+\begin{gather*}
+  \triangledown^m Y_t = \triangledown(\triangledown^{m−1}Y_t)
+\end{gather*}
 <p><em>Currently unsolved.</em></p>
 </div>
 </div>
@@ -480,75 +549,129 @@ Figure 2.1: A white noise time series: no drift, independence between observatio
 <h2><span class="header-section-number">2.10</span> Zero-mean, unit-variance process</h2>
 <div id="a-7" class="section level3 unnumbered">
 <h3>a</h3>
-
+\begin{gather*}
+  \mu_t = E[Y_t] = E[\mu_t + \sigma_t X_t] = \mu_t + \sigma_t E[X_t] = \mu_t + \sigma_t \times 0 = \mu_t\\
+  \gamma_{t,t-k} = \text{Cov}[Y_t] = \text{Cov}[\mu_t + \sigma_t X_t, \mu_{t-k} + \sigma_{t-k} X_{t-k}] = 
+    \sigma_t \sigma_{t-k} \text{Cov}[X_t, X_{t-k}] = \sigma_t \sigma_{t-k} \rho_k
+\end{gather*}
 </div>
 <div id="b-7" class="section level3 unnumbered">
 <h3>b</h3>
 First, we have
-
-<p>since <span class="math inline">\{X_t\}</span> has unit-variance. Futhermore,</p>
-
-<p>which depends only on the time lag, <span class="math inline">k</span>. However, <span class="math inline">\{Y_t\}</span> is not necessarily stationary since <span class="math inline">\mu_t</span> may depend on <span class="math inline">t</span>.</p>
+\begin{gather*}
+  \text{Var}[Y_t] = \text{Var}[\mu_t + \sigma_t X_t] = 0 + \sigma_t^2 \text{Var}[X_t] = \sigma_t^2 \times 1 = \sigma_t^2
+\end{gather*}
+<p>since <span class="math inline">\(\{X_t\}\)</span> has unit-variance. Futhermore,</p>
+\begin{gather*}
+  \text{Corr}[Y_t, Y_{t-k}] = \frac{\sigma_t \sigma_{t-k} \rho_k}{\sqrt{\text{Var}[Y_t]\text{Var}[Y_{t-k}]}} = 
+    \frac{\sigma_t \sigma_{t-k}\rho_k}{\sigma_t \sigma_{t-k}} = \rho_k,
+\end{gather*}
+<p>which depends only on the time lag, <span class="math inline">\(k\)</span>. However, <span class="math inline">\(\{Y_t\}\)</span> is not necessarily stationary since <span class="math inline">\(\mu_t\)</span> may depend on <span class="math inline">\(t\)</span>.</p>
 </div>
 <div id="c-3" class="section level3 unnumbered">
 <h3>c</h3>
-<p>Yes, <span class="math inline">\rho_k</span> might be free from <span class="math inline">t</span> but if <span class="math inline">\sigma_t</span> is not, we will have a non-stationary time series with autocorrelation free from <span class="math inline">t</span> and constant mean.</p>
+<p>Yes, <span class="math inline">\(\rho_k\)</span> might be free from <span class="math inline">\(t\)</span> but if <span class="math inline">\(\sigma_t\)</span> is not, we will have a non-stationary time series with autocorrelation free from <span class="math inline">\(t\)</span> and constant mean.</p>
 </div>
 </div>
 <div id="drift" class="section level2">
 <h2><span class="header-section-number">2.11</span> Drift</h2>
 <div id="a-8" class="section level3 unnumbered">
 <h3>a</h3>
-
-<p><span class="math inline">\{X_t\}</span> is not stationary because <span class="math inline">\mu_t</span> varies with <span class="math inline">t</span>.</p>
+\begin{gather*}
+  \text{Cov}[X_t, X_{t-k}] = \gamma_k\\
+  E[X_t] = 3t
+\end{gather*}
+<p><span class="math inline">\(\{X_t\}\)</span> is not stationary because <span class="math inline">\(\mu_t\)</span> varies with <span class="math inline">\(t\)</span>.</p>
 </div>
 <div id="b-8" class="section level3 unnumbered">
 <h3>b</h3>
-
-<p>Since the mean function of <span class="math inline">\{Y_t\}</span> is constant (7) and its autocovariance free of <span class="math inline">t</span>, <span class="math inline">\{Y_t\}</span> is stionary.</p>
+\begin{gather*}
+  E[Y_t] = 3 - 3t+E[X_t] = 7 - 3t - 3t = 7\\
+  \text{Cov}[Y_t, Y_{t-k}] = \text{Cov}[7-3t+X_t,7-3(t-k)+X_{t-k}] = \text{Cov}[X_t, X_{t-k}] = \gamma_k
+\end{gather*}
+<p>Since the mean function of <span class="math inline">\(\{Y_t\}\)</span> is constant (7) and its autocovariance free of <span class="math inline">\(t\)</span>, <span class="math inline">\(\{Y_t\}\)</span> is stionary.</p>
 </div>
 </div>
 <div id="periods" class="section level2">
 <h2><span class="header-section-number">2.12</span> Periods</h2>
-
+\begin{gather*}
+  E[Y_t] = E[e_t - e_{t-12}] = E[e_t] - E[e_{t-12}] = 0\\
+  \text{Cov}[Y_t, Y_{t-k}] = \text{Cov}[e_t - e_{t-12}, e_{t-k} - e_{t-12-k}] =\\
+  \text{Cov}[e_t, e_{t-k}] - \text{Cov}[e_t, e_{t-12-k}] - \text{Cov}[e_{t-12}, e_{t-k}] + \text{Cov}[e_{t-12}, e_{t-12-k}]
+\end{gather*}
 <p>Then, as required, we have</p>
-
+\begin{gather*} \text{Cov}[Y_t, Y_{t-k}] =
+  \begin{cases}
+    \text{Cov}[e_t, e_{t-12}] - \text{Cov}[e_t, e_t] -\\ \text{Cov}[e_{t-12}, e_{t-12}] + \text{Cov}[e_{t-12},e_t] =\\
+      \text{Var}[e_t] - \text{Var}[e_{t-12}] \neq 0 &amp; \quad \text{for }  k=12\\
+      \\
+    \text{Cov}[e_t, e_{t-k}] - \text{Cov}[e_t, e_{t-12-k}] -\\ \text{Cov}[e_{t-12}, e_{t-k}] + \text{Cov}[e_{t-12}, e_{t-12-k}] =\\
+    0 + 0 + 0 + 0 = 0 &amp; \quad \text{for } k \neq 12
+  \end{cases}
+\end{gather*}
 </div>
 <div id="drift-part-2" class="section level2">
 <h2><span class="header-section-number">2.13</span> Drift, part 2</h2>
 <div id="a-9" class="section level3 unnumbered">
 <h3>a</h3>
-
+\begin{gather*}
+  E[Y_t] = E[e_t - \theta e_{t-1}^2] = E[e_t] - \theta E[e_{t-1}^2] = 0 - \theta \text{Var}[e_{t-1}] = -\theta \sigma_e^2
+\end{gather*}
 <p>And thus the requirement of constant variance is fulfilled. Moreover,</p>
-
+\begin{gather*}
+  \text{Var}[Y_t] = \text{Var}[e_t-\theta e_{t-1}^2] = \text{Var}[e_t] + \theta^2 \text{Var}[e_{t-1}^2] = \sigma_e^2 + \theta^2 (E[e_{t-1}^4] - E[e_{t-1}^2]^2),
+\end{gather*}
 where
-
+\begin{gather*}
+  E[e_{t-1}^4] = 3\sigma_e^4 \quad \text{and} \quad E[e_{t-1}^2 ]^2 = \sigma_e^4,
+\end{gather*}
 gives us
-
+\begin{gather*}
+  \text{Var}[Y_t] = \sigma_e^2 + \theta(3\sigma_e^4 - \sigma_e^2) = \sigma_e^2 + 2 \theta^2 \sigma_e^4
+\end{gather*}
 and
-
-<p>which means that the autocorrelation function <span class="math inline">\gamma_{t,s}</span> also has to be zero.</p>
+\begin{gather*}
+  \text{Cov}[Y_t, Y_{t-1}] = \text{Cov}[e_t - \theta e_{t-1}^2, e_{t-1} - \theta e_{t-2}^2] = \\
+  \text{Cov}[e_t, e_{t-1}] + \text{Cov}[e_t, - \theta e_{t-2}^2] + \text{Cov}[- \theta e_{t-1}^2, e_{t-1}]
+    \text{Cov}[-\theta e_{t-1}^2, - \theta e_{t-2}^2] =\\
+  \text{Cov}[e_t, e_{t-1}] - \theta \text{Cov}[e_t, e_{t-2}^2] - \theta \text{Cov}[e_{t-1}^2, e_{t-1}] +
+    \theta^2 \text{Cov}[e_{t-1}^2, e_{t-2}^2] = \\
+  -\theta \text{Cov}[e_{t-1}^2, e_{t-1}] = -\theta (E[e_{t-1}^3] + \mu_{t-1} + \mu_t) = 0
+\end{gather*}
+<p>which means that the autocorrelation function <span class="math inline">\(\gamma_{t,s}\)</span> also has to be zero.</p>
 </div>
 <div id="b-9" class="section level3 unnumbered">
 <h3>b</h3>
-<p>The autocorrelation of <span class="math inline">\{Y_t\}</span> is zeor and its mean function is constant, thus <span class="math inline">\{Y_t\}</span> must be stationary.</p>
+<p>The autocorrelation of <span class="math inline">\(\{Y_t\}\)</span> is zeor and its mean function is constant, thus <span class="math inline">\(\{Y_t\}\)</span> must be stationary.</p>
 </div>
 </div>
 <div id="stationarity-again" class="section level2">
 <h2><span class="header-section-number">2.14</span> Stationarity, again</h2>
 <div id="a-10" class="section level3 unnumbered">
 <h3>a</h3>
-
-<p>So <span class="math inline">\{Y_t\}</span> is not stationary.</p>
+\begin{gather*}
+  E[Y_t]= E[\theta_0 +  t e_t] = \theta_0 + E[e_t] = \theta_0+t \times 0 = \theta_0\\
+\text{Var}[Y_t] = \text{Var}[\theta_0] + \text{Var}[t e_t] = 0 + t^2\sigma_e^2 = t^2\sigma_e^2
+\end{gather*}
+<p>So <span class="math inline">\(\{Y_t\}\)</span> is not stationary.</p>
 </div>
 <div id="b-10" class="section level3 unnumbered">
 <h3>b</h3>
-
-<p>which varies with <span class="math inline">t</span> and means that <span class="math inline">\{W_t\}</span> is not stationary.</p>
+\begin{gather*}
+  E[W_t] = E[\triangledown Y_t] = E[\theta_0 + te_t - \theta_0 - (t-1)e_{t-1}] =
+    tE[e_t] - tE[e_{t-1} + E[e_{t-1}] = 0 \\
+  \text{Var}[\triangledown Y_t] = \text{Var}[t e_t] = - \text{Var}[(t-1)e_{t-1}] = 
+    t^2 \sigma_e^2 - (t-1)^2 \sigma_e^2 = \sigma_e^2 (t^2 - t^2 + 2t - 1) = (2t-1)\sigma_e^2,
+\end{gather*}
+<p>which varies with <span class="math inline">\(t\)</span> and means that <span class="math inline">\(\{W_t\}\)</span> is not stationary.</p>
 </div>
 <div id="c-4" class="section level3 unnumbered">
 <h3>c</h3>
-
+\begin{gather*}
+  E[Y_t] = E[e_t e_{t-1}] = E[e_t] E[e_{t-1}] = 0\\
+  \text{Cov}[Y_t, Y_{t-1}] = \text{Cov}[e_t e_{t-1}, e_{t-1} e_{t-2}] = E[(e_t e_{t-1} - \mu_t^2)(e_{t-1} e_{t-2} - \mu_t^2)] =\\
+  E[e_t]E[e_{t-1}]E[e_{t-1}]E[e_{t-2}] = 0
+\end{gather*}
 <p>Both the covariance and the mean function are zero, hence the process is stationary.</p>
 </div>
 </div>
@@ -556,202 +679,388 @@ and
 <h2><span class="header-section-number">2.15</span> Random variable, zero mean</h2>
 <div id="a-11" class="section level3 unnumbered">
 <h3>a</h3>
-<p><span class="math inline">E[Y_t] = (-1)^tE[X] = 0</span></p>
+<p><span class="math inline">\(E[Y_t] = (-1)^tE[X] = 0\)</span></p>
 </div>
 <div id="b-11" class="section level3 unnumbered">
 <h3>b</h3>
-<p><span class="math inline">\text{Cov}[Y_t, Y_{t-k}] = \text{Cov}[(-1)^tX, (-1)^{t-k}X] = (-1)^{2t-k}\text{Cov}[X, X] = (-1)^k \text{Var}[X] = (-1)^k\sigma_t^2</span></p>
+<p><span class="math inline">\(\text{Cov}[Y_t, Y_{t-k}] = \text{Cov}[(-1)^tX, (-1)^{t-k}X] = (-1)^{2t-k}\text{Cov}[X, X] = (-1)^k \text{Var}[X] = (-1)^k\sigma_t^2\)</span></p>
 </div>
 <div id="c-5" class="section level3 unnumbered">
 <h3>c</h3>
-<p>Yes, the covariance is free of <span class="math inline">t</span> and the mean is constant.</p>
+<p>Yes, the covariance is free of <span class="math inline">\(t\)</span> and the mean is constant.</p>
 </div>
 </div>
 <div id="mean-and-variance" class="section level2">
 <h2><span class="header-section-number">2.16</span> Mean and variance</h2>
-
+\begin{gather*}
+  E[Y_t] = E[A + X_t] = E[A] + E[X_t] = \mu_A + \mu_X\\
+  \text{Cov}[Y_t, Y_{t-k}] = \text{Cov}[A + X_t, A+ X_{t-k}] = \\
+  \text{Cov}[A, A] + \text{Cov}[A, X_{t-k}] + \text{Cov}[X_t, A] + \text{Cov}[X_t, X_{t-k}] = \sigma_A^2 + \gamma_{k_k}
+\end{gather*}
 </div>
 <div id="variance-of-sample-mean" class="section level2">
 <h2><span class="header-section-number">2.17</span> Variance of sample mean</h2>
-
-<p>Setting <span class="math inline">k = t-s, j = t</span> gives us</p>
-
+\begin{gather*}
+  \text{Var}[\bar{Y}] = \text{Var}\left[ \frac{1}{n} \sum_{t=1}^n Y_t \right] = \frac{1}{n^2} \text{Var}\left[ \sum_{t=1}^n Y_t \right] = \\
+  \frac{1}{n^2}\text{Cov}\left[ \sum_{t=1}^n Y_t, \sum_{s=1}^n Y_s \right] = \frac{1}{n^2} \sum_{t=1}^n \sum_{s=1}^n \gamma_{t-s}
+\end{gather*}
+<p>Setting <span class="math inline">\(k = t-s, j = t\)</span> gives us</p>
+\begin{gather*}
+  \text{Var}[\bar{Y}] = \frac{1}{n^2} \sum_{j=1}^n \sum_{j-k=1}^n \gamma_k = \frac{1}{n^2} \sum_{j=1}^n \sum_{j=k+1}^{n+k} \gamma_k = \\
+  \frac{1}{n^2} \left( \sum_{k=1}^{n-1} \sum_{j=k+1}^{n} \gamma_k + \sum_{k=-n+1}^0 \sum_{j=1}^{n+k} \gamma_k \right) = \\
+  \frac{1}{n^2} \left( \sum_{k=1}^{n-1} (n-k)\gamma_k + \sum_{k=-n+1}^0 (n+k)\gamma_k \right) = \\
+  \frac{1}{n^2} \sum_{k=-n+1}^{n-1} \left( (n-k)\gamma_k + (n+k)\gamma_k \right) = \\
+  \frac{1}{n^2} \sum_{k=-n+1}^{n-1} (n-|k|)\gamma_k = \frac{1}{n} \sum_{k=-n+1}^{n-1} \left(1-\frac{|k|}{n}\right)\gamma_k \quad \square
+\end{gather*}
 </div>
 <div id="sample-variance" class="section level2">
 <h2><span class="header-section-number">2.18</span> Sample variance</h2>
 <div id="a-12" class="section level3 unnumbered">
 <h3>a</h3>
-
+\begin{gather*}
+  \sum_{t=1}^n (Y_t - \mu)^2 = \sum_{t=1}^n((Y_t - \bar{Y}) + (\bar{Y} - \mu))^2 = \\
+  \sum_{t=1}^n ((Y_t - \bar{Y})^2 - 2(Y_t - \bar{Y})(\bar{Y}- \mu) + (\bar{Y} - \mu)^2) = \\
+  n(\bar{Y} - \mu)^2 + 2(\bar{Y} - \mu)\sum_{t=1}^n (Y_t - \bar{Y}) + \sum_{t=1}^n (Y_t - \bar{Y})^2  = \\
+  n(\bar{Y} - \mu)^2 + \sum_{t=1}^n(Y_t - \bar{Y})^2 \quad \square
+\end{gather*}
 </div>
 <div id="b-12" class="section level3 unnumbered">
 <h3>b</h3>
-
+\begin{gather*}
+  E[s^2] = E\left[\frac{n}{n-1} \sum_{t=1}^n (Y_t - \bar{Y})^2 \right] =
+    \frac{n}{n-1} E\left[\sum_{t=1}^n \left( (Y_t-\mu)^2  + n(\bar{Y} - \mu)^2 \right)\right] = \\
+  \frac{n}{n-1} \sum_{t=1}^n \left( E[(Y_t-\mu)^2]  + nE[(\bar{Y} - \mu)^2] \right) = 
+    \frac{1}{n-1} \left( n\text{Var}[Y_t] - n\text{Var}[\bar{Y}] \right) = \\
+  \frac{n}{n-1} \gamma_0 - \frac{n}{n-1} \text{Var}[\bar{Y}] =
+    \frac{1}{n-1} \left( n \gamma_0 - n \left( \frac{\gamma_0}{n} + \frac{2}{n} \sum_{k=1}^{n-1} \left( 1 - \frac{k}{n} \right) \gamma_k\right) \right) = \\
+  \frac{1}{n-1} \left( n \gamma_0 - \gamma_0 + 2 \sum_{k=1}^{n-1} \left( 1 - \frac{k}{n} \right) \gamma_k\right) = 
+    \frac{1}{n-1} \left( \gamma_0(n-1) + 2 \sum_{k=1}^{n-1} \left( 1 - \frac{k}{n} \right) \gamma_k\right) = \\
+  \gamma_0 + \frac{2}{n-1} \sum_{k=1}^{n-1} \left( 1 - \frac{k}{n} \right) \gamma_k \quad \square
+\end{gather*}
 </div>
 <div id="c-6" class="section level3 unnumbered">
 <h3>c</h3>
-Since <span class="math inline">\gamma_k = 0</span> for <span class="math inline">k \neq 0</span>, in our case for all <span class="math inline">k</span>, we have
-
+Since <span class="math inline">\(\gamma_k = 0\)</span> for <span class="math inline">\(k \neq 0\)</span>, in our case for all <span class="math inline">\(k\)</span>, we have
+\begin{gather*}
+  E[s^2] = \gamma_0 - \frac{2}{n-1} \sum_{t=1}^n \left( 1 - \frac{k}{n} \right) \times 0 = \gamma_0
+\end{gather*}
 </div>
 </div>
 <div id="random-walk-with-drift" class="section level2">
 <h2><span class="header-section-number">2.19</span> Random walk with drift</h2>
 <div id="a-13" class="section level3 unnumbered">
 <h3>a</h3>
-
+\begin{gather*}
+  Y_{1} = \theta_0 + e_1\\
+  Y_{2} = \theta_0 + \theta_0 + e_2 + e_1\\
+  Y_{t} = \theta_0 + \theta_0 + \dots + \theta_0 + e_{t} + e_{t-1} + \dots+ e_1 = \\
+  Y_{t} = t \theta_0 + e_t + e_{t-1} + \dots + e_1 \quad \square
+\end{gather*}
 </div>
 <div id="b-13" class="section level3 unnumbered">
 <h3>b</h3>
-
+\begin{gather*}
+  \mu_t = E[Y_t] = E[t \theta_0 + e_t + e_{t-1} + \dots + e_1] = t\theta_0 + E[e_t] + E[e_{t-1}] + \dots + E[e_1] = \\
+  t\theta_0 + 0 + 0 + \dots + 0 = t \theta_0
+\end{gather*}
 </div>
 <div id="c-7" class="section level3 unnumbered">
 <h3>c</h3>
-
+\begin{gather*}
+  \gamma_{t,t-k} = \text{Cov}[Y_t, Y_{t-k}] = \text{Cov}[t\theta_0 + e_t, + e_{t-1} + \dots + e_1, (t-k)\theta_0 + e_{t-k}, + e_{t-1-k} + \dots + e_1] = \\
+   \text{Cov}[e_{t-k}, + e_{t-1-k} + \dots + e_1, e_{t-k}, + e_{t-1-k} + \dots + e_1] \quad \text{(since all other terms are 0)} =\\
+   \text{Var}[e_{t-k}, + e_{t-1-k} + \dots + e_1, e_{t-k}, + e_{t-1-k} + \dots + e_1] = (t-k)\sigma_e^2
+\end{gather*}
 </div>
 </div>
 <div id="random-walk" class="section level2">
 <h2><span class="header-section-number">2.20</span> Random walk</h2>
 <div id="a-14" class="section level3 unnumbered">
 <h3>a</h3>
-
-<p>which implies <span class="math inline">\mu_t = \mu_{t-1}\quad</span> Q.E.D.</p>
+\begin{gather*}
+  \mu_1 = E[Y_1] = E[e_1] = 0\\
+  \mu_2 = E[Y_2] = E[Y_1 - e_2] = E[Y_1] - E[e_2] = 0 - 0 = 0\\
+  \dots\\
+  \mu_{t-1} = E[Y_{t-1}] = E[Y_{t-2} - e_{t-1}] = E[Y_{t-2}] - E[e_{t-1}] = 0 \\
+  \mu_t = E[Y_t] = E[Y_{t-1} - e_t] = E[Y_t] - E[e_t] = 0,
+\end{gather*}
+<p>which implies <span class="math inline">\(\mu_t = \mu_{t-1}\quad\)</span> Q.E.D.</p>
 </div>
 <div id="b-14" class="section level3 unnumbered">
 <h3>b</h3>
-
+\begin{gather*}
+  \text{Var}[Y_1] = \sigma_e^2\\
+  \text{Var}[Y_2] = \text{Var}[Y_1 - e_2] = \text{Var}[Y_1] + \text{Var}[e_1] = \sigma_e^2 +  \sigma_e^2 = 2\sigma_e^2\\
+  \dots\\
+  \text{Var}[Y_{t-1}] = \text{Var}[Y_{t-2} - e_{t-1}] = \text{Var}[Y_{t-2}] + \text{Var}[e_{t-1}]  = (t-1)\sigma_e^2\\
+  \text{Var}[Y_t] = \text{Var}[Y_{t-1} - e_t] = \text{Var}[Y_{t-1}] + \text{Var}[e_t]  = (t-1)\sigma_e^2 + \sigma_e^2 = t\sigma_e^2 \quad \square
+\end{gather*}
 </div>
 <div id="c-8" class="section level3 unnumbered">
 <h3>c</h3>
-
+\begin{gather*}
+  \text{Cov}[Y_t, Y_s] = \text{Cov}[Y_t, Y_t+e_{t+1}+e_{t+2}+ \dots + e_s] = \text{Cov}[Y_t, Y_t] = \text{Var}[Y_t] = t\sigma_e^2
+\end{gather*}
 </div>
 </div>
 <div id="random-walk-with-random-starting-value" class="section level2">
 <h2><span class="header-section-number">2.21</span> Random walk with random starting value</h2>
 <div id="a-15" class="section level3 unnumbered">
 <h3>a</h3>
-
+\begin{gather*}
+  E[Y_t] = E[Y_0+e_t+e_{t-1}+\dots+e_1] = \\
+  E[Y_0] + E[e_t] + E[e_{t-1}] + E[e_{t-2}] + \dots + E[e_1] = \\
+  \mu_0 + 0 + \dots + 0 = \mu_0 \quad \square
+\end{gather*}
 </div>
 <div id="b-15" class="section level3 unnumbered">
 <h3>b</h3>
-
+\begin{gather*}
+  \text{Var}[Y_t] = \text{Var}[Y_0 + e_t + e_{t-1} + \dots + e_1] = \\
+  \text{Var}[Y_0] + \text{Var}[e_t] + \text{Var}[e_{t-1}] + \dots + \text{Var}[e_1] = \\
+  \sigma_0^2+t\sigma_e^2 \quad \square
+\end{gather*}
 </div>
 <div id="c-9" class="section level3 unnumbered">
 <h3>c</h3>
-
+\begin{gather*}
+  \text{Cov}[Y_t, Y_s] = \text{Cov}[Y_t, Y_t+e_{t+1}+e_{t+2}+ \dots + e_s] = \\
+  \text{Cov}[Y_t, Y_t] = \text{Var}[Y_t] = \sigma_0^2+t\sigma_e^2 \quad \square
+\end{gather*}
 </div>
 <div id="d" class="section level3 unnumbered">
 <h3>d</h3>
-
+\begin{gather*}
+  \text{Corr}[Y_t, Y_s] = \frac{\sigma_0^2+t\sigma_e^2}{\sqrt{(\sigma_0^2+t\sigma_e^2)(\sigma_0^2+s\sigma_e^2)}} = 
+    \sqrt{\frac{\sigma_0^2+t\sigma_e^2}{\sigma_0^2+s\sigma_e^2}} \quad \square
+\end{gather*}
 </div>
 </div>
 <div id="asymptotic-stationarity" class="section level2">
 <h2><span class="header-section-number">2.22</span> Asymptotic stationarity</h2>
 <div id="a-16" class="section level3 unnumbered">
 <h3>a</h3>
-
+\begin{gather*}
+  E[Y_1] = E[e_1] = 0\\
+  E[Y_2] = E[cY_{1}+e_2] = cE[Y_1] + E[e_2] = 0\\
+  \dots\\
+  E[Y_t] = E[cY_{t-1}+e_t] = cE[Y_{t-1}] + E[e_t] = 0\quad \square
+\end{gather*}
 </div>
 <div id="b-16" class="section level3 unnumbered">
 <h3>b</h3>
-
-<p><span class="math inline">\{Y_t\}</span> is not stationary, given that its variance varies with <span class="math inline">t</span>.</p>
+\begin{gather*}
+  \text{Var}[Y_1] = \text{Var}[e_1] = \sigma_e^2\\
+  \text{Var}[Y_2] = \text{Var}[cY_{1} + e_2] = c^2\text{Var}[Y_{t-1}] + \text{Var}[e_2] = c^2\sigma_e^2 + \sigma_e^2 = \sigma_e^2(1 + c^2)\\
+  \dots\\
+  \text{Var}[Y_t] = \sigma_e^2(1 + c^2 + c^4 + \dots + c^{2t-2}) \quad\square
+\end{gather*}
+<p><span class="math inline">\(\{Y_t\}\)</span> is not stationary, given that its variance varies with <span class="math inline">\(t\)</span>.</p>
 </div>
 <div id="c-10" class="section level3 unnumbered">
 <h3>c</h3>
-
+\begin{gather*}
+  \text{Cov}[Y_t, Y_{t-1}] = \text{Cov}[cY_{t-1} + e_t, Y_{t-1}] = c\text{Cov}[Y_{t-1}, Y_{t-1}] = c\text{Var}[Y_{t-1}]\quad \text{giving}\\
+  \text{Corr}[Y_t, Y_{t-1}] = \frac{c\text{Var}[Y_{t-1}]}{\sqrt{\text{Var}[Y_t]\text{Var}[Y_{t-1}]}} =
+    c \sqrt{\frac{\text{Var}[Y_{t-1}]}{\text{Var}[Y_t]}}\quad\square
+\end{gather*}
 And, in the general case,
-
+\begin{gather*}
+  \text{Cov}[Y_t, Y_{t-k}] = \text{Cov}[cY_{t-1}+e_t, Y_{t-k}] = \\
+  c\text{Cov}[cY_{t-2} + e_{t-1}, Y_{t-k}] =\\
+  c^3\text{Cov}[Y_{t-2} + e_{t-1}, Y_{t-k}] = \dots\\ = c^k\text{Var}[Y_{t-k}]
+\end{gather*}
 giving
-
+\begin{gather*}
+  \text{Corr}[Y_t, Y_{t-k}] = \frac{c^k\text{Var}[Y_{t-k}]}{\sqrt{\text{Var}[Y_t]\text{Var}[Y_{t-k}]}} =
+    c^k \sqrt{\frac{\text{Var}[Y_{t-k}]}{\text{Var}[Y_t]}}\quad\square
+\end{gather*}
 </div>
 <div id="d-1" class="section level3 unnumbered">
 <h3>d</h3>
-
+\begin{gather*}
+  \text{Var}[Y_t] = \sigma_e^2(1+c^2+c^4+\dots+c^{2t-2}) = \sigma_e^2\sum_{t=1}^{n}c^{2(t-1)}=\sigma_e^2 \sum_{t=0}^{n-1} c^{2t} =
+    \sigma_e^2 \frac{1-c^{2t}}{1-c^2}
+\end{gather*}
 And because
-
-<p>which is free of <span class="math inline">t</span>, <span class="math inline">\{Y_t\}</span> can be considered <em>asymptotically</em> stationary.</p>
+\begin{gather*}
+\lim_{t \rightarrow \infty} \sigma_e^2 \frac{1-c^{2t}}{1-c^2} = \sigma_e^2 \frac{1}{1-c^2}\quad\text{since }|c| &lt; 1,
+\end{gather*}
+<p>which is free of <span class="math inline">\(t\)</span>, <span class="math inline">\(\{Y_t\}\)</span> can be considered <em>asymptotically</em> stationary.</p>
 </div>
 <div id="e" class="section level3 unnumbered">
 <h3>e</h3>
-
+\begin{gather*}
+  Y_t = c(cY_{t-2} + e_{t-1}) + e_t = \dots = e_t+ce_{t-1} + c^2e_{t-2} + \dots + c^{t-2}e_2+ \frac{c^{t-1}}{\sqrt{1-c^2}}e_1\\
+  \text{Var}[Y_t] = \text{Var}[e_t+ce_{t-1}+c^2e_{t-2}+\dots+c^{t-2}e_2+\frac{c^{t-1}}{\sqrt{1-c^2}}e_1] =\\
+  \text{Var}[e_t] + c^2\text{Var}[e_{t-1}]+c^4 \text{Var}[e_{t-2}] + \dots + c^{2(t-2)}\text{Var}[e_2]+\frac{c^{2(t-1)}}{1-c^2}\text{Var}[e_1] =\\
+  \sigma_e^2(1 + c^2 + c^4 + \dots + c^{2(t-2)} + \frac{c^{2(t-1)}}{1-c^2}) =\sigma_e^2\left( \sum_{t=1}^{n}c^{2(t-1)} - c^{2(t-1)} + \frac{c^{2(t-1)}}{1-c^2}\right)= \\
+  \sigma_e^2 \frac{1-c^{2t}+c^{2t-2+2}}{1-c^2} = \sigma_e^2 \frac{1}{1-c^2} \quad \square
+\end{gather*}
 Futhermore,
-
+\begin{gather*}
+  E[Y_1] = E\left[\frac{e_1}{\sqrt{1-c^2}}\right] = \frac{E[e_1]}{\sqrt{1-c^2}} = 0\\
+  E[Y_2] = E[cY_{1} + e_2] = cE[Y_{1}] = 0\\
+  \dots \\
+  E[Y_t] = E[cY_{t-1} + e_2] = cE[Y_{t-1}] = 0,\\
+\end{gather*}
 <p>which satisfies our first requirement for weak stationarity. Also,</p>
-
-<p>which is free of <span class="math inline">t</span> and hence <span class="math inline">\{Y_t\}</span> is now stationary.</p>
+\begin{gather*}
+  \text{Cov}[Y_t,Y_{t-k}] = \text{Cov}[cY_{t-1} + e_t, Y_{t-1}] = c^k\text{Var}[Y_{t-1}] =\\
+    c^k \frac{\sigma_e^2}{1-c^2},
+\end{gather*}
+<p>which is free of <span class="math inline">\(t\)</span> and hence <span class="math inline">\(\{Y_t\}\)</span> is now stationary.</p>
 </div>
 </div>
 <div id="stationarity-in-sums-of-stochastic-processes" class="section level2">
 <h2><span class="header-section-number">2.23</span> Stationarity in sums of stochastic processes</h2>
-
+\begin{gather*}
+  E[W_t] = E[Z_t + Y_t] = E[Z_t] + Y[Z_t] = \mu_{Z_t} + \mu_{Y_s}
+\end{gather*}
 <p>Since both processes are stationary – and hence their sums are constant – the sum of both processes must also be constant.</p>
-
-<p>both free of <span class="math inline">t</span>.</p>
+\begin{gather*}
+  \text{Cov}[W_t, W_{t-k}] = \text{Cov}[Z_t + Y_t, Z_{t-k} + Y_{t-k}] = \\
+  \text{Cov}[Z_t, Z_{t-k}] + \text{Cov}[Z_t, Y_{t-k}] + \text{Cov}[Y_t, Z_{t-k}] + \text{Cov}[Y_t, Y_{t-k}] = \\
+  \text{Cov}[Z_t, Z_{t-k}] + \text{Cov}[Z_t, Y_{t-k}] + \text{Cov}[Y_t, Z_{t-k}] + \text{Cov}[Y_t, Y_{t-k}] =
+  \text{Cov}[Z_t, Z_{t-k}] + \text{Cov}[Y_t, Y_{t-k}] = \gamma_{Z_k} + \gamma_{Y_k},
+\end{gather*}
+<p>both free of <span class="math inline">\(t\)</span>.</p>
 </div>
 <div id="measurement-noise" class="section level2">
 <h2><span class="header-section-number">2.24</span> Measurement noise</h2>
-
+\begin{gather*}
+  E[Y_t] = E[Y_t + e_t] = E[X_t] + E[e_t] - \mu_t\\
+  \text{Var}[Y_t] = \text{Var}[X_t + e_t] = \text{Var}[X_t]+\text{Var}[e_t] = \sigma_X^2 + \sigma_e^2\\
+  \text{Cov}[Y_t, Y_{t-k}] = \text{Cov}[X_t + e_t, X_{t-k}+e_{t-k}] = \text{Cov}[X_t, X_{t-k}] = \rho_k\\
+  \text{Corr}[Y_t, Y_{t-k}] = \frac{\rho_k}{\sqrt{(\sigma_X^2 + \sigma_e^2)(\sigma_X^2 + \sigma_e^2)}} = \frac{\rho_k}{\sigma_X^2 + \sigma_e^2} =
+    \frac{\rho_k}{1 + \frac{\sigma_e^2}{\sigma_X^2}} \quad \square
+\end{gather*}
 </div>
 <div id="random-cosine-wave" class="section level2">
 <h2><span class="header-section-number">2.25</span> Random cosine wave</h2>
-
-<p>and is thus free of <span class="math inline">t</span> and <span class="math inline">s</span>.</p>
+\begin{gather*}
+  E[Y_t] = E\left[\beta_0 + \sum_{i=1}^k(A_i\cos(2\pi f_it) + B_i \sin(2\pi f_it))\right] = \\
+  \beta_0 + \sum_{i=1}^k(E[A_i]\cos(2\pi f_it) + E[B_i]\sin(2\pi f_it) = \beta_0\\
+  \text{Cov}[Y_t, Y_s] = \text{Cov}\left[\sum_{i=1}^k A_i\cos(2\pi f_it) + B_i\sin(2\pi f_it),
+    \sum_{j=1}^k A_j\cos(2\pi f_j s) + B_j\sin(2\pi f_j s)\right] =\\
+  \sum_{i=1}^k \text{Cov}[A_i\cos(2\pi f_it) + A_i\sin(2\pi f_is)] +
+    \sum_{i=1}^k \text{Cov}[B_i\cos(2\pi f_j t) + B_i\sin(2\pi f_j s)] = \\
+  \sum_{i=1}^k \text{Var}[A_i](\cos(2\pi f_it) + \sin(2\pi f_is)) +
+    \sum_{i=1}^k \text{Var}[B_i](\cos(2\pi f_j t) + \sin(2\pi f_j s)) = \\
+  \frac{\sigma_i^2}{2} \sum_{i=1}^k (\cos(2\pi f_i (t-s)) + \sin(2\pi f_i (t+s))) +
+     \frac{\sigma_i^2}{2} \sum_{i=1}^k (\cos(2\pi f_j (t-s)) + \sin(2\pi f_j (t+s))) = \\
+  \sigma_i^2 \sum_{i=1}^k \cos(2\pi f_i (t-s)) = \sigma_i^2 \sum_{i=1}^k \cos(2\pi f_i k),
+\end{gather*}
+<p>and is thus free of <span class="math inline">\(t\)</span> and <span class="math inline">\(s\)</span>.</p>
 </div>
 <div id="semivariogram" class="section level2">
 <h2><span class="header-section-number">2.26</span> Semivariogram</h2>
 <div id="a-17" class="section level3 unnumbered">
 <h3>a</h3>
-
+\begin{gather*}
+  \Gamma_{t,s} = \frac{1}{2}E[(Y_t-Y_s)^2] = \frac{1}{2}E[Y_t^2 - 2Y_t Y_s + Y_s^2] = \\
+  \frac{1}{2}\left( E[Y_t^2] - 2E[Y_t Y_s] + E[Y_s^2] \right) = \frac{1}{2}\gamma_0 + \frac{1}{2}\gamma_0 - 2 \times \frac{1}{2}\gamma_{|t-s|} = \gamma_0 - \gamma_{|t-s|}\\
+  \text{Cov}[Y_t,Y_s] = E[Y_tY_s]-\mu_t\mu_s=E[Y_tY_s]=\gamma_{|t-s|} \quad \square
+\end{gather*}
 </div>
 <div id="b-17" class="section level3 unnumbered">
 <h3>b</h3>
-
+\begin{gather*}
+  Y_t-Y_s = e_t + e_{t-1} + \dots + e_1 - e_s - e_{s-1} - \dots - e_1 = \\
+  e_t + e_{t-1} + \dots + e_{s+1}, \quad \text{for } t &gt; s \\
+  \Gamma_{t,s} = \frac{1}{2}E[(Y_t-Y_s)^2] = \frac{1}{2}\text{Var}[e_t + e_{t-1} + \dots + e_{s-1}] =\\ \frac{1}{2}\sigma_e^2(t-s) \quad \square
+\end{gather*}
 </div>
 </div>
 <div id="polynomials" class="section level2">
 <h2><span class="header-section-number">2.27</span> Polynomials</h2>
 <div id="a-18" class="section level3 unnumbered">
 <h3>a</h3>
-
-<p>Hence, because of the zero mean and covariance free of <span class="math inline">t</span>, it is a stationary process.</p>
+\begin{gather*}
+  E[Y_t] = E[e_t + \phi e_{t-1} + \phi^2 e_{t-2} + \dots + \phi^r e_{t-r}] = 0\\
+  \text{Cov}[Y_t, Y_{t-k}] = \text{Cov}[e_t + \phi e_{t-1} + \dots +
+    \phi^r e_{t-r}, e_{t-k} + \phi e_{t-1-k} + \dots + \phi^r e_{t-r-k}] =\\
+  \text{Cov}[e_1+\dots + \phi^k e_{t-k} + \phi^{k+1}e_{t-k-1} +
+    \dots + \phi^r e_{t-r}, e_{t-r}, e_{t-k} + \dots + \phi^k e_{t-k-1} + \dots + \phi^r e_{t-k-r}] = \\
+  \sigma_e^2(\phi^k + \phi^{k+2} + \phi^{k+4} + \dots + \phi^{k+2(r-k)}) = \sigma_e^2 \phi^k(1 + \phi^2 + \phi^4 + \dots + \phi^{2(r-k)})
+\end{gather*}
+<p>Hence, because of the zero mean and covariance free of <span class="math inline">\(t\)</span>, it is a stationary process.</p>
 </div>
 <div id="b-18" class="section level3 unnumbered">
 <h3>b</h3>
-
+\begin{gather*}
+  \text{Var}[Y_t] = \text{Var}[e_t + \phi e_{t-1} + \phi^2 e_{t-2} + \dots + \phi^r e_{t-r}] = \sigma_e^2(1 + \phi + \phi^2 + \dots + \phi^{2r})\\
+  \text{Corr}[Y_t, Y_{t-k}] = \frac{\sigma_e^2 \phi^k(1 + \phi^2 + \phi^4 + \dots + \phi^{2(r-k)})}{\sqrt{(\sigma_e^2(1 + \phi + \phi^2 + \dots + \phi^{2r}))^2}} = \frac{\phi^k(1 + \phi^2 + \phi^4 + \dots + \phi^{2(r-k)})}{(1 + \phi + \phi^2 + \dots + \phi^{2r})} \quad \square
+\end{gather*}
 </div>
 </div>
 <div id="random-cosine-wave-extended" class="section level2">
 <h2><span class="header-section-number">2.28</span> Random cosine wave extended</h2>
 <div id="a-19" class="section level3 unnumbered">
 <h3>a</h3>
-
+\begin{gather*}
+  E[Y_t] = E[R \cos{(2\pi(ft+\phi))}] = E[R] \cos{(2\pi(ft+\phi))} = \\
+  E[R] \int_0^1\cos(E[R \cos(2\pi(ft+\phi))])d\phi = E[R]\left[ \frac{1}{2\pi}\sin(2\pi(ft+\phi))\right]^1_0 = \\
+  E[R] \left( \frac{1}{2\pi}(\sin(2\pi(ft+1)) - \sin(2\pi(ft))) \right) = \\
+  E[R] \left( \frac{1}{2\pi}(\sin(2\pi ft + 2\pi) - \sin(2\pi ft + 1)) \right) = \\
+  E[R] \left( 0 \right) = 0
+\end{gather*}
 </div>
 <div id="b-19" class="section level3 unnumbered">
 <h3>b</h3>
-
-<p>which is free of <span class="math inline">t</span>.</p>
+\begin{gather*}
+  \gamma_{t,s} = E[R \cos{(2\pi(ft+\phi))} R \cos{(2\pi(fs+\phi))}] = \\
+  \frac{1}{2} E[R^2] \int_0^1\left(\cos{\left(2\pi(f(t-s)\right)} + \frac{1}{4\pi}\sin{(2\pi(f(t+s) + 2\phi)}) \right) =\\
+  \frac{1}{2} E[R^2]\left[ \cos{(2\pi f(t-s))} + \frac{1}{4\pi}\sin{(2\pi(f(t+s) + 2\phi))} \right]^1_0 = \\
+  \frac{1}{2} E[R^2]\left( \cos{(2\pi (f|t-s|))} \right),
+\end{gather*}
+<p>which is free of <span class="math inline">\(t\)</span>.</p>
 </div>
 </div>
 <div id="random-cosine-wave-further" class="section level2">
 <h2><span class="header-section-number">2.29</span> Random cosine wave further</h2>
 <div id="a-20" class="section level3 unnumbered">
 <h3>a</h3>
-
+\begin{gather*}
+  E[Y_t] = \sum_{j=1}^m E[R_j]E[\cos{(2\pi(f_j t+\phi))}] = \text{via 2.28} = \sum_{j=1}^m E[R_j] \times 0 = 0
+\end{gather*}
 </div>
 <div id="b-20" class="section level3 unnumbered">
 <h3>b</h3>
-
+\begin{gather*}
+  \gamma_k = \sum_{j=1}^m E[R_j]\cos{(2\pi f_jk)}, \text{ also from 2.28.}
+\end{gather*}
 </div>
 </div>
 <div id="rayleigh-distribution" class="section level2">
 <h2><span class="header-section-number">2.30</span> Rayleigh distribution</h2>
-
+\begin{gather*}
+  Y = R\cos{(2\pi(ft + \phi))}, \quad X = R\sin{(2\pi(ft+\phi))}\\
+  \begin{bmatrix}
+    \frac{\partial X}{\partial R} &amp; \frac{\partial X}{\partial \Phi} \\
+    \frac{\partial Y}{\partial R} &amp; \frac{\partial X}{\partial \Phi}
+  \end{bmatrix} = 
+  \begin{bmatrix}
+    \cos{(2\pi(ft + \Phi))} &amp; 2\pi R \sin{(2\pi(ft + \Phi))} \\
+    \sin{(2\pi(ft + \Phi))} &amp; 2\pi R \cos{(2\pi(ft + \Phi))}
+  \end{bmatrix},
+\end{gather*}
 <p>with jacobian</p>
-
+\begin{gather*}
+  -2\pi R = -2\pi \sqrt{X^2 + Y^2}
+\end{gather*}
 <p>and inverse Jacobian</p>
-
+\begin{gather*}
+  \frac{1}{-2\pi \sqrt{X^2 + Y^2}}.
+\end{gather*}
 Furthermore,
-
+\begin{gather*}
+  f(r,\Phi) = re^{-r^2/2}
+\end{gather*}
 and
-
+\begin{gather*} 
+  f(x,y) = \frac{e^{-(x^2+y^2)/2}\sqrt{x^2 + y^2}}{2\pi \sqrt{x^2 + y^2}} = \frac{e^{-x^2/2}}{\sqrt{2\pi}}\frac{e^{-y^2/2}}{\sqrt{2\pi}} \quad \square
+\end{gather*}
 
 </div>
 </div>
@@ -801,6 +1110,17 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    if (location.protocol !== "file:" && /^https?:/.test(script.src))
+      script.src  = script.src.replace(/^https?:/, '');
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>
