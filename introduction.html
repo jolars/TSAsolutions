@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Solutions to Time Series Analysis: with Applications in R</title>
   <meta name="description" content="This book contains solutions to the problems in the book Time Series Analysis with Applications in R, second edition, by Cryer and Chan. It is provided as a github repository so that anybody may contribute to its development.">
-  <meta name="generator" content="bookdown 0.3.16 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.3.18 and GitBook 2.6.7">
 
   <meta property="og:title" content="Solutions to Time Series Analysis: with Applications in R" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="Johan Larsson">
 
 
-<meta name="date" content="2017-04-05">
+<meta name="date" content="2017-04-20">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -47,6 +47,15 @@
 
 
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    renderMathInElement(document.body);
+  });
+</script>
 
 
 <style type="text/css">
@@ -106,7 +115,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#larain"><i class="fa fa-check"></i><b>1.1</b> Larain</a></li>
 <li class="chapter" data-level="1.2" data-path="introduction.html"><a href="introduction.html#colors"><i class="fa fa-check"></i><b>1.2</b> Colors</a></li>
 <li class="chapter" data-level="1.3" data-path="introduction.html"><a href="introduction.html#random-normal-time-series"><i class="fa fa-check"></i><b>1.3</b> Random, normal time series</a></li>
-<li class="chapter" data-level="1.4" data-path="introduction.html"><a href="introduction.html#random-chi2-distributed-time-series"><i class="fa fa-check"></i><b>1.4</b> Random, <span class="math inline">\(\chi^2\)</span>-distributed time series</a></li>
+<li class="chapter" data-level="1.4" data-path="introduction.html"><a href="introduction.html#random-chi2-distributed-time-series"><i class="fa fa-check"></i><b>1.4</b> Random, <span class="math inline">\chi^2</span>-distributed time series</a></li>
 <li class="chapter" data-level="1.5" data-path="introduction.html"><a href="introduction.html#t5-distributed-random-values"><i class="fa fa-check"></i><b>1.5</b> <em>t</em>(5)-distributed, random values</a></li>
 <li class="chapter" data-level="1.6" data-path="introduction.html"><a href="introduction.html#dubuque-temperature-series"><i class="fa fa-check"></i><b>1.6</b> Dubuque temperature series</a></li>
 </ul></li>
@@ -306,6 +315,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="3.17" data-path="trends.html"><a href="trends.html#equation-3.2.6"><i class="fa fa-check"></i><b>3.17</b> Equation 3.2.6</a></li>
 <li class="chapter" data-level="3.18" data-path="trends.html"><a href="trends.html#equation-3.2.7"><i class="fa fa-check"></i><b>3.18</b> Equation 3.2.7</a></li>
 </ul></li>
+<li class="chapter" data-level="4" data-path="models-for-stationary-time-series.html"><a href="models-for-stationary-time-series.html"><i class="fa fa-check"></i><b>4</b> Models for stationary time series</a></li>
 </ul>
 
       </nav>
@@ -357,7 +367,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>As far as we can tell there is no discernable pattern here.</p>
 </div>
 <div id="random-chi2-distributed-time-series" class="section level2">
-<h2><span class="header-section-number">1.4</span> Random, <span class="math inline">\(\chi^2\)</span>-distributed time series</h2>
+<h2><span class="header-section-number">1.4</span> Random, <span class="math inline">\chi^2</span>-distributed time series</h2>
 <blockquote>
 <p>Simulate a completely random process of length 48 with independent, chi-square distributed values, each with 2 degrees of freedom. Display the time series plot. Does it look “random” and nonnormal? Repeat this exercise several times with a new simulation each time.</p>
 </blockquote>
@@ -434,17 +444,6 @@ gitbook.start({
 });
 </script>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
-    if (location.protocol !== "file:" && /^https?:/.test(script.src))
-      script.src  = script.src.replace(/^https?:/, '');
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script>
 </body>
 
 </html>
