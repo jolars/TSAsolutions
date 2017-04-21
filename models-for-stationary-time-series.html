@@ -25,7 +25,7 @@
 <meta name="author" content="Johan Larsson">
 
 
-<meta name="date" content="2017-04-20">
+<meta name="date" content="2017-04-21">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -316,6 +316,17 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="4.3" data-path="models-for-stationary-time-series.html"><a href="models-for-stationary-time-series.html#max-and-min-correlations-for-ma1"><i class="fa fa-check"></i><b>4.3</b> Max and min correlations for MA(1)</a></li>
 <li class="chapter" data-level="4.4" data-path="models-for-stationary-time-series.html"><a href="models-for-stationary-time-series.html#non-uniqueness-of-ma1"><i class="fa fa-check"></i><b>4.4</b> Non-uniqueness of MA(1)</a></li>
 <li class="chapter" data-level="4.5" data-path="models-for-stationary-time-series.html"><a href="models-for-stationary-time-series.html#sketch-more-autocorrelations"><i class="fa fa-check"></i><b>4.5</b> Sketch more autocorrelations</a></li>
+<li class="chapter" data-level="4.6" data-path="models-for-stationary-time-series.html"><a href="models-for-stationary-time-series.html#difference-function-for-ar1"><i class="fa fa-check"></i><b>4.6</b> Difference function for AR(1)</a><ul>
+<li class="chapter" data-level="" data-path="models-for-stationary-time-series.html"><a href="models-for-stationary-time-series.html#a-35"><i class="fa fa-check"></i>a</a></li>
+<li class="chapter" data-level="" data-path="models-for-stationary-time-series.html"><a href="models-for-stationary-time-series.html#b-35"><i class="fa fa-check"></i>b</a></li>
+</ul></li>
+<li class="chapter" data-level="4.7" data-path="models-for-stationary-time-series.html"><a href="models-for-stationary-time-series.html#characteristics-of-several-models"><i class="fa fa-check"></i><b>4.7</b> Characteristics of several models</a><ul>
+<li class="chapter" data-level="" data-path="models-for-stationary-time-series.html"><a href="models-for-stationary-time-series.html#a-36"><i class="fa fa-check"></i>a</a></li>
+<li class="chapter" data-level="" data-path="models-for-stationary-time-series.html"><a href="models-for-stationary-time-series.html#b-36"><i class="fa fa-check"></i>b</a></li>
+<li class="chapter" data-level="" data-path="models-for-stationary-time-series.html"><a href="models-for-stationary-time-series.html#c-24"><i class="fa fa-check"></i>c</a></li>
+<li class="chapter" data-level="" data-path="models-for-stationary-time-series.html"><a href="models-for-stationary-time-series.html#d-12"><i class="fa fa-check"></i>d</a></li>
+<li class="chapter" data-level="" data-path="models-for-stationary-time-series.html"><a href="models-for-stationary-time-series.html#e-5"><i class="fa fa-check"></i>e</a></li>
+</ul></li>
 </ul></li>
 </ul>
 
@@ -446,7 +457,62 @@ for (i in <span class="kw">seq_along</span>(theta)) {
 Figure 4.5: ACF for various AR(1) processes.
 </p>
 </div>
+</div>
+<div id="difference-function-for-ar1" class="section level2">
+<h2><span class="header-section-number">4.6</span> Difference function for AR(1)</h2>
+<div id="a-35" class="section level3 unnumbered">
+<h3>a</h3>
+<p><span class="math display">\[
+\begin{aligned}
+\text{Cov}(\triangledown Y_t, \triangledown Y_{t-k}) &amp; = \text{Cov}(Y_t-Y_{t-1}, Y{t-k}-Y_{t-k-1})\\
+                                                     &amp; = \text{Cov}(Y_t, Y_{t-k}) - \text{Cov}(Y_{t-1},Y_{t-k}) - \text{Cov}(Y_t, Y_{t-k-1}) + \text{Cov}(Y_{t-1}, Y_{t-k-1})\\
+                                                     &amp; = \frac{\sigma_e^2}{1-\phi^2}(\phi^2 - \phi^{k-1}-\phi^{k+1}+\phi^k) \\
+                                                     &amp; = \frac{\sigma_e^2}{1-\phi^2}\phi^{k-1}(2\phi-\phi2-1)\\
+                                                     &amp; = - \frac{\sigma_e^2}{1-\phi^2}(1-\phi)^2\phi^{k-1}\\
+                                                     &amp; = - \sigma_e^2 \frac{(1-\phi)^2}{(1-\phi)(1+\phi)}\\
+                                                     &amp; = -\sigma_e^2 \frac{1-\phi}{1+\phi}\phi^{k-1}
+\end{aligned}
+\]</span> as required.</p>
+</div>
+<div id="b-35" class="section level3 unnumbered">
+<h3>b</h3>
+<p><span class="math display">\[
+\begin{aligned}
+  \text{Var}(W_t) &amp; = \text{Var}(Y_t-Y_{t-1})\\
+                  &amp; = \text{Var}(\phi_1Y_{t-1}+e_t-Y_{t-1})\\
+                  &amp; = \text{Var}(Y_{t-1}(\phi-1)+\sigma_e^2)\\
+                  &amp; = (\phi-1)^2\text{Var}(Y_{t-1}) + \text{Var}(e_t)\\
+                  &amp; = \frac{\sigma_e^2}{1-\phi^2}(\phi^2-2\phi+1) + \sigma_e^2\\
+                  &amp; = \frac{\sigma_e^2(\phi^2-2\phi+1+1-\phi^2)}{1-\phi^2}\\
+                  &amp; = \frac{2\sigma_e^2(1-\phi)}{1-\phi^2} \\
+                  &amp; = \frac{2\sigma_e^2}{1+\phi} \tag*{$\square$}
+\end{aligned}
+\]</span></p>
+</div>
+</div>
+<div id="characteristics-of-several-models" class="section level2">
+<h2><span class="header-section-number">4.7</span> Characteristics of several models</h2>
+<div id="a-36" class="section level3 unnumbered">
+<h3>a</h3>
+<p>Only correlation at lag 1.</p>
+</div>
+<div id="b-36" class="section level3 unnumbered">
+<h3>b</h3>
+<p>Only autocorrelation at lag 1 and 2. Shape of process depends on values of coefficients.</p>
+</div>
+<div id="c-24" class="section level3 unnumbered">
+<h3>c</h3>
+<p>Exponentially decaying correlation from lag 0.</p>
+</div>
+<div id="d-12" class="section level3 unnumbered">
+<h3>d</h3>
+<p>Different patterns in ACF that depends on whether roots are complex or real.</p>
+</div>
+<div id="e-5" class="section level3 unnumbered">
+<h3>e</h3>
+<p>Exponentially decaying correlations from lag 1.</p>
 
+</div>
 </div>
 </div>
             </section>
