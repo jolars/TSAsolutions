@@ -107,3 +107,57 @@ for (i in seq_along(theta)) {
 }
 ```
 
+## Difference function for AR(1)
+
+### a {-}
+
+\[
+\begin{aligned}
+\text{Cov}(\triangledown Y_t, \triangledown Y_{t-k}) & = \text{Cov}(Y_t-Y_{t-1}, Y{t-k}-Y_{t-k-1})\\
+                                                     & = \text{Cov}(Y_t, Y_{t-k}) - \text{Cov}(Y_{t-1},Y_{t-k}) - \text{Cov}(Y_t, Y_{t-k-1}) + \text{Cov}(Y_{t-1}, Y_{t-k-1})\\
+                                                     & = \frac{\sigma_e^2}{1-\phi^2}(\phi^2 - \phi^{k-1}-\phi^{k+1}+\phi^k) \\
+                                                     & = \frac{\sigma_e^2}{1-\phi^2}\phi^{k-1}(2\phi-\phi2-1)\\
+                                                     & = - \frac{\sigma_e^2}{1-\phi^2}(1-\phi)^2\phi^{k-1}\\
+                                                     & = - \sigma_e^2 \frac{(1-\phi)^2}{(1-\phi)(1+\phi)}\\
+                                                     & = -\sigma_e^2 \frac{1-\phi}{1+\phi}\phi^{k-1}
+\end{aligned}
+\]
+as required.
+
+### b {-}
+
+\[
+\begin{aligned}
+  \text{Var}(W_t) & = \text{Var}(Y_t-Y_{t-1})\\
+                  & = \text{Var}(\phi_1Y_{t-1}+e_t-Y_{t-1})\\
+                  & = \text{Var}(Y_{t-1}(\phi-1)+\sigma_e^2)\\
+                  & = (\phi-1)^2\text{Var}(Y_{t-1}) + \text{Var}(e_t)\\
+                  & = \frac{\sigma_e^2}{1-\phi^2}(\phi^2-2\phi+1) + \sigma_e^2\\
+                  & = \frac{\sigma_e^2(\phi^2-2\phi+1+1-\phi^2)}{1-\phi^2}\\
+                  & = \frac{2\sigma_e^2(1-\phi)}{1-\phi^2} \\
+                  & = \frac{2\sigma_e^2}{1+\phi} \tag*{$\square$}
+\end{aligned}
+\]
+
+## Characteristics of several models
+
+### a {-}
+
+Only correlation at lag 1.
+
+### b {-}
+
+Only autocorrelation at lag 1 and 2. Shape of process depends on values of
+coefficients.
+
+### c {-}
+
+Exponentially decaying correlation from lag 0.
+
+### d {-}
+
+Different patterns in ACF that depends on whether roots are complex or real.
+
+### e {-}
+
+Exponentially decaying correlations from lag 1.
