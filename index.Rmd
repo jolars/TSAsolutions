@@ -30,7 +30,7 @@ source(file.path("R", "lattice_wrappers.R"))
 # Preface {-}
 
 This book contains solutions to the problems in the book
-*Time Series Analysis: with Applications in R*, third edition, by Cryer and
+*Time Series Analysis: with Applications in R*, second edition, by Cryer and
 Chan. It is provided as a github repository so that anybody may contribute to
 its development.
 
