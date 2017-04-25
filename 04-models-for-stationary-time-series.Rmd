@@ -657,4 +657,4 @@ and
 \text{Var}(Y_{t-1}) = \text{Var}(Y_t)(1-\phi^2) = \sigma_e^2 \implies \text{Var}(Y_t) = \frac{\sigma_e^2}{1-\phi}
 \]
 
-and then wew must have $|\phi| < 1$.
+and then we must have $|\phi| < 1$.
