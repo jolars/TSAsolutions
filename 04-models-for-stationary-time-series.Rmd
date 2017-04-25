@@ -161,3 +161,500 @@ Different patterns in ACF that depends on whether roots are complex or real.
 ### e {-}
 
 Exponentially decaying correlations from lag 1.
+
+
+## AR(2)
+
+First, we have variance
+\[
+\text{Var}(Y_t) = \text{Var}(\phi_2 Y_{t-2} + e_t) = \phi_2^2 \text{Var}Y_{t-2} + \sigma_e^2
+\]
+which, assuming stationarity, is equivalent to
+\[
+\text{Var}(Y_{t-2}) = \phi_2^2\text{Var}(Y_{t-2}) + \sigma_e^2 \iff \\
+\sigma_e^2 = (1-\phi_2^2) \text{Var}(Y_{t-2}) \iff \\
+\text{Var}(Y_{t-2}) = \frac{\sigma_e^2}{1-\phi^2_2}
+\]
+which requires that $-1 < \phi_2 < 1$ since $\text{Var}(Y_{t-2}) \geq 0$.
+
+## Sketching AR(2) processes
+
+### a {-}
+
+\[
+\begin{split}
+\rho_1 & = 0.6\rho_0 + 0.3\rho{-1} = 0.6 + 0.3\rho_1 = 0.8571 \\
+\rho_2 & = 0.6\rho_1+0.3\rho_0 = 0.81426\\
+\rho_3 & = 0.6\rho_2 + 0.3\rho_1 = 0.7457
+\end{split}
+\]
+
+The roots to the characteristic equation are given by
+
+\[
+\frac{\phi_1 \pm \sqrt{\phi_1^2 + 4\phi_2}}{-2\phi_2} = \frac{0.6 \pm \sqrt{0.6 + 4 \times 0.3}}{-2 \times 0.3} = -1 \pm 2.0817 = \{1.0817, -3.0817\}.
+\]
+
+Since both of these roots exceed 1 in absolute value, they are real. Next,
+we sketch the theoretical autocorrelation function (\@ref(fig:ar2a)).
+
+```{r ar2a, fig.cap = "ACF for AR(2) with $\\phi_1 = 0.6, \\phi_2 = 0.3$."}
+tacf(ar = c(0.6, 0.3))
+```
+
+### b {-}
+
+Next we write a function to do the work for us.
+
+```{r}
+ar2solver <- function(phi1, phi2) {
+  roots <- polyroot(c(1, -phi1, -phi2))
+  cat("Roots:\t\t", roots, "\n")
+  
+  if (any(Im(roots) > sqrt(.Machine$double.eps))) {
+    damp <- sqrt(-phi2)
+    freq <- acos(phi1 / (2 * damp))
+    
+    cat("Dampening:\t", damp, "\n")
+    cat("Frequency:\t", freq, "\n")
+  }
+  
+  tacf(ar = c(phi1, phi2))
+}
+```
+
+```{r, fig.cap = "ACF for AR(2) with $\\phi_1 = -0.4, \\phi_2 = 0.5$."}
+ar2solver(-0.4, 0.5)
+```
+
+### c {-}
+
+```{r, fig.cap = "ACF for AR(2) with $\\phi_1 = 1.2, \\phi_2 = -0.7$."}
+ar2solver(1.2, -0.7)
+```
+
+### d {-}
+
+```{r, fig.cap = "ACF for AR(2) with $\\phi_1 = -1, \\phi_2 = -0.6$."}
+ar2solver(-1, -0.6)
+```
+
+### e {-}
+
+```{r, fig.cap = "ACF for AR(2) with $\\phi_1 = 0.5, \\phi_2 = -0.9$."}
+ar2solver(0.5, -0.9)
+```
+
+### f {-}
+
+```{r, fig.cap = "ACF for AR(2) with $\\phi_1 = -0.5, \\phi_2 = -0.6$."}
+ar2solver(-0.5, -0.6)
+```
+
+## Sketch ARMA(1,1) models
+
+### a {-}
+
+```{r, fig.cap = "ACF for ARMA(1,1) with $\\phi = 0.7$ and $\\theta = 0.4$."}
+tacf(ar = 0.7, ma = -0.4)
+```
+
+### b {-}
+
+```{r, fig.cap = "ACF for ARMA(1,1) with $\\phi = 0.7$ and $\\theta = -0.4$."}
+tacf(ar = 0.7, ma = 0.4)
+```
+
+## ARMA(1,2)
+
+### a {-}
+
+\[
+\begin{aligned}
+\text{Cov}(Y_t, Y_{t-k}) & = \text{E}[(0.8Y_{t-1}+e_t+0.7e_{t-1}+0.6e_{t-2})Y_{t-k}] - \text{E}(Y_t)\text{E}(Y_{t-k})\\
+                         & = \text{E}(0.8Y_{t-1}Y_{t-k} + Y_{t-k}e_t + 0.7e_{t-1}Y_{t-k}+0.6e_{t-2}Y_{t-k}) - 0\\
+                         & = 0.8\text{E}(Y_{t-1}Y_{t-k}) + \text{E}(Y_{t-k}e_t) + 0.7\text{E}(e_{t-1}Y_{t-k}) + 0.7\text{E}(e_{t-2}Y_{t-k})\\
+                         & = 0.8\text{E}(Y_{t-1}Y_{t-k})\\
+                         & = 0.8\text{Cov}(Y_t,Y_{t-k+1})\\
+                         & = 0.8\gamma_{k-1} & \square
+\end{aligned}
+\]
+
+### b {-}
+
+\[
+\begin{split}
+\text{Cov}(Y_t,Y_{t-2}) & = \text{E}[0.8Y_{t-1}+e_t+0.7e_{t-1}+0.6e_{t-2})Y_{t-2}]\\
+                        & = \text{E}[(0.8Y_{t-1}+0.6e_{t-2})Y_{t-2}]\\
+                        & = 0.8\text{Cov}(Y_{t-1},Y_{t-2})+0.6\text{E}(e_{t-2}Y_{t-2})\\
+                        & = 0.8\gamma_1 + 0.6\text{E}(e_t Y_t)\\
+                        & = 0.8\gamma_1 + 0.6\text{E}[e_t(0.8Y_{t-1}+e_t+0.7e_{t-1}+0.6e_{t-2})]\\
+                        & = 0.8\gamma_1 + 0.6\sigma_e^2 \iff \\
+\rho_2                  & = 0.8\rho_1+0.6\sigma_e^2/\gamma_0 & \square
+\end{split}
+\]
+
+## Two MA(2) processes
+
+### a {-}
+
+For $\theta_1 = \theta_2 = 1/6$ we have
+\[
+\rho_k = \frac{-\frac{1}{6}+\frac{1}{6}\times\frac{1}{6}}{1 + \left(\frac{1}{6}\right)^2 + \left(\frac{1}{6}\right)^2} = 
+\frac{\frac{1}{6}\left(\frac{1}{6}-1\right)}{1 + \frac{2}{36}} = - \frac{5}{38}.
+\]
+
+For $\theta_1 = -1$ and $\theta_2 = 6$,
+\[
+\rho_k = \frac{1-6}{1+1^2+36} = - \frac{5}{38} \tag*{$\square$}.
+\]
+
+### b {-}
+
+For $\theta_1 = \theta_2 = 1/6$ we have roots given by 
+\[
+\frac{\frac{1}{6} \pm \sqrt{\frac{1}{36}+ 4 \times \frac{1}{6}}}{-2\times \frac{1}{6}} =
+- \frac{1}{2} \pm \frac{\sqrt{\frac{25}{36}}}{-\frac{1}{3}} = - \frac{1}{2} \pm \frac{\frac{5}{6}}{\frac{1}{3}} = \{-3, -2\}
+\]
+
+and for $\theta_1 = -1$ and $\theta_2 = 6$,
+\[
+\frac{-1 \pm \sqrt{1 + 4 \times 6}}{-2\times6} = \frac{-1\pm 5}{-12} = \frac{1}{12} \pm \frac{5}{12} = \left\{-\frac{1}{3}, \frac{1}{2}\right\}
+\]
+
+## Autocorrelation in MA(1)
+
+\[
+\begin{aligned}
+& \text{Var}(Y_{n+1}+Y_n+Y_{n-1}+ \dots + Y_1)  = \left((n+1)+2n\rho_1\right)\gamma_0 = \left(1+n(1+2\rho_1)\right)\gamma_0\\
+& \text{Var}(Y_{n+1}-Y_n+Y_{n-1}- \dots + Y_1)  = \left((n+1)-2n\rho_1 \right)\gamma_0 = \left(1 + n(1-2\rho_1)\right)\gamma_0
+\end{aligned}
+\]
+
+\[
+\begin{cases}
+\left(1+n(1+2\rho-1)\right) \geq 0 \\
+\left(1+n(1-2\rho-1)\right) \geq 0 \\
+\end{cases} \iff
+
+\begin{cases}
+1+n+2\rho_1n \geq 0 \\
+1+n-2\rho_1n \geq 0 \\
+\end{cases} \iff
+
+\begin{cases}
+\rho_1 \geq \frac{-(n+1)}{2n}\\
+\rho_1 \leq \frac{n+1}{2n}
+\end{cases} \iff
+
+\begin{cases}
+\rho_1 \geq -\frac{1}{2}(1+\frac{1}{n})\\
+\rho_1 \leq \frac{1}{2}(1+\frac{1}{n})
+\end{cases}
+\]
+where $\rho_1 \geq |1/2|$ for all $n$.
+
+## Zero-mean stationary process
+
+We set $Y_t=e_t−θe_t−1$ and then we have
+
+$$
+\begin{split}
+e_t & = \sum_{j=0}^\infty \theta^j Y_{t-j}\quad \text{and expanding into} \\
+    & = \sum_{j=1}^\infty \theta^j Y_{t-j} + \theta^0 Y_{t-0} \\
+    & \iff \\
+Y_t & = e_t - \sum_{j=1}^\infty \theta^j Y_{t-j}
+\end{split}
+$$
+which is equivalent to
+\[
+Y_t = \mu_0 + (1 + \theta B + \theta^2 B^2 + \dots + \theta^n B^n)e_t
+\]
+which is the definition of a MA(1) process where $B$ is the backshift operator
+such that $Y_t B^k =Y_{t-k}$.
+
+## Stationarity prerequisite of AR(1)
+
+\[
+\begin{split}
+\text{Var}(Y_t) & = \text{Var}(\phi Y_{t-1}+e_t) = \phi^2\text{Var}(Y_{t-1})+\sigma_e^2\\
+                & = \phi^2 \text{Var}(\phi Y_{t-2}+e_t)+\sigma_e^2\\
+                & = \phi^4 \text{Var}(Y_{t-2})+2\sigma_e^2\\
+                & = \phi^{2n}\text{Var}(Y_{t-n})+n\sigma_e^2
+\end{split}
+\]
+And $\lim_{n \rightarrow \infty} \text{Var}(Y_t) = \infty$ if $|\phi$=1$, which
+is impossible.
+
+## Nonstationary AR(1) process
+
+### a {-}
+
+\[
+\begin{split}
+Y_t & = \phi Y_{t-1}+e_t \implies \\
+- \sum_{j=1}^\infty \left(\frac{1}{3}\right)^j e_{t+j}     & = 3 \left(-\sum_{j=1}^\infty \left(\frac{1}{3}\right)^j e_{t-1+j}\right) + e_t\\
+- \sum_{j=1}^\infty \left(\frac{1}{3}\right)^{j+1} e_{t+j} & = -\sum_{j=1}^\infty \left(\frac{1}{3}\right)^j e_{t-1+j} + \frac{1}{3} e_t\\
+- \sum_{j=1}^\infty \left(\frac{1}{3}\right)^{j+1} e_{t+j} & = -\sum_{j=2}^\infty \left(\frac{1}{3}\right)^j e_{t-1+j}\\
+- \sum_{j=1}^\infty \left(\frac{1}{3}\right)^{j+1} e_{t+j} & = -\sum_{j+1=2}^\infty \left(\frac{1}{3}\right)^{j+1} e_{t+j} & \square
+\end{split}
+\]
+
+### b {-}
+
+\[
+\text{E}(Y_t) = \text{E}(\sum_{j=1}^\infty \left(\frac{1}{3}\right)^j e_{t+j}) = 0
+\]
+since all terms are uncorrelated white noise.
+
+\[
+\begin{gathered}
+\text{Cov}(Y_t,Y_{t-1}) = \text{Cov}\left( -\sum_{j=1}^\infty \left(\frac{1}{3}\right)^j e_{t+j}, \sum_{j=1}^\infty \left(\frac{1}{3}\right)^j e_{t+j-1} \right) = \\
+\text{Cov}\left(-\frac{1}{3}e_{t+1} - \left(\frac{1}{3}\right)^2e_{t+2} - \dots - \left(\frac{1}{3}\right)^n e_{t+n},
+                -\frac{1}{3}e_{t} - \left(\frac{1}{3}\right)^2e_{t+1} - \dots - \left(\frac{1}{3}\right)^n e_{t+n-1} \right) = \\
+\text{Cov}\left(-\frac{1}{3}e_{t+1},-\frac{1}{3^2}e_{t+1}\right) +
+  \text{Cov}\left(-\frac{1}{3}e_{t+2},-\frac{1}{3^3}e_{t+2}\right) + \dots +
+  \text{Cov}\left(-\frac{1}{3}e_{t+n},-\frac{1}{3^{n+1}}e_{t+n}\right) = \\
+\frac{1}{26}\sigma_e^2\left(1 + \frac{1}{3} + \frac{1}{3^2} + \dots + \frac{1}{3^n} \right)
+\end{gathered}
+\]
+which is free of $t$.
+
+### c {-}
+
+It is unsatisfactory because Y_t depends on future observations.
+
+## Solution to AR(1)
+
+### a {-}
+
+\[
+\frac{1}{2}\left(10\left(\frac{1}{2}\right)^{t-1} + e_{t-1} + \frac{1}{2}e_{t-2} + \left(\frac{1}{2}\right)^2e_{t-3} + \dots +
+  \left(\frac{1}{2}\right)^{n-1}e_{t-n}\right) + e_{t-1} = \\
+10 \left(\frac{1}{2}\right)^t + \frac{1}{2}e_{t-1} + \left(\frac{1}{2}\right)^2e_{t-2} + \left(\frac{1}{2}\right)^3 e_{t-3} +
+  \dots + \left( \frac{1}{2}\right)^n e_{t-n} + e_{t-1} = \\
+10\left(\frac{1}{2}\right)^{t-1} + e_{t-1} + \frac{1}{2}e_{t-2} + \left(\frac{1}{2}\right)^2e_{t-3} + \dots +
+  \left(\frac{1}{2}\right)^{n-1}e_{t-n} \qquad \square
+\]
+
+### b {-}
+
+$\text{E}(Y_t) = 10 \left( \frac{1}{2}\right)^t$ varies with $t$ and thus is
+not stationary.
+
+## Stationary AR(1)
+
+### a {-}
+
+\[
+\text{E}(W_t) = \text{E}(Y_t + c\phi^t) = \text{E}(Y_t) + \text{E}(c\phi^t) = 0 + c\phi^t = c\phi^t \tag*{$\square$}
+\]
+
+
+### b {-}
+
+\[
+\phi(Y_{t-1}+c\phi^{t-1})+e_t = \phi Y_{t-1} + c\phi^t + e_t = \phi \left( \frac{Y_t - e_t}{\phi}\right) + c \phi^t + e_t = Y_t + c\phi^t \tag*{$\square$}
+\]
+
+### c {-}
+
+No, \text{E}(W_t) is not free of $t$.
+
+## Find a simpler model (1)
+
+This is similar to an AR(1) with $\rho_k = -(-0.5)^k$.
+
+```{r}
+ARMAacf(ar = -0.5, lag.max = 7)
+ARMAacf(ma = -c(0.5, -0.25, 0.125, -0.0625, 0.03125, -0.0015625))
+```
+
+## Find a simpler model (2)
+
+This is like an ARMA(1,1) with $\phi = -0.5$ and $\theta = 0.5$.
+
+\[
+\begin{cases}
+\psi_1 = \phi - \theta = 1\\
+\psi_2 = (\phi - \theta)\phi = -0.5
+\end{cases}
+
+\implies
+
+\begin{cases}
+\theta = 0.5\\
+\phi = -0.5
+\end{cases}
+\]
+
+```{r}
+ARMAacf(ma = -c(1, -0.5, 0.25, -0.125, 0.0625, -0.03125, 0.015625))
+ARMAacf(ar = -0.5, ma = -0.5, lag.max = 8)
+```
+
+## ARMA in disguise
+
+### a {-}
+
+\[
+\begin{gathered}
+\text{Cov}(Y_t, Y_{t-k}) = \text{Cov}(e_{t-1}-e_{t-2}+0.5e_{t-3}, e_{t-1-k}-e_{t-2-k}+0.5e_{t-3-k}) = \\
+\gamma_k = \begin{cases}
+             \sigma_e^2 + \sigma_e^2 + 0.25\sigma_e^2 = 2.25\sigma_e^2 & k = 0\\
+             -\sigma_e^2-0.5\sigma_e^2=-1.5\sigma_e^2 & k = 1\\
+             0.5\sigma_e^2 & k = 2
+           \end{cases}
+\end{gathered}
+\]
+
+### b {-}
+
+This is an ARMA(p,q) in the sense that $p = 0$ and $q = 2$, that is, it is in
+fact an MA(2) process $Y_t = e_t - e_{t-1}+0.5e_{t-2}$ with $\theta_1 = 1, \theta2 = -0.5$.
+
+## Equivalence of statements
+
+\[
+1 - \phi_1x - \phi_2x^2 - \dots - \phi_p x^p \implies
+x^k \left( \left(\frac{1}{k}\right)^p - \phi_1 \left(\frac{1}{k}\right)^{p-1} \dots - \phi_p \right)
+\]
+
+Thus if $x_1 = G$ is a root to the above, $\frac{1}{x_1} = \frac{1}{G}$ must be a root to
+\[
+x^p - \phi_1 x^{p-1} -\phi_2 x^{p-2} - \dots -\phi_p
+\]
+
+## Covariance of AR(1)
+
+### a {-}
+
+\[
+\begin{gathered}
+\text{Cov}(Y_t - \phi Y_{t+1}, Y_{t-k} - \phi Y_{t-k+1}) = \\
+\text{Cov}(Y_t, Y_{t-k}) - \phi \text{Cov}(Y_t, Y_{t+1-k}) - \phi\text{Cov}(Y_{t+1},Y_{t-k}) + \phi^2\text{Cov}(Y_{t+1, Y_{t+1-k}}) = \\
+\frac{\sigma_e^2}{1-\phi^2}\left(\phi^k - \phi \phi^{k-1} - \phi \phi^{k+1} + \phi^2 \phi\right) =\\
+\frac{\sigma_e^2}{1-\phi^2}\left( \phi^k - \phi^k - \phi^{k+2} + \phi^{k+2} \right) = 0
+\end{gathered}
+\]
+
+### b {-}
+
+First,
+
+\[
+Y_{t+k} = \phi Y_{t+k-1} + e_t + k \implies
+\]
+
+\[
+\begin{split}
+\text{Cov}(b_t,  Y_{t+k}) & = \text{Cov}(Y_t - \phi Y_{t+1, Y_{t+n}})\\
+                          & = \text{Cov}(Y_t,Y_{t+k}) - \phi \text{Cov}(Y_{t+1}, Y_{t+k)})\\
+                          & = \frac{\sigma_e^2}{1-\phi^2}\phi^k - \phi \frac{\sigma_e^2}{1-\phi^2}\phi^{k-1}\\
+                          & = 0 & \square
+\end{split}
+\]
+
+## Recursion
+
+### a {-}
+
+\[
+\begin{split}
+E(Y_0) & = E[c_1e_0] = c_1E[e_0] = 0\\
+E(Y_1) & = E(c_2Y_0 + e_1) = c_2 E(Y_0) = 0\\
+E(Y_2) & = E(\phi_1 Y_1 + \phi_2 Y_0 + e_t) = 0\\
+       & \vdots \\
+E(Y_t) & = E(\phi_1 Y_{t-1} + \phi_2 Y_{t-2}) = 0
+\end{split}
+\]
+
+### b {-}
+
+We have
+\[
+\begin{cases}
+\text{Var}(Y_0) = c_1^2\text{Var}(e_0) = c_1^2\sigma_e^2\\
+\text{Var}(Y_1) = c_2^2\text{Var}(Y_0) + \text{Var}(e_0) = c_2^2c_1^2\sigma_e^2=\sigma_e^2(1+c_1^2c_2^2)
+\end{cases}  \implies
+\]
+
+\[
+\begin{cases}
+c_1^2\sigma_e^2 = \sigma_e^2(1+c_1^2c_2^2) & \iff c_1^2(1-c_2^2) = 1\\
+c_1^2 = \frac{1}{1-c_2^2} & \iff c_1 = \sqrt{\frac{1}{1-c_1^2}} = \frac{1}{\sqrt{1-c_1^2}}
+\end{cases}
+\]
+with covariance
+\[
+\begin{gathered}
+\text{Cov}(Y_0, Y_1) = \text{Cov}(c_1e_0,c_2 c_1 e_0 + e_1) = \text{Cov}(c_1e_0,c_2 c_1 e_0) + \text{Cov}(c_1e_0, e_1) =\\
+c_1^2c_2\sigma_e^2 + c_1\text{Cov}(e_0, e_1) = c_1^2c_2\sigma_e^2 + 0
+\end{gathered}
+\]
+and autocorrelation
+\[
+\rho_1 = \frac{c_1^2c_2\sigma_e^2}{\sqrt{(c_1^2)^2}} = c_2 
+\]
+so we must choose
+\[
+\begin{cases}
+c_2 = \frac{\phi_1}{1-\phi_2} \\
+c_1 = \frac{1}{\sqrt{1-c_2^2}}
+\end{cases}.
+\]
+
+### c {-}
+
+The process can be transformed by scaling and standardizing it and then shifting
+with any given mean.
+\[
+\frac{Y_t \sqrt{y_0}}{c_1} + \mu
+\]
+
+## Final exercise
+
+### a {-}
+
+\[
+\begin{split}
+Y_t & = \phi Y_{t-1} + e_t\\
+    & = \phi(\phi Y_{t-2}+e_{t-1}) + e_t = \phi^2 Y_{t-2} + \phi e_{t-1} + e_t\\
+    & \vdots \\
+    & = \phi^t Y_{t-t} + \phi e_{t-1} + \phi^2 e_{t-2} + \dots + \phi^{t-1}e_1+e_t & \square
+\end{split}
+\]
+
+### b {-}
+
+\[
+E(Y_t) = E(\phi^t Y_0 +\phi e_{t-1} + \phi^2 e_{t-2} + \dots + \phi^{t-1}e_1+e_t) =\phi^t\mu_0
+\]
+
+### c {-}
+
+\[
+\begin{split}
+\text{Var}(Y_t) & = \text{Var}(\phi^t Y_0 + \phi e_{t-1}+\phi^2e_{t-2} + \dots + \phi^{t-1}e_1)\\
+                & = \phi^{2t}\sigma_0^2+\sigma_e^2 \sum_{k=0}^{t-1}(\phi^2)^k\\
+                & = \sigma_e^2 \frac{1-\phi^{2n}}{1-\phi^2} + \phi^{2t}\sigma_0^2 \quad\text{if $\phi \neq 1$ else}\\
+                & = \text{Var}(Y_0) + \sigma_e^2 t = \sigma_0^2 + \sigma_e^2 t
+\end{split}
+\]
+
+### d {-}
+
+If $\mu_0 = 0$ then $E(Y_t) = 0$ but for $\text{Var}(Y_t)$ to be free of t, 
+$\phi$ cannot be 1.
+
+### e {-}
+
+\[
+\text{Var}(Y_t) = \phi^2 \text{Var}(Y_{t-1}) + \sigma_e^2 \implies \phi^2 \text{Var}(Y_t) + \sigma_e^2
+\]
+and
+\[
+\text{Var}(Y_{t-1}) = \text{Var}(Y_t)(1-\phi^2) = \sigma_e^2 \implies \text{Var}(Y_t) = \frac{\sigma_e^2}{1-\phi}
+\]
+
+and then wew must have $|\phi| < 1$.
