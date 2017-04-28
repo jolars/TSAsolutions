@@ -8,6 +8,7 @@ lat_acf <- function(x, ci = 0.95, drop.lag.0 = FALSE, ...) {
   ylim <- range(s$acf[, 1L:nser, 1L:nser], na.rm = TRUE)
   ylim <- range(c(-clim0, clim0, ylim))
 
+
   lattice::xyplot(s$acf ~ s$lag, type = "h", xlab = "Lag", ylab = "ACF",
                   ylim = ylim * 1.1,
                   panel = function(x, y, ...) {
