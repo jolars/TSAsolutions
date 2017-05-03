@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="trends.html">
-<link rel="next" href="models-for-nonstationary-time-series.html">
+<link rel="prev" href="models-for-stationary-time-series.html">
+
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -438,671 +438,212 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="models-for-stationary-time-series" class="section level1">
-<h1><span class="header-section-number">4</span> Models for stationary time series</h1>
-<div id="first-principles" class="section level2">
-<h2><span class="header-section-number">4.1</span> First principles</h2>
-<p>We have the process <span class="math display">\[
-Y_t = 5  + e_t - \frac{1}{2}e_{t-i} + \frac{1}{4}e_{t-2}
-\]</span> and begin by working out its variance <span class="math display">\[
-\begin{aligned}
-\text{Var}(Y_t) &amp; = \text{Var}(5  + e_t - \frac{1}{2}e_{t-i} + \frac{1}{4}e_{t-2})\\
-                &amp; = \text{Var}(e_t) + \frac{1}{4}\text{Var}(e_t) + \frac{1}{16}\text{Var}(e_t)\\
-                &amp; = \frac{21}{16}\sigma_e^2
-\end{aligned}
-\]</span> and then the autocovariance at lag 1 <span class="math display">\[
-\begin{aligned}
-\text{Cov}(Y_t, Y_{t-1}) &amp; = \text{Cov}(5+e_t-\frac{1}{2}e_{t-1}+\frac{1}{4}e_{t-2}, 5+e_{t-1}-\frac{1}{2}e_{t-2}+\frac{1}{4}e_{t-3})\\
-                         &amp; = \text{Cov}(-\frac{1}{2}e_{t-1},e_{t-1}) + \text{Cov}(\frac{1}{4}e_{t-2},-\frac{1}{2}e_{t-2}) \\
-                         &amp; = -\frac{1}{2}\text{Var}(e_{t-1}) -\frac{1}{8}\text{Var}(e_{t-2})\\
-                         &amp; = -\frac{5}{8}\sigma_e^2
-\end{aligned}
-\]</span> lag 2 <span class="math display">\[
-\begin{aligned}
-\text{Cov}(Y_t, Y_{t-2}) &amp; = \text{Cov}(5+e_t-\frac{1}{2}e_{t-1}+\frac{1}{4}e_{t-2}, 5+e_{t-2}-\frac{1}{2}e_{t-3}+\frac{1}{4}e_{t-4})\\
-                         &amp; = \frac{1}{4}\text{Var}(e_{t-2}) \\
-                         &amp; = \frac{1}{4}\sigma_e^2
-\end{aligned}
-\]</span> and lag 3 <span class="math display">\[
-\text{Cov}(Y_t, Y_{t-2}) = \text{Cov}(5+e_t-\frac{1}{2}e_{t-1}+\frac{1}{4}e_{t-2}, 5+e_{t-2}-\frac{1}{2}e_{t-3}+\frac{1}{4}e_{t-4}) = 0
-\]</span> which results in the autocorrelation <span class="math display">\[
-\rho_k = \begin{cases}
-           1 &amp; k = 0\\
-           \frac{-\frac{5}{8}\sigma_e^2}{\frac{21}{16}\sigma_e^2}=-\frac{10}{21} &amp; k = 1\\
-           \frac{\frac{1}{4}\sigma_e^2}{\frac{21}{16}\sigma_e^2}=\frac{4}{21} &amp; k = 2\\
-           0 &amp; k = 3\\
-         \end{cases} \tag*{$\square$}
-\]</span></p>
+<div id="models-for-nonstationary-time-series" class="section level1">
+<h1><span class="header-section-number">5</span> Models for Nonstationary Time Series</h1>
+<div id="section" class="section level2">
+<h2><span class="header-section-number">5.1</span> 5.1</h2>
 </div>
-<div id="sketch-autocorrelations" class="section level2">
-<h2><span class="header-section-number">4.2</span> Sketch autocorrelations</h2>
-<div id="a-34" class="section level3 unnumbered">
+<div id="section-1" class="section level2">
+<h2><span class="header-section-number">5.2</span> 5.2</h2>
+</div>
+<div id="section-2" class="section level2">
+<h2><span class="header-section-number">5.3</span> 5.3</h2>
+</div>
+<div id="section-3" class="section level2">
+<h2><span class="header-section-number">5.4</span> 5.4</h2>
+</div>
+<div id="section-4" class="section level2">
+<h2><span class="header-section-number">5.5</span> 5.5</h2>
+</div>
+<div id="section-5" class="section level2">
+<h2><span class="header-section-number">5.6</span> 5.6</h2>
+</div>
+<div id="section-6" class="section level2">
+<h2><span class="header-section-number">5.7</span> 5.7</h2>
+</div>
+<div id="section-7" class="section level2">
+<h2><span class="header-section-number">5.8</span> 5.8</h2>
+</div>
+<div id="section-8" class="section level2">
+<h2><span class="header-section-number">5.9</span> 5.9</h2>
+</div>
+<div id="section-9" class="section level2">
+<h2><span class="header-section-number">5.10</span> 5.10</h2>
+</div>
+<div id="winnebago-1" class="section level2">
+<h2><span class="header-section-number">5.11</span> Winnebago</h2>
+<div id="a-48" class="section level3 unnumbered">
 <h3>a</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">tacf</span>(<span class="dt">ma =</span> <span class="kw">list</span>(-<span class="fl">0.5</span>, -<span class="fl">0.4</span>))</code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-36"></span>
-<img src="TSAsolutions_files/figure-html/unnamed-chunk-36-1.png" alt="Autocorrelation with $\theta_1 = 0.5$ and $\theta_2 = 0.4$" width="672" />
+<p>The plot in <a href="models-for-nonstationary-time-series.html#fig:winnebago2">5.1</a> has a trend that seems almost exponential, as well as a seasonal pattern by which sales seem to slump later in the year and surge in the spring months.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(winnebago)
+winnebago &lt;-<span class="st"> </span><span class="kw">as.xts</span>(winnebago)
+<span class="kw">xyplot</span>(winnebago, <span class="dt">ylab =</span> <span class="st">&quot;Sales&quot;</span>)</code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:winnebago2"></span>
+<img src="TSAsolutions_files/figure-html/winnebago2-1.png" alt="Monthly unit sales of recreational vehicles." width="672" />
 <p class="caption">
-Figure 4.1: Autocorrelation with <span class="math inline">\(\theta_1 = 0.5\)</span> and <span class="math inline">\(\theta_2 = 0.4\)</span>
+Figure 5.1: Monthly unit sales of recreational vehicles.
 </p>
 </div>
 </div>
-<div id="b-34" class="section level3 unnumbered">
+<div id="b-48" class="section level3 unnumbered">
 <h3>b</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">tacf</span>(<span class="dt">ma =</span> <span class="kw">list</span>(-<span class="fl">1.2</span>, <span class="fl">0.7</span>))</code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-37"></span>
-<img src="TSAsolutions_files/figure-html/unnamed-chunk-37-1.png" alt="Autocorrelation with $\theta_1 = 1.2$ and $\theta_2 = -0.7$" width="672" />
+<p>We take the log of sales and it looks like we have made the trend linear in time <a href="models-for-nonstationary-time-series.html#fig:winnebago-log">5.2</a></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">winnebago_log &lt;-<span class="st"> </span><span class="kw">log</span>(winnebago)
+<span class="kw">xyplot</span>(winnebago_log, <span class="dt">ylab =</span> <span class="kw">expression</span>(<span class="kw">log</span>(sales)))</code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:winnebago-log"></span>
+<img src="TSAsolutions_files/figure-html/winnebago-log-1.png" alt="Logged monthly sales." width="672" />
 <p class="caption">
-Figure 4.2: Autocorrelation with <span class="math inline">\(\theta_1 = 1.2\)</span> and <span class="math inline">\(\theta_2 = -0.7\)</span>
+Figure 5.2: Logged monthly sales.
 </p>
 </div>
 </div>
-<div id="c-23" class="section level3 unnumbered">
+</div>
+<div id="c-30" class="section level2 unnumbered">
+<h2>c</h2>
+<p>We produce the result in figure <a href="models-for-nonstationary-time-series.html#fig:winnebago-comp">5.3</a>. The patterns are similar but it seems like the fractional relative changes are greater in magnitude for the larger values of sales</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">winnebago_frac &lt;-<span class="st"> </span><span class="kw">diff</span>(winnebago) /<span class="st"> </span><span class="kw">lag</span>(winnebago, <span class="dv">1</span>)
+winnebago_logdiff &lt;-<span class="st"> </span><span class="kw">diff</span>(<span class="kw">log</span>(winnebago))
+winnebago_comp &lt;-<span class="st"> </span><span class="kw">merge.xts</span>(<span class="dt">frac =</span> winnebago_frac, <span class="dt">logdiff =</span> winnebago_logdiff)
+<span class="kw">xyplot</span>(winnebago_comp, <span class="dt">screens =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>), <span class="dt">auto.key =</span> <span class="ot">TRUE</span>,
+       <span class="dt">ylab =</span> <span class="st">&quot;Sales&quot;</span>,
+       <span class="dt">col =</span> <span class="kw">c</span>(<span class="st">&quot;darkorange2&quot;</span>, <span class="st">&quot;navy&quot;</span>))</code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:winnebago-comp"></span>
+<img src="TSAsolutions_files/figure-html/winnebago-comp-1.png" alt="Comparison between differences of logs and fractional relative changes." width="672" />
+<p class="caption">
+Figure 5.3: Comparison between differences of logs and fractional relative changes.
+</p>
+</div>
+</div>
+<div id="standard-poor" class="section level2">
+<h2><span class="header-section-number">5.12</span> Standard &amp; Poor</h2>
+<div id="a-49" class="section level3 unnumbered">
+<h3>a</h3>
+<p>There is an exponential trend in the time series (Figure <a href="models-for-nonstationary-time-series.html#fig:sp">5.4</a>) that, however, seems to perhaps level off after 1970 or so.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(SP)
+SP &lt;-<span class="st"> </span><span class="kw">as.xts</span>(SP)
+<span class="kw">xyplot</span>(SP, <span class="dt">grid =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:sp"></span>
+<img src="TSAsolutions_files/figure-html/sp-1.png" alt="Quarterly values of the Standard and Poor index." width="672" />
+<p class="caption">
+Figure 5.4: Quarterly values of the Standard and Poor index.
+</p>
+</div>
+</div>
+<div id="b-49" class="section level3 unnumbered">
+<h3>b</h3>
+<p>In Figure <a href="models-for-nonstationary-time-series.html#fig:sp-log">5.5</a> we’ve transformed the time series of the S&amp;P index by taking the log. The series is “more” linear but there is still an exponential pattern.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sp_log &lt;-<span class="st"> </span><span class="kw">log</span>(SP)
+<span class="kw">xyplot</span>(sp_log, <span class="dt">ylab =</span> <span class="kw">expression</span>(<span class="kw">log</span>(value)), <span class="dt">grid =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:sp-log"></span>
+<img src="TSAsolutions_files/figure-html/sp-log-1.png" alt="Logged values of the Standard and Poor's index." width="672" />
+<p class="caption">
+Figure 5.5: Logged values of the Standard and Poor’s index.
+</p>
+</div>
+</div>
+<div id="c-31" class="section level3 unnumbered">
 <h3>c</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">tacf</span>(<span class="dt">ma =</span> <span class="kw">list</span>(<span class="dv">1</span>, <span class="fl">0.6</span>))</code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-38"></span>
-<img src="TSAsolutions_files/figure-html/unnamed-chunk-38-1.png" alt="Autocorrelation with $\theta_1 = -1$ and $\theta_2 = -0.6$" width="672" />
+<p>Next, we compute the fractional relative changes and the differences of natural logartihms (Figure <a href="models-for-nonstationary-time-series.html#fig:sp-comp">5.6</a>). We see that there is little difference between the series and only really so for the higher numbers of sales.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">SP_frac &lt;-<span class="st"> </span><span class="kw">diff</span>(SP) /<span class="st"> </span><span class="kw">lag</span>(SP, <span class="dv">1</span>)
+SP_logdiff &lt;-<span class="st"> </span><span class="kw">diff</span>(<span class="kw">log</span>(SP))
+SP_comp &lt;-<span class="st"> </span><span class="kw">merge.xts</span>(<span class="dt">frac =</span> SP_frac, <span class="dt">logdiff =</span> SP_logdiff)
+<span class="kw">xyplot</span>(SP_comp, <span class="dt">screens =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>), <span class="dt">auto.key =</span> <span class="ot">TRUE</span>,
+       <span class="dt">ylab =</span> <span class="st">&quot;Sales&quot;</span>,
+       <span class="dt">col =</span> <span class="kw">c</span>(<span class="st">&quot;darkorange2&quot;</span>, <span class="st">&quot;navy&quot;</span>))</code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:sp-comp"></span>
+<img src="TSAsolutions_files/figure-html/sp-comp-1.png" alt="Differences in logs and fractional relative differences." width="672" />
 <p class="caption">
-Figure 4.3: Autocorrelation with <span class="math inline">\(\theta_1 = -1\)</span> and <span class="math inline">\(\theta_2 = -0.6\)</span>
+Figure 5.6: Differences in logs and fractional relative differences.
 </p>
 </div>
 </div>
 </div>
-<div id="max-and-min-correlations-for-ma1" class="section level2">
-<h2><span class="header-section-number">4.3</span> Max and min correlations for MA(1)</h2>
-<p>For <span class="math display">\[
-\rho_1 = \frac{-\theta}{1+\theta^2}
-\]</span> we retrieve extreme values at <span class="math display">\[
-\frac{\partial}{\partial \theta}\rho_1 = \frac{-1(1+\theta^2)-2\theta(-\theta)}{(1+\theta^2)^2} = \frac{\theta^2 - 1}{(1+\theta^2)^2} = 0
-\]</span> when <span class="math inline">\(t = \begin{cases}-1\\1\end{cases}\)</span>, which gives us <span class="math display">\[
-\begin{aligned}
-\max \rho_1 &amp; = \frac{-1(-1)}{1+(-1)^2} = 0.5\\
-\min \rho_1 &amp; = \frac{-1}{1+1^2} = -0.5
-\end{aligned}
-\]</span> which we graph in figure <a href="models-for-stationary-time-series.html#fig:minmax">4.4</a></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">theta &lt;-<span class="st"> </span><span class="kw">seq</span>(-<span class="dv">10</span>, <span class="dv">10</span>, <span class="dt">by =</span> <span class="fl">0.01</span>)
-p1 &lt;-<span class="st"> </span>(-theta) /<span class="st"> </span>(<span class="dv">1</span> +<span class="st"> </span>theta^<span class="dv">2</span>)
-<span class="kw">plot</span>(theta, p1, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>)
-<span class="kw">points</span>(theta[<span class="kw">which.max</span>(p1)], <span class="kw">max</span>(p1))
-<span class="kw">points</span>(theta[<span class="kw">which.min</span>(p1)], <span class="kw">min</span>(p1))</code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:minmax"></span>
-<img src="TSAsolutions_files/figure-html/minmax-1.png" alt="Autocorrelation at lag one for MA(1) with max and min annotated." width="672" />
-<p class="caption">
-Figure 4.4: Autocorrelation at lag one for MA(1) with max and min annotated.
-</p>
-</div>
-</div>
-<div id="non-uniqueness-of-ma1" class="section level2">
-<h2><span class="header-section-number">4.4</span> Non-uniqueness of MA(1)</h2>
-<p><span class="math display">\[
-\frac{-\frac{1}{\theta}}{1 + \left( \frac{1}{\theta}\right)^2} = \frac{-\frac{1}{\theta}\times\theta^2}{\left( 1 + \frac{1}{\theta^2} \right) \theta^2} = \frac{-\theta}{1+\theta^2} \tag*{$\square$}
-\]</span></p>
-</div>
-<div id="sketch-more-autocorrelations" class="section level2">
-<h2><span class="header-section-number">4.5</span> Sketch more autocorrelations</h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">theta &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.6</span>, -<span class="fl">0.6</span>, <span class="fl">0.95</span>, <span class="fl">0.3</span>)
-lag &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">10</span>)
-for (i in <span class="kw">seq_along</span>(theta)) {
-  <span class="kw">print</span>(<span class="kw">tacf</span>(<span class="dt">ar =</span> theta[i], <span class="dt">lag.max =</span> lag[i]))
-}</code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:autocorrelation"></span>
-<img src="TSAsolutions_files/figure-html/autocorrelation-1.png" alt="ACF for various AR(1) processes." width="211.2" /><img src="TSAsolutions_files/figure-html/autocorrelation-2.png" alt="ACF for various AR(1) processes." width="211.2" /><img src="TSAsolutions_files/figure-html/autocorrelation-3.png" alt="ACF for various AR(1) processes." width="211.2" /><img src="TSAsolutions_files/figure-html/autocorrelation-4.png" alt="ACF for various AR(1) processes." width="211.2" />
-<p class="caption">
-Figure 4.5: ACF for various AR(1) processes.
-</p>
-</div>
-</div>
-<div id="difference-function-for-ar1" class="section level2">
-<h2><span class="header-section-number">4.6</span> Difference function for AR(1)</h2>
-<div id="a-35" class="section level3 unnumbered">
+<div id="air-passengers" class="section level2">
+<h2><span class="header-section-number">5.13</span> Air passengers</h2>
+<div id="a-50" class="section level3 unnumbered">
 <h3>a</h3>
-<p><span class="math display">\[
-\begin{aligned}
-\text{Cov}(\triangledown Y_t, \triangledown Y_{t-k}) &amp; = \text{Cov}(Y_t-Y_{t-1}, Y{t-k}-Y_{t-k-1})\\
-                                                     &amp; = \text{Cov}(Y_t, Y_{t-k}) - \text{Cov}(Y_{t-1},Y_{t-k}) - \text{Cov}(Y_t, Y_{t-k-1}) + \text{Cov}(Y_{t-1}, Y_{t-k-1})\\
-                                                     &amp; = \frac{\sigma_e^2}{1-\phi^2}(\phi^2 - \phi^{k-1}-\phi^{k+1}+\phi^k) \\
-                                                     &amp; = \frac{\sigma_e^2}{1-\phi^2}\phi^{k-1}(2\phi-\phi2-1)\\
-                                                     &amp; = - \frac{\sigma_e^2}{1-\phi^2}(1-\phi)^2\phi^{k-1}\\
-                                                     &amp; = - \sigma_e^2 \frac{(1-\phi)^2}{(1-\phi)(1+\phi)}\\
-                                                     &amp; = -\sigma_e^2 \frac{1-\phi}{1+\phi}\phi^{k-1}
-\end{aligned}
-\]</span> as required.</p>
+<p>We plot the monthly intervational airline passenger counts in Figure<a href="models-for-nonstationary-time-series.html#fig:airpass">5.7</a> and note that we have a strong seasonal trend and perhaps a slight exponential increase. Variance seems to increase as well.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(airpass)
+airpass &lt;-<span class="st"> </span><span class="kw">as.xts</span>(airpass)
+<span class="kw">xyplot</span>(airpass, <span class="dt">ylab =</span> <span class="st">&quot;Passengers&quot;</span>)</code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:airpass"></span>
+<img src="TSAsolutions_files/figure-html/airpass-1.png" alt="Monthly airline passenger totals." width="672" />
+<p class="caption">
+Figure 5.7: Monthly airline passenger totals.
+</p>
 </div>
-<div id="b-35" class="section level3 unnumbered">
+</div>
+<div id="b-50" class="section level3 unnumbered">
 <h3>b</h3>
-<p><span class="math display">\[
-\begin{aligned}
-  \text{Var}(W_t) &amp; = \text{Var}(Y_t-Y_{t-1})\\
-                  &amp; = \text{Var}(\phi_1Y_{t-1}+e_t-Y_{t-1})\\
-                  &amp; = \text{Var}(Y_{t-1}(\phi-1)+\sigma_e^2)\\
-                  &amp; = (\phi-1)^2\text{Var}(Y_{t-1}) + \text{Var}(e_t)\\
-                  &amp; = \frac{\sigma_e^2}{1-\phi^2}(\phi^2-2\phi+1) + \sigma_e^2\\
-                  &amp; = \frac{\sigma_e^2(\phi^2-2\phi+1+1-\phi^2)}{1-\phi^2}\\
-                  &amp; = \frac{2\sigma_e^2(1-\phi)}{1-\phi^2} \\
-                  &amp; = \frac{2\sigma_e^2}{1+\phi} \tag*{$\square$}
-\end{aligned}
-\]</span></p>
+<p>As in previous exercises, we take the natural log of the dependent variable, in this case passenger totals, and note that we have made the trend linear (or maybe exponentially decreasing?) but notably have stabilized the variance of the series.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">airpass_log &lt;-<span class="st"> </span><span class="kw">log</span>(airpass)
+<span class="kw">xyplot</span>(airpass_log, <span class="dt">ylab =</span> <span class="kw">expression</span>(<span class="kw">log</span>(airpass)))</code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:airpass-log"></span>
+<img src="TSAsolutions_files/figure-html/airpass-log-1.png" alt="Logged monthly airline passenger totals." width="672" />
+<p class="caption">
+Figure 5.8: Logged monthly airline passenger totals.
+</p>
 </div>
 </div>
-<div id="characteristics-of-several-models" class="section level2">
-<h2><span class="header-section-number">4.7</span> Characteristics of several models</h2>
-<div id="a-36" class="section level3 unnumbered">
-<h3>a</h3>
-<p>Only correlation at lag 1.</p>
-</div>
-<div id="b-36" class="section level3 unnumbered">
-<h3>b</h3>
-<p>Only autocorrelation at lag 1 and 2. Shape of process depends on values of coefficients.</p>
-</div>
-<div id="c-24" class="section level3 unnumbered">
+<div id="c-32" class="section level3 unnumbered">
 <h3>c</h3>
-<p>Exponentially decaying correlation from lag 0.</p>
+<p>Next, we compute the fractional relative changes and the differences of natural logartihms (Figure <a href="models-for-nonstationary-time-series.html#fig:sp-comp">5.6</a>). We see that there is little difference between the series and only really so for the higher numbers of sales.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">airpass_frac &lt;-<span class="st"> </span><span class="kw">diff</span>(airpass) /<span class="st"> </span><span class="kw">lag</span>(airpass, <span class="dv">1</span>)
+airpass_logdiff &lt;-<span class="st"> </span><span class="kw">diff</span>(<span class="kw">log</span>(airpass))
+airpass_comp &lt;-<span class="st"> </span><span class="kw">merge.xts</span>(<span class="dt">frac =</span> airpass_frac, <span class="dt">logdiff =</span> airpass_logdiff)
+<span class="kw">xyplot</span>(airpass_comp, <span class="dt">screens =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>), <span class="dt">auto.key =</span> <span class="ot">TRUE</span>,
+       <span class="dt">ylab =</span> <span class="st">&quot;Sales&quot;</span>,
+       <span class="dt">col =</span> <span class="kw">c</span>(<span class="st">&quot;darkorange2&quot;</span>, <span class="st">&quot;navy&quot;</span>))</code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:airpass-comp"></span>
+<img src="TSAsolutions_files/figure-html/airpass-comp-1.png" alt="Differences in logs and fractional relative differences." width="672" />
+<p class="caption">
+Figure 5.9: Differences in logs and fractional relative differences.
+</p>
 </div>
-<div id="d-12" class="section level3 unnumbered">
+</div>
+</div>
+<div id="rainfall" class="section level2">
+<h2><span class="header-section-number">5.14</span> Rainfall</h2>
+<div id="a-51" class="section level3 unnumbered">
+<h3>a</h3>
+<p>In this exercise we consider annual rainfall data for Los Angeles. We use <code>TSA::BoxCox.ar()</code> to train a power model to the time series (Figure <a href="models-for-nonstationary-time-series.html#fig:larain">5.10</a>), optimizing via lok-likelihood maximization.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(larain)
+larain &lt;-<span class="st"> </span><span class="kw">as.xts</span>(larain)
+obj &lt;-<span class="st"> </span><span class="kw">BoxCox.ar</span>(larain)</code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:larain"></span>
+<img src="TSAsolutions_files/figure-html/larain-1.png" alt="Box-Cox training on the annual rainfall data." width="672" />
+<p class="caption">
+Figure 5.10: Box-Cox training on the annual rainfall data.
+</p>
+</div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lambda &lt;-<span class="st"> </span>obj$lambda[<span class="kw">which.max</span>(obj$loglike)]</code></pre></div>
+<p>The best value of <span class="math inline">\(\lambda\)</span> is 0.2.</p>
+</div>
+<div id="b-51" class="section level3 unnumbered">
+<h3>b</h3>
+<p>We apply the power transformation and see the results of Q-Q plots for both the untransformed and the transformed time series in Figure <a href="models-for-nonstationary-time-series.html#fig:larain-qq">5.11</a></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">larain_trans &lt;-<span class="st"> </span>larain ^<span class="st"> </span>lambda
+<span class="kw">xyplot</span>(<span class="kw">list</span>(<span class="dt">Untransformed =</span> larain, <span class="dt">Transformed =</span> larain_trans),
+       <span class="dt">FUN =</span> qqmath, <span class="dt">y.same =</span> <span class="ot">FALSE</span>)</code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:larain-qq"></span>
+<img src="TSAsolutions_files/figure-html/larain-qq-1.png" alt="Q-Q plots of untransformed and transformed time series data." width="672" />
+<p class="caption">
+Figure 5.11: Q-Q plots of untransformed and transformed time series data.
+</p>
+</div>
+</div>
+<div id="d-15" class="section level3 unnumbered">
 <h3>d</h3>
-<p>Different patterns in ACF that depends on whether roots are complex or real.</p>
-</div>
-<div id="e-5" class="section level3 unnumbered">
-<h3>e</h3>
-<p>Exponentially decaying correlations from lag 1.</p>
-</div>
-</div>
-<div id="ar2" class="section level2">
-<h2><span class="header-section-number">4.8</span> AR(2)</h2>
-<p>First, we have variance <span class="math display">\[
-\text{Var}(Y_t) = \text{Var}(\phi_2 Y_{t-2} + e_t) = \phi_2^2 \text{Var}Y_{t-2} + \sigma_e^2
-\]</span> which, assuming stationarity, is equivalent to <span class="math display">\[
-\text{Var}(Y_{t-2}) = \phi_2^2\text{Var}(Y_{t-2}) + \sigma_e^2 \iff \\
-\sigma_e^2 = (1-\phi_2^2) \text{Var}(Y_{t-2}) \iff \\
-\text{Var}(Y_{t-2}) = \frac{\sigma_e^2}{1-\phi^2_2}
-\]</span> which requires that <span class="math inline">\(-1 &lt; \phi_2 &lt; 1\)</span> since <span class="math inline">\(\text{Var}(Y_{t-2}) \geq 0\)</span>.</p>
-</div>
-<div id="sketching-ar2-processes" class="section level2">
-<h2><span class="header-section-number">4.9</span> Sketching AR(2) processes</h2>
-<div id="a-37" class="section level3 unnumbered">
-<h3>a</h3>
-<p><span class="math display">\[
-\begin{split}
-\rho_1 &amp; = 0.6\rho_0 + 0.3\rho{-1} = 0.6 + 0.3\rho_1 = 0.8571 \\
-\rho_2 &amp; = 0.6\rho_1+0.3\rho_0 = 0.81426\\
-\rho_3 &amp; = 0.6\rho_2 + 0.3\rho_1 = 0.7457
-\end{split}
-\]</span></p>
-<p>The roots to the characteristic equation are given by</p>
-<p><span class="math display">\[
-\frac{\phi_1 \pm \sqrt{\phi_1^2 + 4\phi_2}}{-2\phi_2} = \frac{0.6 \pm \sqrt{0.6 + 4 \times 0.3}}{-2 \times 0.3} = -1 \pm 2.0817 = \{1.0817, -3.0817\}.
-\]</span></p>
-<p>Since both of these roots exceed 1 in absolute value, they are real. Next, we sketch the theoretical autocorrelation function (<a href="models-for-stationary-time-series.html#fig:ar2a">4.6</a>).</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">tacf</span>(<span class="dt">ar =</span> <span class="kw">c</span>(<span class="fl">0.6</span>, <span class="fl">0.3</span>))</code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:ar2a"></span>
-<img src="TSAsolutions_files/figure-html/ar2a-1.png" alt="ACF for AR(2) with $\phi_1 = 0.6, \phi_2 = 0.3$." width="672" />
+<p>Next we plot <span class="math inline">\(Y_t\)</span> versus <span class="math inline">\(Y_{t-1}\)</span> in Figure <a href="models-for-nonstationary-time-series.html#fig:lahrain-laglag">5.12</a> – no correlation is evident from this picture, nor would we expect that our transformatin would induce any given that it is not at all based on the previous values.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">xyplot</span>(<span class="kw">zlag</span>(larain_trans) ~<span class="st"> </span>larain_trans,
+       <span class="dt">ylab =</span> <span class="st">&quot;Lag 1&quot;</span>,
+       <span class="dt">xlab =</span> <span class="st">&quot;Lag 0&quot;</span>)</code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:lahrain-laglag"></span>
+<img src="TSAsolutions_files/figure-html/lahrain-laglag-1.png" alt="Lag 0 against lag 1." width="672" />
 <p class="caption">
-Figure 4.6: ACF for AR(2) with <span class="math inline">\(\phi_1 = 0.6, \phi_2 = 0.3\)</span>.
+Figure 5.12: Lag 0 against lag 1.
 </p>
 </div>
-</div>
-<div id="b-37" class="section level3 unnumbered">
-<h3>b</h3>
-<p>Next we write a function to do the work for us.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ar2solver &lt;-<span class="st"> </span>function(phi1, phi2) {
-  roots &lt;-<span class="st"> </span><span class="kw">polyroot</span>(<span class="kw">c</span>(<span class="dv">1</span>, -phi1, -phi2))
-  <span class="kw">cat</span>(<span class="st">&quot;Roots:</span><span class="ch">\t\t</span><span class="st">&quot;</span>, roots, <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)
-  
-  if (<span class="kw">any</span>(<span class="kw">Im</span>(roots) &gt;<span class="st"> </span><span class="kw">sqrt</span>(.Machine$double.eps))) {
-    damp &lt;-<span class="st"> </span><span class="kw">sqrt</span>(-phi2)
-    freq &lt;-<span class="st"> </span><span class="kw">acos</span>(phi1 /<span class="st"> </span>(<span class="dv">2</span> *<span class="st"> </span>damp))
-    
-    <span class="kw">cat</span>(<span class="st">&quot;Dampening:</span><span class="ch">\t</span><span class="st">&quot;</span>, damp, <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)
-    <span class="kw">cat</span>(<span class="st">&quot;Frequency:</span><span class="ch">\t</span><span class="st">&quot;</span>, freq, <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)
-  }
-  
-  <span class="kw">tacf</span>(<span class="dt">ar =</span> <span class="kw">c</span>(phi1, phi2))
-}</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ar2solver</span>(-<span class="fl">0.4</span>, <span class="fl">0.5</span>)</code></pre></div>
-<pre><code>## Roots:        -1.1+0i 1.9-0i</code></pre>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-40"></span>
-<img src="TSAsolutions_files/figure-html/unnamed-chunk-40-1.png" alt="ACF for AR(2) with $\phi_1 = -0.4, \phi_2 = 0.5$." width="672" />
-<p class="caption">
-Figure 4.7: ACF for AR(2) with <span class="math inline">\(\phi_1 = -0.4, \phi_2 = 0.5\)</span>.
-</p>
-</div>
-</div>
-<div id="c-25" class="section level3 unnumbered">
-<h3>c</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ar2solver</span>(<span class="fl">1.2</span>, -<span class="fl">0.7</span>)</code></pre></div>
-<pre><code>## Roots:        0.86+0.83i 0.86-0.83i 
-## Dampening:    0.84 
-## Frequency:    0.77</code></pre>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-41"></span>
-<img src="TSAsolutions_files/figure-html/unnamed-chunk-41-1.png" alt="ACF for AR(2) with $\phi_1 = 1.2, \phi_2 = -0.7$." width="672" />
-<p class="caption">
-Figure 4.8: ACF for AR(2) with <span class="math inline">\(\phi_1 = 1.2, \phi_2 = -0.7\)</span>.
-</p>
-</div>
-</div>
-<div id="d-13" class="section level3 unnumbered">
-<h3>d</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ar2solver</span>(-<span class="dv">1</span>, -<span class="fl">0.6</span>)</code></pre></div>
-<pre><code>## Roots:        -0.83+0.99i -0.83-0.99i 
-## Dampening:    0.77 
-## Frequency:    2.3</code></pre>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-42"></span>
-<img src="TSAsolutions_files/figure-html/unnamed-chunk-42-1.png" alt="ACF for AR(2) with $\phi_1 = -1, \phi_2 = -0.6$." width="672" />
-<p class="caption">
-Figure 4.9: ACF for AR(2) with <span class="math inline">\(\phi_1 = -1, \phi_2 = -0.6\)</span>.
-</p>
-</div>
-</div>
-<div id="e-6" class="section level3 unnumbered">
-<h3>e</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ar2solver</span>(<span class="fl">0.5</span>, -<span class="fl">0.9</span>)</code></pre></div>
-<pre><code>## Roots:        0.3+1i 0.3-1i 
-## Dampening:    0.95 
-## Frequency:    1.3</code></pre>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-43"></span>
-<img src="TSAsolutions_files/figure-html/unnamed-chunk-43-1.png" alt="ACF for AR(2) with $\phi_1 = 0.5, \phi_2 = -0.9$." width="672" />
-<p class="caption">
-Figure 4.10: ACF for AR(2) with <span class="math inline">\(\phi_1 = 0.5, \phi_2 = -0.9\)</span>.
-</p>
-</div>
-</div>
-<div id="f-2" class="section level3 unnumbered">
-<h3>f</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ar2solver</span>(-<span class="fl">0.5</span>, -<span class="fl">0.6</span>)</code></pre></div>
-<pre><code>## Roots:        -0.4+1.2i -0.4-1.2i 
-## Dampening:    0.77 
-## Frequency:    1.9</code></pre>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-44"></span>
-<img src="TSAsolutions_files/figure-html/unnamed-chunk-44-1.png" alt="ACF for AR(2) with $\phi_1 = -0.5, \phi_2 = -0.6$." width="672" />
-<p class="caption">
-Figure 4.11: ACF for AR(2) with <span class="math inline">\(\phi_1 = -0.5, \phi_2 = -0.6\)</span>.
-</p>
-</div>
-</div>
-</div>
-<div id="sketch-arma11-models" class="section level2">
-<h2><span class="header-section-number">4.10</span> Sketch ARMA(1,1) models</h2>
-<div id="a-38" class="section level3 unnumbered">
-<h3>a</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">tacf</span>(<span class="dt">ar =</span> <span class="fl">0.7</span>, <span class="dt">ma =</span> -<span class="fl">0.4</span>)</code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-45"></span>
-<img src="TSAsolutions_files/figure-html/unnamed-chunk-45-1.png" alt="ACF for ARMA(1,1) with $\phi = 0.7$ and $\theta = 0.4$." width="672" />
-<p class="caption">
-Figure 4.12: ACF for ARMA(1,1) with <span class="math inline">\(\phi = 0.7\)</span> and <span class="math inline">\(\theta = 0.4\)</span>.
-</p>
-</div>
-</div>
-<div id="b-38" class="section level3 unnumbered">
-<h3>b</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">tacf</span>(<span class="dt">ar =</span> <span class="fl">0.7</span>, <span class="dt">ma =</span> <span class="fl">0.4</span>)</code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-46"></span>
-<img src="TSAsolutions_files/figure-html/unnamed-chunk-46-1.png" alt="ACF for ARMA(1,1) with $\phi = 0.7$ and $\theta = -0.4$." width="672" />
-<p class="caption">
-Figure 4.13: ACF for ARMA(1,1) with <span class="math inline">\(\phi = 0.7\)</span> and <span class="math inline">\(\theta = -0.4\)</span>.
-</p>
-</div>
-</div>
-</div>
-<div id="arma12" class="section level2">
-<h2><span class="header-section-number">4.11</span> ARMA(1,2)</h2>
-<div id="a-39" class="section level3 unnumbered">
-<h3>a</h3>
-<p><span class="math display">\[
-\begin{aligned}
-\text{Cov}(Y_t, Y_{t-k}) &amp; = \text{E}[(0.8Y_{t-1}+e_t+0.7e_{t-1}+0.6e_{t-2})Y_{t-k}] - \text{E}(Y_t)\text{E}(Y_{t-k})\\
-                         &amp; = \text{E}(0.8Y_{t-1}Y_{t-k} + Y_{t-k}e_t + 0.7e_{t-1}Y_{t-k}+0.6e_{t-2}Y_{t-k}) - 0\\
-                         &amp; = 0.8\text{E}(Y_{t-1}Y_{t-k}) + \text{E}(Y_{t-k}e_t) + 0.7\text{E}(e_{t-1}Y_{t-k}) + 0.7\text{E}(e_{t-2}Y_{t-k})\\
-                         &amp; = 0.8\text{E}(Y_{t-1}Y_{t-k})\\
-                         &amp; = 0.8\text{Cov}(Y_t,Y_{t-k+1})\\
-                         &amp; = 0.8\gamma_{k-1} &amp; \square
-\end{aligned}
-\]</span></p>
-</div>
-<div id="b-39" class="section level3 unnumbered">
-<h3>b</h3>
-<p><span class="math display">\[
-\begin{split}
-\text{Cov}(Y_t,Y_{t-2}) &amp; = \text{E}[0.8Y_{t-1}+e_t+0.7e_{t-1}+0.6e_{t-2})Y_{t-2}]\\
-                        &amp; = \text{E}[(0.8Y_{t-1}+0.6e_{t-2})Y_{t-2}]\\
-                        &amp; = 0.8\text{Cov}(Y_{t-1},Y_{t-2})+0.6\text{E}(e_{t-2}Y_{t-2})\\
-                        &amp; = 0.8\gamma_1 + 0.6\text{E}(e_t Y_t)\\
-                        &amp; = 0.8\gamma_1 + 0.6\text{E}[e_t(0.8Y_{t-1}+e_t+0.7e_{t-1}+0.6e_{t-2})]\\
-                        &amp; = 0.8\gamma_1 + 0.6\sigma_e^2 \iff \\
-\rho_2                  &amp; = 0.8\rho_1+0.6\sigma_e^2/\gamma_0 &amp; \square
-\end{split}
-\]</span></p>
-</div>
-</div>
-<div id="two-ma2-processes" class="section level2">
-<h2><span class="header-section-number">4.12</span> Two MA(2) processes</h2>
-<div id="a-40" class="section level3 unnumbered">
-<h3>a</h3>
-<p>For <span class="math inline">\(\theta_1 = \theta_2 = 1/6\)</span> we have <span class="math display">\[
-\rho_k = \frac{-\frac{1}{6}+\frac{1}{6}\times\frac{1}{6}}{1 + \left(\frac{1}{6}\right)^2 + \left(\frac{1}{6}\right)^2} = 
-\frac{\frac{1}{6}\left(\frac{1}{6}-1\right)}{1 + \frac{2}{36}} = - \frac{5}{38}.
-\]</span></p>
-<p>For <span class="math inline">\(\theta_1 = -1\)</span> and <span class="math inline">\(\theta_2 = 6\)</span>, <span class="math display">\[
-\rho_k = \frac{1-6}{1+1^2+36} = - \frac{5}{38} \tag*{$\square$}.
-\]</span></p>
-</div>
-<div id="b-40" class="section level3 unnumbered">
-<h3>b</h3>
-<p>For <span class="math inline">\(\theta_1 = \theta_2 = 1/6\)</span> we have roots given by <span class="math display">\[
-\frac{\frac{1}{6} \pm \sqrt{\frac{1}{36}+ 4 \times \frac{1}{6}}}{-2\times \frac{1}{6}} =
-- \frac{1}{2} \pm \frac{\sqrt{\frac{25}{36}}}{-\frac{1}{3}} = - \frac{1}{2} \pm \frac{\frac{5}{6}}{\frac{1}{3}} = \{-3, -2\}
-\]</span></p>
-<p>and for <span class="math inline">\(\theta_1 = -1\)</span> and <span class="math inline">\(\theta_2 = 6\)</span>, <span class="math display">\[
-\frac{-1 \pm \sqrt{1 + 4 \times 6}}{-2\times6} = \frac{-1\pm 5}{-12} = \frac{1}{12} \pm \frac{5}{12} = \left\{-\frac{1}{3}, \frac{1}{2}\right\}
-\]</span></p>
-</div>
-</div>
-<div id="autocorrelation-in-ma1" class="section level2">
-<h2><span class="header-section-number">4.13</span> Autocorrelation in MA(1)</h2>
-<p><span class="math display">\[
-\begin{aligned}
-&amp; \text{Var}(Y_{n+1}+Y_n+Y_{n-1}+ \dots + Y_1)  = \left((n+1)+2n\rho_1\right)\gamma_0 = \left(1+n(1+2\rho_1)\right)\gamma_0\\
-&amp; \text{Var}(Y_{n+1}-Y_n+Y_{n-1}- \dots + Y_1)  = \left((n+1)-2n\rho_1 \right)\gamma_0 = \left(1 + n(1-2\rho_1)\right)\gamma_0
-\end{aligned}
-\]</span></p>
-[
-\begin{cases}
-\left(1+n(1+2\rho-1)\right) \geq 0 \\
-\left(1+n(1-2\rho-1)\right) \geq 0 \\
-\end{cases}
-<p></p>
-\begin{cases}
-1+n+2\rho_1n \geq 0 \\
-1+n-2\rho_1n \geq 0 \\
-\end{cases}
-<p></p>
-\begin{cases}
-\rho_1 \geq \frac{-(n+1)}{2n}\\
-\rho_1 \leq \frac{n+1}{2n}
-\end{cases}
-<p></p>
-\begin{cases}
-\rho_1 \geq -\frac{1}{2}(1+\frac{1}{n})\\
-\rho_1 \leq \frac{1}{2}(1+\frac{1}{n})
-\end{cases}
-<p>] where <span class="math inline">\(\rho_1 \geq |1/2|\)</span> for all <span class="math inline">\(n\)</span>.</p>
-</div>
-<div id="zero-mean-stationary-process" class="section level2">
-<h2><span class="header-section-number">4.14</span> Zero-mean stationary process</h2>
-<p>We set <span class="math inline">\(Y_t=e_t−θe_t−1\)</span> and then we have</p>
-<p><span class="math display">\[
-\begin{split}
-e_t &amp; = \sum_{j=0}^\infty \theta^j Y_{t-j}\quad \text{and expanding into} \\
-    &amp; = \sum_{j=1}^\infty \theta^j Y_{t-j} + \theta^0 Y_{t-0} \\
-    &amp; \iff \\
-Y_t &amp; = e_t - \sum_{j=1}^\infty \theta^j Y_{t-j}
-\end{split}
-\]</span> which is equivalent to <span class="math display">\[
-Y_t = \mu_0 + (1 + \theta B + \theta^2 B^2 + \dots + \theta^n B^n)e_t
-\]</span> which is the definition of a MA(1) process where <span class="math inline">\(B\)</span> is the backshift operator such that <span class="math inline">\(Y_t B^k =Y_{t-k}\)</span>.</p>
-</div>
-<div id="stationarity-prerequisite-of-ar1" class="section level2">
-<h2><span class="header-section-number">4.15</span> Stationarity prerequisite of AR(1)</h2>
-<p><span class="math display">\[
-\begin{split}
-\text{Var}(Y_t) &amp; = \text{Var}(\phi Y_{t-1}+e_t) = \phi^2\text{Var}(Y_{t-1})+\sigma_e^2\\
-                &amp; = \phi^2 \text{Var}(\phi Y_{t-2}+e_t)+\sigma_e^2\\
-                &amp; = \phi^4 \text{Var}(Y_{t-2})+2\sigma_e^2\\
-                &amp; = \phi^{2n}\text{Var}(Y_{t-n})+n\sigma_e^2
-\end{split}
-\]</span> And <span class="math inline">\(\lim_{n \rightarrow \infty} \text{Var}(Y_t) = \infty\)</span> if <span class="math inline">\(|\phi\)</span>=1$, which is impossible.</p>
-</div>
-<div id="nonstationary-ar1-process" class="section level2">
-<h2><span class="header-section-number">4.16</span> Nonstationary AR(1) process</h2>
-<div id="a-41" class="section level3 unnumbered">
-<h3>a</h3>
-<p><span class="math display">\[
-\begin{split}
-Y_t &amp; = \phi Y_{t-1}+e_t \implies \\
-- \sum_{j=1}^\infty \left(\frac{1}{3}\right)^j e_{t+j}     &amp; = 3 \left(-\sum_{j=1}^\infty \left(\frac{1}{3}\right)^j e_{t-1+j}\right) + e_t\\
-- \sum_{j=1}^\infty \left(\frac{1}{3}\right)^{j+1} e_{t+j} &amp; = -\sum_{j=1}^\infty \left(\frac{1}{3}\right)^j e_{t-1+j} + \frac{1}{3} e_t\\
-- \sum_{j=1}^\infty \left(\frac{1}{3}\right)^{j+1} e_{t+j} &amp; = -\sum_{j=2}^\infty \left(\frac{1}{3}\right)^j e_{t-1+j}\\
-- \sum_{j=1}^\infty \left(\frac{1}{3}\right)^{j+1} e_{t+j} &amp; = -\sum_{j+1=2}^\infty \left(\frac{1}{3}\right)^{j+1} e_{t+j} &amp; \square
-\end{split}
-\]</span></p>
-</div>
-<div id="b-41" class="section level3 unnumbered">
-<h3>b</h3>
-<p><span class="math display">\[
-\text{E}(Y_t) = \text{E}(\sum_{j=1}^\infty \left(\frac{1}{3}\right)^j e_{t+j}) = 0
-\]</span> since all terms are uncorrelated white noise.</p>
-<p><span class="math display">\[
-\begin{gathered}
-\text{Cov}(Y_t,Y_{t-1}) = \text{Cov}\left( -\sum_{j=1}^\infty \left(\frac{1}{3}\right)^j e_{t+j}, \sum_{j=1}^\infty \left(\frac{1}{3}\right)^j e_{t+j-1} \right) = \\
-\text{Cov}\left(-\frac{1}{3}e_{t+1} - \left(\frac{1}{3}\right)^2e_{t+2} - \dots - \left(\frac{1}{3}\right)^n e_{t+n},
-                -\frac{1}{3}e_{t} - \left(\frac{1}{3}\right)^2e_{t+1} - \dots - \left(\frac{1}{3}\right)^n e_{t+n-1} \right) = \\
-\text{Cov}\left(-\frac{1}{3}e_{t+1},-\frac{1}{3^2}e_{t+1}\right) +
-  \text{Cov}\left(-\frac{1}{3}e_{t+2},-\frac{1}{3^3}e_{t+2}\right) + \dots +
-  \text{Cov}\left(-\frac{1}{3}e_{t+n},-\frac{1}{3^{n+1}}e_{t+n}\right) = \\
-\frac{1}{26}\sigma_e^2\left(1 + \frac{1}{3} + \frac{1}{3^2} + \dots + \frac{1}{3^n} \right)
-\end{gathered}
-\]</span> which is free of <span class="math inline">\(t\)</span>.</p>
-</div>
-<div id="c-26" class="section level3 unnumbered">
-<h3>c</h3>
-<p>It is unsatisfactory because Y_t depends on future observations.</p>
-</div>
-</div>
-<div id="solution-to-ar1" class="section level2">
-<h2><span class="header-section-number">4.17</span> Solution to AR(1)</h2>
-<div id="a-42" class="section level3 unnumbered">
-<h3>a</h3>
-<p><span class="math display">\[
-\frac{1}{2}\left(10\left(\frac{1}{2}\right)^{t-1} + e_{t-1} + \frac{1}{2}e_{t-2} + \left(\frac{1}{2}\right)^2e_{t-3} + \dots +
-  \left(\frac{1}{2}\right)^{n-1}e_{t-n}\right) + e_{t-1} = \\
-10 \left(\frac{1}{2}\right)^t + \frac{1}{2}e_{t-1} + \left(\frac{1}{2}\right)^2e_{t-2} + \left(\frac{1}{2}\right)^3 e_{t-3} +
-  \dots + \left( \frac{1}{2}\right)^n e_{t-n} + e_{t-1} = \\
-10\left(\frac{1}{2}\right)^{t-1} + e_{t-1} + \frac{1}{2}e_{t-2} + \left(\frac{1}{2}\right)^2e_{t-3} + \dots +
-  \left(\frac{1}{2}\right)^{n-1}e_{t-n} \qquad \square
-\]</span></p>
-</div>
-<div id="b-42" class="section level3 unnumbered">
-<h3>b</h3>
-<p><span class="math inline">\(\text{E}(Y_t) = 10 \left( \frac{1}{2}\right)^t\)</span> varies with <span class="math inline">\(t\)</span> and thus is not stationary.</p>
-</div>
-</div>
-<div id="stationary-ar1" class="section level2">
-<h2><span class="header-section-number">4.18</span> Stationary AR(1)</h2>
-<div id="a-43" class="section level3 unnumbered">
-<h3>a</h3>
-<p><span class="math display">\[
-\text{E}(W_t) = \text{E}(Y_t + c\phi^t) = \text{E}(Y_t) + \text{E}(c\phi^t) = 0 + c\phi^t = c\phi^t \tag*{$\square$}
-\]</span></p>
-</div>
-<div id="b-43" class="section level3 unnumbered">
-<h3>b</h3>
-<p><span class="math display">\[
-\phi(Y_{t-1}+c\phi^{t-1})+e_t = \phi Y_{t-1} + c\phi^t + e_t = \phi \left( \frac{Y_t - e_t}{\phi}\right) + c \phi^t + e_t = Y_t + c\phi^t \tag*{$\square$}
-\]</span></p>
-</div>
-<div id="c-27" class="section level3 unnumbered">
-<h3>c</h3>
-<p>No, (W_t) is not free of <span class="math inline">\(t\)</span>.</p>
-</div>
-</div>
-<div id="find-a-simpler-model-1" class="section level2">
-<h2><span class="header-section-number">4.19</span> Find a simpler model (1)</h2>
-<p>This is similar to an AR(1) with <span class="math inline">\(\rho_k = -(-0.5)^k\)</span>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ARMAacf</span>(<span class="dt">ar =</span> -<span class="fl">0.5</span>, <span class="dt">lag.max =</span> <span class="dv">7</span>)</code></pre></div>
-<pre><code>##       0       1       2       3       4       5       6       7 
-##  1.0000 -0.5000  0.2500 -0.1250  0.0625 -0.0312  0.0156 -0.0078</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ARMAacf</span>(<span class="dt">ma =</span> -<span class="kw">c</span>(<span class="fl">0.5</span>, -<span class="fl">0.25</span>, <span class="fl">0.125</span>, -<span class="fl">0.0625</span>, <span class="fl">0.03125</span>, -<span class="fl">0.0015625</span>))</code></pre></div>
-<pre><code>##       0       1       2       3       4       5       6       7 
-##  1.0000 -0.4997  0.2492 -0.1232  0.0589 -0.0240  0.0012  0.0000</code></pre>
-</div>
-<div id="find-a-simpler-model-2" class="section level2">
-<h2><span class="header-section-number">4.20</span> Find a simpler model (2)</h2>
-<p>This is like an ARMA(1,1) with <span class="math inline">\(\phi = -0.5\)</span> and <span class="math inline">\(\theta = 0.5\)</span>.</p>
-[
-\begin{cases}
-\psi_1 = \phi - \theta = 1\\
-\psi_2 = (\phi - \theta)\phi = -0.5
-\end{cases}
-<p></p>
-\begin{cases}
-\theta = 0.5\\
-\phi = -0.5
-\end{cases}
-<p>]</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ARMAacf</span>(<span class="dt">ma =</span> -<span class="kw">c</span>(<span class="dv">1</span>, -<span class="fl">0.5</span>, <span class="fl">0.25</span>, -<span class="fl">0.125</span>, <span class="fl">0.0625</span>, -<span class="fl">0.03125</span>, <span class="fl">0.015625</span>))</code></pre></div>
-<pre><code>##       0       1       2       3       4       5       6       7       8 
-##  1.0000 -0.7142  0.3570 -0.1783  0.0887 -0.0435  0.0201 -0.0067  0.0000</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ARMAacf</span>(<span class="dt">ar =</span> -<span class="fl">0.5</span>, <span class="dt">ma =</span> -<span class="fl">0.5</span>, <span class="dt">lag.max =</span> <span class="dv">8</span>)</code></pre></div>
-<pre><code>##       0       1       2       3       4       5       6       7       8 
-##  1.0000 -0.7143  0.3571 -0.1786  0.0893 -0.0446  0.0223 -0.0112  0.0056</code></pre>
-</div>
-<div id="arma-in-disguise" class="section level2">
-<h2><span class="header-section-number">4.21</span> ARMA in disguise</h2>
-<div id="a-44" class="section level3 unnumbered">
-<h3>a</h3>
-<p><span class="math display">\[
-\begin{gathered}
-\text{Cov}(Y_t, Y_{t-k}) = \text{Cov}(e_{t-1}-e_{t-2}+0.5e_{t-3}, e_{t-1-k}-e_{t-2-k}+0.5e_{t-3-k}) = \\
-\gamma_k = \begin{cases}
-             \sigma_e^2 + \sigma_e^2 + 0.25\sigma_e^2 = 2.25\sigma_e^2 &amp; k = 0\\
-             -\sigma_e^2-0.5\sigma_e^2=-1.5\sigma_e^2 &amp; k = 1\\
-             0.5\sigma_e^2 &amp; k = 2
-           \end{cases}
-\end{gathered}
-\]</span></p>
-</div>
-<div id="b-44" class="section level3 unnumbered">
-<h3>b</h3>
-<p>This is an ARMA(p,q) in the sense that <span class="math inline">\(p = 0\)</span> and <span class="math inline">\(q = 2\)</span>, that is, it is in fact an MA(2) process <span class="math inline">\(Y_t = e_t - e_{t-1}+0.5e_{t-2}\)</span> with <span class="math inline">\(\theta_1 = 1, \theta2 = -0.5\)</span>.</p>
-</div>
-</div>
-<div id="equivalence-of-statements" class="section level2">
-<h2><span class="header-section-number">4.22</span> Equivalence of statements</h2>
-<p><span class="math display">\[
-1 - \phi_1x - \phi_2x^2 - \dots - \phi_p x^p \implies
-x^k \left( \left(\frac{1}{k}\right)^p - \phi_1 \left(\frac{1}{k}\right)^{p-1} \dots - \phi_p \right)
-\]</span></p>
-<p>Thus if <span class="math inline">\(x_1 = G\)</span> is a root to the above, <span class="math inline">\(\frac{1}{x_1} = \frac{1}{G}\)</span> must be a root to <span class="math display">\[
-x^p - \phi_1 x^{p-1} -\phi_2 x^{p-2} - \dots -\phi_p
-\]</span></p>
-</div>
-<div id="covariance-of-ar1" class="section level2">
-<h2><span class="header-section-number">4.23</span> Covariance of AR(1)</h2>
-<div id="a-45" class="section level3 unnumbered">
-<h3>a</h3>
-<p><span class="math display">\[
-\begin{gathered}
-\text{Cov}(Y_t - \phi Y_{t+1}, Y_{t-k} - \phi Y_{t-k+1}) = \\
-\text{Cov}(Y_t, Y_{t-k}) - \phi \text{Cov}(Y_t, Y_{t+1-k}) - \phi\text{Cov}(Y_{t+1},Y_{t-k}) + \phi^2\text{Cov}(Y_{t+1, Y_{t+1-k}}) = \\
-\frac{\sigma_e^2}{1-\phi^2}\left(\phi^k - \phi \phi^{k-1} - \phi \phi^{k+1} + \phi^2 \phi\right) =\\
-\frac{\sigma_e^2}{1-\phi^2}\left( \phi^k - \phi^k - \phi^{k+2} + \phi^{k+2} \right) = 0
-\end{gathered}
-\]</span></p>
-</div>
-<div id="b-45" class="section level3 unnumbered">
-<h3>b</h3>
-<p>First,</p>
-<p><span class="math display">\[
-Y_{t+k} = \phi Y_{t+k-1} + e_t + k \implies
-\]</span></p>
-<p><span class="math display">\[
-\begin{split}
-\text{Cov}(b_t,  Y_{t+k}) &amp; = \text{Cov}(Y_t - \phi Y_{t+1, Y_{t+n}})\\
-                          &amp; = \text{Cov}(Y_t,Y_{t+k}) - \phi \text{Cov}(Y_{t+1}, Y_{t+k)})\\
-                          &amp; = \frac{\sigma_e^2}{1-\phi^2}\phi^k - \phi \frac{\sigma_e^2}{1-\phi^2}\phi^{k-1}\\
-                          &amp; = 0 &amp; \square
-\end{split}
-\]</span></p>
-</div>
-</div>
-<div id="recursion" class="section level2">
-<h2><span class="header-section-number">4.24</span> Recursion</h2>
-<div id="a-46" class="section level3 unnumbered">
-<h3>a</h3>
-<p><span class="math display">\[
-\begin{split}
-E(Y_0) &amp; = E[c_1e_0] = c_1E[e_0] = 0\\
-E(Y_1) &amp; = E(c_2Y_0 + e_1) = c_2 E(Y_0) = 0\\
-E(Y_2) &amp; = E(\phi_1 Y_1 + \phi_2 Y_0 + e_t) = 0\\
-       &amp; \vdots \\
-E(Y_t) &amp; = E(\phi_1 Y_{t-1} + \phi_2 Y_{t-2}) = 0
-\end{split}
-\]</span></p>
-</div>
-<div id="b-46" class="section level3 unnumbered">
-<h3>b</h3>
-<p>We have <span class="math display">\[
-\begin{cases}
-\text{Var}(Y_0) = c_1^2\text{Var}(e_0) = c_1^2\sigma_e^2\\
-\text{Var}(Y_1) = c_2^2\text{Var}(Y_0) + \text{Var}(e_0) = c_2^2c_1^2\sigma_e^2=\sigma_e^2(1+c_1^2c_2^2)
-\end{cases}  \implies
-\]</span></p>
-<p><span class="math display">\[
-\begin{cases}
-c_1^2\sigma_e^2 = \sigma_e^2(1+c_1^2c_2^2) &amp; \iff c_1^2(1-c_2^2) = 1\\
-c_1^2 = \frac{1}{1-c_2^2} &amp; \iff c_1 = \sqrt{\frac{1}{1-c_1^2}} = \frac{1}{\sqrt{1-c_1^2}}
-\end{cases}
-\]</span> with covariance <span class="math display">\[
-\begin{gathered}
-\text{Cov}(Y_0, Y_1) = \text{Cov}(c_1e_0,c_2 c_1 e_0 + e_1) = \text{Cov}(c_1e_0,c_2 c_1 e_0) + \text{Cov}(c_1e_0, e_1) =\\
-c_1^2c_2\sigma_e^2 + c_1\text{Cov}(e_0, e_1) = c_1^2c_2\sigma_e^2 + 0
-\end{gathered}
-\]</span> and autocorrelation <span class="math display">\[
-\rho_1 = \frac{c_1^2c_2\sigma_e^2}{\sqrt{(c_1^2)^2}} = c_2 
-\]</span> so we must choose <span class="math display">\[
-\begin{cases}
-c_2 = \frac{\phi_1}{1-\phi_2} \\
-c_1 = \frac{1}{\sqrt{1-c_2^2}}
-\end{cases}.
-\]</span></p>
-</div>
-<div id="c-28" class="section level3 unnumbered">
-<h3>c</h3>
-<p>The process can be transformed by scaling and standardizing it and then shifting with any given mean. <span class="math display">\[
-\frac{Y_t \sqrt{y_0}}{c_1} + \mu
-\]</span></p>
-</div>
-</div>
-<div id="final-exercise" class="section level2">
-<h2><span class="header-section-number">4.25</span> Final exercise</h2>
-<div id="a-47" class="section level3 unnumbered">
-<h3>a</h3>
-<p><span class="math display">\[
-\begin{split}
-Y_t &amp; = \phi Y_{t-1} + e_t\\
-    &amp; = \phi(\phi Y_{t-2}+e_{t-1}) + e_t = \phi^2 Y_{t-2} + \phi e_{t-1} + e_t\\
-    &amp; \vdots \\
-    &amp; = \phi^t Y_{t-t} + \phi e_{t-1} + \phi^2 e_{t-2} + \dots + \phi^{t-1}e_1+e_t &amp; \square
-\end{split}
-\]</span></p>
-</div>
-<div id="b-47" class="section level3 unnumbered">
-<h3>b</h3>
-<p><span class="math display">\[
-E(Y_t) = E(\phi^t Y_0 +\phi e_{t-1} + \phi^2 e_{t-2} + \dots + \phi^{t-1}e_1+e_t) =\phi^t\mu_0
-\]</span></p>
-</div>
-<div id="c-29" class="section level3 unnumbered">
-<h3>c</h3>
-<p><span class="math display">\[
-\begin{split}
-\text{Var}(Y_t) &amp; = \text{Var}(\phi^t Y_0 + \phi e_{t-1}+\phi^2e_{t-2} + \dots + \phi^{t-1}e_1)\\
-                &amp; = \phi^{2t}\sigma_0^2+\sigma_e^2 \sum_{k=0}^{t-1}(\phi^2)^k\\
-                &amp; = \sigma_e^2 \frac{1-\phi^{2n}}{1-\phi^2} + \phi^{2t}\sigma_0^2 \quad\text{if $\phi \neq 1$ else}\\
-                &amp; = \text{Var}(Y_0) + \sigma_e^2 t = \sigma_0^2 + \sigma_e^2 t
-\end{split}
-\]</span></p>
-</div>
-<div id="d-14" class="section level3 unnumbered">
-<h3>d</h3>
-<p>If <span class="math inline">\(\mu_0 = 0\)</span> then <span class="math inline">\(E(Y_t) = 0\)</span> but for <span class="math inline">\(\text{Var}(Y_t)\)</span> to be free of t, <span class="math inline">\(\phi\)</span> cannot be 1.</p>
-</div>
-<div id="e-7" class="section level3 unnumbered">
-<h3>e</h3>
-<p><span class="math display">\[
-\text{Var}(Y_t) = \phi^2 \text{Var}(Y_{t-1}) + \sigma_e^2 \implies \phi^2 \text{Var}(Y_t) + \sigma_e^2
-\]</span> and <span class="math display">\[
-\text{Var}(Y_{t-1}) = \text{Var}(Y_t)(1-\phi^2) = \sigma_e^2 \implies \text{Var}(Y_t) = \frac{\sigma_e^2}{1-\phi}
-\]</span></p>
-<p>and then we must have <span class="math inline">\(|\phi| &lt; 1\)</span>.</p>
 
 </div>
 </div>
@@ -1112,8 +653,8 @@ E(Y_t) = E(\phi^t Y_0 +\phi e_{t-1} + \phi^2 e_{t-2} + \dots + \phi^{t-1}e_1+e_t
           </div>
         </div>
       </div>
-<a href="trends.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="models-for-nonstationary-time-series.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="models-for-stationary-time-series.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -1142,7 +683,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/jolars/TSAsolutions/edit/master/04-models-for-stationary-time-series.Rmd",
+"link": "https://github.com/jolars/TSAsolutions/edit/master/05-models-for-nonstationary-time-series.Rmd",
 "text": "Edit"
 },
 "download": ["TSAsolutions.pdf", "TSAsolutions.epub"],
