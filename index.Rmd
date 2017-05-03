@@ -7,7 +7,7 @@ documentclass: book
 link-citations: yes
 github-repo: jolars/TSAsolutions
 cover-image: images/tsa.png
-description: "This book contains solutions to the problems in the book Time Series Analysis with Applications in R, second edition, by Cryer and Chan. It is provided as a github repository so that anybody may contribute to its development."
+description: "This book contains solutions to the problems in the book Time Series Analysis with Applications in R (2nd ed.) by Cryer and Chan. It is provided as a github repository so that anybody may contribute to its development."
 ---
 
 ```{r setup-options, include = FALSE}
@@ -44,22 +44,30 @@ install.packages(c(
   "lattice",
   "TSA",
   "pander",
-  "gridExtra"
+  "gridExtra",
+  "devtools",
+  "zoo",
+  "xts"
 ))
+devtools::install_github("jolars/latticework")
 ```
 
 ```{r libraries, message = FALSE}
 # Load the packages
+library(devtools)
+library(lattice)
 library(latticeExtra)
+library(gridExtra)
 library(TSA)
 library(pander)
-library(gridExtra)
+library(zoo)
+library(xts)
+library(latticework)
 ```
 
 In order for some of the content in this book to be reproducible, the random
-seed is set as follows.
+seed is set at 1234.
 
 ```{r}
 set.seed(1234)
 ```
-

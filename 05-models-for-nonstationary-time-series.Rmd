@@ -1,0 +1,184 @@
+# Models for Nonstationary Time Series
+
+## 5.1
+
+## 5.2
+
+## 5.3
+
+## 5.4
+
+## 5.5
+
+## 5.6
+
+## 5.7
+
+## 5.8
+
+## 5.9
+
+## 5.10
+
+## Winnebago
+
+### a {-}
+
+The plot in \@ref(fig:winnebago2) has a trend that seems almost exponential,
+as well as a seasonal pattern by which sales seem to slump later in the year
+and surge in the spring months.
+
+```{r winnebago2, fig.cap = "Monthly unit sales of recreational vehicles."}
+data(winnebago)
+winnebago <- as.xts(winnebago)
+xyplot(winnebago, ylab = "Sales")
+```
+
+### b {-}
+
+We take the log of sales and it looks like we have made the trend linear 
+in time \@ref(fig:winnebago-log)
+
+```{r winnebago-log, fig.cap = "Logged monthly sales."}
+winnebago_log <- log(winnebago)
+xyplot(winnebago_log, ylab = expression(log(sales)))
+```
+
+## c {-}
+
+We produce the result in figure \@ref(fig:winnebago-comp). The patterns are
+similar but it seems like the fractional relative changes are greater in
+magnitude for the larger values of sales
+
+```{r winnebago-comp, fig.cap = "Comparison between differences of logs and fractional relative changes."}
+winnebago_frac <- diff(winnebago) / lag(winnebago, 1)
+winnebago_logdiff <- diff(log(winnebago))
+winnebago_comp <- merge.xts(frac = winnebago_frac, logdiff = winnebago_logdiff)
+xyplot(winnebago_comp, screens = c(1, 1), auto.key = TRUE,
+       ylab = "Sales",
+       col = c("darkorange2", "navy"))
+```
+
+## Standard & Poor
+
+### a {-}
+
+There is an exponential trend in the time series (Figure \@ref(fig:sp)) that,
+however, seems to perhaps level off after 1970 or so.
+
+```{r sp, fig.cap = "Quarterly values of the Standard and Poor index."}
+data(SP)
+SP <- as.xts(SP)
+xyplot(SP, grid = TRUE)
+```
+
+### b {-}
+
+In Figure \@ref(fig:sp-log) we've transformed the time series of the S&P index
+by taking the log. The series is "more" linear but there is still an
+exponential pattern.
+
+```{r sp-log, fig.cap = "Logged values of the Standard and Poor's index."}
+sp_log <- log(SP)
+xyplot(sp_log, ylab = expression(log(value)), grid = TRUE)
+```
+
+### c {-}
+
+Next, we compute the fractional relative changes and the differences of 
+natural logartihms (Figure \@ref(fig:sp-comp)). We see that there is little
+difference between the series and only really so for the higher numbers of
+sales.
+
+```{r sp-comp, fig.cap = "Differences in logs and fractional relative differences."}
+SP_frac <- diff(SP) / lag(SP, 1)
+SP_logdiff <- diff(log(SP))
+SP_comp <- merge.xts(frac = SP_frac, logdiff = SP_logdiff)
+xyplot(SP_comp, screens = c(1, 1), auto.key = TRUE,
+       ylab = "Sales",
+       col = c("darkorange2", "navy"))
+```
+
+## Air passengers
+
+### a {-}
+
+We plot the monthly intervational airline passenger counts in
+Figure\@ref(fig:airpass) and note that we have a strong seasonal trend and
+perhaps a slight exponential increase. Variance seems to increase as well.
+
+```{r airpass, fig.cap = "Monthly airline passenger totals."}
+data(airpass)
+airpass <- as.xts(airpass)
+xyplot(airpass, ylab = "Passengers")
+```
+
+### b {-}
+
+As in previous exercises, we take the natural log of the dependent variable,
+in this case passenger totals, and note that we have made the trend linear
+(or maybe exponentially decreasing?) but notably have stabilized the variance of
+the series.
+
+```{r airpass-log, fig.cap = "Logged monthly airline passenger totals."}
+airpass_log <- log(airpass)
+xyplot(airpass_log, ylab = expression(log(airpass)))
+```
+
+### c {-}
+
+Next, we compute the fractional relative changes and the differences of 
+natural logartihms (Figure \@ref(fig:sp-comp)). We see that there is little
+difference between the series and only really so for the higher numbers of
+sales.
+
+```{r airpass-comp, fig.cap = "Differences in logs and fractional relative differences."}
+airpass_frac <- diff(airpass) / lag(airpass, 1)
+airpass_logdiff <- diff(log(airpass))
+airpass_comp <- merge.xts(frac = airpass_frac, logdiff = airpass_logdiff)
+xyplot(airpass_comp, screens = c(1, 1), auto.key = TRUE,
+       ylab = "Sales",
+       col = c("darkorange2", "navy"))
+```
+
+## Rainfall
+
+### a {-}
+
+In this exercise we consider annual rainfall data for Los Angeles. We use `TSA::BoxCox.ar()`
+to train a power model to the time series (Figure \@ref(fig:larain)), optimizing
+via lok-likelihood maximization. 
+
+```{r larain, fig.cap = "Box-Cox training on the annual rainfall data."}
+data(larain)
+larain <- as.xts(larain)
+obj <- BoxCox.ar(larain)
+lambda <- obj$lambda[which.max(obj$loglike)]
+```
+
+The best value of $\lambda$ is `r lambda`.
+
+### b {-}
+
+We apply the power transformation and see the results of Q-Q plots for both
+the untransformed and the transformed time series in Figure \@ref(fig:larain-qq)
+
+```{r larain-qq, fig.cap = "Q-Q plots of untransformed and transformed time series data.", warning = FALSE}
+larain_trans <- larain ^ lambda
+xyplot(list(Untransformed = larain, Transformed = larain_trans),
+       FUN = qqmath, y.same = FALSE)
+```
+
+### d {-}
+
+Next we plot $Y_t$ versus $Y_{t-1}$ in Figure \@ref(fig:lahrain-laglag) --
+no correlation is evident from this picture, nor would we expect that
+our transformatin would induce any given that it is not at all based on the
+previous values.
+
+```{r lahrain-laglag, fig.cap = "Lag 0 against lag 1."}
+xyplot(zlag(larain_trans) ~ larain_trans,
+       ylab = "Lag 1",
+       xlab = "Lag 0")
+```
+
