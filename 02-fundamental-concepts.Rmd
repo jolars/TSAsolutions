@@ -93,7 +93,7 @@ and for $k = 0$ we get
   \text{Corr}[Y_t, Y_{t-k}] = \text{Corr}[Y_t, Y_t] = 1
 \end{gather*}
 
-and, finally, for $k > 0$:
+and, finally, for $k > 1$:
 
 \begin{gather*}
   C[e_t + \theta e_{t-1}, e_{t-k} + \theta e_{t-k-1}] = \\
