@@ -22,8 +22,12 @@ $$\text{Cov}[X, X+Y] = \text{Cov}[X,X] + \text{Cov}[X,Y] =
 \text{Corr}[X+Y, X-Y] = & \text{Corr}[X,X] + \text{Corr}[X,-Y] +
                           \text{Corr}[Y,X] + \text{Corr}[Y,-Y] \\
                       = & \text{Corr}[Y,X] + \text{Corr}[Y,-Y] \\
-                      = & 1 - 0.25 + 0.25 -1 \\
-                      = & 0 \\
+                      = & 1 - 0.25 + 0.25 -1 \\ Iam not sure if this is right... (it's corr, not cov)
+                      = & 0 \\ 
+\text{Corr}[X+Y, X-Y] = & frac{\text{Cov}[X,X]+\text{Cov}[X,-Y]+\text{Cov}[Y,X] + \text{Cov}[Y,-Y]}{\sqrt{\text{Var}[X+Y]\text{Var}[X-Y]}} \\
+                      = & frac{\text{Var}[X] - \text{Var}[Y]}{\sqrt{\text{Var}[X+Y][\text{Var}[X]+\text{Var}[Y]-2\text{Cov}[X,Y]]}}
+
+                      
 \end{align}
 
 ## Dependence and covariance
