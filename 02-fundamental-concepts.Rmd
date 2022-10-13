@@ -7,7 +7,7 @@
  \begin{align}
     \text{Cov}[X,Y] & = \text{Corr}[X,Y]\sqrt{Var[X]Var[Y]}\\
                     & = 0.25 \sqrt{9 \times 4} = 1.5 \\
-    \text{Var}[X,Y] & = Var[X]+Var[Y]+2Cov[X,Y]\\
+    \text{Var}[X+Y] & = Var[X]+Var[Y]+2Cov[X,Y]\\
                     & = 9 + 4 + 2 \times 3 = 16\\
     \end{align}
     
